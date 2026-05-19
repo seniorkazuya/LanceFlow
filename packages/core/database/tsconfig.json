@@ -1,0 +1,7 @@
+{
+  "extends": "@lanceflow/typescript-config/base.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}
