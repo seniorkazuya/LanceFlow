@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project status (client view)
+    url: https://github.com/seniorkazuya/LanceFlow/blob/staging/documents/docs/PROJECT_STATUS.md
+    about: Current milestone and story progress
+  - name: DevOps guide
+    url: https://github.com/seniorkazuya/LanceFlow/blob/staging/documents/docs/DEVOPS_GUIDE.md
+    about: Branching, PRs, CI/CD, and deploy
