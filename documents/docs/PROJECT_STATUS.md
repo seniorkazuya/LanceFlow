@@ -1,10 +1,10 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-19  
+> **Last updated:** 2026-05-20  
 > **Current phase:** M0 — Platform & DevOps (in progress)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 > **Staging demo:** _Not deployed yet_ (local: http://localhost:3000)  
-> **Latest release:** _None_
+> **Latest release:** DEV-002 on `main`
 
 ---
 
@@ -12,18 +12,18 @@
 
 | | |
 |--|--|
-| **Active story** | DEV-003 — CI pipeline |
-| **Just completed** | DEV-002 — GitHub setup & branch protection ✅ |
-| **Next up** | DEV-004 — Staging deployment |
+| **Active story** | DEV-004 — Staging deployment |
+| **Just completed** | DEV-003 — CI pipeline ✅ |
+| **Next up** | DEV-004 — Staging URL for client demos |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-Engineering: [stories index](../stories/README.md) · DevOps: [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md) · GitHub: [Project board](https://github.com/users/seniorkazuya/projects)
+Engineering: [stories index](../stories/README.md) · DevOps: [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md)
 
 ---
 
 ## Executive summary
 
-The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 approval required). PR/issue templates and CODEOWNERS are in place. Next: **CI on every pull request**, then a **staging URL** for client demos.
+GitHub **CI runs on every PR** (`lint`, `typecheck`, `test`, `build`). Integration tests use Postgres 16 + Redis 7 in CI. Branch protection can require these checks after merging DEV-003. Next: deploy **staging** so clients can see the app online.
 
 ---
 
@@ -31,15 +31,9 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 
 | Milestone | Status | Target | Notes |
 |-----------|--------|--------|-------|
-| M0 — Platform & DevOps | 🟡 In progress | Week 1–2 | DEV-001–002 done; DEV-003 next |
-| M1 — Foundation | 🔴 Not started | Week 2–3 | Auth, RBAC after M0 |
-| M2 — Operations Core | 🔴 Not started | Week 4–7 | |
-| M3 — Automation | 🔴 Not started | Week 8–11 | |
-| M4 — Control Center | 🔴 Not started | Week 12–15 | |
-| M5 — Payments & Trust | 🔴 Not started | Week 16–19 | |
-| M6 — Hiring MVP | 🔴 Not started | Week 20–25 | |
-| M7 — AI Hiring | 🔴 Not started | Week 26–33 | |
-| M8 — Scale | 🔴 Not started | Week 34+ | |
+| M0 — Platform & DevOps | 🟡 In progress | Week 1–2 | DEV-001–003 done; DEV-004 next |
+| M1 — Foundation | 🔴 Not started | Week 2–3 | Auth, RBAC |
+| M2–M8 | 🔴 Not started | | |
 
 **Legend:** 🟢 Done · 🟡 In progress · 🔴 Not started
 
@@ -51,8 +45,8 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 |-------|-------|--------|
 | DEV-001 | Monorepo scaffold | 🟢 Done |
 | DEV-002 | GitHub + branch protection | 🟢 Done |
-| DEV-003 | CI pipeline | 🟡 **Next** |
-| DEV-004 | Staging deployment | 🔴 Backlog |
+| DEV-003 | CI pipeline | 🟢 Done |
+| DEV-004 | Staging deployment | 🟡 **Next** |
 | DEV-006 | Docker Compose | 🔴 Backlog |
 | DEV-007 | Observability | 🔴 Backlog |
 | DEV-008 | Client status automation | 🔴 Backlog |
@@ -61,15 +55,11 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 
 ## What is complete today
 
-- [x] Brand and product vision documented
-- [x] Modular architecture & 62 user stories with dev prompts
-- [x] Monorepo — `pnpm dev`, `pnpm build` locally
-- [x] Health API — `/api/health`
-- [x] **GitHub repo** — https://github.com/seniorkazuya/LanceFlow
-- [x] **Branch protection** on `main` and `staging`
-- [x] **PR template**, **story issue template**, **CODEOWNERS**, Dependabot
-- [ ] CI on pull requests (DEV-003)
-- [ ] Staging URL for client demos (DEV-004)
+- [x] Monorepo + GitHub + branch protection
+- [x] **CI workflow** — `.github/workflows/ci.yml`
+- [x] Unit + integration tests (Postgres/Redis in CI)
+- [ ] Staging URL (DEV-004)
+- [ ] Production deploy automation (DEV-005)
 
 ---
 
@@ -78,8 +68,8 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 | Environment | URL | Access |
 |-------------|-----|--------|
 | **Local** | http://localhost:3000 | `pnpm dev` |
-| Staging | _pending DEV-004_ | After CI + deploy |
-| Production | _pending_ | After M4+ |
+| Staging | _pending DEV-004_ | |
+| Production | _pending_ | |
 
 ---
 
@@ -87,26 +77,9 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 
 | Date | Change |
 |------|--------|
-| 2026-05-19 | DEV-002 complete: templates, CODEOWNERS, branch protection, GitHub Project |
-| 2026-05-19 | DEV-001 complete: monorepo scaffold |
-| 2026-05-19 | Development started |
-
----
-
-## Risks & blockers
-
-| Item | Impact | Mitigation |
-|------|--------|------------|
-| CI not configured | No automated gate on PRs yet | DEV-003; then enable required checks on branches |
-| Staging URL missing | Client cannot UAT online | DEV-004 after CI |
-
----
-
-## How to track live progress
-
-1. **This file** — updated each story  
-2. **GitHub Project** — LanceFlow Build  
-3. **GitHub Releases** — after first staging/production deploy  
+| 2026-05-20 | DEV-003: CI (lint, typecheck, test, build) + Vitest |
+| 2026-05-19 | DEV-002: GitHub templates, branch protection |
+| 2026-05-19 | DEV-001: Monorepo scaffold |
 
 ---
 
