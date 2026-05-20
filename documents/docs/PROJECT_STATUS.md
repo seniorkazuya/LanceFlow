@@ -3,8 +3,6 @@
 > **Last updated:** 2026-05-20  
 > **Current phase:** M0 — Platform & DevOps (in progress)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
-> **Staging demo:** _Not deployed yet_ (local: http://localhost:3000)  
-> **Latest release:** DEV-002 on `main`
 
 ---
 
@@ -12,30 +10,39 @@
 
 | | |
 |--|--|
-| **Active story** | DEV-004 — Staging deployment |
-| **Just completed** | DEV-003 — CI pipeline ✅ |
-| **Next up** | DEV-004 — Staging URL for client demos |
+| **Active story** | DEV-005 — Production deployment (after staging secrets configured) |
+| **Just completed** | DEV-004 — Staging deployment pipeline ✅ (code); **one-time setup required** |
+| **Next up** | Configure Neon + Vercel secrets → first staging deploy |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-Engineering: [stories index](../stories/README.md) · DevOps: [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md)
+Setup guide: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)**
+
+---
+
+## Staging demo
+
+| | |
+|--|--|
+| **Staging URL** | _Set after first deploy — add to GitHub secret `STAGING_URL` and update this line_ |
+| **Health check** | `{STAGING_URL}/api/health` |
+| **Local** | http://localhost:3000 |
+
+**Your action:** Complete [DEPLOY_STAGING.md](./DEPLOY_STAGING.md) §1–3, merge DEV-004 PR, then paste Vercel URL here.
 
 ---
 
 ## Executive summary
 
-GitHub **CI runs on every PR** (`lint`, `typecheck`, `test`, `build`). Integration tests use Postgres 16 + Redis 7 in CI. Branch protection can require these checks after merging DEV-003. Next: deploy **staging** so clients can see the app online.
+CI runs on every PR. **Deploy Staging** workflow runs on push to `staging`: Neon migrations → Vercel → health check. After you add secrets, clients can use the staging URL to see progress.
 
 ---
 
 ## Progress at a glance
 
-| Milestone | Status | Target | Notes |
-|-----------|--------|--------|-------|
-| M0 — Platform & DevOps | 🟡 In progress | Week 1–2 | DEV-001–003 done; DEV-004 next |
-| M1 — Foundation | 🔴 Not started | Week 2–3 | Auth, RBAC |
-| M2–M8 | 🔴 Not started | | |
-
-**Legend:** 🟢 Done · 🟡 In progress · 🔴 Not started
+| Milestone | Status | Notes |
+|-----------|--------|--------|
+| M0 — Platform & DevOps | 🟡 In progress | DEV-001–004 code done; first deploy pending secrets |
+| M1 — Foundation | 🔴 Not started | Auth, RBAC after M0 |
 
 ---
 
@@ -46,7 +53,8 @@ GitHub **CI runs on every PR** (`lint`, `typecheck`, `test`, `build`). Integrati
 | DEV-001 | Monorepo scaffold | 🟢 Done |
 | DEV-002 | GitHub + branch protection | 🟢 Done |
 | DEV-003 | CI pipeline | 🟢 Done |
-| DEV-004 | Staging deployment | 🟡 **Next** |
+| DEV-004 | Staging deployment | 🟢 Done (configure secrets) |
+| DEV-005 | Production deployment | 🟡 Next |
 | DEV-006 | Docker Compose | 🔴 Backlog |
 | DEV-007 | Observability | 🔴 Backlog |
 | DEV-008 | Client status automation | 🔴 Backlog |
@@ -55,21 +63,10 @@ GitHub **CI runs on every PR** (`lint`, `typecheck`, `test`, `build`). Integrati
 
 ## What is complete today
 
-- [x] Monorepo + GitHub + branch protection
-- [x] **CI workflow** — `.github/workflows/ci.yml`
-- [x] Unit + integration tests (Postgres/Redis in CI)
-- [ ] Staging URL (DEV-004)
-- [ ] Production deploy automation (DEV-005)
-
----
-
-## Demo & environments
-
-| Environment | URL | Access |
-|-------------|-----|--------|
-| **Local** | http://localhost:3000 | `pnpm dev` |
-| Staging | _pending DEV-004_ | |
-| Production | _pending_ | |
+- [x] Monorepo, GitHub, CI (lint / typecheck / test / build)
+- [x] Deploy workflow + Prisma initial migration + Vercel config
+- [ ] **You:** Neon + Vercel + GitHub `staging` secrets (see DEPLOY_STAGING.md)
+- [ ] **You:** First green Deploy Staging run + staging URL in this doc
 
 ---
 
@@ -77,9 +74,9 @@ GitHub **CI runs on every PR** (`lint`, `typecheck`, `test`, `build`). Integrati
 
 | Date | Change |
 |------|--------|
-| 2026-05-20 | DEV-003: CI (lint, typecheck, test, build) + Vitest |
-| 2026-05-19 | DEV-002: GitHub templates, branch protection |
-| 2026-05-19 | DEV-001: Monorepo scaffold |
+| 2026-05-20 | DEV-004: deploy-staging.yml, Neon migrate, Vercel, health check |
+| 2026-05-20 | DEV-003: CI pipeline |
+| 2026-05-19 | DEV-002, DEV-001 |
 
 ---
 

@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **DEV-004** — Deploy Staging workflow (Neon migrate, Vercel, health check), initial Prisma migration, DEPLOY_STAGING.md
 - **DEV-003** — GitHub Actions CI (lint, typecheck, test, build), Vitest unit/integration tests, ESLint for web
 - **DEV-002** — GitHub PR/issue templates, CODEOWNERS, Dependabot, branch protection on `main`/`staging`, setup docs
 - **DEV-001** — Monorepo with Turborepo, Next.js 15 (`apps/web`), `@lanceflow/types`, `@lanceflow/database` (Prisma schema placeholder), `/api/health`
