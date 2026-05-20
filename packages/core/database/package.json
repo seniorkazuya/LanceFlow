@@ -16,7 +16,7 @@
     "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
-    "@prisma/client": "^6.1.0"
+    "@prisma/client": "^7.8.0"
   },
   "devDependencies": {
     "@lanceflow/typescript-config": "workspace:*",
