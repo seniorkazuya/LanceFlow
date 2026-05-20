@@ -2,6 +2,7 @@
 
 > **Last updated:** 2026-05-19  
 > **Current phase:** M0 — Platform & DevOps (in progress)  
+> **Repository:** https://github.com/seniorkazuya/LanceFlow  
 > **Staging demo:** _Not deployed yet_ (local: http://localhost:3000)  
 > **Latest release:** _None_
 
@@ -11,19 +12,18 @@
 
 | | |
 |--|--|
-| **Active story** | DEV-002 — GitHub repository and branch protection |
-| **Just completed** | DEV-001 — Monorepo scaffold ✅ |
-| **Next up** | DEV-003 — CI pipeline |
+| **Active story** | DEV-003 — CI pipeline |
+| **Just completed** | DEV-002 — GitHub setup & branch protection ✅ |
+| **Next up** | DEV-004 — Staging deployment |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-Engineering tracks every story in [../stories/README.md](../stories/README.md).  
-DevOps handbook: [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md).
+Engineering: [stories index](../stories/README.md) · DevOps: [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md) · GitHub: [Project board](https://github.com/users/seniorkazuya/projects)
 
 ---
 
 ## Executive summary
 
-LanceFlow application development has started. The **monorepo** is scaffolded (Next.js 15 + Turborepo + shared packages). Next step: connect **GitHub**, then **CI** and **staging deploy** so clients can follow progress online.
+The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 approval required). PR/issue templates and CODEOWNERS are in place. Next: **CI on every pull request**, then a **staging URL** for client demos.
 
 ---
 
@@ -31,7 +31,7 @@ LanceFlow application development has started. The **monorepo** is scaffolded (N
 
 | Milestone | Status | Target | Notes |
 |-----------|--------|--------|-------|
-| M0 — Platform & DevOps | 🟡 In progress | Week 1–2 | DEV-001 done; DEV-002–004 next |
+| M0 — Platform & DevOps | 🟡 In progress | Week 1–2 | DEV-001–002 done; DEV-003 next |
 | M1 — Foundation | 🔴 Not started | Week 2–3 | Auth, RBAC after M0 |
 | M2 — Operations Core | 🔴 Not started | Week 4–7 | |
 | M3 — Automation | 🔴 Not started | Week 8–11 | |
@@ -50,8 +50,8 @@ LanceFlow application development has started. The **monorepo** is scaffolded (N
 | Story | Title | Status |
 |-------|-------|--------|
 | DEV-001 | Monorepo scaffold | 🟢 Done |
-| DEV-002 | GitHub + branch protection | 🟡 **Next** |
-| DEV-003 | CI pipeline | 🔴 Backlog |
+| DEV-002 | GitHub + branch protection | 🟢 Done |
+| DEV-003 | CI pipeline | 🟡 **Next** |
 | DEV-004 | Staging deployment | 🔴 Backlog |
 | DEV-006 | Docker Compose | 🔴 Backlog |
 | DEV-007 | Observability | 🔴 Backlog |
@@ -62,13 +62,14 @@ LanceFlow application development has started. The **monorepo** is scaffolded (N
 ## What is complete today
 
 - [x] Brand and product vision documented
-- [x] Hiring AI & automation specifications
 - [x] Modular architecture & 62 user stories with dev prompts
-- [x] **Monorepo** — `pnpm dev`, `pnpm build` working locally
+- [x] Monorepo — `pnpm dev`, `pnpm build` locally
 - [x] Health API — `/api/health`
-- [ ] GitHub repo + branch protection
-- [ ] CI on pull requests
-- [ ] Staging URL for client demos
+- [x] **GitHub repo** — https://github.com/seniorkazuya/LanceFlow
+- [x] **Branch protection** on `main` and `staging`
+- [x] **PR template**, **story issue template**, **CODEOWNERS**, Dependabot
+- [ ] CI on pull requests (DEV-003)
+- [ ] Staging URL for client demos (DEV-004)
 
 ---
 
@@ -77,7 +78,7 @@ LanceFlow application development has started. The **monorepo** is scaffolded (N
 | Environment | URL | Access |
 |-------------|-----|--------|
 | **Local** | http://localhost:3000 | `pnpm dev` |
-| Staging | _pending DEV-004_ | Client UAT after setup |
+| Staging | _pending DEV-004_ | After CI + deploy |
 | Production | _pending_ | After M4+ |
 
 ---
@@ -86,8 +87,9 @@ LanceFlow application development has started. The **monorepo** is scaffolded (N
 
 | Date | Change |
 |------|--------|
-| 2026-05-19 | DEV-001 complete: Turborepo, apps/web, @lanceflow/types, @lanceflow/database |
-| 2026-05-19 | Development started; DEVOPS_GUIDE added |
+| 2026-05-19 | DEV-002 complete: templates, CODEOWNERS, branch protection, GitHub Project |
+| 2026-05-19 | DEV-001 complete: monorepo scaffold |
+| 2026-05-19 | Development started |
 
 ---
 
@@ -95,16 +97,16 @@ LanceFlow application development has started. The **monorepo** is scaffolded (N
 
 | Item | Impact | Mitigation |
 |------|--------|------------|
-| GitHub repo not created yet | No remote CI/deploy | DEV-002 in progress |
-| pnpm install | Was missing on machine | Installed via `npm install -g pnpm@9.15.0` |
+| CI not configured | No automated gate on PRs yet | DEV-003; then enable required checks on branches |
+| Staging URL missing | Client cannot UAT online | DEV-004 after CI |
 
 ---
 
 ## How to track live progress
 
-1. **This file** — updated when each story completes  
-2. **GitHub Project** — after DEV-002  
-3. **GitHub Releases** — after first deploy to staging  
+1. **This file** — updated each story  
+2. **GitHub Project** — LanceFlow Build  
+3. **GitHub Releases** — after first staging/production deploy  
 
 ---
 

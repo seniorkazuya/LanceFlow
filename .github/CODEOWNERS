@@ -1,0 +1,14 @@
+# Default owners for everything in the repo
+* @seniorkazuya
+
+# CI/CD and GitHub configuration — require owner review
+/.github/ @seniorkazuya
+
+# Scoring formulas and automation rules — CTO review (per DEVOPS workflow)
+/packages/rules-engine/ @seniorkazuya
+
+# Auth and RBAC — security-sensitive (future CORE-003)
+/packages/core/auth/ @seniorkazuya
+
+# AI hiring prompts and parsers (future)
+/packages/modules/ai-hiring/ @seniorkazuya

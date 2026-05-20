@@ -1,0 +1,59 @@
+name: User story
+description: Track a LanceFlow story (DEV-*, CORE-*, OPS-*, etc.)
+title: "[STORY-ID] "
+labels: ["story"]
+body:
+  - type: input
+    id: story_id
+    attributes:
+      label: Story ID
+      description: e.g. DEV-003, OPS-001
+      placeholder: DEV-003
+    validations:
+      required: true
+  - type: input
+    id: story_doc
+    attributes:
+      label: Story document path
+      description: Path in repo
+      placeholder: documents/stories/DEV-003.md
+    validations:
+      required: true
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Epic
+      options:
+        - E0 Platform
+        - E1 Foundation
+        - E2 Operations
+        - E3 Automation
+        - E4 Analytics
+        - E5 Payments
+        - E6 Hiring
+        - E7 AI Hiring
+        - E8 Scale
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0
+        - P1
+        - P2
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Paste from story file
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Blockers, dependencies, links to PR
