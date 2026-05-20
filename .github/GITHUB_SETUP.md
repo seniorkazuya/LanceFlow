@@ -10,7 +10,7 @@ Applied configuration for **seniorkazuya/LanceFlow**.
 | `staging` | Yes | **0** | Solo maintainer can merge story PRs; add 1+ when team grows |
 
 Shared: dismiss stale reviews, enforce admins, no force push, no branch delete.  
-**Status checks:** off until DEV-003 (CI).
+**Status checks:** `lint`, `typecheck`, `test`, `build` (after DEV-003; apply with `*-with-ci.json` scripts).
 
 Re-apply:
 
@@ -22,7 +22,17 @@ gh api --method PUT repos/seniorkazuya/LanceFlow/branches/staging/protection \
   --input .github/scripts/apply-branch-protection-staging.json
 ```
 
-When a second engineer joins, set staging approvals to **1** (use `apply-branch-protection.json` for staging).
+**After DEV-003 (CI live):**
+
+```bash
+gh api --method PUT repos/seniorkazuya/LanceFlow/branches/main/protection \
+  --input .github/scripts/apply-branch-protection-with-ci.json
+
+gh api --method PUT repos/seniorkazuya/LanceFlow/branches/staging/protection \
+  --input .github/scripts/apply-branch-protection-staging-with-ci.json
+```
+
+When a second engineer joins, set staging approvals to **1** (use `apply-branch-protection-with-ci.json` for staging).
 
 ## GitHub Project
 

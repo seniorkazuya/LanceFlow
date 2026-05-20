@@ -11,7 +11,7 @@
   "scripts": {
     "build": "prisma generate",
     "typecheck": "prisma generate && tsc --noEmit",
-    "lint": "tsc --noEmit",
+    "lint": "prisma generate && tsc --noEmit",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev"
   },
