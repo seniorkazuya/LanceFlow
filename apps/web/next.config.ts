@@ -1,7 +1,9 @@
 import { withSentryConfig } from '@sentry/nextjs';
+import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['@prisma/client'],
   transpilePackages: [
     '@lanceflow/types',
     '@lanceflow/config',
@@ -9,6 +11,12 @@ const nextConfig: NextConfig = {
     '@lanceflow/database',
     '@lanceflow/ui',
   ],
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins.push(new PrismaPlugin());
+    }
+    return config;
+  },
 };
 
 const sentryEnabled = Boolean(process.env.SENTRY_DSN);
