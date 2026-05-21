@@ -8,10 +8,10 @@ import { ArchiveClientButton } from '@/components/clients/archive-client-button'
 import { ClientForm } from '@/components/clients/client-form';
 import { auth } from '@/auth';
 
-function riskLevel(score: number): 'success' | 'warning' | 'error' {
+function riskLevel(score: number): 'success' | 'warning' | 'danger' {
   if (score < 40) return 'success';
   if (score < 70) return 'warning';
-  return 'error';
+  return 'danger';
 }
 
 type PageProps = { params: Promise<{ id: string }> };

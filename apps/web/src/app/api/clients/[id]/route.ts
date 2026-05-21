@@ -17,33 +17,28 @@ async function authorizeClients(
   return authorizeRequest(user, allowed);
 }
 
-export const GET = withApiLogging(
-  '/api/clients/[id]',
-  async (_request: Request, context: RouteContext) => {
+export const GET = withApiLogging('/api/clients/[id]', async (_request: Request, context?: unknown) => {
     const authz = await authorizeClients(RolePolicy.clientsRead);
     if (!authz.ok) {
       return NextResponse.json({ error: authz.error }, { status: authz.status });
     }
 
-    const { id } = await context.params;
+    const { id } = await (context as RouteContext).params;
     const client = await getClientById(id);
     if (!client) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
     return NextResponse.json({ client: serializeClient(client) });
-  }
-);
+});
 
-export const PATCH = withApiLogging(
-  '/api/clients/[id]',
-  async (request: Request, context: RouteContext) => {
+export const PATCH = withApiLogging('/api/clients/[id]', async (request: Request, context?: unknown) => {
     const authz = await authorizeClients(RolePolicy.clientsWrite);
     if (!authz.ok) {
       return NextResponse.json({ error: authz.error }, { status: authz.status });
     }
 
-    const { id } = await context.params;
+    const { id } = await (context as RouteContext).params;
     const body = await parseJsonBody<{
       name?: string;
       contactEmail?: string | null;
@@ -63,23 +58,19 @@ export const PATCH = withApiLogging(
     }
 
     return NextResponse.json({ client: serializeClient(result.client) });
-  }
-);
+});
 
-export const DELETE = withApiLogging(
-  '/api/clients/[id]',
-  async (_request: Request, context: RouteContext) => {
+export const DELETE = withApiLogging('/api/clients/[id]', async (_request: Request, context?: unknown) => {
     const authz = await authorizeClients(RolePolicy.clientsWrite);
     if (!authz.ok) {
       return NextResponse.json({ error: authz.error }, { status: authz.status });
     }
 
-    const { id } = await context.params;
+    const { id } = await (context as RouteContext).params;
     const result = await archiveClient(id, authz.user.id);
     if (!result.ok) {
       return NextResponse.json({ errors: result.errors }, { status: 404 });
     }
 
     return NextResponse.json({ client: serializeClient(result.client) });
-  }
-);
+});

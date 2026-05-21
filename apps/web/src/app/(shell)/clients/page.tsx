@@ -7,10 +7,10 @@ import { redirect } from 'next/navigation';
 import { ShellPage } from '@/components/app/shell-page';
 import { auth } from '@/auth';
 
-function riskLevel(score: number): 'success' | 'warning' | 'error' {
+function riskLevel(score: number): 'success' | 'warning' | 'danger' {
   if (score < 40) return 'success';
   if (score < 70) return 'warning';
-  return 'error';
+  return 'danger';
 }
 
 export default async function ClientsPage() {
