@@ -10,9 +10,9 @@
 
 | | |
 |--|--|
-| **Active story** | DEV-007 — Observability (next) |
-| **Just completed** | **M0 release** — PR #28 merged to `main` ✅ |
-| **Next up** | Merge PR #32 (sync staging); optional stable prod domain on Vercel |
+| **Active story** | DEV-007 — Observability (in PR) |
+| **Just completed** | M0 release on `main` + v0.1.0 prod deploy ✅ |
+| **Next up** | Merge DEV-007 PR → DEV-008 |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md)**
@@ -67,7 +67,7 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 | DEV-004 | Staging deployment | 🟢 Done |
 | DEV-005 | Production deployment | 🟢 Done |
 | DEV-006 | Docker Compose | 🟢 Done |
-| DEV-007 | Observability | 🟡 Next |
+| DEV-007 | Observability | 🟡 In PR |
 | DEV-008 | Client status automation | 🔴 Backlog |
 
 ---

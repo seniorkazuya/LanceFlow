@@ -44,6 +44,7 @@ pnpm db:migrate:deploy   # requires DATABASE_URL in .env (matches .env.example)
 |----------|----------|
 | **Current status** | [documents/docs/PROJECT_STATUS.md](documents/docs/PROJECT_STATUS.md) |
 | **DevOps (GitHub, deploy)** | [documents/docs/DEVOPS_GUIDE.md](documents/docs/DEVOPS_GUIDE.md) |
+| **Observability** | [documents/docs/OBSERVABILITY.md](documents/docs/OBSERVABILITY.md) |
 | **Active stories** | [documents/stories/](documents/stories/) |
 | **Architecture** | [documents/docs/MODULAR_ARCHITECTURE.md](documents/docs/MODULAR_ARCHITECTURE.md) |
 
