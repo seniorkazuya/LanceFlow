@@ -2,7 +2,13 @@ import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@lanceflow/types', '@lanceflow/config', '@lanceflow/auth', '@lanceflow/database'],
+  transpilePackages: [
+    '@lanceflow/types',
+    '@lanceflow/config',
+    '@lanceflow/auth',
+    '@lanceflow/database',
+    '@lanceflow/ui',
+  ],
 };
 
 const sentryEnabled = Boolean(process.env.SENTRY_DSN);

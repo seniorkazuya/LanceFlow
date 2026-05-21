@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **CORE-004** — `@lanceflow/ui` (Tailwind + shadcn-style primitives), `StatusBadge`, `AppShell` with role-aware nav
 - **CORE-003** — RBAC policies, `assertRole` / `withAuth`, `/api/control/summary`, `/api/hiring/ceo-queue`
 
 ## [0.2.1] — 2026-05-21

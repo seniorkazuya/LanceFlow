@@ -1,0 +1,9 @@
+{
+  "extends": "@lanceflow/typescript-config/base.json",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "ES2022"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tailwind-preset.ts"],
+  "exclude": ["node_modules"]
+}

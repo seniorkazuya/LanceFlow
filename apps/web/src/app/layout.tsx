@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { AuthSessionProvider } from '@/components/providers/session-provider';
 
-import './globals.css';
+import '@lanceflow/ui/globals.css';
 
 export const metadata: Metadata = {
   title: 'LanceFlow',
