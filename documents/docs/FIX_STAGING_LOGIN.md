@@ -16,7 +16,7 @@ Open in the browser:
 https://lance-flow-web.vercel.app/api/diagnostics/auth
 ```
 
-You want:
+You want `"ready": true` **and** `"prismaUsersTable": true`.
 
 ```json
 {
@@ -26,12 +26,28 @@ You want:
     "devAuthPassword": true,
     "authSecret": true,
     "authUrl": "https://lance-flow-web.vercel.app",
-    "databaseUrl": true
+    "databaseUrl": true,
+    "prismaUsersTable": true
   }
 }
 ```
 
-If any `checks` value is `false`, fix that variable on Vercel (step 2), then redeploy (step 4).
+**Important:** `/api/health` can show `"database":"ok"` while sign-in still fails. Health only runs `SELECT 1` — sign-in needs the **`users` table** via Prisma. If `prismaUsersTable` is `false`, run **Deploy Staging** (migrate job) with the same `DATABASE_URL` as Vercel.
+
+### Step 1b — POST probe (find exact failure)
+
+Use browser devtools, curl, or PowerShell:
+
+```powershell
+$body = @{ email = "ops@lanceflow.test"; password = "YOUR_VERCEL_PASSWORD" } | ConvertTo-Json
+Invoke-RestMethod -Uri "https://lance-flow-web.vercel.app/api/diagnostics/auth" -Method POST -Body $body -ContentType "application/json"
+```
+
+| Result | Meaning |
+|--------|---------|
+| `credentialsMatch: false` | Vercel `DEV_AUTH_PASSWORD` ≠ password you sent |
+| `credentialsMatch: true`, `databaseOk: false` | Run migrations on Neon `lanceflow` DB |
+| Both `true` | Sign-in should work — try incognito / clear site data |
 
 `expectedLogin.email` shows the **only** email Vercel accepts (usually `ops@lanceflow.test`).
 
