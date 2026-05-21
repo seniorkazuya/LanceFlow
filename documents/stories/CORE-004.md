@@ -9,7 +9,7 @@
 | **Modules** | `packages/core/ui, apps/web` |
 | **Depends on** | DEV-001 |
 | **Branch** | `feature/CORE-004-ui` |
-| **Status** | Backlog |
+| **Status** | Done |
 
 ---
 
@@ -21,9 +21,11 @@ As a user, I see a consistent LanceFlow UI with navigation by role.
 
 ## Acceptance criteria
 
-- [ ] Tailwind + shadcn in packages/core/ui
-- [ ] StatusBadge green/yellow/red
-- [ ] App shell: sidebar, header, role-aware nav
+- [x] Tailwind + shadcn in packages/core/ui
+- [x] StatusBadge green/yellow/red
+- [x] App shell: sidebar, header, role-aware nav
+- [x] Modern brand theme (navy/teal, glass surfaces) — reference: [Screenpipe Teams](https://screenpi.pe/team)
+- [x] Brand assets highlighted on landing (`/brand/lanceflow-icon.png`, `/brand/lanceflow-lockup.png`)
 
 ---
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { Button, Input } from '@lanceflow/ui';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -22,7 +23,9 @@ export function SignInForm() {
     setPending(false);
 
     if (result?.error) {
-      setError('Invalid email or password.');
+      setError(
+        'Sign-in failed. Open /api/diagnostics/auth — use POST with your email/password to see if credentials or database failed.'
+      );
       return;
     }
 
@@ -30,47 +33,23 @@ export function SignInForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} style={{ display: 'grid', gap: '1rem', maxWidth: 360 }}>
-      <label style={{ display: 'grid', gap: '0.35rem' }}>
-        <span>Email</span>
-        <input
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          style={{ padding: '0.5rem 0.75rem', borderRadius: 6, border: '1px solid var(--border)' }}
-        />
+    <form onSubmit={onSubmit} className="grid gap-4">
+      <label className="grid gap-1.5 text-sm">
+        <span className="font-medium text-foreground">Email</span>
+        <Input name="email" type="email" required autoComplete="email" />
       </label>
-      <label style={{ display: 'grid', gap: '0.35rem' }}>
-        <span>Password</span>
-        <input
-          name="password"
-          type="password"
-          required
-          autoComplete="current-password"
-          style={{ padding: '0.5rem 0.75rem', borderRadius: 6, border: '1px solid var(--border)' }}
-        />
+      <label className="grid gap-1.5 text-sm">
+        <span className="font-medium text-foreground">Password</span>
+        <Input name="password" type="password" required autoComplete="current-password" />
       </label>
       {error ? (
-        <p role="alert" style={{ color: '#b91c1c', fontSize: '0.875rem', margin: 0 }}>
+        <p role="alert" className="text-sm text-destructive">
           {error}
         </p>
       ) : null}
-      <button
-        type="submit"
-        disabled={pending}
-        style={{
-          padding: '0.6rem 1rem',
-          borderRadius: 6,
-          border: 'none',
-          background: 'var(--accent)',
-          color: '#fff',
-          fontWeight: 600,
-          cursor: pending ? 'wait' : 'pointer',
-        }}
-      >
+      <Button type="submit" disabled={pending} className="w-full">
         {pending ? 'Signing in…' : 'Sign in'}
-      </button>
+      </Button>
     </form>
   );
 }

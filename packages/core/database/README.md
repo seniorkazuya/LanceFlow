@@ -8,6 +8,7 @@ Prisma schema and client for LanceFlow (CORE-001).
 |-------|---------|
 | `User` | Platform users — `email`, `role`, `status`, `displayName` |
 | `AuditLog` | Immutable audit trail — `action`, `entityType`, `entityId`, `payload` |
+| `Client` (`ops_clients`) | Name, contact, status, risk score (OPS-001) |
 
 ## Scripts
 

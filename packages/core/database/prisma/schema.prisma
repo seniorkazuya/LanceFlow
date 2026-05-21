@@ -1,6 +1,7 @@
 // CORE-001 — users and audit_logs (v0). Extend in later stories.
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -30,4 +31,20 @@ model AuditLog {
   createdAt  DateTime @default(now()) @map("created_at")
 
   @@map("audit_logs")
+}
+
+model Client {
+  id                 String   @id @default(cuid())
+  name               String
+  contactEmail       String?  @map("contact_email")
+  status             String   @default("active")
+  riskScore          Int      @default(0) @map("risk_score")
+  riskScoreSource    String   @default("default") @map("risk_score_source")
+  riskFormulaVersion String?  @map("risk_formula_version")
+  riskOverrideReason String?  @map("risk_override_reason")
+  notes              String?
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@map("ops_clients")
 }

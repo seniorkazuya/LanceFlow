@@ -4,9 +4,25 @@ All notable changes to the LanceFlow application are documented here.
 
 ## [Unreleased]
 
+_No unreleased changes._
+
+## [0.3.0] — 2026-05-21
+
+M1 Foundation complete + M2 Operations start (clients & risk).
+
 ### Added
 
-- (none)
+- **OPS-002** — Client risk v0 (`ops-client-risk-v0`), evaluate/override APIs, risk panel for Bidders, audited manual override
+- **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations
+- **CORE-006** — `@lanceflow/audit` (`auditLog`, `queryAuditLogs`), `GET /api/audit/logs` (CEO), `/audit` page, `auth.sign_in` logging
+- **CORE-005** — Foundation narrative on landing (promises, how-it-works, org roles); glass layout on app pages; `PageHeader` and `Input`
+- **CORE-004** — Modern brand theme (navy/teal, glass UI), landing hero with brand assets, `GlassCard` / `BrandHighlight`
+- **CORE-004** — `@lanceflow/ui` (Tailwind + shadcn-style primitives), `StatusBadge`, `AppShell` with role-aware nav
+- **CORE-003** — RBAC policies, `assertRole` / `withAuth`, protected API routes
+
+### Fixed
+
+- **Staging auth** — Prisma `rhel-openssl-3.0.x` binary target + Next.js monorepo `PrismaPlugin` for Vercel serverless
 
 ## [0.2.1] — 2026-05-21
 

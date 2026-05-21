@@ -1,3 +1,4 @@
+import { auditLog } from '@lanceflow/audit';
 import {
   findOrCreateUserForSignIn,
   resolveDevAuthConfig,
@@ -8,12 +9,13 @@ import Credentials from 'next-auth/providers/credentials';
 
 import { authConfig } from './auth.config';
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+const nextAuth = NextAuth({
   ...authConfig,
   secret: process.env.AUTH_SECRET,
   trustHost: true,
   providers: [
     Credentials({
+      id: 'credentials',
       name: 'Email',
       credentials: {
         email: { label: 'Email', type: 'email' },
@@ -28,14 +30,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (typeof email !== 'string' || typeof password !== 'string') return null;
         if (!validateDevCredentials(email, password, config)) return null;
 
-        const user = await findOrCreateUserForSignIn({ email });
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.displayName,
-          role: user.role,
-        };
+        try {
+          const user = await findOrCreateUserForSignIn({ email: config.email });
+          try {
+            await auditLog({
+              actorId: user.id,
+              action: 'auth.sign_in',
+              entityType: 'user',
+              entityId: user.id,
+              payload: { email: user.email, role: user.role },
+            });
+          } catch (auditError) {
+            console.error('[auth] auditLog auth.sign_in failed', auditError);
+          }
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.displayName,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error('[auth] findOrCreateUserForSignIn failed', error);
+          return null;
+        }
       },
     }),
   ],
 });
+
+export const { handlers, signIn, signOut, auth } = nextAuth;
+
+export async function getAuthSession() {
+  return nextAuth.auth();
+}

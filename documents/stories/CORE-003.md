@@ -9,7 +9,7 @@
 | **Modules** | `packages/core/auth` |
 | **Depends on** | CORE-002 |
 | **Branch** | `feature/CORE-003-rbac` |
-| **Status** | Backlog |
+| **Status** | Done |
 
 ---
 
@@ -21,10 +21,10 @@ As CTO, I need role-based access for CEO, OpsManager, Caller, Bidder, Engineer.
 
 ## Acceptance criteria
 
-- [ ] Role enum and policy map
-- [ ] assertRole() / withAuth(handler, roles)
-- [ ] 403 on unauthorized API access
-- [ ] Tests for each role boundary
+- [x] Role enum and policy map
+- [x] assertRole() / withAuth(handler, roles)
+- [x] 403 on unauthorized API access
+- [x] Tests for each role boundary
 
 ---
 
