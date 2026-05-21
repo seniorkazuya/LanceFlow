@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-005 — Marketing pages (Foundation narrative) |
-| **Just completed** | CORE-004 — Design system, brand UI (#50 + brand refresh) |
+| **Active story** | CORE-006 — Audit log (backlog) |
+| **Just completed** | CORE-005 — Marketing + app shell brand UI |
 | **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
@@ -55,7 +55,7 @@
 | CORE-002 | Authentication | 🟢 Done |
 | CORE-003 | RBAC | 🟢 Done |
 | CORE-004 | Design system & app shell | 🟢 Done |
-| CORE-005 | Marketing & brand pages | 🟡 In progress |
+| CORE-005 | Marketing & brand pages | 🟢 Done |
 | CORE-006 | Audit | 🔴 Backlog |
 
 ---

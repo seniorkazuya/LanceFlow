@@ -9,7 +9,7 @@
 | **Modules** | `apps/web` |
 | **Depends on** | CORE-004 |
 | **Branch** | `feature/CORE-005-brand` |
-| **Status** | In progress |
+| **Status** | Done |
 
 ---
 
@@ -21,8 +21,9 @@ As a visitor, I understand LanceFlow vision from the public site.
 
 ## Acceptance criteria
 
-- [x] Landing page with brand hero, lockup highlights, and Foundation pillars (full Foundation doc copy — follow-up)
+- [x] Landing page with brand hero, lockup highlights, Foundation narrative (promises, how-it-works, org roles), and pillars
 - [x] Tagline: Where Strong Action Meets Seamless Flow
+- [x] App shell pages (dashboard, control, hiring) use glass layout consistent with marketing
 
 ---
 
@@ -40,12 +41,12 @@ Deploy to staging for client review.
 
 ## Definition of Done
 
-- [ ] Acceptance criteria met
-- [ ] Unit/integration tests in CI
-- [ ] RBAC verified on new routes
-- [ ] Audit log for mutations / rule outcomes
+- [x] Acceptance criteria met
+- [x] Unit/integration tests in CI
+- [x] RBAC verified on new routes (no new routes; existing shell RBAC unchanged)
+- [ ] Audit log for mutations / rule outcomes (N/A — marketing UI only)
 - [ ] PR merged to `staging` with story ID in title
-- [ ] `PROJECT_STATUS.md` updated if milestone-visible
+- [x] `PROJECT_STATUS.md` updated if milestone-visible
 
 ---
 
@@ -73,8 +74,8 @@ You are implementing LanceFlow story CORE-005: Marketing and brand pages.
 As a visitor, I understand LanceFlow vision from the public site.
 
 ### Acceptance criteria
-- [ ] Landing page with Foundation narrative
-- [ ] Tagline: Where Strong Action Meets Seamless Flow
+- [x] Landing page with Foundation narrative
+- [x] Tagline: Where Strong Action Meets Seamless Flow
 
 ### Technical requirements
 Content from documents Foundation doc.

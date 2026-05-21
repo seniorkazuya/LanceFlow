@@ -131,7 +131,7 @@ export function AppShell({
             )}
           </div>
         </header>
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="lf-page-grid relative flex-1 p-4 md:p-6">{children}</main>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@lanceflow/ui';
+import { Button, Input } from '@lanceflow/ui';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -36,23 +36,11 @@ export function SignInForm() {
     <form onSubmit={onSubmit} className="grid gap-4">
       <label className="grid gap-1.5 text-sm">
         <span className="font-medium text-foreground">Email</span>
-        <input
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          className="h-11 rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-ring/50"
-        />
+        <Input name="email" type="email" required autoComplete="email" />
       </label>
       <label className="grid gap-1.5 text-sm">
         <span className="font-medium text-foreground">Password</span>
-        <input
-          name="password"
-          type="password"
-          required
-          autoComplete="current-password"
-          className="h-11 rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-ring/50"
-        />
+        <Input name="password" type="password" required autoComplete="current-password" />
       </label>
       {error ? (
         <p role="alert" className="text-sm text-destructive">

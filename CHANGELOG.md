@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **CORE-005** — Foundation narrative on landing (promises, how-it-works, org roles); glass layout on dashboard, control, and hiring pages; `PageHeader` and `Input` in `@lanceflow/ui`
 - **CORE-004** — Modern brand theme (navy/teal, glass UI), landing hero with highlighted logo assets, `GlassCard` / `BrandHighlight`
 - **CORE-004** — `@lanceflow/ui` (Tailwind + shadcn-style primitives), `StatusBadge`, `AppShell` with role-aware nav
 - **CORE-003** — RBAC policies, `assertRole` / `withAuth`, `/api/control/summary`, `/api/hiring/ceo-queue`
