@@ -18,9 +18,16 @@ export default function HomePage() {
       <p style={{ color: 'var(--muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
         Structured performance ecosystem for digital professionals — not a chaotic marketplace.
       </p>
-      <p style={{ fontSize: '0.875rem', color: 'var(--muted)' }}>
-        Platform scaffold active · Story DEV-001 · Roles defined:{' '}
-        {Object.values(UserRole).join(', ')}
+      <p style={{ fontSize: '0.875rem', color: 'var(--muted)', marginBottom: '1.5rem' }}>
+        Platform scaffold active · Roles: {Object.values(UserRole).join(', ')}
+      </p>
+      <p style={{ display: 'flex', gap: '1rem', fontSize: '0.875rem' }}>
+        <a href="/auth/signin" style={{ color: 'var(--accent)' }}>
+          Sign in
+        </a>
+        <a href="/dashboard" style={{ color: 'var(--accent)' }}>
+          Dashboard
+        </a>
       </p>
     </main>
   );

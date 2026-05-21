@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-21  
-> **Current phase:** M1 — Foundation (started)  
+> **Current phase:** M1 — Foundation (in progress)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,12 +10,12 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-001 — Database package & Prisma schema (in PR) |
-| **Just completed** | **M0** — DEV-001 through DEV-008 ✅ |
-| **Next up** | Merge CORE-001 → CORE-002 Auth |
+| **Active story** | CORE-002 — Authentication (PR in progress) |
+| **Just completed** | CORE-001 — Database & Prisma client ✅ |
+| **Next up** | CORE-003 RBAC |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-**Client links:** [Staging demo](#staging-demo) · [Production](#production) · [Story board](https://github.com/users/seniorkazuya/projects)
+**Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
 
 ---
 
@@ -23,10 +23,10 @@
 
 | | |
 |--|--|
-| **Staging URL** | https://lance-flow-web.vercel.app |
-| **Health check** | https://lance-flow-web.vercel.app/api/health |
-| **Local** | http://localhost:3000 (`docker compose up -d`) |
-| **Last deploy** | 2026-05-21 — DEV-008 ✅ |
+| **URL** | https://lance-flow-web.vercel.app |
+| **Health** | https://lance-flow-web.vercel.app/api/health |
+| **Sign-in** | `/auth/signin` after `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
+| **Local** | http://localhost:3000 · `docker compose up -d` |
 
 ---
 
@@ -34,43 +34,26 @@
 
 | | |
 |--|--|
-| **Release** | **v0.1.0** on `main` — https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0 |
-| **Pending** | Release PR: `staging` → `main` for DEV-007/008 (v0.2.0) |
-| **Last prod deploy** | 2026-05-21 — Deploy Production ✅ |
+| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · `main` includes [v0.2.0 merge](https://github.com/seniorkazuya/LanceFlow/pull/37) |
+| **Staging ahead of main** | CORE-001 (+ CORE-002 when merged) — release PR when ready |
 
 ---
 
-## Executive summary
+## Milestones
 
-**M0 complete on `staging`:** platform, CI/CD, staging + production deploys, Docker, observability, client status automation. **M1 started:** database client and schema tests.
+| Milestone | Status |
+|-----------|--------|
+| **M0** Platform & DevOps | 🟢 Done |
+| **M1** Foundation | 🟡 In progress |
 
----
-
-## Progress at a glance
-
-| Milestone | Status | Notes |
-|-----------|--------|--------|
-| M0 — Platform & DevOps | 🟢 Done | All DEV stories shipped |
-| M1 — Foundation | 🟡 In progress | CORE-001 in PR |
-
----
-
-## Story progress (M0)
+### M1 — stories
 
 | Story | Title | Status |
 |-------|-------|--------|
-| DEV-001 … DEV-008 | Platform & DevOps | 🟢 Done |
-
-## Story progress (M1)
-
-| Story | Title | Status |
-|-------|-------|--------|
-| CORE-001 | Database / Prisma v0 | 🟡 In PR |
-| CORE-002 | Authentication | 🔴 Next |
-| CORE-003 | RBAC | 🔴 Backlog |
-| CORE-004 | Design system | 🔴 Backlog |
-| CORE-005 | Marketing pages | 🔴 Backlog |
-| CORE-006 | Audit log service | 🔴 Backlog |
+| CORE-001 | Database / Prisma | 🟢 Done |
+| CORE-002 | Authentication | 🟡 In progress |
+| CORE-003 | RBAC | 🔴 Next |
+| CORE-004–006 | UI, marketing, audit | 🔴 Backlog |
 
 ---
 
@@ -78,10 +61,10 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | M0 complete — DEV-008 merged (#35) |
-| 2026-05-21 | DEV-007 observability (#33) |
-| 2026-05-21 | v0.1.0 on `main` (#28) |
+| 2026-05-21 | CORE-001 merged (#38); CI Prisma fix |
+| 2026-05-21 | Release to `main` (#37) — DEV-007/008 |
+| 2026-05-21 | Staging deploy green; health `database: ok` |
 
 ---
 
-*Technical plan: [STORY_DEVELOPMENT_PLAN.md](./STORY_DEVELOPMENT_PLAN.md)*
+*Plan: [STORY_DEVELOPMENT_PLAN.md](./STORY_DEVELOPMENT_PLAN.md)*

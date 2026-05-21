@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **CORE-002** — `@lanceflow/auth`, NextAuth (credentials), `/auth/signin`, `/dashboard`, `/api/me`, AUTH.md
 - **CORE-001** — Prisma client singleton, database package README, integration tests for User/AuditLog
 - **DEV-008** — PR status checklist, `remind-project-status` workflow, GitHub Project board template
 - **DEV-007** — `@lanceflow/config` health checks, structured API JSON logs, optional Sentry, `/api/health` DB+Redis status

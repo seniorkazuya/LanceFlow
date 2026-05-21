@@ -73,6 +73,9 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/lanceflow_test
       REDIS_URL: redis://localhost:6379
+      AUTH_SECRET: ci-auth-secret-minimum-32-characters-long
+      DEV_AUTH_EMAIL: ops@lanceflow.test
+      DEV_AUTH_PASSWORD: ci-test-password
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -93,6 +96,10 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      AUTH_SECRET: ci-auth-secret-minimum-32-characters-long
+      DEV_AUTH_EMAIL: ops@lanceflow.test
+      DEV_AUTH_PASSWORD: ci-test-password
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
