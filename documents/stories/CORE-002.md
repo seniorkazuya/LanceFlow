@@ -9,7 +9,7 @@
 | **Modules** | `packages/core/auth, apps/web` |
 | **Depends on** | CORE-001 |
 | **Branch** | `feature/CORE-002-auth` |
-| **Status** | Backlog |
+| **Status** | Done |
 
 ---
 
@@ -21,10 +21,10 @@ As a user, I can sign in securely and maintain a session.
 
 ## Acceptance criteria
 
-- [ ] Auth provider integrated (Clerk/NextAuth)
-- [ ] Session in server components and API
-- [ ] Sign in/out flows
-- [ ] Protected routes redirect unauthenticated users
+- [x] Auth provider integrated (Clerk/NextAuth)
+- [x] Session in server components and API
+- [x] Sign in/out flows
+- [x] Protected routes redirect unauthenticated users
 
 ---
 
