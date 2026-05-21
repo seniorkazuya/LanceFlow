@@ -34,7 +34,7 @@
 
 | | |
 |--|--|
-| **URL** | Same Vercel project as staging unless a separate prod project is configured — set `PRODUCTION_URL` in GitHub **production** environment |
+| **URL** | Set `PRODUCTION_URL` in GitHub **production** environment (Vercel prod project or same app) |
 | **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) · **v0.3.0** (M1 + Ops clients) |
 | **Deploy** | Tag `v0.3.0` on `main` → **Deploy Production** (requires environment approval) |
 
