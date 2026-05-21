@@ -12,7 +12,7 @@
 |--|--|
 | **Active story** | DEV-007 — Observability (next) |
 | **Just completed** | **M0 release** — PR #28 merged to `main` ✅ |
-| **Next up** | Tag `v0.1.0` + production secrets → first prod deploy |
+| **Next up** | Merge PR #32 (sync staging); optional stable prod domain on Vercel |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md)**
@@ -34,10 +34,11 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 | | |
 |--|--|
-| **Production URL** | _Pending — configure `production` secrets, then tag `v0.1.0`_ |
+| **Release** | **v0.1.0** — https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0 |
+| **Production URL** | Set in GitHub secret `PRODUCTION_URL` (see Deploy Production run) |
 | **Health check** | `{PRODUCTION_URL}/api/health` |
-| **Workflow** | `.github/workflows/deploy-production.yml` on `main` |
-| **`main` branch** | M0 code merged (#28) — ready for release tag |
+| **Last deploy** | 2026-05-21 — Deploy Production ✅ ([run](https://github.com/seniorkazuya/LanceFlow/actions/runs/26225026548)) |
+| **`main` branch** | M0 release merged (#28) |
 
 ---
 
@@ -51,7 +52,7 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 | Milestone | Status | Notes |
 |-----------|--------|--------|
-| M0 — Platform & DevOps | 🟡 Wrapping up | Release on `main`; prod URL + DEV-007–008 remain |
+| M0 — Platform & DevOps | 🟢 Done | v0.1.0 tagged; prod deploy green; DEV-007–008 optional polish |
 | M1 — Foundation | 🔴 Not started | Auth, RBAC |
 
 ---
@@ -64,7 +65,7 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 | DEV-002 | GitHub + branch protection | 🟢 Done |
 | DEV-003 | CI pipeline | 🟢 Done |
 | DEV-004 | Staging deployment | 🟢 Done |
-| DEV-005 | Production deployment | 🟢 Done (workflow on `main`); prod deploy pending |
+| DEV-005 | Production deployment | 🟢 Done |
 | DEV-006 | Docker Compose | 🟢 Done |
 | DEV-007 | Observability | 🟡 Next |
 | DEV-008 | Client status automation | 🔴 Backlog |
@@ -75,8 +76,8 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 - [x] M0 code on **`main`** (release PR #28)
 - [x] Staging live + CI + Docker local stack
-- [ ] **You:** GitHub `production` environment + secrets ([DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md))
-- [ ] **You:** Push tag **`v0.1.0`** (or use GitHub Release) + approve deploy
+- [x] Tag **`v0.1.0`** + Deploy Production green
+- [ ] **You:** Confirm stable `PRODUCTION_URL` in GitHub + Vercel prod domain (if using alias)
 - [ ] **You:** Sync **LanceFlow Build** cards ([GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md))
 - [ ] **You:** Close Dependabot PR #31 if not wanted
 
