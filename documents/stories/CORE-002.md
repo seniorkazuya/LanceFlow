@@ -9,7 +9,7 @@
 | **Modules** | `packages/core/auth, apps/web` |
 | **Depends on** | CORE-001 |
 | **Branch** | `feature/CORE-002-auth` |
-| **Status** | Backlog |
+| **Status** | In progress |
 
 ---
 
