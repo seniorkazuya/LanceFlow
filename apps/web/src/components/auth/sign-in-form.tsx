@@ -24,7 +24,7 @@ export function SignInForm() {
 
     if (result?.error) {
       setError(
-        'Invalid email or password. Check Vercel DEV_AUTH_* — open /api/diagnostics/auth'
+        'Sign-in failed. Open /api/diagnostics/auth — use POST with your email/password to see if credentials or database failed.'
       );
       return;
     }
