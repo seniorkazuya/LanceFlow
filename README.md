@@ -20,7 +20,23 @@ pnpm typecheck
 pnpm lint
 ```
 
-Copy `.env.example` → `.env` before database migrations (story CORE-001).
+Copy `.env.example` → `.env` before database migrations.
+
+### Local database (Docker)
+
+**Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+```bash
+docker compose up -d              # Postgres :5432, Redis :6379
+docker compose --profile storage up -d   # + MinIO :9000 (API), :9001 (console)
+docker compose down               # stop; add -v to remove volumes
+```
+
+Then run migrations:
+
+```bash
+pnpm db:migrate:deploy   # requires DATABASE_URL in .env (matches .env.example)
+```
 
 ## Documentation
 

@@ -1,10 +1,8 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-19  
-> **Current phase:** M0 — Platform & DevOps (in progress)  
+> **Last updated:** 2026-05-21  
+> **Current phase:** M0 — Platform & DevOps (release to `main` in progress)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
-> **Staging demo:** _Not deployed yet_ (local: http://localhost:3000)  
-> **Latest release:** _None_
 
 ---
 
@@ -12,36 +10,48 @@
 
 | | |
 |--|--|
-| **Active story** | DEV-003 — CI pipeline |
-| **Just completed** | DEV-002 — GitHub setup & branch protection ✅ |
-| **Next up** | DEV-004 — Staging deployment |
+| **Active story** | Release PR #28 — `staging` → `main` (v0.1.0) |
+| **Just completed** | DEV-006 — Docker Compose ✅ |
+| **Next up** | Merge #28 → tag `v0.1.0` → configure production secrets |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-Engineering: [stories index](../stories/README.md) · DevOps: [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md) · GitHub: [Project board](https://github.com/users/seniorkazuya/projects)
+Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md)**
+
+---
+
+## Staging demo
+
+| | |
+|--|--|
+| **Staging URL** | https://lance-flow-web.vercel.app |
+| **Health check** | https://lance-flow-web.vercel.app/api/health |
+| **Local** | http://localhost:3000 (`docker compose up -d` for Postgres/Redis) |
+| **Last deploy** | 2026-05-21 — Deploy Staging ✅ |
+
+---
+
+## Production
+
+| | |
+|--|--|
+| **Production URL** | _Pending — after #28 merge + `v0.1.0` tag + prod secrets_ |
+| **Health check** | `{PRODUCTION_URL}/api/health` |
+| **Workflow** | `.github/workflows/deploy-production.yml` |
 
 ---
 
 ## Executive summary
 
-The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 approval required). PR/issue templates and CODEOWNERS are in place. Next: **CI on every pull request**, then a **staging URL** for client demos.
+CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** deploys on tags `v*` with GitHub Environment approval after `main` is current.
 
 ---
 
 ## Progress at a glance
 
-| Milestone | Status | Target | Notes |
-|-----------|--------|--------|-------|
-| M0 — Platform & DevOps | 🟡 In progress | Week 1–2 | DEV-001–002 done; DEV-003 next |
-| M1 — Foundation | 🔴 Not started | Week 2–3 | Auth, RBAC after M0 |
-| M2 — Operations Core | 🔴 Not started | Week 4–7 | |
-| M3 — Automation | 🔴 Not started | Week 8–11 | |
-| M4 — Control Center | 🔴 Not started | Week 12–15 | |
-| M5 — Payments & Trust | 🔴 Not started | Week 16–19 | |
-| M6 — Hiring MVP | 🔴 Not started | Week 20–25 | |
-| M7 — AI Hiring | 🔴 Not started | Week 26–33 | |
-| M8 — Scale | 🔴 Not started | Week 34+ | |
-
-**Legend:** 🟢 Done · 🟡 In progress · 🔴 Not started
+| Milestone | Status | Notes |
+|-----------|--------|--------|
+| M0 — Platform & DevOps | 🟡 In progress | Release PR #28; prod deploy after tag |
+| M1 — Foundation | 🔴 Not started | Auth, RBAC after M0 |
 
 ---
 
@@ -51,9 +61,10 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 |-------|-------|--------|
 | DEV-001 | Monorepo scaffold | 🟢 Done |
 | DEV-002 | GitHub + branch protection | 🟢 Done |
-| DEV-003 | CI pipeline | 🟡 **Next** |
-| DEV-004 | Staging deployment | 🔴 Backlog |
-| DEV-006 | Docker Compose | 🔴 Backlog |
+| DEV-003 | CI pipeline | 🟢 Done |
+| DEV-004 | Staging deployment | 🟢 Done |
+| DEV-005 | Production deployment | 🟢 Done (workflow); prod release pending |
+| DEV-006 | Docker Compose | 🟢 Done |
 | DEV-007 | Observability | 🔴 Backlog |
 | DEV-008 | Client status automation | 🔴 Backlog |
 
@@ -61,25 +72,14 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 
 ## What is complete today
 
-- [x] Brand and product vision documented
-- [x] Modular architecture & 62 user stories with dev prompts
-- [x] Monorepo — `pnpm dev`, `pnpm build` locally
-- [x] Health API — `/api/health`
-- [x] **GitHub repo** — https://github.com/seniorkazuya/LanceFlow
-- [x] **Branch protection** on `main` and `staging`
-- [x] **PR template**, **story issue template**, **CODEOWNERS**, Dependabot
-- [ ] CI on pull requests (DEV-003)
-- [ ] Staging URL for client demos (DEV-004)
-
----
-
-## Demo & environments
-
-| Environment | URL | Access |
-|-------------|-----|--------|
-| **Local** | http://localhost:3000 | `pnpm dev` |
-| Staging | _pending DEV-004_ | After CI + deploy |
-| Production | _pending_ | After M4+ |
+- [x] Monorepo, GitHub, CI
+- [x] Staging live + health check
+- [x] Production deploy workflow + runbook
+- [x] Docker Compose local stack
+- [ ] **You:** Merge PR #28 (`staging` → `main`)
+- [ ] **You:** `production` environment + Neon/Vercel prod secrets
+- [ ] **You:** Tag `v0.1.0`, approve Deploy Production
+- [ ] **You:** LanceFlow Build project cards ([GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md))
 
 ---
 
@@ -87,26 +87,10 @@ The repo is on GitHub with **protected `main` and `staging`** branches (PR + 1 a
 
 | Date | Change |
 |------|--------|
-| 2026-05-19 | DEV-002 complete: templates, CODEOWNERS, branch protection, GitHub Project |
-| 2026-05-19 | DEV-001 complete: monorepo scaffold |
-| 2026-05-19 | Development started |
-
----
-
-## Risks & blockers
-
-| Item | Impact | Mitigation |
-|------|--------|------------|
-| CI not configured | No automated gate on PRs yet | DEV-003; then enable required checks on branches |
-| Staging URL missing | Client cannot UAT online | DEV-004 after CI |
-
----
-
-## How to track live progress
-
-1. **This file** — updated each story  
-2. **GitHub Project** — LanceFlow Build  
-3. **GitHub Releases** — after first staging/production deploy  
+| 2026-05-21 | Release PR #28; DEV-006 merged; staging live |
+| 2026-05-21 | DEV-005 production workflow (#22) |
+| 2026-05-20 | DEV-004 staging pipeline |
+| 2026-05-19 | DEV-001–003 |
 
 ---
 

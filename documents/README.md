@@ -18,6 +18,7 @@ Structured performance ecosystem — *Where Strong Action Meets Seamless Flow.*
 | [docs/DEVOPS_AND_GITHUB_WORKFLOW.md](docs/DEVOPS_AND_GITHUB_WORKFLOW.md) | Engineering | Branches, PR, CI/CD, review |
 | [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md) | **Clients** | Live milestone progress & demo URLs |
 | [docs/DEVOPS_GUIDE.md](docs/DEVOPS_GUIDE.md) | Engineering | GitHub, PR, CI/CD, deploy (step-by-step) |
+| [docs/DEPLOY_STAGING.md](docs/DEPLOY_STAGING.md) | Engineering | **One-time** Neon + Vercel + GitHub secrets |
 | [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) | Reference | Original phased plan |
 
 ## User stories (with dev prompts)
