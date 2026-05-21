@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-004 — Design system & app shell |
-| **Just completed** | CORE-003 — RBAC ✅ (merged #48) |
+| **Active story** | CORE-005 — Marketing pages (Foundation narrative) |
+| **Just completed** | CORE-004 — Design system, brand UI (#50 + brand refresh) |
 | **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
@@ -53,8 +53,9 @@
 | CORE-001 | Database / Prisma | 🟢 Done |
 | CORE-002 | Authentication | 🟢 Done |
 | CORE-003 | RBAC | 🟢 Done |
-| CORE-004 | Design system & app shell | 🟡 In progress |
-| CORE-005–006 | Marketing, audit | 🔴 Backlog |
+| CORE-004 | Design system & app shell | 🟢 Done |
+| CORE-005 | Marketing & brand pages | 🟡 In progress |
+| CORE-006 | Audit | 🔴 Backlog |
 
 ---
 
@@ -62,6 +63,7 @@
 
 | Date | Change |
 |------|--------|
+| 2026-05-21 | CORE-004 design system + modern brand landing merged (#50) |
 | 2026-05-21 | CORE-003 RBAC merged to `staging` (#48) |
 | 2026-05-21 | v0.2.1 — CORE-002, CORE-001 released to `main` |
 | 2026-05-21 | v0.2.0 on `main` (#37) — DEV-007/008 |

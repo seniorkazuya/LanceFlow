@@ -1,9 +1,12 @@
 'use client';
 
 import { AppShell, type AppShellLinkProps } from '@lanceflow/ui';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
+
+const BRAND_ICON = '/brand/lanceflow-icon.png';
 
 export type ShellLayoutClientProps = {
   user: {
@@ -26,12 +29,23 @@ function NextLink({ href, className, children, onClick }: AppShellLinkProps) {
 export function ShellLayoutClient({ user, signOutAction, children }: ShellLayoutClientProps) {
   const pathname = usePathname();
 
+  const brandSlot = (
+    <Image
+      src={BRAND_ICON}
+      alt=""
+      width={32}
+      height={32}
+      className="h-8 w-8 shrink-0 object-contain"
+    />
+  );
+
   return (
     <AppShell
       user={user}
       currentPath={pathname}
       LinkComponent={NextLink}
       signOutAction={signOutAction}
+      brandSlot={brandSlot}
     >
       {children}
     </AppShell>

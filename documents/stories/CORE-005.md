@@ -9,7 +9,7 @@
 | **Modules** | `apps/web` |
 | **Depends on** | CORE-004 |
 | **Branch** | `feature/CORE-005-brand` |
-| **Status** | Backlog |
+| **Status** | In progress |
 
 ---
 
@@ -21,8 +21,8 @@ As a visitor, I understand LanceFlow vision from the public site.
 
 ## Acceptance criteria
 
-- [ ] Landing page with Foundation narrative
-- [ ] Tagline: Where Strong Action Meets Seamless Flow
+- [x] Landing page with brand hero, lockup highlights, and Foundation pillars (full Foundation doc copy — follow-up)
+- [x] Tagline: Where Strong Action Meets Seamless Flow
 
 ---
 

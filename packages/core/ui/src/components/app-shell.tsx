@@ -25,6 +25,8 @@ export type AppShellProps = {
   /** Next.js `Link` or plain anchor — keeps @lanceflow/ui framework-agnostic. */
   LinkComponent: React.ComponentType<AppShellLinkProps>;
   signOutAction?: React.ReactNode;
+  /** Brand mark (e.g. logo image) shown in sidebar header */
+  brandSlot?: React.ReactNode;
 };
 
 export function AppShell({
@@ -33,16 +35,19 @@ export function AppShell({
   children,
   LinkComponent,
   signOutAction,
+  brandSlot,
 }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navItems = getNavItemsForRole(user.role);
 
   const sidebar = (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2 border-b border-sidebar-border px-4 py-4">
-        <LayoutDashboard className="h-5 w-5 text-primary" aria-hidden />
-        <div>
-          <p className="text-sm font-semibold text-sidebar-foreground">LanceFlow</p>
+      <div className="flex items-center gap-3 border-b border-sidebar-border px-4 py-4">
+        {brandSlot ?? (
+          <LayoutDashboard className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+        )}
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold text-sidebar-foreground">LanceFlow</p>
           <p className="text-xs text-muted-foreground">Performance ecosystem</p>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { StatusBadge, statusToLevel } from '@lanceflow/ui';
+import { GlassCard, StatusBadge, statusToLevel } from '@lanceflow/ui';
 
 import { auth } from '@/auth';
 
@@ -13,14 +13,14 @@ export default async function DashboardPage() {
           Signed in as <span className="text-foreground">{session?.user?.email}</span>
         </p>
       </div>
-      <section className="rounded-lg border border-border bg-secondary/30 p-4">
+      <GlassCard className="p-4">
         <h2 className="text-sm font-medium text-muted-foreground">System status</h2>
         <div className="mt-3 flex flex-wrap gap-2">
           <StatusBadge status="success" label="Platform" />
           <StatusBadge status="warning" label="Exceptions queue" />
           <StatusBadge status={statusToLevel('error')} label="Blocked payouts" />
         </div>
-      </section>
+      </GlassCard>
       <p className="text-sm text-muted-foreground">
         Use the sidebar — navigation items match your role (CORE-004).
       </p>
