@@ -12,7 +12,7 @@
 |--|--|
 | **Active story** | CORE-003 — RBAC (next) |
 | **Just completed** | CORE-002 — Authentication ✅ · CORE-001 — Database ✅ |
-| **Release** | [PR #41](https://github.com/seniorkazuya/LanceFlow/pull/41) `staging` → `main` (v0.2.1) |
+| **Release** | v0.2.1 on `main` (CORE-001 + CORE-002) |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 **Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
@@ -34,8 +34,7 @@
 
 | | |
 |--|--|
-| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.0](https://github.com/seniorkazuya/LanceFlow/pull/37) on `main` |
-| **Pending** | v0.2.1 — CORE-001 + CORE-002 (PR #41) |
+| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.0](https://github.com/seniorkazuya/LanceFlow/pull/37) · **v0.2.1** (M1) |
 | **Deploy** | Tag `v0.2.1` on `main` + Deploy Production workflow |
 
 ---
@@ -62,9 +61,8 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | CORE-002 merged (#40) |
-| 2026-05-21 | CORE-001 merged (#38) |
-| 2026-05-21 | v0.2.0 on `main` (#37) |
+| 2026-05-21 | v0.2.1 — CORE-002, CORE-001 released to `main` |
+| 2026-05-21 | v0.2.0 on `main` (#37) — DEV-007/008 |
 
 ---
 
