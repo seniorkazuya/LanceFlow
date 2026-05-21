@@ -17,6 +17,14 @@ All notable changes to the LanceFlow application are documented here.
 - **DEV-002** — GitHub PR/issue templates, CODEOWNERS, Dependabot, branch protection on `main`/`staging`, setup docs
 - **DEV-001** — Monorepo with Turborepo, Next.js 15 (`apps/web`), `@lanceflow/types`, `@lanceflow/database` (Prisma schema placeholder), `/api/health`
 
+## [0.2.1] — 2026-05-21
+
+M1 foundation (staging): Prisma client and schema tests (CORE-001), NextAuth credentials and protected routes (CORE-002).
+
+## [0.2.0] — 2026-05-21
+
+M0 completion on `main`: observability (DEV-007), client status automation (DEV-008).
+
 ## [0.1.0] — 2026-05-21
 
 M0 platform release: monorepo, CI, staging deployment (Vercel + Neon), production deploy workflow, Docker local stack.
