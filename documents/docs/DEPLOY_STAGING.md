@@ -24,8 +24,20 @@ One-time setup so **push to `staging`** runs migrations and deploys to Vercel.
 3. **Root Directory:** `apps/web`  
 4. Enable **Include source files outside of the Root Directory** (monorepo).
 5. **Production Branch:** set to `staging` (so staging branch = preview/production for this project).
-6. Environment variables in Vercel (Preview + Production for staging project):
-   - `DATABASE_URL` = same Neon URL (optional for build; required at runtime for future stories)
+6. Environment variables in Vercel (**Settings → Environment Variables**). Enable for **Production** and **Preview** (this project uses `staging` as production branch):
+
+| Variable | Required for sign-in | Example / notes |
+|----------|----------------------|-----------------|
+| `DATABASE_URL` | Yes (runtime) | Neon pooled URL with `?sslmode=require` |
+| `AUTH_SECRET` | Yes | `openssl rand -base64 32` — must match a stable value per environment |
+| `AUTH_URL` | Yes | `https://lance-flow-web.vercel.app` (no trailing slash) |
+| `DEV_AUTH_EMAIL` | Yes | `ops@lanceflow.test` |
+| `DEV_AUTH_PASSWORD` | Yes | **Your chosen password** — must match exactly what you type at `/auth/signin` |
+| `REDIS_URL` | Optional | Omit or set Redis URL; health shows `redis: skipped` if omitted |
+
+**Important:** Values in your local `.env` are **not** sent to Vercel automatically. If sign-in shows *Invalid email or password*, the email/password on Vercel differ from what you entered (or `DEV_AUTH_*` is missing).
+
+After changing Vercel env vars, **redeploy** (empty commit to `staging` or Vercel → Redeploy).
 
 7. Get IDs for GitHub Actions:
    - [Account tokens](https://vercel.com/account/tokens) → create token → `VERCEL_TOKEN`

@@ -11,7 +11,9 @@ LanceFlow uses **Auth.js (NextAuth v5)** with a **credentials** provider for dev
 | `DEV_AUTH_EMAIL` | For sign-in | Allowed dev user email |
 | `DEV_AUTH_PASSWORD` | For sign-in | Matching password |
 
-Set the same values on **Vercel** (staging project) and in GitHub **staging** environment if you need sign-in on the deployed preview.
+Set the same values on **Vercel** (staging project — **Settings → Environment Variables**). GitHub **staging** secrets are for CI/migrations only; they do **not** inject `DEV_AUTH_*` into the running Vercel app unless you also add them in Vercel.
+
+Sign-in compares credentials with **exact** string equality. A password that works in local `.env` will fail on staging if Vercel still has a different `DEV_AUTH_PASSWORD`.
 
 ## Routes
 
