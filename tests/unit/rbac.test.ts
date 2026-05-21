@@ -30,6 +30,11 @@ describe('hasRole', () => {
     expect(hasRole(UserRole.CEO, RolePolicy.controlCenter)).toBe(true);
     expect(hasRole(UserRole.ENGINEER, RolePolicy.controlCenter)).toBe(false);
   });
+
+  it('restricts audit read to CEO', () => {
+    expect(hasRole(UserRole.CEO, RolePolicy.auditRead)).toBe(true);
+    expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.auditRead)).toBe(false);
+  });
 });
 
 describe('assertRole', () => {

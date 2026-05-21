@@ -32,6 +32,7 @@ The marketing landing page **is the site root**:
 | `/dashboard` | App home (requires login) |
 | `/control` | Control Center (CEO / Ops only) |
 | `/hiring/ceo-queue` | Hiring CEO queue (not Engineers) |
+| `/audit` | Audit log (CEO only) |
 
 There is no separate `/landing` route — `/` is the public marketing entry.
 

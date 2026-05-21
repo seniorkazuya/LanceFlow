@@ -1,3 +1,4 @@
+import { auditLog } from '@lanceflow/audit';
 import {
   findOrCreateUserForSignIn,
   resolveDevAuthConfig,
@@ -31,6 +32,17 @@ const nextAuth = NextAuth({
 
         try {
           const user = await findOrCreateUserForSignIn({ email: config.email });
+          try {
+            await auditLog({
+              actorId: user.id,
+              action: 'auth.sign_in',
+              entityType: 'user',
+              entityId: user.id,
+              payload: { email: user.email, role: user.role },
+            });
+          } catch (auditError) {
+            console.error('[auth] auditLog auth.sign_in failed', auditError);
+          }
           return {
             id: user.id,
             email: user.email,

@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-21  
-> **Current phase:** M1 — Foundation (in progress)  
+> **Current phase:** M1 — Foundation (complete) · Sprint 2 (Ops) next  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-006 — Audit log (backlog) |
-| **Just completed** | CORE-005 — Marketing + app shell brand UI |
+| **Active story** | OPS-001 — Clients (Sprint 2) |
+| **Just completed** | CORE-006 — Audit log service |
 | **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
@@ -45,7 +45,7 @@
 | Milestone | Status |
 |-----------|--------|
 | **M0** Platform & DevOps | 🟢 Done |
-| **M1** Foundation | 🟡 In progress |
+| **M1** Foundation | 🟢 Done |
 
 ### M1 — stories
 
@@ -56,7 +56,7 @@
 | CORE-003 | RBAC | 🟢 Done |
 | CORE-004 | Design system & app shell | 🟢 Done |
 | CORE-005 | Marketing & brand pages | 🟢 Done |
-| CORE-006 | Audit | 🔴 Backlog |
+| CORE-006 | Audit | 🟢 Done |
 
 ---
 
@@ -64,6 +64,8 @@
 
 | Date | Change |
 |------|--------|
+| 2026-05-21 | CORE-006 audit service + CEO `/audit` page (#61) |
+| 2026-05-21 | CORE-005 Foundation landing + glass app pages (#60) |
 | 2026-05-21 | CORE-004 design system + modern brand landing merged (#50) |
 | 2026-05-21 | CORE-003 RBAC merged to `staging` (#48) |
 | 2026-05-21 | v0.2.1 — CORE-002, CORE-001 released to `main` |
