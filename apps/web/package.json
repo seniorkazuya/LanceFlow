@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@lanceflow/audit": "workspace:*",
+    "@lanceflow/operations": "workspace:*",
     "@lanceflow/auth": "workspace:*",
     "@lanceflow/database": "workspace:*",
     "@lanceflow/config": "workspace:*",

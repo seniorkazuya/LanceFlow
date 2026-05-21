@@ -35,6 +35,17 @@ describe('hasRole', () => {
     expect(hasRole(UserRole.CEO, RolePolicy.auditRead)).toBe(true);
     expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.auditRead)).toBe(false);
   });
+
+  it('allows client read for ops and bidder', () => {
+    expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.clientsRead)).toBe(true);
+    expect(hasRole(UserRole.BIDDER, RolePolicy.clientsRead)).toBe(true);
+    expect(hasRole(UserRole.ENGINEER, RolePolicy.clientsRead)).toBe(false);
+  });
+
+  it('allows client write for ops only', () => {
+    expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.clientsWrite)).toBe(true);
+    expect(hasRole(UserRole.BIDDER, RolePolicy.clientsWrite)).toBe(false);
+  });
 });
 
 describe('assertRole', () => {

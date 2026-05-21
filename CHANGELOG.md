@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations
 - **CORE-006** — `@lanceflow/audit` (`auditLog`, `queryAuditLogs`), `GET /api/audit/logs` (CEO), `/audit` page, `auth.sign_in` logging
 - **CORE-005** — Foundation narrative on landing (promises, how-it-works, org roles); glass layout on dashboard, control, and hiring pages; `PageHeader` and `Input` in `@lanceflow/ui`
 - **CORE-004** — Modern brand theme (navy/teal, glass UI), landing hero with highlighted logo assets, `GlassCard` / `BrandHighlight`

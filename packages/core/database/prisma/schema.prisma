@@ -32,3 +32,16 @@ model AuditLog {
 
   @@map("audit_logs")
 }
+
+model Client {
+  id           String   @id @default(cuid())
+  name         String
+  contactEmail String?  @map("contact_email")
+  status       String   @default("active")
+  riskScore    Int      @default(0) @map("risk_score")
+  notes        String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("ops_clients")
+}
