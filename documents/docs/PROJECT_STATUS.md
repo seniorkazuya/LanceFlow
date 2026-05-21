@@ -10,9 +10,9 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-002 — Authentication (PR in progress) |
-| **Just completed** | CORE-001 — Database & Prisma client ✅ |
-| **Next up** | CORE-003 RBAC |
+| **Active story** | CORE-003 — RBAC (next) |
+| **Just completed** | CORE-002 — Authentication ✅ · CORE-001 — Database ✅ |
+| **Release** | [PR #41](https://github.com/seniorkazuya/LanceFlow/pull/41) `staging` → `main` (v0.2.1, M1) |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 **Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
@@ -25,8 +25,8 @@
 |--|--|
 | **URL** | https://lance-flow-web.vercel.app |
 | **Health** | https://lance-flow-web.vercel.app/api/health |
-| **Sign-in** | `/auth/signin` after `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
-| **Local** | http://localhost:3000 · `docker compose up -d` |
+| **Sign-in** | `/auth/signin` — requires `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
+| **Local** | http://localhost:3000 · [LOCAL_DEV_WINDOWS.md](./LOCAL_DEV_WINDOWS.md) |
 
 ---
 
@@ -34,8 +34,9 @@
 
 | | |
 |--|--|
-| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · `main` includes [v0.2.0 merge](https://github.com/seniorkazuya/LanceFlow/pull/37) |
-| **Staging ahead of main** | CORE-001 (+ CORE-002 when merged) — release PR when ready |
+| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.0](https://github.com/seniorkazuya/LanceFlow/pull/37) on `main` |
+| **Pending** | v0.2.1 — CORE-001 + CORE-002 via PR #41 |
+| **Deploy** | Tag on `main` + Deploy Production workflow |
 
 ---
 
@@ -51,7 +52,7 @@
 | Story | Title | Status |
 |-------|-------|--------|
 | CORE-001 | Database / Prisma | 🟢 Done |
-| CORE-002 | Authentication | 🟡 In progress |
+| CORE-002 | Authentication | 🟢 Done |
 | CORE-003 | RBAC | 🔴 Next |
 | CORE-004–006 | UI, marketing, audit | 🔴 Backlog |
 
@@ -61,9 +62,9 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | CORE-001 merged (#38); CI Prisma fix |
-| 2026-05-21 | Release to `main` (#37) — DEV-007/008 |
-| 2026-05-21 | Staging deploy green; health `database: ok` |
+| 2026-05-21 | CORE-002 merged (#40) — NextAuth, sign-in, dashboard |
+| 2026-05-21 | CORE-001 merged (#38) |
+| 2026-05-21 | v0.2.0 on `main` (#37) — DEV-007/008 |
 
 ---
 
