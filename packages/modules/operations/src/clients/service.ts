@@ -5,6 +5,7 @@ import type {
   ClientRecord,
   ClientStatus,
   CreateClientInput,
+  RiskScoreSource,
   UpdateClientInput,
 } from './types';
 import { validateCreateClientInput, validateUpdateClientInput } from './validate';
@@ -15,6 +16,9 @@ function toRecord(row: {
   contactEmail: string | null;
   status: string;
   riskScore: number;
+  riskScoreSource: string;
+  riskFormulaVersion: string | null;
+  riskOverrideReason: string | null;
   notes: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -25,6 +29,9 @@ function toRecord(row: {
     contactEmail: row.contactEmail,
     status: row.status as ClientStatus,
     riskScore: row.riskScore,
+    riskScoreSource: row.riskScoreSource as RiskScoreSource,
+    riskFormulaVersion: row.riskFormulaVersion,
+    riskOverrideReason: row.riskOverrideReason,
     notes: row.notes,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
@@ -60,6 +67,7 @@ export async function createClient(
       name: input.name.trim(),
       contactEmail: input.contactEmail?.trim() || null,
       riskScore: input.riskScore ?? 0,
+      riskScoreSource: 'default',
       notes: input.notes?.trim() || null,
     },
   });
@@ -95,7 +103,6 @@ export async function updateClient(
         ? { contactEmail: input.contactEmail?.trim() || null }
         : {}),
       ...(input.status !== undefined ? { status: input.status } : {}),
-      ...(input.riskScore !== undefined ? { riskScore: input.riskScore } : {}),
       ...(input.notes !== undefined ? { notes: input.notes?.trim() || null } : {}),
     },
   });

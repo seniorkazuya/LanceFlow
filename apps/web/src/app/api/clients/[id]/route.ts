@@ -43,7 +43,6 @@ export const PATCH = withApiLogging('/api/clients/[id]', async (request: Request
       name?: string;
       contactEmail?: string | null;
       status?: 'active' | 'archived';
-      riskScore?: number;
       notes?: string | null;
     }>(request);
 

@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **OPS-002** — Client risk v0 formula, manual override with audit, risk panel for Bidders
 - **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations
 - **CORE-006** — `@lanceflow/audit` (`auditLog`, `queryAuditLogs`), `GET /api/audit/logs` (CEO), `/audit` page, `auth.sign_in` logging
 - **CORE-005** — Foundation narrative on landing (promises, how-it-works, org roles); glass layout on dashboard, control, and hiring pages; `PageHeader` and `Input` in `@lanceflow/ui`

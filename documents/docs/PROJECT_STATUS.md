@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | OPS-002 — Client risk v0 (Sprint 2) |
-| **Just completed** | OPS-001 — Client CRUD |
+| **Active story** | OPS-003 — Project lifecycle (Sprint 3) |
+| **Just completed** | OPS-002 — Client risk v0 |
 | **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 

@@ -1,18 +1,14 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
 import { getClientById } from '@lanceflow/operations';
-import { GlassCard, PageHeader, SectionLabel, StatusBadge } from '@lanceflow/ui';
+import { GlassCard, PageHeader, SectionLabel } from '@lanceflow/ui';
 import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ArchiveClientButton } from '@/components/clients/archive-client-button';
 import { ClientForm } from '@/components/clients/client-form';
+import { ClientRiskActions } from '@/components/clients/client-risk-actions';
+import { RiskPanel } from '@/components/clients/risk-panel';
 import { auth } from '@/auth';
-
-function riskLevel(score: number): 'success' | 'warning' | 'danger' {
-  if (score < 40) return 'success';
-  if (score < 70) return 'warning';
-  return 'danger';
-}
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -43,18 +39,14 @@ export default async function ClientDetailPage({ params }: PageProps) {
         }
       />
 
+      <RiskPanel client={client} />
+
       <GlassCard className="p-5 md:p-6">
         <SectionLabel>summary</SectionLabel>
         <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-muted-foreground">Status</dt>
             <dd className="font-medium capitalize text-foreground">{client.status}</dd>
-          </div>
-          <div>
-            <dt className="text-muted-foreground">Risk</dt>
-            <dd className="mt-1">
-              <StatusBadge status={riskLevel(client.riskScore)} label={`${client.riskScore}`} />
-            </dd>
           </div>
           <div>
             <dt className="text-muted-foreground">Contact</dt>
@@ -73,7 +65,13 @@ export default async function ClientDetailPage({ params }: PageProps) {
       {canWrite && client.status === 'active' ? (
         <>
           <GlassCard className="p-6 md:p-8">
-            <SectionLabel>edit</SectionLabel>
+            <SectionLabel>risk controls</SectionLabel>
+            <div className="mt-4">
+              <ClientRiskActions clientId={client.id} />
+            </div>
+          </GlassCard>
+          <GlassCard className="p-6 md:p-8">
+            <SectionLabel>edit profile</SectionLabel>
             <div className="mt-4">
               <ClientForm
                 mode="edit"
@@ -81,7 +79,6 @@ export default async function ClientDetailPage({ params }: PageProps) {
                 initial={{
                   name: client.name,
                   contactEmail: client.contactEmail ?? '',
-                  riskScore: client.riskScore,
                   notes: client.notes ?? '',
                 }}
               />

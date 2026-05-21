@@ -34,14 +34,17 @@ model AuditLog {
 }
 
 model Client {
-  id           String   @id @default(cuid())
-  name         String
-  contactEmail String?  @map("contact_email")
-  status       String   @default("active")
-  riskScore    Int      @default(0) @map("risk_score")
-  notes        String?
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id                 String   @id @default(cuid())
+  name               String
+  contactEmail       String?  @map("contact_email")
+  status             String   @default("active")
+  riskScore          Int      @default(0) @map("risk_score")
+  riskScoreSource    String   @default("default") @map("risk_score_source")
+  riskFormulaVersion String?  @map("risk_formula_version")
+  riskOverrideReason String?  @map("risk_override_reason")
+  notes              String?
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
 
   @@map("ops_clients")
 }
