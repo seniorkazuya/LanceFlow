@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && pnpm turbo build --filter=@lanceflow/web",
+  "buildCommand": "cd ../.. && pnpm --filter @lanceflow/database db:generate && pnpm turbo build --filter=@lanceflow/web",
   "outputDirectory": ".next"
 }
