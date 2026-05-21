@@ -22,9 +22,11 @@ pnpm lint
 
 Copy `.env.example` → `.env` before database migrations.
 
-### Local database (Docker)
+### Local database
 
-**Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+**Windows / `docker` not found?** See [LOCAL_DEV_WINDOWS.md](documents/docs/LOCAL_DEV_WINDOWS.md) (install Docker or use Neon without Docker).
+
+**With Docker:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ```bash
 docker compose up -d              # Postgres :5432, Redis :6379
@@ -46,6 +48,8 @@ pnpm db:migrate:deploy   # requires DATABASE_URL in .env (matches .env.example)
 | **Project board** | [GITHUB_PROJECT_BOARD.md](documents/docs/GITHUB_PROJECT_BOARD.md) |
 | **DevOps (GitHub, deploy)** | [documents/docs/DEVOPS_GUIDE.md](documents/docs/DEVOPS_GUIDE.md) |
 | **Observability** | [documents/docs/OBSERVABILITY.md](documents/docs/OBSERVABILITY.md) |
+| **Auth** | [documents/docs/AUTH.md](documents/docs/AUTH.md) |
+| **Local dev (Windows)** | [documents/docs/LOCAL_DEV_WINDOWS.md](documents/docs/LOCAL_DEV_WINDOWS.md) |
 | **Active stories** | [documents/stories/](documents/stories/) |
 | **Architecture** | [documents/docs/MODULAR_ARCHITECTURE.md](documents/docs/MODULAR_ARCHITECTURE.md) |
 

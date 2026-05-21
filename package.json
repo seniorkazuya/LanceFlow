@@ -16,6 +16,7 @@
   "devDependencies": {
     "@lanceflow/eslint-config": "workspace:*",
     "@lanceflow/typescript-config": "workspace:*",
+    "@lanceflow/auth": "workspace:*",
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
     "@lanceflow/types": "workspace:*",
