@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@lanceflow/auth": "workspace:*",
+    "@lanceflow/database": "workspace:*",
     "@lanceflow/config": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "@lanceflow/ui": "workspace:*",
@@ -24,6 +25,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@prisma/nextjs-monorepo-workaround-plugin": "^6.6.0",
     "@lanceflow/eslint-config": "workspace:*",
     "@lanceflow/typescript-config": "workspace:*",
     "autoprefixer": "^10.4.20",
