@@ -6,7 +6,7 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
-    "test": "vitest run",
+    "test": "pnpm --filter @lanceflow/database db:generate && vitest run",
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
@@ -16,6 +16,8 @@
   "devDependencies": {
     "@lanceflow/eslint-config": "workspace:*",
     "@lanceflow/typescript-config": "workspace:*",
+    "@lanceflow/config": "workspace:*",
+    "@lanceflow/database": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "ioredis": "^5.4.2",
     "@types/pg": "^8.11.10",

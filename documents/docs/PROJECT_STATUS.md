@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-21  
-> **Current phase:** M0 — Platform & DevOps (release to `main` in progress)  
+> **Current phase:** M1 — Foundation (started)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,12 +10,12 @@
 
 | | |
 |--|--|
-| **Active story** | Release PR #28 — `staging` → `main` (v0.1.0) |
-| **Just completed** | DEV-006 — Docker Compose ✅ |
-| **Next up** | Merge #28 → tag `v0.1.0` → configure production secrets |
+| **Active story** | CORE-001 — Database package & Prisma schema (in PR) |
+| **Just completed** | **M0** — DEV-001 through DEV-008 ✅ |
+| **Next up** | Merge CORE-001 → CORE-002 Auth |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md)**
+**Client links:** [Staging demo](#staging-demo) · [Production](#production) · [Story board](https://github.com/users/seniorkazuya/projects)
 
 ---
 
@@ -25,8 +25,8 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 |--|--|
 | **Staging URL** | https://lance-flow-web.vercel.app |
 | **Health check** | https://lance-flow-web.vercel.app/api/health |
-| **Local** | http://localhost:3000 (`docker compose up -d` for Postgres/Redis) |
-| **Last deploy** | 2026-05-21 — Deploy Staging ✅ |
+| **Local** | http://localhost:3000 (`docker compose up -d`) |
+| **Last deploy** | 2026-05-21 — DEV-008 ✅ |
 
 ---
 
@@ -34,15 +34,15 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 | | |
 |--|--|
-| **Production URL** | _Pending — after #28 merge + `v0.1.0` tag + prod secrets_ |
-| **Health check** | `{PRODUCTION_URL}/api/health` |
-| **Workflow** | `.github/workflows/deploy-production.yml` |
+| **Release** | **v0.1.0** on `main` — https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0 |
+| **Pending** | Release PR: `staging` → `main` for DEV-007/008 (v0.2.0) |
+| **Last prod deploy** | 2026-05-21 — Deploy Production ✅ |
 
 ---
 
 ## Executive summary
 
-CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** deploys on tags `v*` with GitHub Environment approval after `main` is current.
+**M0 complete on `staging`:** platform, CI/CD, staging + production deploys, Docker, observability, client status automation. **M1 started:** database client and schema tests.
 
 ---
 
@@ -50,8 +50,8 @@ CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** de
 
 | Milestone | Status | Notes |
 |-----------|--------|--------|
-| M0 — Platform & DevOps | 🟡 In progress | Release PR #28; prod deploy after tag |
-| M1 — Foundation | 🔴 Not started | Auth, RBAC after M0 |
+| M0 — Platform & DevOps | 🟢 Done | All DEV stories shipped |
+| M1 — Foundation | 🟡 In progress | CORE-001 in PR |
 
 ---
 
@@ -59,27 +59,18 @@ CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** de
 
 | Story | Title | Status |
 |-------|-------|--------|
-| DEV-001 | Monorepo scaffold | 🟢 Done |
-| DEV-002 | GitHub + branch protection | 🟢 Done |
-| DEV-003 | CI pipeline | 🟢 Done |
-| DEV-004 | Staging deployment | 🟢 Done |
-| DEV-005 | Production deployment | 🟢 Done (workflow); prod release pending |
-| DEV-006 | Docker Compose | 🟢 Done |
-| DEV-007 | Observability | 🔴 Backlog |
-| DEV-008 | Client status automation | 🔴 Backlog |
+| DEV-001 … DEV-008 | Platform & DevOps | 🟢 Done |
 
----
+## Story progress (M1)
 
-## What is complete today
-
-- [x] Monorepo, GitHub, CI
-- [x] Staging live + health check
-- [x] Production deploy workflow + runbook
-- [x] Docker Compose local stack
-- [ ] **You:** Merge PR #28 (`staging` → `main`)
-- [ ] **You:** `production` environment + Neon/Vercel prod secrets
-- [ ] **You:** Tag `v0.1.0`, approve Deploy Production
-- [ ] **You:** LanceFlow Build project cards ([GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md))
+| Story | Title | Status |
+|-------|-------|--------|
+| CORE-001 | Database / Prisma v0 | 🟡 In PR |
+| CORE-002 | Authentication | 🔴 Next |
+| CORE-003 | RBAC | 🔴 Backlog |
+| CORE-004 | Design system | 🔴 Backlog |
+| CORE-005 | Marketing pages | 🔴 Backlog |
+| CORE-006 | Audit log service | 🔴 Backlog |
 
 ---
 
@@ -87,10 +78,9 @@ CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** de
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | Release PR #28; DEV-006 merged; staging live |
-| 2026-05-21 | DEV-005 production workflow (#22) |
-| 2026-05-20 | DEV-004 staging pipeline |
-| 2026-05-19 | DEV-001–003 |
+| 2026-05-21 | M0 complete — DEV-008 merged (#35) |
+| 2026-05-21 | DEV-007 observability (#33) |
+| 2026-05-21 | v0.1.0 on `main` (#28) |
 
 ---
 

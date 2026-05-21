@@ -1,0 +1,38 @@
+name: Remind project status
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [staging]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  remind:
+    name: remind
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on merged PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = [
+              '### Staging merge — client status checklist',
+              '',
+              'This PR was merged to `staging`. Please update:',
+              '',
+              '- [ ] [`documents/docs/PROJECT_STATUS.md`](https://github.com/seniorkazuya/LanceFlow/blob/staging/documents/docs/PROJECT_STATUS.md) — staging URL, active story, changelog',
+              '- [ ] [**LanceFlow Build**](https://github.com/users/seniorkazuya/projects) — move story card (see [board guide](https://github.com/seniorkazuya/LanceFlow/blob/staging/documents/docs/GITHUB_PROJECT_UPDATES.md))',
+              '- [ ] Confirm [Deploy Staging](https://github.com/seniorkazuya/LanceFlow/actions/workflows/deploy-staging.yml) is green',
+              '',
+              '_Automated reminder (DEV-008)._',
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body,
+            });

@@ -9,7 +9,7 @@
 | **Modules** | `packages/core/database` |
 | **Depends on** | DEV-001 |
 | **Branch** | `feature/CORE-001-database` |
-| **Status** | Backlog |
+| **Status** | In PR |
 
 ---
 
@@ -21,10 +21,10 @@ As a platform, I need users and audit_logs persisted with migrations.
 
 ## Acceptance criteria
 
-- [ ] Prisma in packages/core/database
-- [ ] User model: id, email, role, status, displayName
-- [ ] AuditLog model
-- [ ] migrate dev + CI migration test
+- [x] Prisma in packages/core/database
+- [x] User model: id, email, role, status, displayName
+- [x] AuditLog model
+- [x] migrate dev + CI migration test
 
 ---
 
