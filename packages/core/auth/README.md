@@ -7,6 +7,7 @@ Authentication helpers for LanceFlow (CORE-002). Session provider wiring lives i
 - `resolveDevAuthConfig` / `validateDevCredentials` — dev/staging credentials provider
 - `findOrCreateUserForSignIn` — upsert `User` after successful auth
 - `SessionUser` — typed session payload for API routes and server components
+- `RolePolicy`, `assertRole`, `authorizeRequest`, `withAuth` — RBAC (CORE-003)
 
 ## Environment
 

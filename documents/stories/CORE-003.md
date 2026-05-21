@@ -9,7 +9,7 @@
 | **Modules** | `packages/core/auth` |
 | **Depends on** | CORE-002 |
 | **Branch** | `feature/CORE-003-rbac` |
-| **Status** | Backlog |
+| **Status** | In progress |
 
 ---
 

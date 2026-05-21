@@ -10,9 +10,9 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-003 — RBAC (next) |
-| **Just completed** | CORE-002 — Authentication ✅ · CORE-001 — Database ✅ |
-| **Release** | v0.2.1 on `main` (CORE-001 + CORE-002) |
+| **Active story** | CORE-003 — RBAC (in PR) |
+| **Just completed** | v0.2.1 on `main` — CORE-002 + CORE-001 ✅ |
+| **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 **Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
@@ -52,7 +52,7 @@
 |-------|-------|--------|
 | CORE-001 | Database / Prisma | 🟢 Done |
 | CORE-002 | Authentication | 🟢 Done |
-| CORE-003 | RBAC | 🔴 Next |
+| CORE-003 | RBAC | 🟡 In progress |
 | CORE-004–006 | UI, marketing, audit | 🔴 Backlog |
 
 ---

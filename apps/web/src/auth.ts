@@ -8,7 +8,7 @@ import Credentials from 'next-auth/providers/credentials';
 
 import { authConfig } from './auth.config';
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+const nextAuth = NextAuth({
   ...authConfig,
   secret: process.env.AUTH_SECRET,
   trustHost: true,
@@ -39,3 +39,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
 });
+
+export const { handlers, signIn, signOut, auth } = nextAuth;
+
+export async function getAuthSession() {
+  return nextAuth.auth();
+}
