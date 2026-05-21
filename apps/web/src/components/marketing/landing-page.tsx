@@ -191,9 +191,14 @@ export function LandingPage() {
             <Image src={BRAND_ICON} alt="" width={22} height={22} className="h-5 w-5 opacity-70" />
             <span className="font-medium text-foreground/80">LanceFlow</span>
           </div>
-          <p className="text-center text-xs tracking-wide md:text-right">
-            where strong action meets seamless flow
-          </p>
+          <div className="text-center md:text-right">
+            <p className="text-xs tracking-wide">where strong action meets seamless flow</p>
+            {process.env.VERCEL_GIT_COMMIT_SHA ? (
+              <p className="mt-1 font-mono text-[0.65rem] text-muted-foreground/60">
+                staging · {process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 7)}
+              </p>
+            ) : null}
+          </div>
         </div>
       </footer>
     </div>

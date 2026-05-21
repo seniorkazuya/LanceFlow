@@ -27,6 +27,7 @@
 | **Health** | https://lance-flow-web.vercel.app/api/health |
 | **Sign-in** | `/auth/signin` — requires `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
 | **Local** | http://localhost:3000 · [LOCAL_DEV_WINDOWS.md](./LOCAL_DEV_WINDOWS.md) |
+| **UI guide** | [STAGING_DEMO.md](./STAGING_DEMO.md) — landing, sign-in, roles |
 
 ---
 
