@@ -35,6 +35,7 @@ The marketing landing page **is the site root**:
 | `/audit` | Audit log (CEO only) |
 | `/clients` | Client list (Ops write, Bidder read) |
 | `/clients/new` | Create client (Ops / CEO) |
+| `/clients/[id]` | Risk score 0–100, v0 evaluate, manual override (Ops) |
 
 There is no separate `/landing` route — `/` is the public marketing entry.
 

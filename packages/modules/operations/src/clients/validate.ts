@@ -1,4 +1,10 @@
-import { CLIENT_STATUSES, type ClientValidationError, type CreateClientInput, type UpdateClientInput } from './types';
+import {
+  CLIENT_STATUSES,
+  type ClientValidationError,
+  type CreateClientInput,
+  type OverrideClientRiskInput,
+  type UpdateClientInput,
+} from './types';
 
 export function validateCreateClientInput(input: CreateClientInput): ClientValidationError[] {
   const errors: ClientValidationError[] = [];
@@ -48,11 +54,21 @@ export function validateUpdateClientInput(input: UpdateClientInput): ClientValid
     errors.push({ field: 'status', message: 'Invalid status' });
   }
 
-  if (input.riskScore !== undefined) {
-    if (!Number.isInteger(input.riskScore) || input.riskScore < 0 || input.riskScore > 100) {
-      errors.push({ field: 'riskScore', message: 'Risk score must be 0–100' });
-    }
-  }
+  return errors;
+}
 
+export function validateOverrideClientRiskInput(
+  input: OverrideClientRiskInput
+): ClientValidationError[] {
+  const errors: ClientValidationError[] = [];
+  if (!Number.isInteger(input.riskScore) || input.riskScore < 0 || input.riskScore > 100) {
+    errors.push({ field: 'riskScore', message: 'Risk score must be 0–100' });
+  }
+  const reason = input.reason?.trim();
+  if (!reason) {
+    errors.push({ field: 'reason', message: 'Override reason is required' });
+  } else if (reason.length > 500) {
+    errors.push({ field: 'reason', message: 'Reason must be 500 characters or fewer' });
+  }
   return errors;
 }

@@ -7,7 +7,6 @@ import { useState } from 'react';
 export type ClientFormValues = {
   name: string;
   contactEmail: string;
-  riskScore: number;
   notes: string;
 };
 
@@ -24,7 +23,6 @@ export function ClientForm({ mode, clientId, initial }: ClientFormProps) {
   const [values, setValues] = useState<ClientFormValues>({
     name: initial?.name ?? '',
     contactEmail: initial?.contactEmail ?? '',
-    riskScore: initial?.riskScore ?? 0,
     notes: initial?.notes ?? '',
   });
 
@@ -36,7 +34,6 @@ export function ClientForm({ mode, clientId, initial }: ClientFormProps) {
     const payload = {
       name: values.name,
       contactEmail: values.contactEmail || null,
-      riskScore: values.riskScore,
       notes: values.notes || null,
     };
 
@@ -80,17 +77,6 @@ export function ClientForm({ mode, clientId, initial }: ClientFormProps) {
           type="email"
           value={values.contactEmail}
           onChange={(e) => setValues((v) => ({ ...v, contactEmail: e.target.value }))}
-        />
-      </label>
-      <label className="grid gap-1.5 text-sm">
-        <span className="font-medium text-foreground">Risk score (0–100)</span>
-        <Input
-          name="riskScore"
-          type="number"
-          min={0}
-          max={100}
-          value={values.riskScore}
-          onChange={(e) => setValues((v) => ({ ...v, riskScore: Number(e.target.value) }))}
         />
       </label>
       <label className="grid gap-1.5 text-sm">

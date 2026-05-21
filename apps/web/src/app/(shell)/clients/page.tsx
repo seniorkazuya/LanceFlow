@@ -1,5 +1,5 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
-import { listClients } from '@lanceflow/operations';
+import { listClients, riskBand, riskBandLabel } from '@lanceflow/operations';
 import { Button, GlassCard, PageHeader, StatusBadge } from '@lanceflow/ui';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -65,7 +65,12 @@ export default async function ClientsPage() {
                       <p className="text-sm text-muted-foreground">{client.contactEmail}</p>
                     ) : null}
                   </div>
-                  <StatusBadge status={riskLevel(client.riskScore)} label={`Risk ${client.riskScore}`} />
+                  <div className="flex flex-wrap items-center gap-2">
+                    <StatusBadge status={riskLevel(client.riskScore)} label={`${client.riskScore}`} />
+                    <span className="text-xs text-muted-foreground">
+                      {riskBandLabel(riskBand(client.riskScore))}
+                    </span>
+                  </div>
                 </Link>
               </li>
             ))}
