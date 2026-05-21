@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **DEV-008** — PR status checklist, `remind-project-status` workflow, GitHub Project board template
 - **DEV-007** — `@lanceflow/config` health checks, structured API JSON logs, optional Sentry, `/api/health` DB+Redis status
 - **DEV-006** — Docker Compose (Postgres 16, Redis 7, optional MinIO profile), README local stack docs
 - **DEV-005** — Deploy Production workflow (tag `v*` + manual), DEPLOY_PRODUCTION.md with rollback runbook
