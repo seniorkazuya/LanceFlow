@@ -11,6 +11,9 @@ importers:
       '@lanceflow/config':
         specifier: workspace:*
         version: link:packages/core/config
+      '@lanceflow/database':
+        specifier: workspace:*
+        version: link:packages/core/database
       '@lanceflow/eslint-config':
         specifier: workspace:*
         version: link:packages/core/eslint-config

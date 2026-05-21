@@ -1,4 +1,4 @@
-// CORE-001 will expand this schema. DEV-001: minimal placeholder.
+// CORE-001 — users and audit_logs (v0). Extend in later stories.
 generator client {
   provider = "prisma-client-js"
 }
