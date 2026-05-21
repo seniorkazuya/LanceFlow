@@ -22,6 +22,56 @@ const pillars = [
 
 const trustItems = ['RBAC enforced', 'Role-aware shell', 'Rules + scores'] as const;
 
+const promises = [
+  {
+    audience: 'Employees & talent',
+    items: [
+      'Protection and clarity in how work is assigned',
+      'Stable opportunity through structured pipelines',
+      'Fair systems with transparent performance rewards',
+    ],
+  },
+  {
+    audience: 'Clients',
+    items: [
+      'Reliability and controlled delivery process',
+      'Predictable outcomes from disciplined ops',
+      'Risk-aware engagement — not marketplace chaos',
+    ],
+  },
+] as const;
+
+const howItWorks = [
+  {
+    step: '01',
+    title: 'Encode judgment',
+    body: 'Leadership policies become versioned scores, thresholds, and rules — not ad-hoc decisions.',
+  },
+  {
+    step: '02',
+    title: 'Route by role',
+    body: 'Callers, bidders, engineers, and ops each see the surfaces they need — CEO sees exceptions.',
+  },
+  {
+    step: '03',
+    title: 'Automate with audit',
+    body: 'Auto-approve when safe; every decision stores inputs, formula version, and overrides.',
+  },
+  {
+    step: '04',
+    title: 'Measure & improve',
+    body: 'KPIs, hiring scores (THS/RS), and control-center aggregates close the loop.',
+  },
+] as const;
+
+const orgRoles = [
+  { role: 'Caller', focus: 'Client contact, conversion, communication quality' },
+  { role: 'Bidder', focus: 'Proposals, scope, pricing, deal closure' },
+  { role: 'Engineer', focus: 'Delivery, quality, speed — focused shell' },
+  { role: 'Ops Manager', focus: 'Daily workflow, assignment, KPI reporting' },
+  { role: 'CEO', focus: 'Strategy, exceptions, high-value deals (<5% ops)' },
+] as const;
+
 export function LandingPage() {
   return (
     <div className="lf-page-grid lf-mesh-bg relative min-h-screen">
@@ -125,6 +175,81 @@ export function LandingPage() {
                 />
               </BrandHighlight>
             </div>
+          </GlassCard>
+        </section>
+
+        {/* Foundation narrative — employee & client promises */}
+        <section className="lf-divider mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+          <div className="max-w-2xl">
+            <SectionLabel>foundation</SectionLabel>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl">
+              A performance ecosystem — not a chaotic marketplace.
+            </h2>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              <strong className="font-medium text-foreground">Lance</strong> — courage and excellence in
+              action. <strong className="font-medium text-foreground">Flow</strong> — systems that remove
+              uncertainty. Strong individuals plus seamless operations deliver predictable, high-quality
+              outcomes.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {promises.map((group) => (
+              <GlassCard key={group.audience} className="p-6 md:p-8">
+                <h3 className="text-lg font-semibold text-foreground">{group.audience}</h3>
+                <ul className="mt-4 space-y-3">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
+            ))}
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-8 lg:pb-28">
+          <div className="max-w-2xl">
+            <SectionLabel>how it works</SectionLabel>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+              From rules to measurable flow.
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {howItWorks.map((item) => (
+              <GlassCard key={item.step} className="p-6">
+                <span className="font-mono text-xs text-primary">{item.step}</span>
+                <h3 className="mt-3 text-base font-semibold text-foreground">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </GlassCard>
+            ))}
+          </div>
+        </section>
+
+        {/* Organizational model */}
+        <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-8 lg:pb-28">
+          <GlassCard variant="strong" className="overflow-hidden p-6 md:p-10">
+            <SectionLabel>organizational model</SectionLabel>
+            <h2 className="mt-3 text-xl font-semibold tracking-tight md:text-2xl">
+              Role-aware from day one.
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Every role has a primary function in the operating layer. Cross-role growth paths (e.g.
+              Caller → Bidder) are scored — not guessed.
+            </p>
+            <ul className="mt-8 divide-y divide-white/[0.06]">
+              {orgRoles.map((row) => (
+                <li
+                  key={row.role}
+                  className="flex flex-col gap-1 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+                >
+                  <span className="text-sm font-semibold text-foreground">{row.role}</span>
+                  <span className="text-sm text-muted-foreground sm:text-right">{row.focus}</span>
+                </li>
+              ))}
+            </ul>
           </GlassCard>
         </section>
 

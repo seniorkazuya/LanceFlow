@@ -13,9 +13,9 @@ Yes. The current staging app includes:
 
 | Layer | What you should see |
 |--------|---------------------|
-| **Landing** (`/`) | Dark mesh background, dot grid, centered hero, **brand identity** glass panel with monogram + lockup images, **three pillars** cards, footer with optional `staging · <git-sha>` |
-| **Sign-in** (`/auth/signin`) | Glass card, highlighted logo |
-| **App** (`/dashboard`, etc.) | Sidebar with logo, role-aware nav |
+| **Landing** (`/`) | Hero, **brand identity** panel, **Foundation** (employee/client promises), **how it works** (4 steps), **org roles** table, **three pillars**, CTA, footer with optional `staging · <git-sha>` |
+| **Sign-in** (`/auth/signin`) | Glass card, highlighted logo, shared `Input` fields |
+| **App** (`/dashboard`, etc.) | Sidebar with logo, dot-grid main area, `PageHeader` + `GlassCard` on dashboard, control, and hiring |
 
 If you still see plain text (“Platform scaffold active · Roles: …”) with no images or glass panels, the browser is showing an **old cached build**. Hard refresh: **Ctrl+Shift+R** (Windows) or open in a private window.
 
@@ -45,8 +45,7 @@ Go to https://lance-flow-web.vercel.app/ and confirm:
 
 - Top nav: **lanceflow** + **Open app**
 - Hero: “Where strong action meets seamless flow”
-- Section **brand identity** with two highlighted images
-- Section **three pillars**
+- Sections **brand identity**, **foundation**, **how it works**, **organizational model**, **three pillars**
 
 ### 2. Sign in
 
