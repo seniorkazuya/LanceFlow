@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-21  
-> **Current phase:** M0 — Platform & DevOps (release to `main` in progress)  
+> **Current phase:** M0 — Platform & DevOps (wrapping up)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,9 +10,9 @@
 
 | | |
 |--|--|
-| **Active story** | Release PR #28 — `staging` → `main` (v0.1.0) |
-| **Just completed** | DEV-006 — Docker Compose ✅ |
-| **Next up** | Merge #28 → tag `v0.1.0` → configure production secrets |
+| **Active story** | DEV-007 — Observability (next) |
+| **Just completed** | **M0 release** — PR #28 merged to `main` ✅ |
+| **Next up** | Tag `v0.1.0` + production secrets → first prod deploy |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md)**
@@ -25,7 +25,7 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 |--|--|
 | **Staging URL** | https://lance-flow-web.vercel.app |
 | **Health check** | https://lance-flow-web.vercel.app/api/health |
-| **Local** | http://localhost:3000 (`docker compose up -d` for Postgres/Redis) |
+| **Local** | http://localhost:3000 (`docker compose up -d`) |
 | **Last deploy** | 2026-05-21 — Deploy Staging ✅ |
 
 ---
@@ -34,15 +34,16 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 | | |
 |--|--|
-| **Production URL** | _Pending — after #28 merge + `v0.1.0` tag + prod secrets_ |
+| **Production URL** | _Pending — configure `production` secrets, then tag `v0.1.0`_ |
 | **Health check** | `{PRODUCTION_URL}/api/health` |
-| **Workflow** | `.github/workflows/deploy-production.yml` |
+| **Workflow** | `.github/workflows/deploy-production.yml` on `main` |
+| **`main` branch** | M0 code merged (#28) — ready for release tag |
 
 ---
 
 ## Executive summary
 
-CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** deploys on tags `v*` with GitHub Environment approval after `main` is current.
+**M0 platform is on `main`.** Staging auto-deploys from `staging`. Production deploys on `v*` tags with GitHub Environment approval.
 
 ---
 
@@ -50,8 +51,8 @@ CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** de
 
 | Milestone | Status | Notes |
 |-----------|--------|--------|
-| M0 — Platform & DevOps | 🟡 In progress | Release PR #28; prod deploy after tag |
-| M1 — Foundation | 🔴 Not started | Auth, RBAC after M0 |
+| M0 — Platform & DevOps | 🟡 Wrapping up | Release on `main`; prod URL + DEV-007–008 remain |
+| M1 — Foundation | 🔴 Not started | Auth, RBAC |
 
 ---
 
@@ -63,23 +64,21 @@ CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** de
 | DEV-002 | GitHub + branch protection | 🟢 Done |
 | DEV-003 | CI pipeline | 🟢 Done |
 | DEV-004 | Staging deployment | 🟢 Done |
-| DEV-005 | Production deployment | 🟢 Done (workflow); prod release pending |
+| DEV-005 | Production deployment | 🟢 Done (workflow on `main`); prod deploy pending |
 | DEV-006 | Docker Compose | 🟢 Done |
-| DEV-007 | Observability | 🔴 Backlog |
+| DEV-007 | Observability | 🟡 Next |
 | DEV-008 | Client status automation | 🔴 Backlog |
 
 ---
 
 ## What is complete today
 
-- [x] Monorepo, GitHub, CI
-- [x] Staging live + health check
-- [x] Production deploy workflow + runbook
-- [x] Docker Compose local stack
-- [ ] **You:** Merge PR #28 (`staging` → `main`)
-- [ ] **You:** `production` environment + Neon/Vercel prod secrets
-- [ ] **You:** Tag `v0.1.0`, approve Deploy Production
-- [ ] **You:** LanceFlow Build project cards ([GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md))
+- [x] M0 code on **`main`** (release PR #28)
+- [x] Staging live + CI + Docker local stack
+- [ ] **You:** GitHub `production` environment + secrets ([DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md))
+- [ ] **You:** Push tag **`v0.1.0`** (or use GitHub Release) + approve deploy
+- [ ] **You:** Sync **LanceFlow Build** cards ([GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md))
+- [ ] **You:** Close Dependabot PR #31 if not wanted
 
 ---
 
@@ -87,8 +86,8 @@ CI on every PR. **Staging** auto-deploys on push to `staging`. **Production** de
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | Release PR #28; DEV-006 merged; staging live |
-| 2026-05-21 | DEV-005 production workflow (#22) |
+| 2026-05-21 | **#28 merged** — M0 platform on `main` |
+| 2026-05-21 | Staging live; DEV-005–006 on `staging` |
 | 2026-05-20 | DEV-004 staging pipeline |
 | 2026-05-19 | DEV-001–003 |
 
