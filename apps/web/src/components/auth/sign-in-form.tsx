@@ -24,7 +24,7 @@ export function SignInForm() {
 
     if (result?.error) {
       setError(
-        'Invalid email or password. Staging uses Vercel env vars (DEV_AUTH_*), not your local .env — see /api/auth/setup'
+        'Invalid email or password. Check Vercel DEV_AUTH_* — open /api/diagnostics/auth'
       );
       return;
     }
