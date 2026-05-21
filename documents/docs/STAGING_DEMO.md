@@ -114,8 +114,10 @@ password === process.env.DEV_AUTH_PASSWORD  // exact match, case-sensitive
 5. `DATABASE_URL` = Neon staging URL
 6. Redeploy after saving variables
 
-**Diagnostic URL (after latest deploy):** https://lance-flow-web.vercel.app/api/auth/setup  
-Shows which env vars are set on the server (no passwords exposed).
+**Diagnostic URL:** https://lance-flow-web.vercel.app/api/diagnostics/auth  
+(Do not use `/api/auth/setup` — NextAuth returns `"Bad request."` there.)
+
+Full fix guide: [FIX_STAGING_LOGIN.md](./FIX_STAGING_LOGIN.md)
 
 **Vercel redeploy failed?** Use GitHub instead: **Actions → Deploy Staging → Run workflow** on branch `staging`.  
 Or push any commit to `staging` — that triggers deploy automatically.
