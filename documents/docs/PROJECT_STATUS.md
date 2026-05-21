@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-21  
-> **Current phase:** M0 — Platform & DevOps (wrapping up)  
+> **Current phase:** M0 — Platform & DevOps ✅ (complete on `staging`; `main` has v0.1.0)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,12 +10,12 @@
 
 | | |
 |--|--|
-| **Active story** | DEV-007 — Observability (in PR) |
-| **Just completed** | M0 release on `main` + v0.1.0 prod deploy ✅ |
-| **Next up** | Merge DEV-007 PR → DEV-008 |
+| **Active story** | DEV-008 — Client status automation (in PR) |
+| **Just completed** | DEV-007 — Observability ✅ |
+| **Next up** | Merge DEV-008 → optional release `staging` → `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
-Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md)**
+**Client links:** [Staging demo](#staging-demo) · [Production](#production) · [Story board](https://github.com/users/seniorkazuya/projects)
 
 ---
 
@@ -25,8 +25,9 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 |--|--|
 | **Staging URL** | https://lance-flow-web.vercel.app |
 | **Health check** | https://lance-flow-web.vercel.app/api/health |
+| **Health details** | `checks.database` / `checks.redis` (`ok` \| `skipped` \| `error`) |
 | **Local** | http://localhost:3000 (`docker compose up -d`) |
-| **Last deploy** | 2026-05-21 — Deploy Staging ✅ |
+| **Last deploy** | 2026-05-21 — Deploy Staging ✅ (DEV-007) |
 
 ---
 
@@ -35,16 +36,14 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 | | |
 |--|--|
 | **Release** | **v0.1.0** — https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0 |
-| **Production URL** | Set in GitHub secret `PRODUCTION_URL` (see Deploy Production run) |
-| **Health check** | `{PRODUCTION_URL}/api/health` |
-| **Last deploy** | 2026-05-21 — Deploy Production ✅ ([run](https://github.com/seniorkazuya/LanceFlow/actions/runs/26225026548)) |
-| **`main` branch** | M0 release merged (#28) |
+| **Production URL** | GitHub secret `PRODUCTION_URL` |
+| **Last deploy** | 2026-05-21 — Deploy Production ✅ |
 
 ---
 
 ## Executive summary
 
-**M0 platform is on `main`.** Staging auto-deploys from `staging`. Production deploys on `v*` tags with GitHub Environment approval.
+M0 platform complete: monorepo, CI, staging + production deploys, Docker local stack, observability baseline. Staging auto-deploys on push to `staging`.
 
 ---
 
@@ -52,7 +51,7 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 | Milestone | Status | Notes |
 |-----------|--------|--------|
-| M0 — Platform & DevOps | 🟢 Done | v0.1.0 tagged; prod deploy green; DEV-007–008 optional polish |
+| M0 — Platform & DevOps | 🟢 Done | DEV-001–007 shipped; DEV-008 polish |
 | M1 — Foundation | 🔴 Not started | Auth, RBAC |
 
 ---
@@ -67,19 +66,18 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 | DEV-004 | Staging deployment | 🟢 Done |
 | DEV-005 | Production deployment | 🟢 Done |
 | DEV-006 | Docker Compose | 🟢 Done |
-| DEV-007 | Observability | 🟡 In PR |
-| DEV-008 | Client status automation | 🔴 Backlog |
+| DEV-007 | Observability | 🟢 Done |
+| DEV-008 | Client status automation | 🟡 In PR |
 
 ---
 
 ## What is complete today
 
-- [x] M0 code on **`main`** (release PR #28)
-- [x] Staging live + CI + Docker local stack
-- [x] Tag **`v0.1.0`** + Deploy Production green
-- [ ] **You:** Confirm stable `PRODUCTION_URL` in GitHub + Vercel prod domain (if using alias)
-- [ ] **You:** Sync **LanceFlow Build** cards ([GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md))
-- [ ] **You:** Close Dependabot PR #31 if not wanted
+- [x] M0 stories DEV-001–007 on `staging`
+- [x] v0.1.0 on `main` with production deploy
+- [x] Staging health + observability (`/api/health` with DB/Redis checks)
+- [ ] **You:** LanceFlow Build cards updated ([guide](./GITHUB_PROJECT_UPDATES.md))
+- [ ] **You:** Optional Sentry DSN in Vercel ([OBSERVABILITY.md](./OBSERVABILITY.md))
 
 ---
 
@@ -87,10 +85,9 @@ Setup: **[DEPLOY_STAGING.md](./DEPLOY_STAGING.md)** · **[DEPLOY_PRODUCTION.md](
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | **#28 merged** — M0 platform on `main` |
-| 2026-05-21 | Staging live; DEV-005–006 on `staging` |
-| 2026-05-20 | DEV-004 staging pipeline |
-| 2026-05-19 | DEV-001–003 |
+| 2026-05-21 | DEV-007 observability merged (#33); staging redeployed |
+| 2026-05-21 | v0.1.0 + M0 release on `main` (#28) |
+| 2026-05-20 | DEV-004–006 staging pipeline, Docker, prod workflow |
 
 ---
 
