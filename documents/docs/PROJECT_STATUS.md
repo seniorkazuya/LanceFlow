@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | CORE-003 — RBAC (in PR) |
-| **Just completed** | v0.2.1 on `main` — CORE-002 + CORE-001 ✅ |
+| **Active story** | CORE-004 — Design system & app shell |
+| **Just completed** | CORE-003 — RBAC ✅ (merged #48) |
 | **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
@@ -52,8 +52,9 @@
 |-------|-------|--------|
 | CORE-001 | Database / Prisma | 🟢 Done |
 | CORE-002 | Authentication | 🟢 Done |
-| CORE-003 | RBAC | 🟡 In progress |
-| CORE-004–006 | UI, marketing, audit | 🔴 Backlog |
+| CORE-003 | RBAC | 🟢 Done |
+| CORE-004 | Design system & app shell | 🟡 In progress |
+| CORE-005–006 | Marketing, audit | 🔴 Backlog |
 
 ---
 
@@ -61,6 +62,7 @@
 
 | Date | Change |
 |------|--------|
+| 2026-05-21 | CORE-003 RBAC merged to `staging` (#48) |
 | 2026-05-21 | v0.2.1 — CORE-002, CORE-001 released to `main` |
 | 2026-05-21 | v0.2.0 on `main` (#37) — DEV-007/008 |
 

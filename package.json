@@ -20,6 +20,7 @@
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
     "@lanceflow/types": "workspace:*",
+    "@lanceflow/ui": "workspace:*",
     "ioredis": "^5.4.2",
     "@types/pg": "^8.11.10",
     "pg": "^8.13.1",

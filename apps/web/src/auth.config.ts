@@ -11,9 +11,12 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = Boolean(auth?.user);
-      const isDashboard = nextUrl.pathname.startsWith('/dashboard');
+      const protectedPrefixes = ['/dashboard', '/control', '/hiring'];
+      const isProtected = protectedPrefixes.some((prefix) =>
+        nextUrl.pathname.startsWith(prefix)
+      );
 
-      if (isDashboard) {
+      if (isProtected) {
         return isLoggedIn;
       }
 
