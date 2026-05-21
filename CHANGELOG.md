@@ -6,7 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
-- (none)
+- **CORE-003** — RBAC policies, `assertRole` / `withAuth`, `/api/control/summary`, `/api/hiring/ceo-queue`
 
 ## [0.2.1] — 2026-05-21
 
