@@ -6,7 +6,7 @@ export type DevAuthConfig = {
 /** Dev/staging credentials from env; omit in production unless explicitly configured. */
 export function resolveDevAuthConfig(): DevAuthConfig | null {
   const email = process.env.DEV_AUTH_EMAIL?.trim();
-  const password = process.env.DEV_AUTH_PASSWORD;
+  const password = process.env.DEV_AUTH_PASSWORD?.trim();
   if (!email || !password) return null;
   return { email, password };
 }
@@ -16,5 +16,5 @@ export function validateDevCredentials(
   password: string,
   config: DevAuthConfig
 ): boolean {
-  return email === config.email && password === config.password;
+  return email.trim() === config.email && password.trim() === config.password;
 }

@@ -56,12 +56,12 @@ Go to https://lance-flow-web.vercel.app/ and confirm:
    - `DEV_AUTH_PASSWORD`
    - `AUTH_SECRET` must also be set (server-side).
 
-If sign-in fails, check Vercel → Project → Settings → Environment Variables (Preview/Production for the staging-linked project).
+If sign-in fails with **Invalid email or password**, see [Troubleshooting sign-in](#troubleshooting-sign-in) below.
 
 Default local example (from `.env.example`):
 
 - Email: `ops@lanceflow.test`
-- Password: whatever you set in `DEV_AUTH_PASSWORD`
+- Password: whatever you set in `DEV_AUTH_PASSWORD` **in that environment** (local `.env` ≠ Vercel unless you copy the same values)
 
 First sign-in creates/updates the user as **OPS_MANAGER** in the database.
 
@@ -84,6 +84,41 @@ After sign-in you land on **Dashboard**:
 | `GET /api/me` | 401 when logged out; user JSON when logged in |
 | `GET /api/control/summary` | 200 for Ops/CEO; 403 for Engineer |
 | `GET /api/hiring/ceo-queue` | 403 for Engineer |
+
+---
+
+## Troubleshooting sign-in
+
+Sign-in uses a **single allowed email/password pair** from server env vars (`packages/core/auth/src/credentials.ts`):
+
+```ts
+email === process.env.DEV_AUTH_EMAIL
+password === process.env.DEV_AUTH_PASSWORD  // exact match, case-sensitive
+```
+
+| Symptom | Likely cause | Fix |
+|---------|----------------|-----|
+| *Invalid email or password* | Vercel `DEV_AUTH_PASSWORD` ≠ password you typed | Vercel → **lance-flow-web** → Settings → Environment Variables → set `DEV_AUTH_PASSWORD` to your password → **Redeploy** |
+| Same error | `DEV_AUTH_EMAIL` / `DEV_AUTH_PASSWORD` not set on Vercel | Add both + `AUTH_SECRET` + `AUTH_URL` (see [DEPLOY_STAGING.md](./DEPLOY_STAGING.md)) |
+| Same error | Email typo or extra spaces | Use exactly `ops@lanceflow.test` (matches CI default) |
+| Works locally, not on staging | Only updated local `.env` | Copy the same `DEV_AUTH_*` and `AUTH_SECRET` into Vercel |
+
+**Your case:** `ops@lanceflow.test` + `smoothm!n!on` works only if Vercel has **exactly** those values. Local `.env` does not apply to https://lance-flow-web.vercel.app.
+
+**Checklist for Vercel (Production + Preview):**
+
+1. `DEV_AUTH_EMAIL` = `ops@lanceflow.test`
+2. `DEV_AUTH_PASSWORD` = `smoothm!n!on` (or change your login to match whatever is on Vercel)
+3. `AUTH_SECRET` = long random string (32+ chars)
+4. `AUTH_URL` = `https://lance-flow-web.vercel.app`
+5. `DATABASE_URL` = Neon staging URL
+6. Redeploy after saving variables
+
+**Diagnostic URL (after latest deploy):** https://lance-flow-web.vercel.app/api/auth/setup  
+Shows which env vars are set on the server (no passwords exposed).
+
+**Vercel redeploy failed?** Use GitHub instead: **Actions → Deploy Staging → Run workflow** on branch `staging`.  
+Or push any commit to `staging` — that triggers deploy automatically.
 
 ---
 
