@@ -32,19 +32,19 @@ gh api --method PUT repos/seniorkazuya/LanceFlow/branches/staging/protection \
   --input .github/scripts/apply-branch-protection-staging-with-ci.json
 ```
 
-When a second engineer joins, set staging approvals to **1** (use `apply-branch-protection-with-ci.json` for staging).
+When a second engineer joins, set staging approvals to **1** (use `apply-branch-protection-staging-with-ci.json` for staging).
 
 ## GitHub Project
 
 Create board **LanceFlow Build** manually (CLI needs extra token scope):
 
 ```bash
-gh auth refresh -s project,read:project
+gh auth refresh -h github.com -s project,read:project
 gh project create --owner seniorkazuya --title "LanceFlow Build"
 ```
 
 Columns: Backlog → Ready → In Progress → In Review → QA / Staging → Done.  
-See [DEVOPS_GUIDE.md](../documents/docs/DEVOPS_GUIDE.md) §2.4.
+See [GITHUB_PROJECT_UPDATES.md](../documents/docs/GITHUB_PROJECT_UPDATES.md) and [DEVOPS_GUIDE.md](../documents/docs/DEVOPS_GUIDE.md) §2.4.
 
 ## Collaborators
 
