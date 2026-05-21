@@ -7,6 +7,9 @@ import '@lanceflow/ui/globals.css';
 export const metadata: Metadata = {
   title: 'LanceFlow',
   description: 'Where Strong Action Meets Seamless Flow.',
+  icons: {
+    icon: '/brand/lanceflow-icon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

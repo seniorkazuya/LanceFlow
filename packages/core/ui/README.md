@@ -6,6 +6,7 @@ Shared LanceFlow design system (Tailwind + shadcn-style primitives).
 
 - `AppShell` — sidebar, header, role-aware navigation
 - `StatusBadge` — green / yellow / red operational status
+- `GlassCard`, `BrandHighlight` — glass surfaces and hero icon frames
 - `Button`, `cn`, `getNavItemsForRole`
 - `@lanceflow/ui/globals.css` — Tailwind layers + theme tokens
 - `@lanceflow/ui/tailwind-preset` — shared `tailwind.config` preset

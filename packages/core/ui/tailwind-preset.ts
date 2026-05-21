@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-/** Shared LanceFlow theme — consumed by apps/web tailwind.config. */
+/** Shared LanceFlow theme — navy/teal brand, glass surfaces. */
 const preset: Partial<Config> = {
   darkMode: ['class'],
   theme: {
@@ -11,6 +11,10 @@ const preset: Partial<Config> = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -45,11 +49,27 @@ const preset: Partial<Config> = {
           accent: 'hsl(var(--sidebar-accent))',
           border: 'hsl(var(--sidebar-border))',
         },
+        brand: {
+          navy: 'hsl(var(--brand-navy))',
+          teal: 'hsl(var(--brand-teal))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
+      animation: {
+        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+      },
+      keyframes: {
+        'pulse-glow': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.85' },
+        },
       },
     },
   },
