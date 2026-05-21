@@ -5,6 +5,7 @@ import { ShellPage } from '@/components/app/shell-page';
 import { auth } from '@/auth';
 
 const quickLinks = [
+  { href: '/clients', label: 'Clients', note: 'Ops manage · Bidder read' },
   { href: '/control', label: 'Control Center', note: 'CEO / Ops KPI oversight' },
   { href: '/hiring/ceo-queue', label: 'Hiring CEO Queue', note: 'Top candidates & exceptions' },
 ] as const;

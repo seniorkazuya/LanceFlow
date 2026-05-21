@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | OPS-001 — Clients (Sprint 2) |
-| **Just completed** | CORE-006 — Audit log service |
+| **Active story** | OPS-002 — Client risk v0 (Sprint 2) |
+| **Just completed** | OPS-001 — Client CRUD |
 | **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
@@ -46,6 +46,7 @@
 |-----------|--------|
 | **M0** Platform & DevOps | 🟢 Done |
 | **M1** Foundation | 🟢 Done |
+| **M2** Operations | 🟡 In progress |
 
 ### M1 — stories
 

@@ -23,6 +23,12 @@ export const APP_NAV_ITEMS: readonly NavItem[] = [
     ],
   },
   {
+    id: 'clients',
+    label: 'Clients',
+    href: '/clients',
+    allowedRoles: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER],
+  },
+  {
     id: 'control',
     label: 'Control Center',
     href: '/control',

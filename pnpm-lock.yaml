@@ -23,6 +23,9 @@ importers:
       '@lanceflow/eslint-config':
         specifier: workspace:*
         version: link:packages/core/eslint-config
+      '@lanceflow/operations':
+        specifier: workspace:*
+        version: link:packages/modules/operations
       '@lanceflow/types':
         specifier: workspace:*
         version: link:packages/core/types
@@ -68,6 +71,9 @@ importers:
       '@lanceflow/database':
         specifier: workspace:*
         version: link:../../packages/core/database
+      '@lanceflow/operations':
+        specifier: workspace:*
+        version: link:../../packages/modules/operations
       '@lanceflow/types':
         specifier: workspace:*
         version: link:../../packages/core/types
@@ -268,6 +274,22 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.19
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  packages/modules/operations:
+    dependencies:
+      '@lanceflow/audit':
+        specifier: workspace:*
+        version: link:../../audit
+      '@lanceflow/database':
+        specifier: workspace:*
+        version: link:../../core/database
+    devDependencies:
+      '@lanceflow/typescript-config':
+        specifier: workspace:*
+        version: link:../../core/typescript-config
       typescript:
         specifier: ^5.7.2
         version: 5.9.3

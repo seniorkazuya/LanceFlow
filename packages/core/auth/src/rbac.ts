@@ -15,6 +15,10 @@ export const RolePolicy = {
   ] as const,
   /** Audit log read — CEO only (CORE-006). */
   auditRead: [UserRole.CEO] as const,
+  /** Client records read (OPS-001). */
+  clientsRead: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
+  /** Client records write (OPS-001). */
+  clientsWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Any signed-in operational role. */
   authenticated: [
     UserRole.CEO,

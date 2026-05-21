@@ -33,6 +33,8 @@ The marketing landing page **is the site root**:
 | `/control` | Control Center (CEO / Ops only) |
 | `/hiring/ceo-queue` | Hiring CEO queue (not Engineers) |
 | `/audit` | Audit log (CEO only) |
+| `/clients` | Client list (Ops write, Bidder read) |
+| `/clients/new` | Create client (Ops / CEO) |
 
 There is no separate `/landing` route — `/` is the public marketing entry.
 
