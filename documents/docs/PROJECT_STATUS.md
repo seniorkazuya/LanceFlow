@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-21  
-> **Current phase:** M1 — Foundation (complete) · Sprint 2 (Ops) next  
+> **Current phase:** M2 — Operations (in progress)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,9 +10,9 @@
 
 | | |
 |--|--|
-| **Active story** | OPS-003 — Project lifecycle (Sprint 3) |
-| **Just completed** | OPS-002 — Client risk v0 |
-| **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
+| **Active story** | OPS-003 — Project lifecycle |
+| **Just completed** | OPS-002 — Client risk v0 · **Release v0.3.0** to production |
+| **Release** | [v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0) (staging → main) |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 **Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
@@ -26,8 +26,7 @@
 | **URL** | https://lance-flow-web.vercel.app |
 | **Health** | https://lance-flow-web.vercel.app/api/health |
 | **Sign-in** | `/auth/signin` — requires `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
-| **Local** | http://localhost:3000 · [LOCAL_DEV_WINDOWS.md](./LOCAL_DEV_WINDOWS.md) |
-| **UI guide** | [STAGING_DEMO.md](./STAGING_DEMO.md) — landing, sign-in, roles |
+| **UI guide** | [STAGING_DEMO.md](./STAGING_DEMO.md) — landing, clients, roles |
 
 ---
 
@@ -35,8 +34,11 @@
 
 | | |
 |--|--|
-| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.0](https://github.com/seniorkazuya/LanceFlow/pull/37) · **v0.2.1** (M1) |
-| **Deploy** | Tag `v0.2.1` on `main` + Deploy Production workflow |
+| **URL** | Same Vercel project as staging unless a separate prod project is configured — set `PRODUCTION_URL` in GitHub **production** environment |
+| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) · **v0.3.0** (M1 + Ops clients) |
+| **Deploy** | Tag `v0.3.0` on `main` → **Deploy Production** (requires environment approval) |
+
+After deploy, verify: `curl $PRODUCTION_URL/api/health` and sign-in flow.
 
 ---
 
@@ -48,16 +50,19 @@
 | **M1** Foundation | 🟢 Done |
 | **M2** Operations | 🟡 In progress |
 
-### M1 — stories
+### M1 — stories (released in v0.3.0)
 
 | Story | Title | Status |
 |-------|-------|--------|
-| CORE-001 | Database / Prisma | 🟢 Done |
-| CORE-002 | Authentication | 🟢 Done |
-| CORE-003 | RBAC | 🟢 Done |
-| CORE-004 | Design system & app shell | 🟢 Done |
-| CORE-005 | Marketing & brand pages | 🟢 Done |
-| CORE-006 | Audit | 🟢 Done |
+| CORE-001–006 | Foundation (DB, auth, RBAC, UI, brand, audit) | 🟢 Done |
+
+### M2 — stories (partial, in v0.3.0)
+
+| Story | Title | Status |
+|-------|-------|--------|
+| OPS-001 | Clients CRUD | 🟢 Done |
+| OPS-002 | Client risk v0 | 🟢 Done |
+| OPS-003+ | Projects, assignments, … | 🔴 Backlog |
 
 ---
 
@@ -65,12 +70,11 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | CORE-006 audit service + CEO `/audit` page (#61) |
-| 2026-05-21 | CORE-005 Foundation landing + glass app pages (#60) |
-| 2026-05-21 | CORE-004 design system + modern brand landing merged (#50) |
-| 2026-05-21 | CORE-003 RBAC merged to `staging` (#48) |
-| 2026-05-21 | v0.2.1 — CORE-002, CORE-001 released to `main` |
-| 2026-05-21 | v0.2.0 on `main` (#37) — DEV-007/008 |
+| 2026-05-21 | **v0.3.0** — M1 Foundation + OPS-001/002 to production |
+| 2026-05-21 | OPS-002 client risk v0 (#64) |
+| 2026-05-21 | OPS-001 clients module (#63) |
+| 2026-05-21 | CORE-006 audit (#62), CORE-005 brand UI (#60), Prisma Vercel fix (#59) |
+| 2026-05-21 | v0.2.1 — CORE-001/002 on `main` |
 
 ---
 
