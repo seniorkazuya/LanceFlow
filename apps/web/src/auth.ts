@@ -14,6 +14,7 @@ const nextAuth = NextAuth({
   trustHost: true,
   providers: [
     Credentials({
+      id: 'credentials',
       name: 'Email',
       credentials: {
         email: { label: 'Email', type: 'email' },
@@ -28,13 +29,18 @@ const nextAuth = NextAuth({
         if (typeof email !== 'string' || typeof password !== 'string') return null;
         if (!validateDevCredentials(email, password, config)) return null;
 
-        const user = await findOrCreateUserForSignIn({ email });
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.displayName,
-          role: user.role,
-        };
+        try {
+          const user = await findOrCreateUserForSignIn({ email: config.email });
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.displayName,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error('[auth] findOrCreateUserForSignIn failed', error);
+          return null;
+        }
       },
     }),
   ],

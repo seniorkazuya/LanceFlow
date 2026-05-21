@@ -1,5 +1,11 @@
 export type { DevAuthConfig } from './credentials';
 export { resolveDevAuthConfig, validateDevCredentials } from './credentials';
+export {
+  checkPrismaAuthDatabase,
+  probeSignIn,
+  type PrismaAuthCheck,
+  type SignInProbeResult,
+} from './auth-diagnostics';
 export type { SessionUser } from './types';
 export { findOrCreateUserForSignIn } from './user';
 export {
