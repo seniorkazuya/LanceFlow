@@ -93,6 +93,7 @@ Update [PROJECT_STATUS.md](./PROJECT_STATUS.md) with the staging URL for clients
 | Vercel pull fails | Verify `VERCEL_*` secrets; link repo to Vercel project |
 | `Invalid Node.js Version: 24.x` | Vercel project **Settings → Build** → Node.js **22.x**; repo has `apps/web/.nvmrc` and `engines.node` |
 | `apps/web/apps/web/package.json` ENOENT | Do not run `vercel` CLI inside `apps/web` when Root Directory is `apps/web` — workflow runs from repo root |
+| `CLI version is outdated` (needs 47.2.2+) | Workflow pins `vercel@48.x`; redeploy after merge |
 | Health check timeout | Set `STAGING_URL` to production URL (e.g. `https://lance-flow-web.vercel.app`); re-run workflow |
 | Build fails on Vercel | Root Directory = `apps/web`; see `apps/web/vercel.json` |
 
