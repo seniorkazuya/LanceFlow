@@ -5,7 +5,7 @@ import {
   type AuthRouteHandler,
   type SessionUser,
 } from '@lanceflow/auth';
-import { UserRole, type UserRole as UserRoleType } from '@lanceflow/types';
+import type { UserRole as UserRoleType } from '@lanceflow/types';
 import type { Session } from 'next-auth';
 import { NextResponse } from 'next/server';
 
