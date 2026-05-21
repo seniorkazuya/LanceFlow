@@ -1,0 +1,159 @@
+name: Deploy Production
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      git_ref:
+        description: "Branch or tag to deploy (e.g. main or v0.1.0)"
+        required: false
+        default: "main"
+
+concurrency:
+  group: deploy-production-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    name: migrate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    defaults:
+      run:
+        working-directory: packages/core/database
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.git_ref || github.ref }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Pre-deploy checklist
+        run: |
+          echo "::notice::Confirm Neon production backup before migrate. Rollback: documents/docs/DEPLOY_PRODUCTION.md"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: ${{ github.workspace }}
+
+      - name: Apply database migrations (Neon production)
+        run: pnpm db:migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: migrate
+    environment: production
+    outputs:
+      deployment_url: ${{ steps.deploy.outputs.deployment_url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.git_ref || github.ref }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Vercel CLI
+        run: |
+          npm install -g vercel@48.2.0
+          vercel --version
+
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build for Vercel
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Deploy to Vercel (production)
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "deployment_url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Production deployment" >> "$GITHUB_STEP_SUMMARY"
+          echo "Ref: ${{ github.event_name == 'workflow_dispatch' && inputs.git_ref || github.ref }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL: $url" >> "$GITHUB_STEP_SUMMARY"
+
+  health:
+    name: health
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: deploy
+    environment: production
+    steps:
+      - name: Resolve production URL
+        id: url
+        env:
+          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+          DEPLOY_URL: ${{ needs.deploy.outputs.deployment_url }}
+        run: |
+          if [ -n "$PRODUCTION_URL" ]; then
+            base="$PRODUCTION_URL"
+          elif [ -n "$DEPLOY_URL" ]; then
+            base="$DEPLOY_URL"
+          else
+            echo "::error::Set PRODUCTION_URL in GitHub environment production, or fix Vercel deploy output"
+            exit 1
+          fi
+          base="${base%/}"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+
+      - name: Health check /api/health
+        run: |
+          url="${{ steps.url.outputs.base }}/api/health"
+          echo "Checking $url"
+          for i in 1 2 3 4 5; do
+            if curl -fsS "$url" -o /tmp/health.json; then
+              cat /tmp/health.json
+              grep -q '"status":"ok"' /tmp/health.json || grep -q '"status": "ok"' /tmp/health.json
+              echo "Health check passed"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 15s..."
+            sleep 15
+          done
+          echo "::error::Health check failed for $url"
+          exit 1
+
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "### Production is live" >> "$GITHUB_STEP_SUMMARY"
+          echo "Health: ${{ steps.url.outputs.base }}/api/health" >> "$GITHUB_STEP_SUMMARY"
+          echo "App: ${{ steps.url.outputs.base }}" >> "$GITHUB_STEP_SUMMARY"
+
+  notify-failure:
+    name: notify-failure
+    runs-on: ubuntu-latest
+    needs: [migrate, deploy, health]
+    if: failure()
+    steps:
+      - name: Report failure
+        run: echo "::error::Production deploy failed. See documents/docs/DEPLOY_PRODUCTION.md"
