@@ -21,10 +21,9 @@ export function BrandHighlight({
     <figure className={cn('flex flex-col items-center gap-3', className)}>
       <div
         className={cn(
-          'relative overflow-hidden rounded-2xl p-6 transition-transform duration-300 hover:scale-[1.02]',
+          'relative overflow-hidden rounded-2xl p-8 transition-transform duration-300 hover:scale-[1.01]',
           glow === 'strong' ? 'lf-brand-glow-strong' : 'lf-brand-glow',
-          'bg-gradient-to-br from-brand-navy/80 via-secondary/90 to-brand-teal/10',
-          'border border-white/10'
+          'border border-white/[0.08] bg-white/[0.02]'
         )}
       >
         <div

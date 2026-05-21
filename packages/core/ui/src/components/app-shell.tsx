@@ -84,7 +84,7 @@ export function AppShell({
 
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="hidden w-60 shrink-0 border-r border-sidebar-border bg-sidebar md:block">
+      <aside className="hidden w-60 shrink-0 border-r border-white/[0.06] bg-sidebar/95 backdrop-blur-xl md:block">
         {sidebar}
       </aside>
 
@@ -108,7 +108,7 @@ export function AppShell({
       ) : null}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 items-center justify-between gap-4 border-b border-border px-4">
+        <header className="flex h-14 items-center justify-between gap-4 border-b border-white/[0.06] bg-background/60 px-4 backdrop-blur-xl">
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"

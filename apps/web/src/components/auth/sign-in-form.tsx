@@ -39,7 +39,7 @@ export function SignInForm() {
           type="email"
           required
           autoComplete="email"
-          className="h-10 rounded-md border border-input bg-background/80 px-3 text-sm outline-none ring-offset-background transition-shadow focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-11 rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-ring/50"
         />
       </label>
       <label className="grid gap-1.5 text-sm">
@@ -49,7 +49,7 @@ export function SignInForm() {
           type="password"
           required
           autoComplete="current-password"
-          className="h-10 rounded-md border border-input bg-background/80 px-3 text-sm outline-none ring-offset-background transition-shadow focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-11 rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-ring/50"
         />
       </label>
       {error ? (
