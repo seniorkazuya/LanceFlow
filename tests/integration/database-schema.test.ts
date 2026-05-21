@@ -1,12 +1,12 @@
-import { PrismaClient } from '@prisma/client';
-import { describe, expect, it } from 'vitest';
+import { prisma } from '@lanceflow/database';
+import { afterAll, describe, expect, it } from 'vitest';
 
 const databaseUrl = process.env.DATABASE_URL;
 const runIntegration = Boolean(databaseUrl);
 
 describe.runIf(runIntegration)('integration: database schema (CORE-001)', () => {
-  const prisma = new PrismaClient({
-    datasources: { db: { url: databaseUrl! } },
+  afterAll(async () => {
+    await prisma.$disconnect();
   });
 
   it('supports User create and read', async () => {

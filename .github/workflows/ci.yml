@@ -83,6 +83,10 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Generate Prisma client
+        run: pnpm --filter @lanceflow/database db:generate
+      - name: Apply migrations (test database)
+        run: pnpm db:migrate:deploy
       - run: pnpm test
 
   build:
