@@ -28,9 +28,10 @@ The agent updates **issues** and **`PROJECT_STATUS.md`** automatically when poss
 | DEV-002 | **Done** | #8 (closed) | GitHub templates, branch protection |
 | DEV-003 | **Done** | #9 (closed) | CI pipeline |
 | DEV-004 | **Done** or **QA / Staging** | #17 (closed) | Staging live: https://lance-flow-web.vercel.app |
-| DEV-005 | **Done** or **QA / Staging** | #23 (closed) | Workflow merged #22; prod release pending |
-| DEV-006 | **In Review** | _add issue when PR open_ | Docker Compose PR |
-| DEV-007–008 | **Backlog** | _create issues when starting_ | |
+| DEV-005 | **Done** | #23 (closed) | Workflow on `main`; prod deploy after tag |
+| DEV-006 | **Done** | #25 (closed) | Docker Compose #24 |
+| DEV-007 | **Ready** / **In Progress** | _create issue_ | Next story |
+| DEV-008 | **Backlog** | _create issue when starting_ | |
 
 ---
 
@@ -67,4 +68,4 @@ gh project view <PROJECT_NUMBER> --owner seniorkazuya
 
 ---
 
-*Last sync: 2026-05-21 — DEV-004/005 Done on staging; DEV-006 In Review*
+*Last sync: 2026-05-21 — M0 on `main` (#28); DEV-001–006 Done; DEV-007 next*
