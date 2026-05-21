@@ -16,8 +16,14 @@ export type Paginated<T> = {
   pageSize: number;
 };
 
+export type HealthCheckStatus = 'ok' | 'error' | 'skipped';
+
 export type ApiHealth = {
   status: 'ok' | 'degraded';
   version: string;
   timestamp: string;
+  checks: {
+    database: HealthCheckStatus;
+    redis: HealthCheckStatus;
+  };
 };

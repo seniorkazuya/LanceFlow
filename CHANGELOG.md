@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **DEV-007** — `@lanceflow/config` health checks, structured API JSON logs, optional Sentry, `/api/health` DB+Redis status
 - **DEV-006** — Docker Compose (Postgres 16, Redis 7, optional MinIO profile), README local stack docs
 - **DEV-005** — Deploy Production workflow (tag `v*` + manual), DEPLOY_PRODUCTION.md with rollback runbook
 - **DEV-004** — Deploy Staging workflow (Neon migrate, Vercel, health check), initial Prisma migration, DEPLOY_STAGING.md
