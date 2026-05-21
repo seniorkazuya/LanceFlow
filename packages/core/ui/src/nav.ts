@@ -34,6 +34,12 @@ export const APP_NAV_ITEMS: readonly NavItem[] = [
     href: '/hiring/ceo-queue',
     allowedRoles: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.CALLER, UserRole.BIDDER],
   },
+  {
+    id: 'audit',
+    label: 'Audit Log',
+    href: '/audit',
+    allowedRoles: [UserRole.CEO],
+  },
 ] as const;
 
 export function getNavItemsForRole(role: string): NavItem[] {

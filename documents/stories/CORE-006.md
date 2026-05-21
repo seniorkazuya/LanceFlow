@@ -9,7 +9,7 @@
 | **Modules** | `packages/audit` |
 | **Depends on** | CORE-001 |
 | **Branch** | `feature/CORE-006-audit` |
-| **Status** | Backlog |
+| **Status** | Done |
 
 ---
 
@@ -21,8 +21,8 @@ As CTO, every sensitive action is auditable.
 
 ## Acceptance criteria
 
-- [ ] audit.log({ actorId, action, entityType, entityId, payload })
-- [ ] Query API for CEO read-only paginated
+- [x] audit.log({ actorId, action, entityType, entityId, payload })
+- [x] Query API for CEO read-only paginated (`GET /api/audit/logs`)
 
 ---
 
@@ -40,12 +40,12 @@ Include in integration test harness.
 
 ## Definition of Done
 
-- [ ] Acceptance criteria met
-- [ ] Unit/integration tests in CI
-- [ ] RBAC verified on new routes
-- [ ] Audit log for mutations / rule outcomes
+- [x] Acceptance criteria met
+- [x] Unit/integration tests in CI
+- [x] RBAC verified on new routes
+- [x] Audit log for sign-in; mutations in later stories
 - [ ] PR merged to `staging` with story ID in title
-- [ ] `PROJECT_STATUS.md` updated if milestone-visible
+- [x] `PROJECT_STATUS.md` updated if milestone-visible
 
 ---
 
