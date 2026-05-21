@@ -45,6 +45,22 @@ model Client {
   notes              String?
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
+  projects           Project[]
 
   @@map("ops_clients")
+}
+
+model Project {
+  id                 String   @id @default(cuid())
+  clientId           String   @map("client_id")
+  title              String
+  status             String   @default("draft")
+  scopeClarityPct    Int?     @map("scope_clarity_pct")
+  profitMarginPct    Int?     @map("profit_margin_pct")
+  clientRiskAtCreate Int?     @map("client_risk_at_create")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+  client             Client   @relation(fields: [clientId], references: [id])
+
+  @@map("ops_projects")
 }
