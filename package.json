@@ -19,6 +19,7 @@
     "@lanceflow/audit": "workspace:*",
     "@lanceflow/automation": "workspace:*",
     "@lanceflow/operations": "workspace:*",
+    "@lanceflow/payments": "workspace:*",
     "@lanceflow/rules-engine": "workspace:*",
     "@lanceflow/auth": "workspace:*",
     "@lanceflow/config": "workspace:*",

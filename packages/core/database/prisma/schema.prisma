@@ -66,8 +66,27 @@ model Project {
   client             Client   @relation(fields: [clientId], references: [id])
   assignments        Assignment[]
   dailyReports       DailyReport[]
+  paymentSchedules   PaymentSchedule[]
 
   @@map("ops_projects")
+}
+
+model PaymentSchedule {
+  id              String    @id @default(cuid())
+  projectId       String    @map("project_id")
+  dueDate         DateTime  @db.Date @map("due_date")
+  amountCents     Int       @map("amount_cents")
+  currency        String    @default("USD")
+  status          String    @default("scheduled")
+  escalationLevel Int       @default(0) @map("escalation_level")
+  paidAt          DateTime? @map("paid_at")
+  notes           String?
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  project         Project   @relation(fields: [projectId], references: [id])
+
+  @@index([projectId, dueDate])
+  @@map("payment_schedules")
 }
 
 model Assignment {
