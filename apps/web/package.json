@@ -19,6 +19,7 @@
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
     "@lanceflow/operations": "workspace:*",
+    "@lanceflow/payments": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "@lanceflow/ui": "workspace:*",
     "@sentry/nextjs": "^8.45.0",

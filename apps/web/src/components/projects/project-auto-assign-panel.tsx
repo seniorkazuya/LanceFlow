@@ -1,11 +1,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Button, Input } from '@lanceflow/ui';
 
 import { completeMutation, notifyError } from '@/lib/notify';
+
+type Suggestion = {
+  userId: string;
+  displayName: string;
+  email: string;
+  rankScore: number;
+};
 
 type Props = {
   projectId: string;
@@ -20,9 +27,10 @@ export function ProjectAutoAssignPanel({
 }: Props) {
   const router = useRouter();
   const [skillsRaw, setSkillsRaw] = useState('');
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [overrideUserId, setOverrideUserId] = useState('');
   const [overrideReason, setOverrideReason] = useState('');
-  const [loading, setLoading] = useState<'run' | 'override' | null>(null);
+  const [loading, setLoading] = useState<'run' | 'override' | 'suggestions' | null>(null);
   const [lastOutcome, setLastOutcome] = useState<string | null>(null);
 
   if (!autoAssignEnabled || projectStatus !== 'active') {
@@ -35,6 +43,25 @@ export function ProjectAutoAssignPanel({
       .map((s) => s.trim())
       .filter(Boolean);
   }
+
+  const loadSuggestions = useCallback(async () => {
+    setLoading('suggestions');
+    const params = new URLSearchParams();
+    if (skillsRaw.trim()) params.set('skills', skillsRaw);
+    const res = await fetch(
+      `/api/projects/${projectId}/assignment-suggestions?${params.toString()}`
+    );
+    setLoading(null);
+    if (!res.ok) {
+      notifyError('Could not load engineers');
+      return;
+    }
+    const data = (await res.json()) as { items: Suggestion[] };
+    setSuggestions(data.items);
+    if (data.items.length > 0 && !overrideUserId) {
+      setOverrideUserId(data.items[0].userId);
+    }
+  }, [projectId, skillsRaw, overrideUserId]);
 
   async function runAutoAssign() {
     setLoading('run');
@@ -70,6 +97,10 @@ export function ProjectAutoAssignPanel({
   }
 
   async function applyOverride() {
+    if (!overrideUserId.trim()) {
+      notifyError('Select an engineer for override');
+      return;
+    }
     setLoading('override');
     try {
       const res = await fetch(`/api/projects/${projectId}/assign-override`, {
@@ -130,18 +161,46 @@ export function ProjectAutoAssignPanel({
 
       <div className="mt-6 border-t border-white/[0.06] pt-4">
         <p className="text-sm font-medium text-foreground">Manual override (audited)</p>
-        <div className="mt-2 space-y-2">
-          <Input
-            value={overrideUserId}
-            onChange={(e) => setOverrideUserId(e.target.value)}
-            placeholder="Engineer user ID"
-          />
-          <Input
-            value={overrideReason}
-            onChange={(e) => setOverrideReason(e.target.value)}
-            placeholder="Reason (min 8 characters)"
-          />
+        <div className="mt-2 flex flex-wrap gap-2">
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            disabled={loading !== null}
+            onClick={loadSuggestions}
+          >
+            {loading === 'suggestions' ? 'Loading…' : 'Load engineers'}
+          </Button>
         </div>
+        {suggestions.length > 0 ? (
+          <ul className="mt-3 max-h-40 space-y-2 overflow-y-auto text-sm">
+            {suggestions.map((row) => (
+              <li key={row.userId}>
+                <label className="flex cursor-pointer items-start gap-2">
+                  <input
+                    type="radio"
+                    name={`override-${projectId}`}
+                    checked={overrideUserId === row.userId}
+                    onChange={() => setOverrideUserId(row.userId)}
+                    className="mt-1"
+                  />
+                  <span>
+                    <span className="font-medium text-foreground">{row.displayName}</span>
+                    <span className="block text-xs text-muted-foreground">
+                      Score {row.rankScore} · {row.email}
+                    </span>
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        <Input
+          className="mt-2"
+          value={overrideReason}
+          onChange={(e) => setOverrideReason(e.target.value)}
+          placeholder="Reason (min 8 characters)"
+        />
         <Button
           type="button"
           size="sm"

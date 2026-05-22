@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/automation` |
 | **Depends on** | AUTO-001,OPS-005 |
 | **Branch** | `feature/AUTO-003-auto-assign` |
-| **Status** | In Progress |
+| **Status** | QA / Staging |
 
 ---
 

@@ -29,6 +29,9 @@ importers:
       '@lanceflow/operations':
         specifier: workspace:*
         version: link:packages/modules/operations
+      '@lanceflow/payments':
+        specifier: workspace:*
+        version: link:packages/modules/payments
       '@lanceflow/rules-engine':
         specifier: workspace:*
         version: link:packages/rules-engine
@@ -83,6 +86,9 @@ importers:
       '@lanceflow/operations':
         specifier: workspace:*
         version: link:../../packages/modules/operations
+      '@lanceflow/payments':
+        specifier: workspace:*
+        version: link:../../packages/modules/payments
       '@lanceflow/types':
         specifier: workspace:*
         version: link:../../packages/core/types
@@ -338,6 +344,22 @@ importers:
       '@lanceflow/types':
         specifier: workspace:*
         version: link:../../core/types
+    devDependencies:
+      '@lanceflow/typescript-config':
+        specifier: workspace:*
+        version: link:../../core/typescript-config
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  packages/modules/payments:
+    dependencies:
+      '@lanceflow/audit':
+        specifier: workspace:*
+        version: link:../../audit
+      '@lanceflow/database':
+        specifier: workspace:*
+        version: link:../../core/database
     devDependencies:
       '@lanceflow/typescript-config':
         specifier: workspace:*
