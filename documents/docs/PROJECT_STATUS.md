@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-22  
-> **Current phase:** M2 — Operations (in progress)  
+> **Last updated:** 2026-05-23  
+> **Current phase:** M3 — Automation (starting)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,42 +10,34 @@
 
 | | |
 |--|--|
-| **Active story** | **OPS-007** SOP store · then OPS-008 ops console |
-| **Just completed** | **v0.4.0** on production (#70) · OPS-006 daily reports on staging (#71) |
+| **Active story** | **AUTO-002** Project auto-approval |
+| **Just completed** | **v0.4.1** production — M2 complete (OPS-006–008) |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.4.0** on `main` — M1 + clients + risk + projects + workload + assignments + UX |
+| **Production** | **v0.4.1** — full M2 Operations (8/8 stories) |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## Staging (ahead of production)
+## Production (v0.4.1)
 
 | | |
 |--|--|
-| **URL** | https://lance-flow-web.vercel.app |
-| **Health** | https://lance-flow-web.vercel.app/api/health |
-| **Theme** | Light/dark toggle in navbar |
-
-| Area | Routes | Staging | Production |
-|------|--------|---------|--------------|
-| Clients + risk | `/clients` | Yes | Yes |
-| Projects | `/projects` | Yes | Yes |
-| Team workload | `/workers` | Yes | Yes |
-| Assignment | Project detail | Yes | Yes |
-| Daily reports | `/daily-reports`, `/daily-reports/missing` | Yes | Pending v0.4.1 |
-| SOPs | `/sops` | In progress | — |
-
----
-
-## Production (v0.4.0)
-
-| | |
-|--|--|
-| **Tag** | [v0.4.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.0) (create tag if not published) |
-| **Includes** | M1, OPS-001–005, UX (toasts, themes, live refresh) |
-| **Not yet** | Daily reports (staging until next release) |
+| **Release** | [v0.4.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.1) |
+| **Deploy** | Success ([run](https://github.com/seniorkazuya/LanceFlow/actions/runs/26306445495)) |
+| **Includes** | v0.4.0 + OPS-006 daily reports, OPS-007 SOPs, OPS-008 ops console |
 | **URL** | `PRODUCTION_URL` in GitHub environment **production** |
+
+### Production routes
+
+| Area | Routes |
+|------|--------|
+| Clients + risk | `/clients` |
+| Projects | `/projects` |
+| Team workload | `/workers` |
+| Daily reports | `/daily-reports`, `/daily-reports/missing` |
+| SOPs | `/sops` |
+| Ops console | `/ops` |
 
 ---
 
@@ -55,29 +47,22 @@
 |-----------|--------|
 | **M0** Platform & DevOps | Done |
 | **M1** Foundation | Done |
-| **M2** Operations | In progress (6/8 on staging) |
+| **M2** Operations | Done (production v0.4.1) |
+| **M3** Automation | Starting (AUTO-001) |
 
-### M2 — Operations stories
+### M2 — Operations (complete)
 
-| Story | Title | Staging | Production |
-|-------|-------|---------|------------|
-| OPS-001 | Clients | Done | v0.4.0 |
-| OPS-002 | Client risk v0 | Done | v0.4.0 |
-| OPS-003 | Project lifecycle | Done | v0.4.0 |
-| OPS-004 | Skills & workload | Done | v0.4.0 |
-| OPS-005 | Assignment algorithm | Done | v0.4.0 |
-| OPS-006 | Daily reports | Done | Pending v0.4.1 |
-| OPS-007 | SOP store | In progress | — |
-| OPS-008 | Ops console | Backlog | — |
+| Story | Production |
+|-------|------------|
+| OPS-001 … OPS-008 | v0.4.0 / v0.4.1 |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **OPS-007** — SOP document store  
-2. **OPS-008** — Ops Manager console (`/ops`)  
-3. **v0.4.1** — OPS-006 daily reports to production  
-4. **AUTO-001** — Rules engine registry (M3)
+1. **AUTO-001** — Rules engine `evaluateRule()` + registry  
+2. **AUTO-002** — Project auto-approval  
+3. Sync `staging` with `main` after each release  
 
 ---
 
@@ -85,9 +70,9 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-22 | v0.4.0 production (#70) · OPS-006 staging (#71) · project board automation (#72) |
-| 2026-05-22 | OPS-005 (#68) · OPS-004 (#67) · UX (#69) |
-| 2026-05-21 | OPS-003 (#66) · v0.3.0 (#65) |
+| 2026-05-23 | v0.4.1 production (#77) — M2 complete |
+| 2026-05-22 | v0.4.0 production (#70) |
+| 2026-05-22 | OPS-008 (#75) · OPS-007 (#74) · OPS-006 (#71) |
 
 ---
 

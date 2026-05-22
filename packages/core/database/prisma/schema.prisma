@@ -100,3 +100,20 @@ model DailyReport {
   @@unique([userId, projectId, reportDate])
   @@map("ops_daily_reports")
 }
+
+model RuleDecision {
+  id             String   @id @default(cuid())
+  entityType     String   @map("entity_type")
+  entityId       String   @map("entity_id")
+  ruleKey        String   @map("rule_key")
+  formulaVersion String   @map("formula_version")
+  inputs         Json
+  outcome        String
+  explanation    Json?
+  overridden     Boolean  @default(false)
+  actorId        String?  @map("actor_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@index([entityType, entityId])
+  @@map("rule_decisions")
+}

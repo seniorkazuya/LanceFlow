@@ -14,6 +14,9 @@ importers:
       '@lanceflow/auth':
         specifier: workspace:*
         version: link:packages/core/auth
+      '@lanceflow/automation':
+        specifier: workspace:*
+        version: link:packages/modules/automation
       '@lanceflow/config':
         specifier: workspace:*
         version: link:packages/core/config
@@ -68,6 +71,9 @@ importers:
       '@lanceflow/auth':
         specifier: workspace:*
         version: link:../../packages/core/auth
+      '@lanceflow/automation':
+        specifier: workspace:*
+        version: link:../../packages/modules/automation
       '@lanceflow/config':
         specifier: workspace:*
         version: link:../../packages/core/config
@@ -290,6 +296,34 @@ importers:
         specifier: ^5.7.2
         version: 5.9.3
 
+  packages/modules/automation:
+    dependencies:
+      '@lanceflow/audit':
+        specifier: workspace:*
+        version: link:../../audit
+      '@lanceflow/config':
+        specifier: workspace:*
+        version: link:../../core/config
+      '@lanceflow/database':
+        specifier: workspace:*
+        version: link:../../core/database
+      '@lanceflow/operations':
+        specifier: workspace:*
+        version: link:../operations
+      '@lanceflow/rules-engine':
+        specifier: workspace:*
+        version: link:../../rules-engine
+      '@prisma/client':
+        specifier: ^6.1.0
+        version: 6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3)
+    devDependencies:
+      '@lanceflow/typescript-config':
+        specifier: workspace:*
+        version: link:../../core/typescript-config
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
   packages/modules/operations:
     dependencies:
       '@lanceflow/audit':
@@ -313,6 +347,10 @@ importers:
         version: 5.9.3
 
   packages/rules-engine:
+    dependencies:
+      '@lanceflow/config':
+        specifier: workspace:*
+        version: link:../core/config
     devDependencies:
       '@lanceflow/typescript-config':
         specifier: workspace:*

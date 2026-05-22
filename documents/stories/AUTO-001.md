@@ -9,7 +9,7 @@
 | **Modules** | `packages/rules-engine` |
 | **Depends on** | CORE-006 |
 | **Branch** | `feature/AUTO-001-rules-core` |
-| **Status** | Backlog |
+| **Status** | QA / Staging |
 
 ---
 
@@ -21,8 +21,8 @@ As platform, I evaluate versioned rules with explainable outputs.
 
 ## Acceptance criteria
 
-- [ ] evaluateRule() with version and explanation
-- [ ] 100% unit test coverage
+- [x] evaluateRule() with version and explanation
+- [x] 100% unit test coverage
 
 ---
 
