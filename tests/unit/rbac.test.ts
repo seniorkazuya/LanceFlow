@@ -52,7 +52,6 @@ describe('hasRole', () => {
     expect(hasRole(UserRole.CEO, RolePolicy.workersRead)).toBe(true);
     expect(hasRole(UserRole.ENGINEER, RolePolicy.workersRead)).toBe(false);
   });
-
   it('restricts daily report submit to engineers', () => {
     expect(hasRole(UserRole.ENGINEER, RolePolicy.dailyReportsSubmit)).toBe(true);
     expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.dailyReportsSubmit)).toBe(false);
@@ -61,6 +60,11 @@ describe('hasRole', () => {
   it('allows missing reports read for ops and ceo', () => {
     expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.missingReportsRead)).toBe(true);
     expect(hasRole(UserRole.ENGINEER, RolePolicy.missingReportsRead)).toBe(false);
+  });
+
+  it('allows all operational roles to read SOPs', () => {
+    expect(hasRole(UserRole.ENGINEER, RolePolicy.sopsRead)).toBe(true);
+    expect(hasRole(UserRole.CALLER, RolePolicy.sopsRead)).toBe(true);
   });
 });
 

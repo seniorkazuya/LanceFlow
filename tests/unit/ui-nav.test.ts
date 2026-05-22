@@ -11,6 +11,7 @@ describe('getNavItemsForRole', () => {
       'projects',
       'workers',
       'missing-reports',
+      'sops',
       'control',
       'hiring-ceo-queue',
       'audit',
@@ -23,6 +24,7 @@ describe('getNavItemsForRole', () => {
     expect(ids).toContain('projects');
     expect(ids).toContain('workers');
     expect(ids).toContain('missing-reports');
+    expect(ids).toContain('sops');
     expect(ids).toContain('control');
     expect(ids).toContain('hiring-ceo-queue');
   });
@@ -35,7 +37,7 @@ describe('getNavItemsForRole', () => {
 
   it('hides control and hiring CEO queue for engineer', () => {
     const ids = getNavItemsForRole(UserRole.ENGINEER).map((item) => item.id);
-    expect(ids).toEqual(['dashboard', 'daily-reports']);
+    expect(ids).toEqual(['dashboard', 'daily-reports', 'sops']);
   });
 
   it('shows hiring but not control for caller', () => {

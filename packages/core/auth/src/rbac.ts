@@ -31,6 +31,14 @@ export const RolePolicy = {
   dailyReportsSubmit: [UserRole.ENGINEER] as const,
   /** Missing daily reports oversight (OPS-006). */
   missingReportsRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** SOP library read (OPS-007). */
+  sopsRead: [
+    UserRole.CEO,
+    UserRole.OPS_MANAGER,
+    UserRole.CALLER,
+    UserRole.BIDDER,
+    UserRole.ENGINEER,
+  ] as const,
   /** Any signed-in operational role. */
   authenticated: [
     UserRole.CEO,
