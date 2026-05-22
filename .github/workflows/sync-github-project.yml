@@ -1,0 +1,63 @@
+name: Sync GitHub Project
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [staging, main]
+    paths:
+      - .github/project/board-sync.json
+      - documents/docs/PROJECT_STATUS.md
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+    branches: [staging, main]
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: read
+  projects: write
+
+jobs:
+  sync:
+    name: sync-lanceflow-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Patch manifest after PR merge
+        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: node .github/scripts/patch-board-sync.mjs merged "$PR_BASE" "$PR_TITLE" "$PR_BRANCH"
+
+      - name: Patch manifest when PR opens to staging
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.event.action != 'closed' &&
+          github.event.pull_request.base.ref == 'staging'
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: node .github/scripts/patch-board-sync.mjs open staging "$PR_TITLE" "$PR_BRANCH"
+
+      - name: Sync LanceFlow Build (project 4)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+          SYNC_EVENT: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged && 'pr-merged' || github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.base.ref == 'staging' && 'pr-open' || 'manifest' }}
+          PR_BASE: ${{ github.event.pull_request.base.ref || '' }}
+          PR_TITLE: ${{ github.event.pull_request.title || '' }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref || '' }}
+        run: node .github/scripts/sync-github-project.mjs
+
+      - name: Commit board-sync.json after merge
+        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(project): update board-sync after PR #${{ github.event.pull_request.number }}"
+          file_pattern: .github/project/board-sync.json
+          skip_dirty_check: true

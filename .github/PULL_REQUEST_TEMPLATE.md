@@ -32,10 +32,11 @@
 
 ## Client status (required when merging to `staging`)
 
-> **Clients read:** [PROJECT_STATUS.md](../documents/docs/PROJECT_STATUS.md) · **Board:** [LanceFlow Build](https://github.com/users/seniorkazuya/projects) ([update guide](../documents/docs/GITHUB_PROJECT_UPDATES.md))
+> **Clients read:** [PROJECT_STATUS.md](../documents/docs/PROJECT_STATUS.md) · **Board:** [LanceFlow Build #4](https://github.com/users/seniorkazuya/projects/4) ([update guide](../documents/docs/GITHUB_PROJECT_UPDATES.md))
 
 - [ ] Updated **Active story**, **Just completed**, and **Staging demo** in `PROJECT_STATUS.md`
-- [ ] Moved card on **LanceFlow Build** (→ In Review while PR open → QA/Staging or Done after merge)
+- [ ] PR title or branch includes story ID (e.g. `[OPS-006]`) so **Sync GitHub Project** workflow moves the card automatically
+- [ ] If needed, updated `.github/project/board-sync.json` for stories without a PR
 - [ ] Story file `documents/stories/<STORY-ID>.md` status field updated
 
 ## Screenshots / demo
