@@ -10,46 +10,42 @@
 
 | | |
 |--|--|
-| **Active story** | M2 wrap-up — OPS-006+ (reports, SOP, ops console) |
-| **Just completed** | OPS-005 assignment ranking · OPS-004 workload · UX (toasts, themes, live refresh) |
+| **Active story** | **OPS-007** SOP store · then OPS-008 ops console |
+| **Just completed** | **v0.4.0** on production (#70) · OPS-006 daily reports on staging (#71) |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.3.0** on `main` (M1 + clients + risk) — see [DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md) |
-| **Next release** | `staging` → `main` tag **v0.4.0** (projects, workload, assignments) |
+| **Production** | **v0.4.0** on `main` — M1 + clients + risk + projects + workload + assignments + UX |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## Staging demo
+## Staging (ahead of production)
 
 | | |
 |--|--|
 | **URL** | https://lance-flow-web.vercel.app |
 | **Health** | https://lance-flow-web.vercel.app/api/health |
-| **Sign-in** | `/auth/signin` — `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
-| **Theme** | Light/dark toggle in top navbar (app + landing) |
+| **Theme** | Light/dark toggle in navbar |
 
-### Staging feature set (ahead of production)
-
-| Area | Routes | Status |
-|------|--------|--------|
-| Landing + auth | `/`, `/auth/signin` | Done |
-| Clients + risk | `/clients` | Done |
-| Projects lifecycle | `/projects` | Done |
-| Team workload | `/workers` | Done |
-| Assignment rank v1 | Project detail → Assign | Done |
-| Control / hiring / audit | `/control`, `/hiring/ceo-queue`, `/audit` | Done |
+| Area | Routes | Staging | Production |
+|------|--------|---------|--------------|
+| Clients + risk | `/clients` | Yes | Yes |
+| Projects | `/projects` | Yes | Yes |
+| Team workload | `/workers` | Yes | Yes |
+| Assignment | Project detail | Yes | Yes |
+| Daily reports | `/daily-reports`, `/daily-reports/missing` | Yes | Pending v0.4.1 |
+| SOPs | `/sops` | In progress | — |
 
 ---
 
-## Production (v0.3.0)
+## Production (v0.4.0)
 
 | | |
 |--|--|
-| **Tag** | [v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0) |
-| **Includes** | M1 Foundation, OPS-001 clients, OPS-002 client risk |
-| **Not yet** | Projects, workers, assignments (staging only until v0.4.0) |
-| **Verify** | `PRODUCTION_URL/api/health` + sign-in + `/clients` |
+| **Tag** | [v0.4.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.0) (create tag if not published) |
+| **Includes** | M1, OPS-001–005, UX (toasts, themes, live refresh) |
+| **Not yet** | Daily reports (staging until next release) |
+| **URL** | `PRODUCTION_URL` in GitHub environment **production** |
 
 ---
 
@@ -59,28 +55,28 @@
 |-----------|--------|
 | **M0** Platform & DevOps | Done |
 | **M1** Foundation | Done |
-| **M2** Operations | In progress (~5/8 stories on staging) |
+| **M2** Operations | In progress (6/8 on staging) |
 
 ### M2 — Operations stories
 
 | Story | Title | Staging | Production |
 |-------|-------|---------|------------|
-| OPS-001 | Clients | Done | Done |
-| OPS-002 | Client risk v0 | Done | Done |
-| OPS-003 | Project lifecycle | Done | Pending v0.4.0 |
-| OPS-004 | Skills & workload | Done | Pending v0.4.0 |
-| OPS-005 | Assignment algorithm | Done | Pending v0.4.0 |
-| OPS-006 | Daily reports | Backlog | — |
-| OPS-007 | SOP store | Backlog | — |
+| OPS-001 | Clients | Done | v0.4.0 |
+| OPS-002 | Client risk v0 | Done | v0.4.0 |
+| OPS-003 | Project lifecycle | Done | v0.4.0 |
+| OPS-004 | Skills & workload | Done | v0.4.0 |
+| OPS-005 | Assignment algorithm | Done | v0.4.0 |
+| OPS-006 | Daily reports | Done | Pending v0.4.1 |
+| OPS-007 | SOP store | In progress | — |
 | OPS-008 | Ops console | Backlog | — |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **Release v0.4.0** — merge `staging` → `main` (OPS-003–005 + UX)
-2. **OPS-006** — Daily reports  
-3. **OPS-008** — Ops console (ties M2 demo together)  
+1. **OPS-007** — SOP document store  
+2. **OPS-008** — Ops Manager console (`/ops`)  
+3. **v0.4.1** — OPS-006 daily reports to production  
 4. **AUTO-001** — Rules engine registry (M3)
 
 ---
@@ -89,11 +85,9 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-22 | OPS-005 assignment + `@lanceflow/rules-engine` (#68) |
-| 2026-05-22 | OPS-004 team workload (#67) |
-| 2026-05-22 | UX: Sonner toasts, light theme, mutation cache refresh |
-| 2026-05-21 | OPS-003 projects (#66) |
-| 2026-05-21 | v0.3.0 production — M1 + OPS-001/002 (#65) |
+| 2026-05-22 | v0.4.0 production (#70) · OPS-006 staging (#71) · project board automation (#72) |
+| 2026-05-22 | OPS-005 (#68) · OPS-004 (#67) · UX (#69) |
+| 2026-05-21 | OPS-003 (#66) · v0.3.0 (#65) |
 
 ---
 
