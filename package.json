@@ -18,6 +18,7 @@
     "@lanceflow/typescript-config": "workspace:*",
     "@lanceflow/audit": "workspace:*",
     "@lanceflow/operations": "workspace:*",
+    "@lanceflow/rules-engine": "workspace:*",
     "@lanceflow/auth": "workspace:*",
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
