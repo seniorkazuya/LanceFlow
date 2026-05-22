@@ -46,6 +46,12 @@ describe('hasRole', () => {
     expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.clientsWrite)).toBe(true);
     expect(hasRole(UserRole.BIDDER, RolePolicy.clientsWrite)).toBe(false);
   });
+
+  it('allows workers read for ops and ceo only', () => {
+    expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.workersRead)).toBe(true);
+    expect(hasRole(UserRole.CEO, RolePolicy.workersRead)).toBe(true);
+    expect(hasRole(UserRole.ENGINEER, RolePolicy.workersRead)).toBe(false);
+  });
 });
 
 describe('assertRole', () => {
