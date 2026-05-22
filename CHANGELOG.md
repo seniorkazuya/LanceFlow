@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **OPS-006** — Daily self-reports (`/daily-reports`), missing-report queue for Ops (`/daily-reports/missing`)
 - **UX** — Sonner toasts (success/error/confirm), light/dark theme toggle in app navbar and landing, `revalidatePath` after mutations so lists refresh
 - **OPS-005** — Assignment rank v1 in `@lanceflow/rules-engine`, assign engineers on project detail
 - **OPS-004** — Engineer skill tags and team workload view (`/workers`)

@@ -24,7 +24,7 @@ jobs:
               'This PR was merged to `staging`. Please update:',
               '',
               '- [ ] [`documents/docs/PROJECT_STATUS.md`](https://github.com/seniorkazuya/LanceFlow/blob/staging/documents/docs/PROJECT_STATUS.md) — staging URL, active story, changelog',
-              '- [ ] [**LanceFlow Build**](https://github.com/users/seniorkazuya/projects) — move story card (see [board guide](https://github.com/seniorkazuya/LanceFlow/blob/staging/documents/docs/GITHUB_PROJECT_UPDATES.md))',
+              '- [ ] [**LanceFlow Build #4**](https://github.com/users/seniorkazuya/projects/4) — auto-sync runs via [Sync GitHub Project](https://github.com/seniorkazuya/LanceFlow/actions/workflows/sync-github-project.yml) if PR title has story ID; else update [board-sync.json](https://github.com/seniorkazuya/LanceFlow/blob/staging/.github/project/board-sync.json)',
               '- [ ] Confirm [Deploy Staging](https://github.com/seniorkazuya/LanceFlow/actions/workflows/deploy-staging.yml) is green',
               '',
               '_Automated reminder (DEV-008)._',

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "updated": "2026-05-22",
+  "project": {
+    "owner": "seniorkazuya",
+    "number": 4,
+    "url": "https://github.com/users/seniorkazuya/projects/4",
+    "title": "LanceFlow Build"
+  },
+  "statusFieldName": "Status",
+  "columns": [
+    "Backlog",
+    "Ready",
+    "In Progress",
+    "In Review",
+    "QA / Staging",
+    "Done"
+  ],
+  "stories": {
+    "DEV-001": { "column": "Done", "issue": 7, "title": "DEV-001 — Monorepo scaffold" },
+    "DEV-002": { "column": "Done", "issue": 8, "title": "DEV-002 — GitHub templates & branch protection" },
+    "DEV-003": { "column": "Done", "issue": 9, "title": "DEV-003 — CI pipeline" },
+    "DEV-004": { "column": "Done", "issue": 17, "title": "DEV-004 — Staging deployment" },
+    "DEV-005": { "column": "Done", "issue": 23, "title": "DEV-005 — Production deployment" },
+    "DEV-006": { "column": "Done", "issue": 25, "title": "DEV-006 — Docker Compose local stack" },
+    "DEV-007": { "column": "Done", "issue": 34, "title": "DEV-007 — Observability baseline" },
+    "DEV-008": { "column": "Done", "issue": 36, "title": "DEV-008 — Client status automation" },
+    "CORE-001": { "column": "Done", "issue": 39, "title": "CORE-001 — Database & Prisma schema" },
+    "CORE-002": { "column": "Done", "issue": 45, "title": "CORE-002 — Authentication" },
+    "CORE-003": { "column": "Done", "issue": 49, "title": "CORE-003 — RBAC" },
+    "CORE-004": { "column": "Done", "issue": 51, "title": "CORE-004 — Design system & app shell" },
+    "CORE-005": { "column": "Done", "issue": 52, "title": "CORE-005 — Marketing & brand pages" },
+    "CORE-006": { "column": "Done", "issue": 61, "title": "CORE-006 — Audit log service" },
+    "OPS-001": { "column": "Done", "title": "OPS-001 — Client module CRUD" },
+    "OPS-002": { "column": "Done", "title": "OPS-002 — Client risk score v0" },
+    "OPS-003": { "column": "QA / Staging", "title": "OPS-003 — Project lifecycle" },
+    "OPS-004": { "column": "QA / Staging", "title": "OPS-004 — Worker skills & workload" },
+    "OPS-005": { "column": "QA / Staging", "title": "OPS-005 — Assignment algorithm v1" },
+    "OPS-006": { "column": "QA / Staging", "title": "OPS-006 — Daily self-reporting" },
+    "OPS-007": { "column": "Backlog", "title": "OPS-007 — SOP document store" },
+    "OPS-008": { "column": "Backlog", "title": "OPS-008 — Ops Manager console shell" }
+  }
+}

@@ -1,9 +1,39 @@
 # LanceFlow Build — GitHub Project updates
 
-> **Board:** GitHub → **Projects** → **LanceFlow Build**  
-> Update this board whenever a story’s status changes (merge, deploy, release).
+> **Board:** [LanceFlow Build (project #4)](https://github.com/users/seniorkazuya/projects/4)  
+> **Automation:** `.github/workflows/sync-github-project.yml` applies [board-sync.json](../../.github/project/board-sync.json) via GraphQL.
 
-The agent updates **issues** and **`PROJECT_STATUS.md`** automatically when possible. **Project board columns** require `gh` with Projects scope (see below).
+---
+
+## Automatic sync (recommended)
+
+The repo syncs **project #4** when:
+
+| Trigger | Effect |
+|---------|--------|
+| Push to `staging` / `main` updating `board-sync.json` or `PROJECT_STATUS.md` | Full board sync from manifest |
+| PR **opened** to `staging` | Story in PR title/branch → **In Review** |
+| PR **merged** to `staging` | → **QA / Staging** (+ commits manifest) |
+| PR **merged** to `main` | → **Done** |
+| **Actions → Sync GitHub Project → Run workflow** | Manual full sync |
+
+### One-time setup (required)
+
+1. **Link the project to the repo**  
+   Open [project #4](https://github.com/users/seniorkazuya/projects/4) → **⋯** → **Settings** → link repository **seniorkazuya/LanceFlow**.
+
+2. **Grant Projects API access (pick one)**  
+   - **Option A (CI):** Rely on `GITHUB_TOKEN` with `projects: write` (works when project is linked to the repo).  
+   - **Option B (fallback):** Create a classic PAT with `project` + `read:project`, add repo secret **`PROJECTS_TOKEN`**.
+
+3. **Local `gh` (optional, for debugging)**  
+   ```bash
+   gh auth refresh -h github.com -s read:project,project
+   node .github/scripts/sync-github-project.mjs --dry-run
+   ```
+
+4. **Merge automation to `staging`**  
+   Push the workflow + manifest on a PR to `staging`, then merge so Actions can run.
 
 ---
 
@@ -13,61 +43,62 @@ The agent updates **issues** and **`PROJECT_STATUS.md`** automatically when poss
 |--------|------------------------|
 | **Backlog** | Story planned, not started |
 | **Ready** | Refined, dependencies met, no open branch |
-| **In Progress** | Feature branch open |
+| **In Progress** | Feature branch open (set manually in manifest if needed) |
 | **In Review** | PR open to `staging` |
 | **QA / Staging** | Merged to `staging`; staging deploy / UAT |
-| **Done** | On `main` or released with tag |
+| **Done** | On `main` / released with tag |
 
 ---
 
-## Story status (update board to match)
+## Story status (2026-05-22 — matches board-sync.json)
 
-| Story | Suggested column | GitHub issue | Notes |
-|-------|------------------|--------------|--------|
-| DEV-001 | **Done** | #7 (closed) | Monorepo |
-| DEV-002 | **Done** | #8 (closed) | GitHub templates, branch protection |
-| DEV-003 | **Done** | #9 (closed) | CI pipeline |
-| DEV-004 | **Done** or **QA / Staging** | #17 (closed) | Staging live: https://lance-flow-web.vercel.app |
-| DEV-005 | **Done** | #23 (closed) | Workflow on `main`; prod deploy after tag |
-| DEV-006 | **Done** | #25 (closed) | Docker Compose #24 |
-| DEV-007 | **Done** | _issue when created_ | Observability #33 |
-| DEV-008 | **In Review** | _issue when PR open_ | Status automation |
+| Story | Column | GitHub issue | Notes |
+|-------|--------|--------------|--------|
+| DEV-001 … DEV-008 | **Done** | #7, #8, #9, #17, #23, #25, #34, #36 | M0 complete |
+| CORE-001 … CORE-006 | **Done** | #39, #45, #49, #51, #52, #61 | M1 complete |
+| OPS-001 | **Done** | — | Production v0.3.0 |
+| OPS-002 | **Done** | — | Production v0.3.0 |
+| OPS-003 | **QA / Staging** | — | Merged; ships with v0.4.0 |
+| OPS-004 | **QA / Staging** | — | Merged; ships with v0.4.0 |
+| OPS-005 | **QA / Staging** | — | Merged; ships with v0.4.0 |
+| OPS-006 | **QA / Staging** | — | Merged to staging |
+| OPS-007 | **Backlog** | — | SOP store |
+| OPS-008 | **Backlog** | — | Ops console |
 
----
-
-## One-time: enable `gh` to update Projects
-
-```bash
-gh auth refresh -h github.com -s read:project,project
-```
-
-Complete the browser device login. Then:
-
-```bash
-gh project list --owner seniorkazuya
-gh project view <PROJECT_NUMBER> --owner seniorkazuya
-```
+After **PR #70** merges to `main`, set OPS-003–005 to **Done** in [board-sync.json](../../.github/project/board-sync.json) (or merge release PR with story IDs in title).
 
 ---
 
-## Manual update (no CLI)
+## Update progress manually
 
-1. Open **https://github.com/users/seniorkazuya/projects** (or org projects).
-2. Open **LanceFlow Build**.
-3. Drag cards (or add from issues **#7, #8, #9, #17, #23**).
-4. Link PR URLs on cards when in **In Review**.
+Edit **`.github/project/board-sync.json`** (`stories.<ID>.column`) and push to `staging` — the workflow syncs the board.
 
----
+Also update:
 
-## After each story (checklist)
-
-- [ ] Close or update the GitHub **issue** (`[DEV-xxx]` title).
-- [ ] Move card on **LanceFlow Build** to the column above.
-- [ ] Update **`documents/docs/PROJECT_STATUS.md`**.
-- [ ] Update **`documents/stories/DEV-xxx.md`** status field.
+- [`PROJECT_STATUS.md`](./PROJECT_STATUS.md) — client-facing summary  
+- `documents/stories/<STORY-ID>.md` — **Status** field  
 
 ---
 
-*Last sync: 2026-05-21 — DEV-001–007 Done; DEV-008 in PR*
+## Manual update (no CI)
+
+1. Open [LanceFlow Build #4](https://github.com/users/seniorkazuya/projects/4).  
+2. Drag cards to match the table above.  
+3. Card titles should start with `OPS-003` etc. so automation can match them.
+
+---
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Workflow fails `INSUFFICIENT_SCOPES` | Link project to repo + add `PROJECTS_TOKEN`, or refresh `gh auth` locally |
+| Column name mismatch | Status field options must match manifest `columns` exactly |
+| Card not moving | Add story to `board-sync.json` or create card titled `OPS-00x — …` |
+| No commit after merge | Branch protection may block bot commits; merge manifest update manually |
+
+---
+
+*Last sync manifest: 2026-05-22 · Automation: DEV-008 extension*
 
 Board template: [GITHUB_PROJECT_BOARD.md](./GITHUB_PROJECT_BOARD.md)
