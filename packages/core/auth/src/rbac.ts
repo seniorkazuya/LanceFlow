@@ -27,6 +27,10 @@ export const RolePolicy = {
   workersRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Engineer skill tag updates (OPS-004). */
   workersWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Submit daily report (OPS-006). */
+  dailyReportsSubmit: [UserRole.ENGINEER] as const,
+  /** Missing daily reports oversight (OPS-006). */
+  missingReportsRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Any signed-in operational role. */
   authenticated: [
     UserRole.CEO,

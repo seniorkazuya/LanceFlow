@@ -19,6 +19,7 @@ model User {
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
   assignments Assignment[]
+  dailyReports  DailyReport[]
 
   @@map("users")
 }
@@ -64,6 +65,7 @@ model Project {
   updatedAt          DateTime @updatedAt @map("updated_at")
   client             Client   @relation(fields: [clientId], references: [id])
   assignments        Assignment[]
+  dailyReports       DailyReport[]
 
   @@map("ops_projects")
 }
@@ -80,4 +82,21 @@ model Assignment {
   user       User      @relation(fields: [userId], references: [id])
 
   @@map("ops_assignments")
+}
+
+model DailyReport {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  projectId   String   @map("project_id")
+  reportDate  DateTime @db.Date @map("report_date")
+  hours       Float    @map("hours")
+  progressPct Int      @map("progress_pct")
+  issues      String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  user        User     @relation(fields: [userId], references: [id])
+  project     Project  @relation(fields: [projectId], references: [id])
+
+  @@unique([userId, projectId, reportDate])
+  @@map("ops_daily_reports")
 }
