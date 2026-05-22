@@ -10,9 +10,9 @@
 
 | | |
 |--|--|
-| **Active story** | OPS-003 — Project lifecycle (Sprint 3) |
-| **Just completed** | OPS-002 — Client risk v0 |
-| **Release** | [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) on `main` |
+| **Active story** | OPS-004 — Skills & workload (Sprint 3) |
+| **Just completed** | OPS-003 — Project lifecycle (staging) |
+| **Release** | [v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0) on `main` (M1 + OPS-001/002) |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 
 **Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
@@ -35,8 +35,8 @@
 
 | | |
 |--|--|
-| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.0](https://github.com/seniorkazuya/LanceFlow/pull/37) · **v0.2.1** (M1) |
-| **Deploy** | Tag `v0.2.1` on `main` + Deploy Production workflow |
+| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) · **[v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0)** (M1 + clients/risk) |
+| **Deploy** | Tag `v0.3.0` on `main` + Deploy Production workflow |
 
 ---
 
