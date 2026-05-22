@@ -6,6 +6,8 @@ import type { SessionUser } from './types';
 export const RolePolicy = {
   /** Control center and ops oversight (CEO + Ops only). */
   controlCenter: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Ops workflow dashboard (OPS-008). */
+  opsConsoleRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Hiring CEO queue — engineers must not access. */
   hiringCeoQueue: [
     UserRole.CEO,
@@ -27,6 +29,18 @@ export const RolePolicy = {
   workersRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Engineer skill tag updates (OPS-004). */
   workersWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Submit daily report (OPS-006). */
+  dailyReportsSubmit: [UserRole.ENGINEER] as const,
+  /** Missing daily reports oversight (OPS-006). */
+  missingReportsRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** SOP library read (OPS-007). */
+  sopsRead: [
+    UserRole.CEO,
+    UserRole.OPS_MANAGER,
+    UserRole.CALLER,
+    UserRole.BIDDER,
+    UserRole.ENGINEER,
+  ] as const,
   /** Any signed-in operational role. */
   authenticated: [
     UserRole.CEO,

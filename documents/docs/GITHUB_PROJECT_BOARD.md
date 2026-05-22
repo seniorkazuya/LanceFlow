@@ -63,7 +63,8 @@ See [GITHUB_PROJECT_UPDATES.md](./GITHUB_PROJECT_UPDATES.md) for current story �
 
 ## Automation (DEV-008)
 
-- **PR template** — checklist for `PROJECT_STATUS.md` + board
+- **Board sync** — `.github/workflows/sync-github-project.yml` + `.github/project/board-sync.json` → [project #4](https://github.com/users/seniorkazuya/projects/4)
+- **PR template** — checklist for `PROJECT_STATUS.md` + story ID in title
 - **Workflow** — `.github/workflows/remind-project-status.yml` comments on PRs merged to `staging`
 - **Repo About** — should link to [PROJECT_STATUS.md](./PROJECT_STATUS.md) (see [DEVOPS_GUIDE.md](./DEVOPS_GUIDE.md))
 

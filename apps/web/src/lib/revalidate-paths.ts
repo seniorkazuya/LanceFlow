@@ -24,3 +24,8 @@ export function revalidateWorkers(workerId?: string): void {
     revalidatePath(`/workers/${workerId}`, 'page');
   }
 }
+
+export function revalidateDailyReports(): void {
+  revalidatePath('/daily-reports', 'page');
+  revalidatePath('/daily-reports/missing', 'page');
+}
