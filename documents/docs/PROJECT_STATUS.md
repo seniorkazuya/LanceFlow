@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **AUTO-002** Project auto-approval |
-| **Just completed** | **v0.4.1** production — M2 complete (OPS-006–008) |
+| **Active story** | **AUTO-003** Auto task assignment on activate |
+| **Just completed** | **AUTO-002** merged to staging (#79) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.4.1** — full M2 Operations (8/8 stories) |
 
@@ -48,7 +48,7 @@
 | **M0** Platform & DevOps | Done |
 | **M1** Foundation | Done |
 | **M2** Operations | Done (production v0.4.1) |
-| **M3** Automation | Starting (AUTO-001) |
+| **M3** Automation | In progress (AUTO-001–002 on staging; AUTO-003 in flight) |
 
 ### M2 — Operations (complete)
 
@@ -60,9 +60,9 @@
 
 ## Recommended sprint order (next)
 
-1. **AUTO-001** — Rules engine `evaluateRule()` + registry  
-2. **AUTO-002** — Project auto-approval  
-3. Sync `staging` with `main` after each release  
+1. **AUTO-003** — Auto-assign on project activate (`AUTO_ASSIGN_ENABLED`)  
+2. Staging QA for AUTO-001 / AUTO-002  
+3. Sync `staging` with `main` before next production release  
 
 ---
 
@@ -70,6 +70,7 @@
 
 | Date | Change |
 |------|--------|
+| 2026-05-23 | AUTO-002 staging (#79) · AUTO-003 branch started |
 | 2026-05-23 | v0.4.1 production (#77) — M2 complete |
 | 2026-05-22 | v0.4.0 production (#70) |
 | 2026-05-22 | OPS-008 (#75) · OPS-007 (#74) · OPS-006 (#71) |

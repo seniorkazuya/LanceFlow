@@ -4,3 +4,4 @@ export {
   PROJECT_AUTO_APPROVE_THRESHOLDS,
   type ProjectAutoApproveThresholds,
 } from './project-auto-approve';
+export { isAutoAssignEnabled } from './feature-flags';

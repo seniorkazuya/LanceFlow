@@ -1,4 +1,5 @@
 import { RolePolicy, authorizeRequest } from '@lanceflow/auth';
+import { runProjectAutoAssignOnActivate } from '@lanceflow/automation';
 import { transitionProject } from '@lanceflow/operations';
 import { NextResponse } from 'next/server';
 
@@ -30,6 +31,10 @@ export const POST = withApiLogging(
     if (!result.ok) {
       const status = result.errors.some((e) => e.field === 'id') ? 404 : 400;
       return NextResponse.json({ errors: result.errors }, { status });
+    }
+
+    if (body.status === 'active') {
+      await runProjectAutoAssignOnActivate(id, authz.user.id);
     }
 
     revalidateProjects(id);
