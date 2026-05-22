@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | OPS-004 — Skills & workload (Sprint 3) |
-| **Just completed** | OPS-003 — Project lifecycle (staging) |
+| **Active story** | OPS-005 — Assignment algorithm (Sprint 3) |
+| **Just completed** | OPS-004 — Skills & workload |
 | **Release** | [v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0) on `main` (M1 + OPS-001/002) |
 | **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
 

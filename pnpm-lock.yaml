@@ -26,6 +26,9 @@ importers:
       '@lanceflow/operations':
         specifier: workspace:*
         version: link:packages/modules/operations
+      '@lanceflow/rules-engine':
+        specifier: workspace:*
+        version: link:packages/rules-engine
       '@lanceflow/types':
         specifier: workspace:*
         version: link:packages/core/types
@@ -286,10 +289,25 @@ importers:
       '@lanceflow/database':
         specifier: workspace:*
         version: link:../../core/database
+      '@lanceflow/rules-engine':
+        specifier: workspace:*
+        version: link:../../rules-engine
+      '@lanceflow/types':
+        specifier: workspace:*
+        version: link:../../core/types
     devDependencies:
       '@lanceflow/typescript-config':
         specifier: workspace:*
         version: link:../../core/typescript-config
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  packages/rules-engine:
+    devDependencies:
+      '@lanceflow/typescript-config':
+        specifier: workspace:*
+        version: link:../core/typescript-config
       typescript:
         specifier: ^5.7.2
         version: 5.9.3
