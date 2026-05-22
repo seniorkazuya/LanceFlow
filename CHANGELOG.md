@@ -6,6 +6,9 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **UX** — Sonner toasts (success/error/confirm), light/dark theme toggle in app navbar and landing, `revalidatePath` after mutations so lists refresh
+- **OPS-005** — Assignment rank v1 in `@lanceflow/rules-engine`, assign engineers on project detail
+- **OPS-004** — Engineer skill tags and team workload view (`/workers`)
 - **OPS-003** — Project lifecycle states, scope/margin %, transition API and `/projects` UI
 - **OPS-002** — Client risk v0 formula, manual override with audit, risk panel for Bidders
 - **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations

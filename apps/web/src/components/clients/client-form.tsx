@@ -4,6 +4,8 @@ import { Button, Input } from '@lanceflow/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { completeMutation, notifyError } from '@/lib/notify';
+
 export type ClientFormValues = {
   name: string;
   contactEmail: string;
@@ -50,13 +52,17 @@ export function ClientForm({ mode, clientId, initial }: ClientFormProps) {
 
     if (!res.ok) {
       const data = (await res.json().catch(() => ({}))) as { errors?: { message: string }[] };
-      setError(data.errors?.[0]?.message ?? 'Save failed');
+      const message = data.errors?.[0]?.message ?? 'Save failed';
+      setError(message);
+      notifyError(message);
       return;
     }
 
     const data = (await res.json()) as { client: { id: string } };
-    router.push(`/clients/${data.client.id}`);
-    router.refresh();
+    await completeMutation(router, {
+      successMessage: mode === 'create' ? 'Client created' : 'Client updated',
+      redirectTo: `/clients/${data.client.id}`,
+    });
   }
 
   return (

@@ -2,6 +2,8 @@ import { BrandHighlight, Button, GlassCard, SectionLabel } from '@lanceflow/ui';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { LandingNav } from '@/components/marketing/landing-nav';
+
 const BRAND_ICON = '/brand/lanceflow-icon.png';
 const BRAND_LOCKUP = '/brand/lanceflow-lockup.png';
 
@@ -75,35 +77,7 @@ const orgRoles = [
 export function LandingPage() {
   return (
     <div className="lf-page-grid lf-mesh-bg relative min-h-screen">
-      {/* Top nav — Screenpipe: minimal, blurred bar */}
-      <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-background/80 backdrop-blur-2xl">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2.5">
-            <Image
-              src={BRAND_ICON}
-              alt=""
-              width={28}
-              height={28}
-              className="h-7 w-7 object-contain"
-              priority
-            />
-            <span className="text-sm font-medium tracking-tight text-foreground/95">
-              lanceflow
-            </span>
-          </Link>
-          <nav className="flex items-center gap-2 text-sm">
-            <Link
-              href="/auth/signin"
-              className="hidden rounded-full px-4 py-2 text-muted-foreground transition-colors hover:text-foreground sm:inline-block"
-            >
-              Sign in
-            </Link>
-            <Button asChild variant="default" size="sm">
-              <Link href="/dashboard">Open app</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
+      <LandingNav />
 
       <main className="relative">
         {/* Hero — centered copy like screenpi.pe/team */}

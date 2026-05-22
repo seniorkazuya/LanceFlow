@@ -4,6 +4,8 @@ import { Button, Input } from '@lanceflow/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { completeMutation, notifyError } from '@/lib/notify';
+
 type ProjectFormProps = {
   clients: { id: string; name: string }[];
 };
@@ -31,13 +33,17 @@ export function ProjectForm({ clients }: ProjectFormProps) {
     setPending(false);
     if (!res.ok) {
       const data = (await res.json().catch(() => ({}))) as { errors?: { message: string }[] };
-      setError(data.errors?.[0]?.message ?? 'Create failed');
+      const message = data.errors?.[0]?.message ?? 'Create failed';
+      setError(message);
+      notifyError(message);
       return;
     }
 
     const data = (await res.json()) as { project: { id: string } };
-    router.push(`/projects/${data.project.id}`);
-    router.refresh();
+    await completeMutation(router, {
+      successMessage: 'Project created',
+      redirectTo: `/projects/${data.project.id}`,
+    });
   }
 
   return (

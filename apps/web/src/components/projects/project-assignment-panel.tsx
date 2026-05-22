@@ -4,6 +4,8 @@ import { Button, Input, StatusBadge } from '@lanceflow/ui';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
+import { notifyError, notifySuccess } from '@/lib/notify';
+
 type Suggestion = {
   userId: string;
   displayName: string;
@@ -42,6 +44,7 @@ export function ProjectAssignmentPanel({ projectId, projectStatus }: AssignmentP
     setLoading(false);
     if (!res.ok) {
       setError('Could not load suggestions');
+      notifyError('Could not load suggestions');
       return;
     }
     const data = (await res.json()) as { items: Suggestion[] };
@@ -65,10 +68,13 @@ export function ProjectAssignmentPanel({ projectId, projectStatus }: AssignmentP
     setAssigningId(null);
     if (!res.ok) {
       const data = (await res.json().catch(() => ({}))) as { errors?: { message: string }[] };
-      setError(data.errors?.[0]?.message ?? 'Assign failed');
+      const message = data.errors?.[0]?.message ?? 'Assign failed';
+      setError(message);
+      notifyError(message);
       return;
     }
 
+    notifySuccess('Engineer assigned');
     router.refresh();
     await loadSuggestions();
   }

@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation';
 import { ShellPage } from '@/components/app/shell-page';
 import { auth } from '@/auth';
 
+export const dynamic = 'force-dynamic';
+
 function riskLevel(score: number): 'success' | 'warning' | 'danger' {
   if (score < 40) return 'success';
   if (score < 70) return 'warning';
@@ -52,12 +54,12 @@ export default async function ClientsPage() {
             ) : null}
           </p>
         ) : (
-          <ul className="divide-y divide-white/[0.06]">
+          <ul className="divide-y divide-border">
             {clients.map((client) => (
               <li key={client.id}>
                 <Link
                   href={`/clients/${client.id}`}
-                  className="flex flex-col gap-2 px-5 py-4 transition-colors hover:bg-white/[0.03] sm:flex-row sm:items-center sm:justify-between"
+                  className="lf-list-hover flex flex-col gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
                     <p className="font-medium text-foreground">{client.name}</p>

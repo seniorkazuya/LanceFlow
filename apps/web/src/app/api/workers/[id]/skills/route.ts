@@ -7,6 +7,7 @@ import { sessionToUser } from '@/lib/api-auth';
 import { withApiLogging } from '@/lib/api-route';
 import { parseJsonBody } from '@/lib/clients-api';
 import { serializeWorker } from '@/lib/workers-api';
+import { revalidateWorkers } from '@/lib/revalidate-paths';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -34,6 +35,7 @@ export const PATCH = withApiLogging(
       return NextResponse.json({ errors: result.errors }, { status });
     }
 
+    revalidateWorkers(id);
     return NextResponse.json({ worker: serializeWorker(result.worker) });
   }
 );

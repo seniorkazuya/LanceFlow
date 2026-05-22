@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation';
 import { ShellPage } from '@/components/app/shell-page';
 import { auth } from '@/auth';
 
+export const dynamic = 'force-dynamic';
+
 function workloadLevel(count: number): 'success' | 'warning' | 'danger' {
   if (count === 0) return 'success';
   if (count <= 2) return 'warning';
@@ -38,12 +40,12 @@ export default async function WorkersPage() {
             then add skill tags on their profile.
           </p>
         ) : (
-          <ul className="divide-y divide-white/[0.06]">
+          <ul className="divide-y divide-border">
             {workers.map((worker) => (
               <li key={worker.id}>
                 <Link
                   href={`/workers/${worker.id}`}
-                  className="flex flex-col gap-2 px-5 py-4 transition-colors hover:bg-white/[0.03] sm:flex-row sm:items-center sm:justify-between"
+                  className="lf-list-hover flex flex-col gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
                     <p className="font-medium text-foreground">{worker.displayName}</p>

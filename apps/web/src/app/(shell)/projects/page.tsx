@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation';
 import { ShellPage } from '@/components/app/shell-page';
 import { auth } from '@/auth';
 
+export const dynamic = 'force-dynamic';
+
 function statusTone(status: string): 'neutral' | 'warning' | 'success' {
   if (status === 'active') return 'success';
   if (status === 'pending_approval') return 'warning';
@@ -42,12 +44,12 @@ export default async function ProjectsPage() {
         {projects.length === 0 ? (
           <p className="px-5 py-8 text-sm text-muted-foreground">No projects yet.</p>
         ) : (
-          <ul className="divide-y divide-white/[0.06]">
+          <ul className="divide-y divide-border">
             {projects.map((p) => (
               <li key={p.id}>
                 <Link
                   href={`/projects/${p.id}`}
-                  className="flex flex-col gap-2 px-5 py-4 hover:bg-white/[0.03] sm:flex-row sm:items-center sm:justify-between"
+                  className="lf-list-hover flex flex-col gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
                     <p className="font-medium text-foreground">{p.title}</p>
