@@ -6,6 +6,7 @@ import { getAuthSession } from '@/auth';
 import { serializeClient } from '@/lib/clients-api';
 import { sessionToUser } from '@/lib/api-auth';
 import { withApiLogging } from '@/lib/api-route';
+import { revalidateClients } from '@/lib/revalidate-paths';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -26,6 +27,7 @@ export const POST = withApiLogging(
       return NextResponse.json({ errors: result.errors }, { status });
     }
 
+    revalidateClients(id);
     return NextResponse.json({ client: serializeClient(result.client) });
   }
 );

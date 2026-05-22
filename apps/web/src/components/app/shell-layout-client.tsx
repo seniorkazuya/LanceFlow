@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
+import { ThemeToggle } from '@/components/theme/theme-toggle';
+
 const BRAND_ICON = '/brand/lanceflow-icon.png';
 
 export type ShellLayoutClientProps = {
@@ -44,7 +46,12 @@ export function ShellLayoutClient({ user, signOutAction, children }: ShellLayout
       user={user}
       currentPath={pathname}
       LinkComponent={NextLink}
-      signOutAction={signOutAction}
+      headerActions={
+        <>
+          <ThemeToggle />
+          {signOutAction}
+        </>
+      }
       brandSlot={brandSlot}
     >
       {children}

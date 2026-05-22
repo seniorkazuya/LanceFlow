@@ -2,4 +2,5 @@ packages:
   - "apps/*"
   - "packages/core/*"
   - "packages/audit"
+  - "packages/rules-engine"
   - "packages/modules/*"

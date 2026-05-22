@@ -25,6 +25,8 @@ export type AppShellProps = {
   /** Next.js `Link` or plain anchor — keeps @lanceflow/ui framework-agnostic. */
   LinkComponent: React.ComponentType<AppShellLinkProps>;
   signOutAction?: React.ReactNode;
+  /** Right side of top bar (theme toggle, sign out, etc.) */
+  headerActions?: React.ReactNode;
   /** Brand mark (e.g. logo image) shown in sidebar header */
   brandSlot?: React.ReactNode;
 };
@@ -35,6 +37,7 @@ export function AppShell({
   children,
   LinkComponent,
   signOutAction,
+  headerActions,
   brandSlot,
 }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -84,7 +87,7 @@ export function AppShell({
 
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="hidden w-60 shrink-0 border-r border-white/[0.06] bg-sidebar/95 backdrop-blur-xl md:block">
+      <aside className="hidden w-60 shrink-0 border-r border-border bg-sidebar/95 backdrop-blur-xl md:block">
         {sidebar}
       </aside>
 
@@ -108,7 +111,7 @@ export function AppShell({
       ) : null}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 items-center justify-between gap-4 border-b border-white/[0.06] bg-background/60 px-4 backdrop-blur-xl">
+        <header className="flex h-14 items-center justify-between gap-4 border-b border-border bg-background/60 px-4 backdrop-blur-xl">
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
@@ -122,8 +125,8 @@ export function AppShell({
             </Button>
             <span className="text-sm font-medium text-muted-foreground md:hidden">LanceFlow</span>
           </div>
-          <div className="flex items-center gap-2">
-            {signOutAction ?? (
+          <div className="flex items-center gap-1">
+            {headerActions ?? signOutAction ?? (
               <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                 <LogOut className="h-3.5 w-3.5" aria-hidden />
                 Sign out via sidebar profile

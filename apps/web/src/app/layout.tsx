@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { AppProviders } from '@/components/providers/app-providers';
 import { AuthSessionProvider } from '@/components/providers/session-provider';
 
 import '@lanceflow/ui/globals.css';
@@ -14,9 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <AuthSessionProvider>{children}</AuthSessionProvider>
+        <AppProviders>
+          <AuthSessionProvider>{children}</AuthSessionProvider>
+        </AppProviders>
       </body>
     </html>
   );

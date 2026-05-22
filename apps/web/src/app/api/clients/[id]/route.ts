@@ -6,6 +6,7 @@ import { getAuthSession } from '@/auth';
 import { parseJsonBody, serializeClient } from '@/lib/clients-api';
 import { sessionToUser } from '@/lib/api-auth';
 import { withApiLogging } from '@/lib/api-route';
+import { revalidateClients } from '@/lib/revalidate-paths';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -56,6 +57,7 @@ export const PATCH = withApiLogging('/api/clients/[id]', async (request: Request
       return NextResponse.json({ errors: result.errors }, { status });
     }
 
+    revalidateClients(id);
     return NextResponse.json({ client: serializeClient(result.client) });
 });
 
@@ -71,5 +73,6 @@ export const DELETE = withApiLogging('/api/clients/[id]', async (_request: Reque
       return NextResponse.json({ errors: result.errors }, { status: 404 });
     }
 
+    revalidateClients(id);
     return NextResponse.json({ client: serializeClient(result.client) });
 });

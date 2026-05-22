@@ -14,31 +14,34 @@
   },
   "dependencies": {
     "@lanceflow/audit": "workspace:*",
-    "@lanceflow/operations": "workspace:*",
     "@lanceflow/auth": "workspace:*",
-    "@lanceflow/database": "workspace:*",
     "@lanceflow/config": "workspace:*",
+    "@lanceflow/database": "workspace:*",
+    "@lanceflow/operations": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "@lanceflow/ui": "workspace:*",
     "@sentry/nextjs": "^8.45.0",
+    "lucide-react": "^0.469.0",
     "next": "^15.1.3",
     "next-auth": "5.0.0-beta.25",
+    "next-themes": "^0.4.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
-    "@prisma/nextjs-monorepo-workaround-plugin": "^6.6.0",
+    "@eslint/eslintrc": "^3.2.0",
     "@lanceflow/eslint-config": "workspace:*",
     "@lanceflow/typescript-config": "workspace:*",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^6.6.0",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
-    "@eslint/eslintrc": "^3.2.0",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.1.3",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
   }
 }

@@ -6,19 +6,37 @@ All notable changes to the LanceFlow application are documented here.
 
 _No unreleased changes._
 
+## [0.4.0] — 2026-05-22
+
+M2 Operations core on production: projects, workload, assignment ranking, and app UX polish.
+
+### Added
+
+- **UX** — Sonner toasts (success/error/confirm), light/dark theme toggle in navbar and landing, `revalidatePath` after mutations so lists refresh
+- **OPS-005** — `@lanceflow/rules-engine` assignment rank v1; assign engineers on project detail with `skillScore` snapshot
+- **OPS-004** — Engineer `skill_tags`, `ops_assignments`, team workload UI (`/workers`)
+- **OPS-003** — Project lifecycle (`draft` → `closed`), `/projects` UI, transition API
+
+### Database
+
+Production migrate deploy adds:
+
+- `ops_projects`
+- `users.skill_tags`, `ops_assignments`
+- `ops_assignments.formula_version`
+
 ## [0.3.0] — 2026-05-21
 
-M1 Foundation complete + M2 Operations start (clients & risk).
+M1 Foundation + Ops clients and client risk v0.
 
 ### Added
 
 - **OPS-002** — Client risk v0 (`ops-client-risk-v0`), evaluate/override APIs, risk panel for Bidders, audited manual override
 - **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations
 - **CORE-006** — `@lanceflow/audit` (`auditLog`, `queryAuditLogs`), `GET /api/audit/logs` (CEO), `/audit` page, `auth.sign_in` logging
-- **CORE-005** — Foundation narrative on landing (promises, how-it-works, org roles); glass layout on app pages; `PageHeader` and `Input`
-- **CORE-004** — Modern brand theme (navy/teal, glass UI), landing hero with brand assets, `GlassCard` / `BrandHighlight`
-- **CORE-004** — `@lanceflow/ui` (Tailwind + shadcn-style primitives), `StatusBadge`, `AppShell` with role-aware nav
-- **CORE-003** — RBAC policies, `assertRole` / `withAuth`, protected API routes
+- **CORE-005** — Foundation narrative on landing; glass layout on app pages; `PageHeader` and `Input`
+- **CORE-004** — Modern brand theme, `GlassCard`, `AppShell` with role-aware nav
+- **CORE-003** — RBAC policies, protected API routes
 
 ### Fixed
 

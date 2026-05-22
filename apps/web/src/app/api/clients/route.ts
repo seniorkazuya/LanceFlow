@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 
 import { parseJsonBody, serializeClient } from '@/lib/clients-api';
 import { withAuthRoute } from '@/lib/api-auth';
+import { revalidateClients } from '@/lib/revalidate-paths';
 
 /** List clients — Ops, CEO, Bidder read (OPS-001). */
 export const GET = withAuthRoute('/api/clients', RolePolicy.clientsRead, async (request) => {
@@ -40,5 +41,6 @@ export const POST = withAuthRoute('/api/clients', RolePolicy.clientsWrite, async
     return NextResponse.json({ errors: result.errors }, { status: 400 });
   }
 
+  revalidateClients(result.client.id);
   return NextResponse.json({ client: serializeClient(result.client) }, { status: 201 });
 });

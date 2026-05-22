@@ -5,12 +5,22 @@ import { UserRole } from '@lanceflow/types';
 describe('getNavItemsForRole', () => {
   it('shows all nav items for CEO', () => {
     const ids = getNavItemsForRole(UserRole.CEO).map((item) => item.id);
-    expect(ids).toEqual(['dashboard', 'clients', 'control', 'hiring-ceo-queue', 'audit']);
+    expect(ids).toEqual([
+      'dashboard',
+      'clients',
+      'projects',
+      'workers',
+      'control',
+      'hiring-ceo-queue',
+      'audit',
+    ]);
   });
 
   it('shows control and hiring for ops manager', () => {
     const ids = getNavItemsForRole(UserRole.OPS_MANAGER).map((item) => item.id);
     expect(ids).toContain('clients');
+    expect(ids).toContain('projects');
+    expect(ids).toContain('workers');
     expect(ids).toContain('control');
     expect(ids).toContain('hiring-ceo-queue');
   });

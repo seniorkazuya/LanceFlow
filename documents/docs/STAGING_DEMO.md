@@ -68,7 +68,11 @@ Default local example (from `.env.example`):
 
 First sign-in creates/updates the user as **OPS_MANAGER** in the database.
 
-### 3. Use the app shell
+### 3. Theme
+
+Use the **sun/moon** icon in the top navbar (app shell or landing) to switch **light** and **dark** theme. Preference is saved in the browser.
+
+### 4. Use the app shell
 
 After sign-in you land on **Dashboard**:
 
@@ -77,9 +81,12 @@ After sign-in you land on **Dashboard**:
   - CEO / Ops: + Control Center
   - CEO / Ops / Caller / Bidder: + Hiring CEO Queue
   - Engineer: Dashboard only
+  - CEO / Ops: + **Team workload** (`/workers`)
+  - CEO / Ops / Bidder: + **Projects** (`/projects`)
 - **Sign out** — header button
+- **Toasts** — create/edit/archive actions show success or error notifications (no browser alerts)
 
-### 4. Quick API checks (optional)
+### 5. Quick API checks (optional)
 
 | Endpoint | Expect |
 |----------|--------|

@@ -19,6 +19,14 @@ export const RolePolicy = {
   clientsRead: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
   /** Client records write (OPS-001). */
   clientsWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Project lifecycle read (OPS-003). */
+  projectsRead: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
+  /** Project lifecycle write (OPS-003). */
+  projectsWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Engineer skills and workload read (OPS-004). */
+  workersRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Engineer skill tag updates (OPS-004). */
+  workersWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Any signed-in operational role. */
   authenticated: [
     UserRole.CEO,

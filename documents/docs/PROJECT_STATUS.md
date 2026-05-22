@@ -1,6 +1,6 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-21  
+> **Last updated:** 2026-05-22  
 > **Current phase:** M2 — Operations (in progress)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
@@ -10,35 +10,51 @@
 
 | | |
 |--|--|
-| **Active story** | OPS-003 — Project lifecycle |
-| **Just completed** | OPS-002 — Client risk v0 · **Release v0.3.0** to production |
-| **Release** | [v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0) (staging → main) |
-| **Branch convention** | `feature/<STORY-ID>-<slug>` → PR → `staging` |
+| **Release in flight** | **v0.4.0** — [PR #70](https://github.com/seniorkazuya/LanceFlow/pull/70) → `main` |
+| **Next on staging** | [PR #71](https://github.com/seniorkazuya/LanceFlow/pull/71) OPS-006 daily reports |
+| **Staging** | https://lance-flow-web.vercel.app |
+| **Production today** | **v0.3.0** — M1 + clients + risk |
 
-**Links:** [Staging](#staging-demo) · [Production](#production) · [Board guide](./GITHUB_PROJECT_UPDATES.md)
+**Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md)
 
 ---
 
-## Staging demo
+## v0.4.0 release (staging → production)
+
+| | |
+|--|--|
+| **PR** | [#70](https://github.com/seniorkazuya/LanceFlow/pull/70) — approve, merge, then tag `v0.4.0` |
+| **Includes** | OPS-003 projects, OPS-004 workload, OPS-005 assignment rank, UX (toasts + themes) |
+| **Migrations** | `ops_projects`, `skill_tags`, `ops_assignments`, `formula_version` |
+
+---
+
+## Staging (ahead of production)
 
 | | |
 |--|--|
 | **URL** | https://lance-flow-web.vercel.app |
 | **Health** | https://lance-flow-web.vercel.app/api/health |
-| **Sign-in** | `/auth/signin` — requires `AUTH_SECRET` + `DEV_AUTH_*` on Vercel |
-| **UI guide** | [STAGING_DEMO.md](./STAGING_DEMO.md) — landing, clients, roles |
+| **Theme** | Light/dark toggle in navbar |
+
+| Area | Routes | On staging |
+|------|--------|------------|
+| Clients + risk | `/clients` | Yes (also on prod v0.3.0) |
+| Projects | `/projects` | Yes (v0.4.0) |
+| Team workload | `/workers` | Yes (v0.4.0) |
+| Assignment | Project detail | Yes (v0.4.0) |
+| Daily reports | `/daily-reports`, `/daily-reports/missing` | After PR #71 |
 
 ---
 
-## Production
+## Production (v0.3.0 today)
 
 | | |
 |--|--|
-| **URL** | Set `PRODUCTION_URL` in GitHub **production** environment (Vercel prod project or same app) |
-| **Releases** | [v0.1.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.1.0) · [v0.2.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.2.1) · **v0.3.0** (M1 + Ops clients) |
-| **Deploy** | Tag `v0.3.0` on `main` → **Deploy Production** (requires environment approval) |
-
-After deploy, verify: `curl $PRODUCTION_URL/api/health` and sign-in flow.
+| **Tag** | [v0.3.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.3.0) |
+| **Includes** | M1 Foundation, OPS-001 clients, OPS-002 client risk |
+| **Not yet** | `/projects`, `/workers`, assignment rank, toasts/theme (until v0.4.0) |
+| **URL** | `PRODUCTION_URL` in GitHub environment **production** |
 
 ---
 
@@ -46,23 +62,22 @@ After deploy, verify: `curl $PRODUCTION_URL/api/health` and sign-in flow.
 
 | Milestone | Status |
 |-----------|--------|
-| **M0** Platform & DevOps | 🟢 Done |
-| **M1** Foundation | 🟢 Done |
-| **M2** Operations | 🟡 In progress |
+| **M0** Platform & DevOps | Done |
+| **M1** Foundation | Done |
+| **M2** Operations | In progress (5/8 on staging; 6/8 after #71) |
 
-### M1 — stories (released in v0.3.0)
+### M2 — Operations stories
 
-| Story | Title | Status |
-|-------|-------|--------|
-| CORE-001–006 | Foundation (DB, auth, RBAC, UI, brand, audit) | 🟢 Done |
-
-### M2 — stories (partial, in v0.3.0)
-
-| Story | Title | Status |
-|-------|-------|--------|
-| OPS-001 | Clients CRUD | 🟢 Done |
-| OPS-002 | Client risk v0 | 🟢 Done |
-| OPS-003+ | Projects, assignments, … | 🔴 Backlog |
+| Story | Title | Staging | Production |
+|-------|-------|---------|------------|
+| OPS-001 | Clients | Done | v0.3.0 |
+| OPS-002 | Client risk v0 | Done | v0.3.0 |
+| OPS-003 | Project lifecycle | Done | v0.4.0 (pending) |
+| OPS-004 | Skills & workload | Done | v0.4.0 (pending) |
+| OPS-005 | Assignment algorithm | Done | v0.4.0 (pending) |
+| OPS-006 | Daily reports | PR #71 | — |
+| OPS-007 | SOP store | Backlog | — |
+| OPS-008 | Ops console | Backlog | — |
 
 ---
 
@@ -70,11 +85,8 @@ After deploy, verify: `curl $PRODUCTION_URL/api/health` and sign-in flow.
 
 | Date | Change |
 |------|--------|
-| 2026-05-21 | **v0.3.0** — M1 Foundation + OPS-001/002 to production |
-| 2026-05-21 | OPS-002 client risk v0 (#64) |
-| 2026-05-21 | OPS-001 clients module (#63) |
-| 2026-05-21 | CORE-006 audit (#62), CORE-005 brand UI (#60), Prisma Vercel fix (#59) |
-| 2026-05-21 | v0.2.1 — CORE-001/002 on `main` |
+| 2026-05-22 | UX: toasts, light theme (#69) · OPS-005 (#68) · OPS-004 (#67) |
+| 2026-05-21 | OPS-003 projects (#66) · v0.3.0 production (#65) |
 
 ---
 

@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@lanceflow/audit": "workspace:*",
-    "@lanceflow/database": "workspace:*"
+    "@lanceflow/database": "workspace:*",
+    "@lanceflow/rules-engine": "workspace:*",
+    "@lanceflow/types": "workspace:*"
   },
   "devDependencies": {
     "@lanceflow/typescript-config": "workspace:*",
