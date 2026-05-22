@@ -10,6 +10,7 @@ describe('getNavItemsForRole', () => {
       'clients',
       'projects',
       'workers',
+      'ops-console',
       'missing-reports',
       'sops',
       'control',
@@ -23,6 +24,7 @@ describe('getNavItemsForRole', () => {
     expect(ids).toContain('clients');
     expect(ids).toContain('projects');
     expect(ids).toContain('workers');
+    expect(ids).toContain('ops-console');
     expect(ids).toContain('missing-reports');
     expect(ids).toContain('sops');
     expect(ids).toContain('control');
