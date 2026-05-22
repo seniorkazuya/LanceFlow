@@ -36,12 +36,11 @@ When a second engineer joins, set staging approvals to **1** (use `apply-branch-
 
 ## GitHub Project
 
-Create board **LanceFlow Build** manually (CLI needs extra token scope):
+**Board:** [LanceFlow Build #4](https://github.com/users/seniorkazuya/projects/4)
 
-```bash
-gh auth refresh -h github.com -s project,read:project
-gh project create --owner seniorkazuya --title "LanceFlow Build"
-```
+1. Link project **#4** to this repository (project **Settings**).
+2. Optional repo secret **`PROJECTS_TOKEN`** (classic PAT: `project`, `read:project`) if Actions cannot write the board.
+3. Workflow **Sync GitHub Project** applies [`.github/project/board-sync.json`](../.github/project/board-sync.json).
 
 Columns: Backlog → Ready → In Progress → In Review → QA / Staging → Done.  
 See [GITHUB_PROJECT_UPDATES.md](../documents/docs/GITHUB_PROJECT_UPDATES.md) and [DEVOPS_GUIDE.md](../documents/docs/DEVOPS_GUIDE.md) §2.4.

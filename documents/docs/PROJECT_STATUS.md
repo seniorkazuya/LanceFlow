@@ -16,7 +16,7 @@
 | **Production** | **v0.3.0** on `main` (M1 + clients + risk) — see [DEPLOY_PRODUCTION.md](./DEPLOY_PRODUCTION.md) |
 | **Next release** | `staging` → `main` tag **v0.4.0** (projects, workload, assignments) |
 
-**Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md)
+**Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
