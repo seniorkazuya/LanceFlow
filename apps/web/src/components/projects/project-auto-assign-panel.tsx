@@ -33,17 +33,6 @@ export function ProjectAutoAssignPanel({
   const [loading, setLoading] = useState<'run' | 'override' | 'suggestions' | null>(null);
   const [lastOutcome, setLastOutcome] = useState<string | null>(null);
 
-  if (!autoAssignEnabled || projectStatus !== 'active') {
-    return null;
-  }
-
-  function requiredSkills(): string[] {
-    return skillsRaw
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean);
-  }
-
   const loadSuggestions = useCallback(async () => {
     setLoading('suggestions');
     const params = new URLSearchParams();
@@ -62,6 +51,17 @@ export function ProjectAutoAssignPanel({
       setOverrideUserId(data.items[0].userId);
     }
   }, [projectId, skillsRaw, overrideUserId]);
+
+  if (!autoAssignEnabled || projectStatus !== 'active') {
+    return null;
+  }
+
+  function requiredSkills(): string[] {
+    return skillsRaw
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
 
   async function runAutoAssign() {
     setLoading('run');
