@@ -1,10 +1,12 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
+import { isAutoAssignEnabled } from '@lanceflow/config';
 import { allowedTransitionsFrom, getProjectById, listProjectAssignments } from '@lanceflow/operations';
 import { GlassCard, PageHeader, SectionLabel, StatusBadge } from '@lanceflow/ui';
 import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectAutoAssignPanel } from '@/components/projects/project-auto-assign-panel';
 import { ProjectAutoApprovePanel } from '@/components/projects/project-auto-approve-panel';
 import { ProjectTransitionButtons } from '@/components/projects/project-transition-buttons';
 import { auth } from '@/auth';
@@ -25,6 +27,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   }
 
   const canWrite = hasRole(role, RolePolicy.projectsWrite);
+  const autoAssignEnabled = isAutoAssignEnabled();
   const nextStatuses = allowedTransitionsFrom(project.status);
   const assignments = await listProjectAssignments(id);
 
@@ -73,7 +76,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <p className="mt-4 text-sm text-muted-foreground">No active assignments.</p>
         )}
         {canWrite ? (
-          <div className="mt-6 border-t border-white/[0.06] pt-6">
+          <div className="mt-6 border-t border-white/[0.06] pt-6 space-y-6">
+            <ProjectAutoAssignPanel
+              projectId={project.id}
+              projectStatus={project.status}
+              autoAssignEnabled={autoAssignEnabled}
+            />
             <ProjectAssignmentPanel projectId={project.id} projectStatus={project.status} />
           </div>
         ) : null}

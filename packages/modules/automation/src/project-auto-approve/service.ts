@@ -11,6 +11,7 @@ import {
   type ProjectAutoApproveInputV1,
 } from '@lanceflow/rules-engine';
 
+import { runProjectAutoAssignOnActivate } from '../project-auto-assign/service';
 import { createRuleDecision } from '../rule-decisions/repository';
 import type { RuleDecisionRecord } from '../rule-decisions/types';
 
@@ -108,6 +109,7 @@ export async function runProjectAutoApproval(
     }
     projectStatus = transition.project.status;
     transitioned = true;
+    await runProjectAutoAssignOnActivate(projectId, actorId);
   }
 
   return {
