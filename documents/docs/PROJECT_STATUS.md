@@ -10,7 +10,7 @@
 
 | | |
 |--|--|
-| **Active story** | **AUTO-001** Rules engine core |
+| **Active story** | **AUTO-002** Project auto-approval |
 | **Just completed** | **v0.4.1** production — M2 complete (OPS-006–008) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.4.1** — full M2 Operations (8/8 stories) |
