@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { Button } from '@lanceflow/ui';
 
-import { completeMutation, notifyError, notifySuccess } from '@/lib/notify';
+import { completeMutation, notifyError } from '@/lib/notify';
 
 type Props = {
   projectId: string;
