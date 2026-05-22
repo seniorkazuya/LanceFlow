@@ -1,6 +1,7 @@
 {
   "version": 1,
   "updated": "2026-05-23",
+  "release": "v0.4.1",
   "project": {
     "owner": "seniorkazuya",
     "number": 4,
@@ -36,8 +37,9 @@
     "OPS-003": { "column": "Done", "title": "OPS-003 — Project lifecycle" },
     "OPS-004": { "column": "Done", "title": "OPS-004 — Worker skills & workload" },
     "OPS-005": { "column": "Done", "title": "OPS-005 — Assignment algorithm v1" },
-    "OPS-006": { "column": "QA / Staging", "title": "OPS-006 — Daily self-reporting" },
-    "OPS-007": { "column": "QA / Staging", "title": "OPS-007 — SOP document store" },
-    "OPS-008": { "column": "QA / Staging", "title": "OPS-008 — Ops Manager console shell" }
+    "OPS-006": { "column": "Done", "title": "OPS-006 — Daily self-reporting" },
+    "OPS-007": { "column": "Done", "title": "OPS-007 — SOP document store" },
+    "OPS-008": { "column": "Done", "title": "OPS-008 — Ops Manager console shell" },
+    "AUTO-001": { "column": "In Progress", "title": "AUTO-001 — Rules engine core" }
   }
 }
