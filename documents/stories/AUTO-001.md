@@ -9,7 +9,7 @@
 | **Modules** | `packages/rules-engine` |
 | **Depends on** | CORE-006 |
 | **Branch** | `feature/AUTO-001-rules-core` |
-| **Status** | In Progress |
+| **Status** | QA / Staging |
 
 ---
 

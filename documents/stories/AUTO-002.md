@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/automation, packages/rules-engine` |
 | **Depends on** | AUTO-001,OPS-003 |
 | **Branch** | `feature/AUTO-002-auto-approve` |
-| **Status** | Backlog |
+| **Status** | QA / Staging |
 
 ---
 
@@ -21,8 +21,8 @@ As CEO, projects auto-approve when thresholds met.
 
 ## Acceptance criteria
 
-- [ ] risk<60 AND margin>25% AND scope>80%
-- [ ] RuleDecision stored
+- [x] risk<60 AND margin>25% AND scope>80%
+- [x] RuleDecision stored
 
 ---
 

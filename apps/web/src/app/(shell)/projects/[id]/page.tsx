@@ -5,6 +5,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectAutoApprovePanel } from '@/components/projects/project-auto-approve-panel';
 import { ProjectTransitionButtons } from '@/components/projects/project-transition-buttons';
 import { auth } from '@/auth';
 
@@ -44,7 +45,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </span>
         </div>
         {canWrite ? (
-          <div className="mt-6">
+          <div className="mt-6 space-y-4">
+            <ProjectAutoApprovePanel projectId={project.id} projectStatus={project.status} />
             <ProjectTransitionButtons
               projectId={project.id}
               currentStatus={project.status}
