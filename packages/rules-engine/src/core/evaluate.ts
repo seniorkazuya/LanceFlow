@@ -1,6 +1,6 @@
 import type {
   RuleDefinition,
-  RuleError,
+  RuleFailure,
   RuleExplanation,
   RuleOutcome,
   RuleResult,
@@ -28,7 +28,7 @@ export function evaluateRuleSafe<TInput, TOutput>(
   if (validate) {
     const message = validate(input);
     if (message) {
-      const err: RuleError<TInput, TOutput> = {
+      const err: RuleFailure<TInput> = {
         ok: false,
         formulaVersion: rule.formulaVersion,
         error: message,

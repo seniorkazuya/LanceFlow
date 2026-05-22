@@ -19,11 +19,13 @@ export type RuleResult<TInput, TOutput> = {
   inputs: TInput;
 };
 
-export type RuleError = {
+export type RuleFailure<TInput> = {
   ok: false;
   formulaVersion: string;
   error: string;
   inputs: TInput;
 };
 
-export type RuleOutcome<TInput, TOutput> = RuleResult<TInput, TOutput> | RuleError<TInput, TOutput>;
+export type RuleOutcome<TInput, TOutput> =
+  | RuleResult<TInput, TOutput>
+  | RuleFailure<TInput>;

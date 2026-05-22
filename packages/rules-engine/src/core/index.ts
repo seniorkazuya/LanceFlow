@@ -1,7 +1,7 @@
 export { evaluateRule, evaluateRuleSafe, formatExplanation } from './evaluate';
 export type {
   RuleDefinition,
-  RuleError,
+  RuleFailure,
   RuleEvaluation,
   RuleExplanation,
   RuleOutcome,
