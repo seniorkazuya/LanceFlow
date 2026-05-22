@@ -66,6 +66,12 @@ describe('hasRole', () => {
     expect(hasRole(UserRole.ENGINEER, RolePolicy.sopsRead)).toBe(true);
     expect(hasRole(UserRole.CALLER, RolePolicy.sopsRead)).toBe(true);
   });
+
+  it('restricts ops console to CEO and ops manager', () => {
+    expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.opsConsoleRead)).toBe(true);
+    expect(hasRole(UserRole.CEO, RolePolicy.opsConsoleRead)).toBe(true);
+    expect(hasRole(UserRole.BIDDER, RolePolicy.opsConsoleRead)).toBe(false);
+  });
 });
 
 describe('assertRole', () => {

@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **OPS-008** — Ops Manager console at `/ops` (workflow projects, missing reports, assignments)
 - **OPS-007** — SOP library by category at `/sops` (placeholder doc links)
 - **OPS-006** — Daily self-reports (`/daily-reports`), missing-report queue (`/daily-reports/missing`)
 
