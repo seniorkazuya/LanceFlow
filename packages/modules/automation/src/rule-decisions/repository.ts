@@ -64,3 +64,20 @@ export async function getLatestRuleDecision(
   });
   return row ? toRecord(row) : null;
 }
+
+export async function markLatestRuleDecisionOverridden(
+  entityType: string,
+  entityId: string,
+  ruleKey: string
+): Promise<void> {
+  const latest = await prisma.ruleDecision.findFirst({
+    where: { entityType, entityId, ruleKey, overridden: false },
+    orderBy: { createdAt: 'desc' },
+  });
+  if (!latest) return;
+
+  await prisma.ruleDecision.update({
+    where: { id: latest.id },
+    data: { overridden: true },
+  });
+}

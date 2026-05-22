@@ -41,6 +41,7 @@
     "OPS-007": { "column": "Done", "title": "OPS-007 — SOP document store" },
     "OPS-008": { "column": "Done", "title": "OPS-008 — Ops Manager console shell" },
     "AUTO-001": { "column": "QA / Staging", "title": "AUTO-001 — Rules engine core" },
-    "AUTO-002": { "column": "In Progress", "title": "AUTO-002 — Project auto-approval" }
+    "AUTO-002": { "column": "QA / Staging", "title": "AUTO-002 — Project auto-approval" },
+    "AUTO-003": { "column": "In Progress", "title": "AUTO-003 — Auto task assignment on activate" }
   }
 }
