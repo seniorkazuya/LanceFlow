@@ -4,9 +4,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ## [Unreleased]
 
-### Added
-
-- (none)
+_No unreleased changes._
 
 ## [0.4.0] — 2026-05-22
 
@@ -33,12 +31,16 @@ M1 Foundation + Ops clients and client risk v0.
 
 ### Added
 
-- **OPS-002** — Client risk v0 formula, manual override with audit, risk panel for Bidders
+- **OPS-002** — Client risk v0 (`ops-client-risk-v0`), evaluate/override APIs, risk panel for Bidders, audited manual override
 - **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations
 - **CORE-006** — `@lanceflow/audit` (`auditLog`, `queryAuditLogs`), `GET /api/audit/logs` (CEO), `/audit` page, `auth.sign_in` logging
-- **CORE-005** — Foundation narrative on landing; glass layout on dashboard, control, and hiring pages
+- **CORE-005** — Foundation narrative on landing; glass layout on app pages; `PageHeader` and `Input`
 - **CORE-004** — Modern brand theme, `GlassCard`, `AppShell` with role-aware nav
-- **CORE-003** — RBAC policies, `/api/control/summary`, `/api/hiring/ceo-queue`
+- **CORE-003** — RBAC policies, protected API routes
+
+### Fixed
+
+- **Staging auth** — Prisma `rhel-openssl-3.0.x` binary target + Next.js monorepo `PrismaPlugin` for Vercel serverless
 
 ## [0.2.1] — 2026-05-21
 
