@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-23  
-> **Current phase:** M2 — Operations (wrapping up)  
+> **Current phase:** M3 — Automation (starting)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,36 +10,34 @@
 
 | | |
 |--|--|
-| **Active story** | **M2 complete on staging** — plan **v0.4.1** release |
-| **Just completed** | **OPS-008** Ops console (#75) · OPS-007 (#74) |
+| **Active story** | **AUTO-001** Rules engine core |
+| **Just completed** | **v0.4.1** production — M2 complete (OPS-006–008) |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.4.0** — full M2 core (clients through assignments + UX) |
+| **Production** | **v0.4.1** — full M2 Operations (8/8 stories) |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## Staging (ahead of production)
-
-| Area | Routes | Staging | Production |
-|------|--------|---------|--------------|
-| Clients + risk | `/clients` | Yes | Yes |
-| Projects | `/projects` | Yes | Yes |
-| Team workload | `/workers` | Yes | Yes |
-| Assignment | Project detail | Yes | Yes |
-| Daily reports | `/daily-reports`, `/daily-reports/missing` | Yes | Pending v0.4.1 |
-| SOPs | `/sops` | Yes | Pending v0.4.1 |
-| Ops console | `/ops` | Yes | Pending v0.4.1 |
-
----
-
-## Production (v0.4.0)
+## Production (v0.4.1)
 
 | | |
 |--|--|
-| **Release** | [v0.4.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.0) |
-| **Includes** | M1, OPS-001–005, UX (toasts, themes, live refresh) |
-| **Next release** | **v0.4.1** — OPS-006, OPS-007 (+ OPS-008 when merged) |
+| **Release** | [v0.4.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.1) |
+| **Deploy** | Success ([run](https://github.com/seniorkazuya/LanceFlow/actions/runs/26306445495)) |
+| **Includes** | v0.4.0 + OPS-006 daily reports, OPS-007 SOPs, OPS-008 ops console |
+| **URL** | `PRODUCTION_URL` in GitHub environment **production** |
+
+### Production routes
+
+| Area | Routes |
+|------|--------|
+| Clients + risk | `/clients` |
+| Projects | `/projects` |
+| Team workload | `/workers` |
+| Daily reports | `/daily-reports`, `/daily-reports/missing` |
+| SOPs | `/sops` |
+| Ops console | `/ops` |
 
 ---
 
@@ -49,27 +47,22 @@
 |-----------|--------|
 | **M0** Platform & DevOps | Done |
 | **M1** Foundation | Done |
-| **M2** Operations | **Done on staging** (8/8) |
+| **M2** Operations | Done (production v0.4.1) |
+| **M3** Automation | Starting (AUTO-001) |
 
-### M2 — Operations stories
+### M2 — Operations (complete)
 
-| Story | Title | Staging | Production |
-|-------|-------|---------|------------|
-| OPS-001 | Clients | Done | v0.4.0 |
-| OPS-002 | Client risk v0 | Done | v0.4.0 |
-| OPS-003 | Project lifecycle | Done | v0.4.0 |
-| OPS-004 | Skills & workload | Done | v0.4.0 |
-| OPS-005 | Assignment algorithm | Done | v0.4.0 |
-| OPS-006 | Daily reports | Done | Pending v0.4.1 |
-| OPS-007 | SOP store | Done | Pending v0.4.1 |
-| OPS-008 | Ops console | Done | Pending v0.4.1 |
+| Story | Production |
+|-------|------------|
+| OPS-001 … OPS-008 | v0.4.0 / v0.4.1 |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **v0.4.1 release** — OPS-006, OPS-007, OPS-008 to production  
-3. **AUTO-001** — Rules engine registry (M3)
+1. **AUTO-001** — Rules engine `evaluateRule()` + registry  
+2. **AUTO-002** — Project auto-approval  
+3. Sync `staging` with `main` after each release  
 
 ---
 
@@ -77,9 +70,9 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-23 | OPS-008 ops console (in progress) |
-| 2026-05-22 | OPS-007 SOPs (#74) · v0.4.0 prod (#70) · OPS-006 (#71) |
-| 2026-05-21 | OPS-003 (#66) · v0.3.0 (#65) |
+| 2026-05-23 | v0.4.1 production (#77) — M2 complete |
+| 2026-05-22 | v0.4.0 production (#70) |
+| 2026-05-22 | OPS-008 (#75) · OPS-007 (#74) · OPS-006 (#71) |
 
 ---
 
