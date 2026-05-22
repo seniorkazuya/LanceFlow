@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **OPS-008** Ops console (`/ops`) |
-| **Just completed** | **OPS-007** SOPs (#74) · **v0.4.0** production (#70) |
+| **Active story** | **M2 complete on staging** — plan **v0.4.1** release |
+| **Just completed** | **OPS-008** Ops console (#75) · OPS-007 (#74) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.4.0** — full M2 core (clients through assignments + UX) |
 
@@ -29,7 +29,7 @@
 | Assignment | Project detail | Yes | Yes |
 | Daily reports | `/daily-reports`, `/daily-reports/missing` | Yes | Pending v0.4.1 |
 | SOPs | `/sops` | Yes | Pending v0.4.1 |
-| Ops console | `/ops` | In progress | — |
+| Ops console | `/ops` | Yes | Pending v0.4.1 |
 
 ---
 
@@ -49,7 +49,7 @@
 |-----------|--------|
 | **M0** Platform & DevOps | Done |
 | **M1** Foundation | Done |
-| **M2** Operations | **7/8 on staging** (OPS-008 in PR) |
+| **M2** Operations | **Done on staging** (8/8) |
 
 ### M2 — Operations stories
 
@@ -62,14 +62,13 @@
 | OPS-005 | Assignment algorithm | Done | v0.4.0 |
 | OPS-006 | Daily reports | Done | Pending v0.4.1 |
 | OPS-007 | SOP store | Done | Pending v0.4.1 |
-| OPS-008 | Ops console | In progress | — |
+| OPS-008 | Ops console | Done | Pending v0.4.1 |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **Merge OPS-008** — complete M2 on staging  
-2. **v0.4.1 release** — OPS-006, OPS-007, OPS-008 to production  
+1. **v0.4.1 release** — OPS-006, OPS-007, OPS-008 to production  
 3. **AUTO-001** — Rules engine registry (M3)
 
 ---
