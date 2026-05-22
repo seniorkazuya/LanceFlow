@@ -4,6 +4,8 @@ import { Button } from '@lanceflow/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { notifyError, notifySuccess } from '@/lib/notify';
+
 type ProjectTransitionButtonsProps = {
   projectId: string;
   currentStatus: string;
@@ -30,9 +32,12 @@ export function ProjectTransitionButtons({
     setPending(null);
     if (!res.ok) {
       const data = (await res.json().catch(() => ({}))) as { errors?: { message: string }[] };
-      setError(data.errors?.[0]?.message ?? 'Transition failed');
+      const message = data.errors?.[0]?.message ?? 'Transition failed';
+      setError(message);
+      notifyError(message);
       return;
     }
+    notifySuccess(`Project moved to ${to.replace('_', ' ')}`);
     router.refresh();
   }
 

@@ -4,6 +4,8 @@ import { Button, Input } from '@lanceflow/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { notifyError, notifySuccess } from '@/lib/notify';
+
 type WorkerSkillsFormProps = {
   workerId: string;
   initialTags: string[];
@@ -35,10 +37,13 @@ export function WorkerSkillsForm({ workerId, initialTags }: WorkerSkillsFormProp
 
     if (!res.ok) {
       const data = (await res.json().catch(() => ({}))) as { errors?: { message: string }[] };
-      setError(data.errors?.[0]?.message ?? 'Save failed');
+      const message = data.errors?.[0]?.message ?? 'Save failed';
+      setError(message);
+      notifyError(message);
       return;
     }
 
+    notifySuccess('Skills updated');
     router.refresh();
   }
 

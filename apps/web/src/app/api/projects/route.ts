@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 import { parseJsonBody } from '@/lib/clients-api';
 import { withAuthRoute } from '@/lib/api-auth';
 import { serializeProject } from '@/lib/projects-api';
+import { revalidateProjects } from '@/lib/revalidate-paths';
 
 export const GET = withAuthRoute('/api/projects', RolePolicy.projectsRead, async () => {
   const projects = await listProjects();
@@ -40,5 +41,6 @@ export const POST = withAuthRoute('/api/projects', RolePolicy.projectsWrite, asy
     return NextResponse.json({ errors: result.errors }, { status: 400 });
   }
 
+  revalidateProjects(result.project.id);
   return NextResponse.json({ project: serializeProject(result.project) }, { status: 201 });
 });

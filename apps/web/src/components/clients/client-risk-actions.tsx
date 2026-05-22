@@ -4,6 +4,8 @@ import { Button, Input } from '@lanceflow/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { notifyError, notifySuccess } from '@/lib/notify';
+
 type ClientRiskActionsProps = {
   clientId: string;
 };
@@ -22,8 +24,10 @@ export function ClientRiskActions({ clientId }: ClientRiskActionsProps) {
     setPending(null);
     if (!res.ok) {
       setError('Evaluation failed');
+      notifyError('Evaluation failed');
       return;
     }
+    notifySuccess('Risk score evaluated');
     router.refresh();
   }
 
@@ -39,10 +43,13 @@ export function ClientRiskActions({ clientId }: ClientRiskActionsProps) {
     setPending(null);
     if (!res.ok) {
       const data = (await res.json().catch(() => ({}))) as { errors?: { message: string }[] };
-      setError(data.errors?.[0]?.message ?? 'Override failed');
+      const message = data.errors?.[0]?.message ?? 'Override failed';
+      setError(message);
+      notifyError(message);
       return;
     }
     setReason('');
+    notifySuccess('Risk override applied');
     router.refresh();
   }
 

@@ -7,6 +7,7 @@ import { sessionToUser } from '@/lib/api-auth';
 import { withApiLogging } from '@/lib/api-route';
 import { parseJsonBody } from '@/lib/clients-api';
 import { serializeAssignment } from '@/lib/assignments-api';
+import { revalidateProjects, revalidateWorkers } from '@/lib/revalidate-paths';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -42,6 +43,8 @@ export const POST = withApiLogging(
       return NextResponse.json({ errors: result.errors }, { status });
     }
 
+    revalidateProjects(id);
+    revalidateWorkers(body.userId);
     return NextResponse.json(
       { assignment: serializeAssignment(result.assignment) },
       { status: 201 }

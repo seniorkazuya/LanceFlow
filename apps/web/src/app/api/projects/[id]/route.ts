@@ -7,6 +7,7 @@ import { parseJsonBody } from '@/lib/clients-api';
 import { sessionToUser } from '@/lib/api-auth';
 import { withApiLogging } from '@/lib/api-route';
 import { serializeProject } from '@/lib/projects-api';
+import { revalidateProjects } from '@/lib/revalidate-paths';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -50,5 +51,6 @@ export const PATCH = withApiLogging('/api/projects/[id]', async (request: Reques
     return NextResponse.json({ errors: result.errors }, { status });
   }
 
+  revalidateProjects(id);
   return NextResponse.json({ project: serializeProject(result.project) });
 });
