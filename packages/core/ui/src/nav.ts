@@ -41,6 +41,18 @@ export const APP_NAV_ITEMS: readonly NavItem[] = [
     allowedRoles: [UserRole.CEO, UserRole.OPS_MANAGER],
   },
   {
+    id: 'daily-reports',
+    label: 'Daily report',
+    href: '/daily-reports',
+    allowedRoles: [UserRole.ENGINEER],
+  },
+  {
+    id: 'missing-reports',
+    label: 'Missing reports',
+    href: '/daily-reports/missing',
+    allowedRoles: [UserRole.CEO, UserRole.OPS_MANAGER],
+  },
+  {
     id: 'control',
     label: 'Control Center',
     href: '/control',
