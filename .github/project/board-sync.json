@@ -44,6 +44,7 @@
     "AUTO-002": { "column": "QA / Staging", "title": "AUTO-002 — Project auto-approval" },
     "AUTO-003": { "column": "QA / Staging", "title": "AUTO-003 — Auto task assignment on activate" },
     "AUTO-004": { "column": "QA / Staging", "title": "AUTO-004 — Payment schedule entity" },
-    "AUTO-005": { "column": "In Progress", "title": "AUTO-005 — Payment reminder and escalation jobs" }
+    "AUTO-005": { "column": "QA / Staging", "title": "AUTO-005 — Payment reminder and escalation jobs" },
+    "AUTO-006": { "column": "Ready", "title": "AUTO-006 — Client risk pre-screen API" }
   }
 }
