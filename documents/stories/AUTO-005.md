@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/payments, apps/worker` |
 | **Depends on** | AUTO-004 |
 | **Branch** | `feature/AUTO-005-payment-jobs` |
-| **Status** | Backlog |
+| **Status** | In Progress |
 
 ---
 

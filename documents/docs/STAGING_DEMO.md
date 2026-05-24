@@ -51,8 +51,12 @@ Set on Vercel (**Preview** for `staging` branch):
 | Variable | Value | Story |
 |----------|--------|-------|
 | `AUTO_ASSIGN_ENABLED` | `true` | AUTO-003 — auto-assign on project activate |
+| `REDIS_URL` | Redis URL | AUTO-005 worker (local: `docker compose up -d redis`) |
+| `PAYMENT_ESCALATION_JOBS_ENABLED` | `true` | Worker process only |
 
-Without this flag, activation still works but no automatic engineer assignment runs.
+Without `AUTO_ASSIGN_ENABLED`, activation still works but no automatic engineer assignment runs.
+
+**AUTO-005 manual run (no worker):** as CEO/Ops, `POST /api/jobs/payment-escalations` (or use Control Center flow when wired) after creating overdue `payment_schedules` in QA.
 
 ---
 
