@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **AUTO-005** — Daily payment escalation job (due reminder, day-3 escalate, day-7 risk); BullMQ worker + manual `/api/jobs/payment-escalations`
 - **AUTO-004** — `PaymentSchedule` entity per project (due date, amount, `escalationLevel`); CRUD APIs and project UI
 - **AUTO-003** — Auto-assign top-ranked engineer on activate when `AUTO_ASSIGN_ENABLED`; audited override via `/api/projects/[id]/assign-override`
 - **AUTO-002** — Project auto-approval when risk under 60, margin over 25%, scope over 80%; `RuleDecision` persisted; `/api/projects/[id]/auto-approve`
