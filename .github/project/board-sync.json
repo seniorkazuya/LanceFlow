@@ -43,6 +43,7 @@
     "AUTO-001": { "column": "QA / Staging", "title": "AUTO-001 — Rules engine core" },
     "AUTO-002": { "column": "QA / Staging", "title": "AUTO-002 — Project auto-approval" },
     "AUTO-003": { "column": "QA / Staging", "title": "AUTO-003 — Auto task assignment on activate" },
-    "AUTO-004": { "column": "In Progress", "title": "AUTO-004 — Payment schedule entity" }
+    "AUTO-004": { "column": "QA / Staging", "title": "AUTO-004 — Payment schedule entity" },
+    "AUTO-005": { "column": "In Progress", "title": "AUTO-005 — Payment reminder and escalation jobs" }
   }
 }

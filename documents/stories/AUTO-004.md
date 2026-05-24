@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/payments` |
 | **Depends on** | OPS-003 |
 | **Branch** | `feature/AUTO-004-payments-entity` |
-| **Status** | In Progress |
+| **Status** | QA / Staging |
 
 ---
 

@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **AUTO-004** Payment schedule entity |
-| **Just completed** | **AUTO-003** on staging ([#80](https://github.com/seniorkazuya/LanceFlow/pull/80)) |
+| **Active story** | **AUTO-005** Payment reminder and escalation jobs |
+| **Just completed** | **AUTO-004** on staging ([#81](https://github.com/seniorkazuya/LanceFlow/pull/81)) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.4.1** — M2 Operations complete (not yet M3) |
 
@@ -24,8 +24,8 @@
 | | |
 |--|--|
 | **Release** | [v0.4.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.1) |
-| **Includes** | OPS-001–008 (clients, projects, assignments, daily reports, SOPs, ops console) |
-| **Not on prod yet** | M3 automation (AUTO-001–003) — staging only until next release |
+| **Includes** | OPS-001–008 |
+| **Not on prod yet** | M3 automation (AUTO-001–004) — staging only until next release |
 
 ---
 
@@ -33,15 +33,25 @@
 
 | Story | PR | Feature |
 |-------|-----|---------|
-| AUTO-001 | [#78](https://github.com/seniorkazuya/LanceFlow/pull/78) | `evaluateRule()`, rule registry |
+| AUTO-001 | [#78](https://github.com/seniorkazuya/LanceFlow/pull/78) | Rules engine `evaluateRule()` + registry |
 | AUTO-002 | [#79](https://github.com/seniorkazuya/LanceFlow/pull/79) | Project auto-approval + `RuleDecision` |
-| AUTO-003 | [#80](https://github.com/seniorkazuya/LanceFlow/pull/80) | Auto-assign on activate (`AUTO_ASSIGN_ENABLED`) |
+| AUTO-003 | [#80](https://github.com/seniorkazuya/LanceFlow/pull/80) | Auto-assign on activate |
+| AUTO-004 | [#81](https://github.com/seniorkazuya/LanceFlow/pull/81) | Payment schedules per project |
 
 ### Staging QA checklist (M3)
 
-1. **AUTO-002** — Project in `pending_approval` with risk &lt; 60, margin &gt; 25%, scope &gt; 80% → **Run auto-approval** → status `active`, `RuleDecision` stored.
-2. **AUTO-003** — Set Vercel `AUTO_ASSIGN_ENABLED=true`, activate project → top-ranked engineer assigned; override with reason ≥ 8 chars → new assignment + audit.
-3. **Ops console** — `/ops` still shows workflow projects and assignments after automation runs.
+1. **AUTO-002** — Auto-approve → `active` + `RuleDecision`.
+2. **AUTO-003** — `AUTO_ASSIGN_ENABLED=true` → engineer assigned; override audited.
+3. **AUTO-004** — Add payment due date on project → mark paid.
+4. **Ops console** — `/ops` coherent after automation.
+
+### Staging env (Vercel)
+
+| Variable | Purpose |
+|----------|---------|
+| `AUTO_ASSIGN_ENABLED` | `true` for AUTO-003 |
+| `REDIS_URL` | Required for AUTO-005 worker (optional for web-only manual job) |
+| `PAYMENT_ESCALATION_JOBS_ENABLED` | `true` on worker host |
 
 ---
 
@@ -49,26 +59,16 @@
 
 | Milestone | Status |
 |-----------|--------|
-| **M0** Platform & DevOps | Done |
-| **M1** Foundation | Done |
-| **M2** Operations | Done (production v0.4.1) |
-| **M3** Automation | 3/8 stories on staging (AUTO-001–003); AUTO-004 in progress |
+| **M0–M2** | Done (production v0.4.1) |
+| **M3** Automation | 4/8 on staging; AUTO-005 in progress |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **AUTO-004** — Payment schedule entity (`packages/modules/payments`)  
-2. **AUTO-005** — Payment reminder jobs (depends on AUTO-004)  
-3. Sync `staging` with `main`, then plan **v0.5.0** when M3 slice is QA-approved  
-
----
-
-## Branch hygiene
-
-| Branch | vs `main` (approx.) |
-|--------|---------------------|
-| `staging` | ~15 commits ahead, ~9 behind — merge `main` into `staging` before production release |
+1. **AUTO-005** — Payment escalation jobs (BullMQ)  
+2. **AUTO-006** — Client risk pre-screen API  
+3. Sync `staging` with `main` → plan **v0.5.0**  
 
 ---
 
@@ -76,9 +76,8 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-23 | AUTO-003 staging (#80) |
-| 2026-05-23 | AUTO-002 staging (#79) |
-| 2026-05-23 | AUTO-001 + staging/main sync (#78) |
+| 2026-05-23 | AUTO-004 staging (#81) |
+| 2026-05-23 | AUTO-003 staging (#80) · AUTO-002 (#79) |
 | 2026-05-23 | v0.4.1 production (#77) — M2 complete |
 
 ---
