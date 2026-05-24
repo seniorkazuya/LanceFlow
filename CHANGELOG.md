@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **AUTO-004** — `PaymentSchedule` entity per project (due date, amount, `escalationLevel`); CRUD APIs and project UI
 - **AUTO-003** — Auto-assign top-ranked engineer on activate when `AUTO_ASSIGN_ENABLED`; audited override via `/api/projects/[id]/assign-override`
 - **AUTO-002** — Project auto-approval when risk under 60, margin over 25%, scope over 80%; `RuleDecision` persisted; `/api/projects/[id]/auto-approve`
 - **AUTO-001** — `evaluateRule()` with formula version and explanation; rule registry for assignment rank v1
@@ -15,6 +16,7 @@ All notable changes to the LanceFlow application are documented here.
 Staging migrate deploy adds:
 
 - `rule_decisions`
+- `payment_schedules`
 
 ## [0.4.1] — 2026-05-23
 
