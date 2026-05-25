@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, GlassCard, Input, SectionLabel } from '@lanceflow/ui';
-import { HIRING_APPLY_ROLES, MAX_RESUME_BYTES } from '@lanceflow/hiring';
+import { HIRING_APPLY_ROLES, MAX_RESUME_BYTES } from '@lanceflow/hiring/client';
 import { useState } from 'react';
 
 const ROLE_LABELS: Record<(typeof HIRING_APPLY_ROLES)[number], string> = {
