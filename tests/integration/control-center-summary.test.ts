@@ -11,10 +11,8 @@ describe.runIf(runIntegration)('integration: control center summary (KPI-003)', 
   const kpiRecordIds: string[] = [];
 
   afterAll(async () => {
-    if (kpiRecordIds.length > 0) {
-      await prisma.kpiRecord.deleteMany({ where: { id: { in: kpiRecordIds } } });
-    }
     if (userIds.length > 0) {
+      await prisma.kpiRecord.deleteMany({ where: { userId: { in: userIds } } });
       await prisma.user.deleteMany({ where: { id: { in: userIds } } });
     }
     await prisma.$disconnect();
