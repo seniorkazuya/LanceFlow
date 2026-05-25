@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
+import { NotificationBell } from '@/components/app/notification-bell';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 
 const BRAND_ICON = '/brand/lanceflow-icon.png';
@@ -48,6 +49,7 @@ export function ShellLayoutClient({ user, signOutAction, children }: ShellLayout
       LinkComponent={NextLink}
       headerActions={
         <>
+          <NotificationBell />
           <ThemeToggle />
           {signOutAction}
         </>

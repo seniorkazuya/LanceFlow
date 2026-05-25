@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/automation` |
 | **Depends on** | DEV-004 |
 | **Branch** | `feature/AUTO-007-notifications` |
-| **Status** | Backlog |
+| **Status** | In Progress |
 
 ---
 
