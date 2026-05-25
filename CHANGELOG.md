@@ -4,16 +4,37 @@ All notable changes to the LanceFlow application are documented here.
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-05-25
+
+M4 Analytics on production: role KPIs, Control Center, configurable thresholds, and Ops-approved bonus/penalty suggestions.
+
 ### Added
 
+- **KPI-006** — Bonus/penalty suggestions from weekly KPI (`compensation_suggestions`); Ops approve/reject with audit; auto-generated after KPI rollup
+- **KPI-005** — CEO-configurable green/yellow/red signal thresholds (`kpi_signal_thresholds`); audited updates; Control Center cards use live bands
 - **KPI-004** — Control Center dashboard cards at `/control` (StatusBadge KPIs + `/control-center` alias)
 - **KPI-003** — `GET /api/control-center/summary` (exceptions, weekly KPI by role, ops aggregates); CEO/Ops RBAC
 - **KPI-002** — Nightly KPI rollup (`kpi_records`, idempotent ISO-week upsert, BullMQ + `POST /api/jobs/kpi-rollup`)
 - **KPI-001** — Role KPI calculators (Worker, Bidder, Caller) in `@lanceflow/analytics` + rules-engine
 
-### Database (staging)
+### Changed
+
+- **Analytics** — `@lanceflow/analytics/client` export for client-safe threshold helpers (fixes Next.js bundle boundary)
+
+### Database
+
+Production migrate deploy adds:
 
 - `kpi_records`
+- `kpi_signal_thresholds`
+- `compensation_suggestions`
+
+### Production env (M4 jobs)
+
+| Variable | Purpose |
+|----------|---------|
+| `KPI_ROLLUP_JOBS_ENABLED` | Enable KPI rollup + compensation suggestion generation in worker |
+| `KPI_ROLLUP_CRON` | Cron pattern (default `0 3 * * *`) |
 
 ## [0.5.0] — 2026-05-25
 
@@ -37,6 +58,7 @@ Staging migrate deploy adds:
 - `rule_decisions`
 - `payment_schedules`
 - `notifications`
+- `leadership_exceptions`
 
 ## [0.4.1] — 2026-05-23
 
@@ -77,36 +99,3 @@ Production migrate deploy adds:
 ## [0.3.0] — 2026-05-21
 
 M1 Foundation + Ops clients and client risk v0.
-
-### Added
-
-- **OPS-002** — Client risk v0 (`ops-client-risk-v0`), evaluate/override APIs, risk panel for Bidders, audited manual override
-- **OPS-001** — `@lanceflow/operations` client CRUD, `/api/clients`, `/clients` UI, audit on mutations
-- **CORE-006** — `@lanceflow/audit` (`auditLog`, `queryAuditLogs`), `GET /api/audit/logs` (CEO), `/audit` page, `auth.sign_in` logging
-- **CORE-005** — Foundation narrative on landing; glass layout on app pages; `PageHeader` and `Input`
-- **CORE-004** — Modern brand theme, `GlassCard`, `AppShell` with role-aware nav
-- **CORE-003** — RBAC policies, protected API routes
-
-### Fixed
-
-- **Staging auth** — Prisma `rhel-openssl-3.0.x` binary target + Next.js monorepo `PrismaPlugin` for Vercel serverless
-
-## [0.2.1] — 2026-05-21
-
-### Added
-
-- **CORE-002** — `@lanceflow/auth`, NextAuth (credentials), `/auth/signin`, `/dashboard`, `/api/me`, AUTH.md
-- **CORE-001** — Prisma client singleton, database package README, integration tests for User/AuditLog
-
-## [0.2.0] — 2026-05-21
-
-### Added
-
-- **DEV-008** — Client status automation (PROJECT_STATUS, GitHub Project board)
-- **DEV-007** — Observability baseline (structured logging, health checks)
-- **DEV-006** — Docker Compose for local Postgres and Redis
-- **DEV-005** — Production deployment workflow with approvals
-- **DEV-004** — Staging deployment (Vercel + Neon migrations)
-- **DEV-003** — CI pipeline (lint, typecheck, test, build)
-- **DEV-002** — GitHub templates, CODEOWNERS, branch protection
-- **DEV-001** — Monorepo scaffold (Turborepo, pnpm workspaces)

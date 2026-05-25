@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-05-25",
-  "release": "v0.5.0",
+  "release": "v0.6.0",
   "project": {
     "owner": "seniorkazuya",
     "number": 4,
@@ -51,6 +51,8 @@
     "KPI-001": { "column": "Done", "title": "KPI-001 — KPI calculators by role" },
     "KPI-002": { "column": "Done", "title": "KPI-002 — Nightly KPI rollup job" },
     "KPI-003": { "column": "Done", "title": "KPI-003 — Control Center summary API" },
-    "KPI-004": { "column": "In Progress", "title": "KPI-004 — Control Center dashboard UI" }
+    "KPI-004": { "column": "Done", "title": "KPI-004 — Control Center dashboard UI" },
+    "KPI-005": { "column": "Done", "title": "KPI-005 — Signal threshold configuration" },
+    "KPI-006": { "column": "Done", "title": "KPI-006 — Bonus and penalty suggestions" }
   }
 }
