@@ -262,6 +262,27 @@ model CompensationSuggestion {
   @@map("compensation_suggestions")
 }
 
+/// HIRE-001 — public candidate applications with resume in object storage.
+model HiringApplication {
+  id               String   @id @default(cuid())
+  fullName         String   @map("full_name")
+  email            String
+  roleApplied      String   @map("role_applied")
+  resumeStorageKey String   @map("resume_storage_key")
+  resumeFileName   String   @map("resume_file_name")
+  resumeMimeType   String?  @map("resume_mime_type")
+  resumeSizeBytes  Int      @map("resume_size_bytes")
+  consentGiven     Boolean  @map("consent_given")
+  consentAt        DateTime @map("consent_at")
+  status           String   @default("submitted")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@index([roleApplied, status])
+  @@map("hiring_applications")
+}
+
 model RuleDecision {
   id             String   @id @default(cuid())
   entityType     String   @map("entity_type")

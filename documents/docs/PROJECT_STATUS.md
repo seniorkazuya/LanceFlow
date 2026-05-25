@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-25  
-> **Current phase:** M5 — Payments  
+> **Last updated:** 2026-05-28  
+> **Current phase:** M6 — Hiring  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **PAY-005** — Dispute workflow (in progress) |
-| **Just completed** | **v0.6.0** production — M4 Analytics |
+| **Active story** | **HIRE-001** — Candidate application portal (in progress) |
+| **Just completed** | **M5 Payments** — PAY-001–005 on staging |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.6.0** — M4 Analytics |
 
@@ -36,14 +36,13 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 ---
 
-## Staging (M4 + M5)
+## Staging (M4 + M5 + M6)
 
 | Story | PR | Feature |
 |-------|-----|---------|
 | KPI-001–006 | #89–#94 | M4 Analytics (complete) |
-| PAY-001 | #96 | Project payment milestones (sum to 100%) |
-| PAY-002 | merged | Escrow hold + overdue payment gating; Ops override |
-| PAY-003 | (pending) | Milestone due dates → linked schedules; AUTO-005 reminders |
+| PAY-001–005 | #96–#100 | M5 Payments (milestones, escrow, reminders, fraud, disputes) |
+| HIRE-001 | (pending) | Public apply portal + resume upload |
 
 ### Staging env (M4 jobs)
 
@@ -59,7 +58,8 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | Milestone | Status |
 |-----------|--------|
 | **M0–M4** | Done (production **v0.6.0**) |
-| **M5** Payments | PAY-001–002 on staging; PAY-003 in progress |
+| **M5** Payments | Done on staging (PAY-001–005) |
+| **M6** Hiring | HIRE-001 in progress |
 
 ---
 
