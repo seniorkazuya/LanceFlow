@@ -59,6 +59,23 @@ Production migrate deploy adds:
 
 - `ops_daily_reports`
 
+## [0.4.1] — 2026-05-23
+
+M2 Operations completion on production: daily reports, SOP library, and Ops console.
+
+### Added
+
+- **OPS-008** — Ops Manager console at `/ops` (workflow projects, missing reports, active assignments)
+- **OPS-007** — SOP library by category at `/sops` (placeholder doc links)
+- **OPS-006** — Daily self-reports (`/daily-reports`), missing-report queue (`/daily-reports/missing`)
+- **DEV-008** — GitHub Project #4 board sync from `board-sync.json` and PR workflows
+
+### Database
+
+Production migrate deploy adds:
+
+- `ops_daily_reports`
+
 ## [0.4.0] — 2026-05-22
 
 M2 Operations core on production: projects, workload, assignment ranking, and app UX polish.
