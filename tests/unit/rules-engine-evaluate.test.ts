@@ -57,4 +57,10 @@ describe('rule registry', () => {
   it('returns undefined for unknown version', () => {
     expect(getRuleByVersion('unknown-rule-v9')).toBeUndefined();
   });
+
+  it('lists and resolves role KPI formulas (KPI-001)', () => {
+    expect(listRuleVersions()).toContain('role-kpi-worker-v1');
+    expect(listRuleVersions()).toContain('role-kpi-bidder-v1');
+    expect(listRuleVersions()).toContain('role-kpi-caller-v1');
+  });
 });
