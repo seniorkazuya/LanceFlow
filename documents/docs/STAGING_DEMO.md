@@ -172,7 +172,7 @@ To get closer to Screenpipe later (CORE-005+): logo strip, “how it works” st
 
 ## Current project status
 
-See [PROJECT_STATUS.md](./PROJECT_STATUS.md) — production **v0.4.1** (M2); staging has **M3** AUTO-001–003 for QA.
+See [PROJECT_STATUS.md](./PROJECT_STATUS.md) — production **v0.5.0** (M3 Automation); staging tracks **M4** KPI work.
 
 ---
 
