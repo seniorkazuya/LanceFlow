@@ -49,13 +49,14 @@ describe.runIf(runIntegration)('integration: project auto-assign (AUTO-003)', ()
   });
 
   it('assigns top engineer and stores RuleDecision', async () => {
+    const uniqueSkill = `auto-assign-skill-${Date.now()}`;
     const engineer = await prisma.user.create({
       data: {
         email: `auto-assign-${Date.now()}@test.local`,
         displayName: 'Auto Assign Engineer',
         role: UserRole.ENGINEER,
         status: 'active',
-        skillTags: ['react'],
+        skillTags: [uniqueSkill],
       },
     });
     userIds.push(engineer.id);
@@ -82,7 +83,7 @@ describe.runIf(runIntegration)('integration: project auto-assign (AUTO-003)', ()
     expect(active.ok).toBe(true);
 
     const result = await runProjectAutoAssignOnActivate(project.project.id, actorId, {
-      requiredSkills: ['react'],
+      requiredSkills: [uniqueSkill],
     });
     expect(result.ok).toBe(true);
     if (!result.ok || result.skipped) return;

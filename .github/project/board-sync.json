@@ -49,6 +49,7 @@
     "AUTO-007": { "column": "Done", "title": "AUTO-007 — Notification service" },
     "AUTO-008": { "column": "Done", "title": "AUTO-008 — Exception queue for leadership" },
     "KPI-001": { "column": "Done", "title": "KPI-001 — KPI calculators by role" },
-    "KPI-002": { "column": "In Progress", "title": "KPI-002 — Nightly KPI rollup job" }
+    "KPI-002": { "column": "Done", "title": "KPI-002 — Nightly KPI rollup job" },
+    "KPI-003": { "column": "In Progress", "title": "KPI-003 — Control Center summary API" }
   }
 }
