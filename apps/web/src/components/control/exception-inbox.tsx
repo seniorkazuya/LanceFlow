@@ -39,6 +39,7 @@ const CATEGORY_LABEL: Record<string, string> = {
   client_risk: 'Client risk',
   assignment: 'Assignment',
   fraud: 'Fraud',
+  dispute: 'Dispute',
 };
 
 export function ExceptionInbox() {

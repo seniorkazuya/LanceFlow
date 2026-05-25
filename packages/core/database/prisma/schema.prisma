@@ -90,8 +90,32 @@ model Project {
   dailyReports       DailyReport[]
   paymentSchedules   PaymentSchedule[]
   milestones         ProjectMilestone[]
+  disputes           ProjectDispute[]
 
   @@map("ops_projects")
+}
+
+/// PAY-005 — payment/client dispute workflow with CEO escalation on high value.
+model ProjectDispute {
+  id             String    @id @default(cuid())
+  projectId      String    @map("project_id")
+  title          String
+  description    String?
+  amountCents    Int       @map("amount_cents")
+  currency       String    @default("USD")
+  status         String    @default("open")
+  sopLinkId      String?   @map("sop_link_id")
+  escalatedAt    DateTime? @map("escalated_at")
+  escalatedBy    String?   @map("escalated_by")
+  resolvedAt     DateTime? @map("resolved_at")
+  resolvedBy     String?   @map("resolved_by")
+  resolutionNote String?   @map("resolution_note")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  project        Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, status])
+  @@map("project_disputes")
 }
 
 /// PAY-001 — payment milestone % breakdown per project (must sum to 100).
