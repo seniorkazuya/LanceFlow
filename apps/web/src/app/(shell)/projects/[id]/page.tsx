@@ -7,6 +7,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectDisputesPanel } from '@/components/projects/project-disputes-panel';
 import { ProjectEscrowPanel } from '@/components/projects/project-escrow-panel';
 import { ProjectMilestonesPanel } from '@/components/projects/project-milestones-panel';
 import { ProjectPaymentSchedulesPanel } from '@/components/projects/project-payment-schedules-panel';
@@ -135,6 +136,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </ul>
         )}
       </GlassCard>
+
+      {canWrite ? (
+        <GlassCard className="p-5 md:p-6">
+          <SectionLabel>disputes</SectionLabel>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Ops dispute workflow (PAY-005). High-value escalations appear in the CEO exception inbox.
+          </p>
+          <div className="mt-6">
+            <ProjectDisputesPanel projectId={project.id} />
+          </div>
+        </GlassCard>
+      ) : null}
 
       <GlassCard className="p-5 md:p-6">
         <SectionLabel>payments</SectionLabel>
