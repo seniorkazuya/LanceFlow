@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-25  
-> **Current phase:** M4 — Analytics  
+> **Current phase:** M5 — Payments  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,38 +10,38 @@
 
 | | |
 |--|--|
-| **Active story** | **KPI-006** — Bonus/penalty suggestions (PR in flight) |
-| **Just completed** | **KPI-005** on staging — Signal threshold configuration |
+| **Active story** | **PAY-001** — Project milestone model ([#96](https://github.com/seniorkazuya/LanceFlow/pull/96)) |
+| **Just completed** | **v0.6.0** production — M4 Analytics |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.5.0** — M3 Automation |
+| **Production** | **v0.6.0** — M4 Analytics |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## Production (v0.5.0)
+## Production (v0.6.0)
 
-M3 Automation: rules engine, auto-approve/assign, payments, notifications, Control Center exception inbox.
+M4 Analytics: role KPIs, Control Center summary + dashboard, CEO thresholds, Ops-approved bonus/penalty suggestions.
 
 | Variable | Purpose |
 |----------|---------|
+| `KPI_ROLLUP_JOBS_ENABLED` | KPI rollup + compensation suggestions in worker |
+| `KPI_ROLLUP_CRON` | Nightly cron (default `0 3 * * *`) |
 | `AUTO_ASSIGN_ENABLED` | Auto-assign on activate |
 | `PAYMENT_ESCALATION_JOBS_ENABLED` | Payment escalation worker |
 | `REDIS_URL` | BullMQ worker |
 | `RESEND_API_KEY` | Optional email |
 
+Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
+
 ---
 
-## Staging (M4)
+## Staging (M4 + M5)
 
 | Story | PR | Feature |
 |-------|-----|---------|
-| KPI-001 | #89 | Role KPI calculators |
-| KPI-002 | #90 | Nightly `kpi_records` rollup |
-| KPI-003 | #91 | `GET /api/control-center/summary` |
-| KPI-004 | merged | Control Center StatusBadge cards |
-| KPI-005 | merged | CEO threshold config + audit |
-| KPI-006 | (in flight) | Bonus/penalty suggestions (Ops approve) |
+| KPI-001–006 | #89–#94 | M4 Analytics (complete) |
+| PAY-001 | #96 | Project payment milestones (sum to 100%) |
 
 ### Staging env (M4 jobs)
 
@@ -50,23 +50,22 @@ M3 Automation: rules engine, auto-approve/assign, payments, notifications, Contr
 | `KPI_ROLLUP_JOBS_ENABLED` | Enable KPI rollup in worker |
 | `KPI_ROLLUP_CRON` | Cron pattern (default `0 3 * * *`) |
 
-Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
-
 ---
 
 ## Milestones
 
 | Milestone | Status |
 |-----------|--------|
-| **M0–M3** | Done (production **v0.5.0**) |
-| **M4** Analytics | KPI-001–005 on staging; KPI-006 in flight |
+| **M0–M4** | Done (production **v0.6.0**) |
+| **M5** Payments | PAY-001 in flight |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **KPI-006** — merge compensation suggestions; QA on staging  
-2. **DEV-005** / release — cut v0.6.0 when M4 slice is ready  
+1. Merge **#96** PAY-001; QA milestones on project detail  
+2. **PAY-002** — Escrow and work gating  
+3. **PAY-003** — Milestone-linked payment reminders  
 
 ---
 
@@ -74,9 +73,9 @@ Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 | Date | Change |
 |------|--------|
-| 2026-05-25 | KPI-002 staging (#90); KPI-003 in flight |
+| 2026-05-25 | **v0.6.0** production — M4 Analytics |
+| 2026-05-25 | PAY-001 staging (#96) |
 | 2026-05-25 | **v0.5.0** production — M3 Automation |
-| 2026-05-23 | **v0.4.1** — M2 Operations |
 
 ---
 
