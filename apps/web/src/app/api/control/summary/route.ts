@@ -1,18 +1,12 @@
-import { getExceptionInboxSummary } from '@lanceflow/automation';
+import { getControlCenterSummary } from '@lanceflow/analytics';
 import { RolePolicy } from '@lanceflow/auth';
 import { NextResponse } from 'next/server';
 
 import { withAuthRoute } from '@/lib/api-auth';
+import { serializeControlCenterSummary } from '@/lib/control-center-api';
 
-/** Control-center summary — CEO and Ops only (CORE-003, AUTO-008). */
+/** Legacy path — delegates to KPI-003 control-center summary. */
 export const GET = withAuthRoute('/api/control/summary', RolePolicy.controlCenter, async () => {
-  const exceptions = await getExceptionInboxSummary();
-  return NextResponse.json({
-    scope: 'control-center',
-    exceptions,
-    message:
-      exceptions.open === 0
-        ? 'No open leadership exceptions'
-        : `${exceptions.open} open exception(s) — ${exceptions.danger} critical, ${exceptions.warning} review`,
-  });
+  const summary = await getControlCenterSummary();
+  return NextResponse.json(serializeControlCenterSummary(summary));
 });

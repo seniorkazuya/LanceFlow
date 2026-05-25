@@ -341,6 +341,9 @@ importers:
       '@lanceflow/audit':
         specifier: workspace:*
         version: link:../../audit
+      '@lanceflow/automation':
+        specifier: workspace:*
+        version: link:../automation
       '@lanceflow/database':
         specifier: workspace:*
         version: link:../../core/database

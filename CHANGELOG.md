@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **KPI-003** — `GET /api/control-center/summary` (exceptions, weekly KPI by role, ops aggregates); CEO/Ops RBAC
 - **KPI-002** — Nightly KPI rollup (`kpi_records`, idempotent ISO-week upsert, BullMQ + `POST /api/jobs/kpi-rollup`)
 - **KPI-001** — Role KPI calculators (Worker, Bidder, Caller) in `@lanceflow/analytics` + rules-engine
 

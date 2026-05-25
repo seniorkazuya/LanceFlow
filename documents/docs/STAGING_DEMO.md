@@ -111,7 +111,8 @@ After sign-in you land on **Dashboard**:
 |----------|--------|
 | `GET /api/health` | `status: ok`, database/redis checks |
 | `GET /api/me` | 401 when logged out; user JSON when logged in |
-| `GET /api/control/summary` | 200 for Ops/CEO; 403 for Engineer |
+| `GET /api/control-center/summary` | 200 for Ops/CEO — exceptions, KPI, ops counts; 403 for Engineer |
+| `GET /api/control/summary` | Same payload as control-center (legacy alias) |
 | `GET /api/hiring/ceo-queue` | 403 for Engineer |
 
 ---

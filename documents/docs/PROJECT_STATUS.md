@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **KPI-002** — Nightly KPI rollup (PR in flight) |
-| **Just completed** | **KPI-001** on staging ([#89](https://github.com/seniorkazuya/LanceFlow/pull/89)) · **v0.5.0** production ([#88](https://github.com/seniorkazuya/LanceFlow/pull/88)) |
+| **Active story** | **KPI-003** — Control Center summary API (PR in flight) |
+| **Just completed** | **KPI-002** on staging ([#90](https://github.com/seniorkazuya/LanceFlow/pull/90)) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.5.0** — M3 Automation |
 
@@ -36,10 +36,11 @@ M3 Automation: rules engine, auto-approve/assign, payments, notifications, Contr
 
 | Story | PR | Feature |
 |-------|-----|---------|
-| KPI-001 | #89 | Role KPI calculators (Worker, Bidder, Caller) |
-| KPI-002 | (in flight) | Nightly `kpi_records` rollup job |
+| KPI-001 | #89 | Role KPI calculators |
+| KPI-002 | #90 | Nightly `kpi_records` rollup |
+| KPI-003 | (in flight) | `GET /api/control-center/summary` |
 
-### Staging env (KPI-002)
+### Staging env (M4 jobs)
 
 | Variable | Purpose |
 |----------|---------|
@@ -55,15 +56,14 @@ Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | Milestone | Status |
 |-----------|--------|
 | **M0–M3** | Done (production **v0.5.0**) |
-| **M4** Analytics | KPI-001 done on staging; KPI-002 in flight |
+| **M4** Analytics | KPI-001–002 on staging; KPI-003 in flight |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **KPI-002** — merge and QA rollup + `kpi_records` migration on staging  
-2. **KPI-003** — Control Center summary API  
-3. **KPI-004** — Dashboard UI  
+1. **KPI-003** — merge and QA `GET /api/control-center/summary`  
+2. **KPI-004** — Control Center dashboard UI  
 
 ---
 
@@ -71,8 +71,8 @@ Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 | Date | Change |
 |------|--------|
+| 2026-05-25 | KPI-002 staging (#90); KPI-003 in flight |
 | 2026-05-25 | **v0.5.0** production — M3 Automation |
-| 2026-05-25 | KPI-001 staging (#89) |
 | 2026-05-23 | **v0.4.1** — M2 Operations |
 
 ---

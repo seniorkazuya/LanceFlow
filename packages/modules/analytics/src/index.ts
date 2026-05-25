@@ -13,3 +13,11 @@ export {
   type KpiRollupResult,
   type KpiRollupRow,
 } from './rollup';
+export {
+  aggregateKpiByRole,
+  getControlCenterSummary,
+  type ControlCenterKpiSummary,
+  type ControlCenterOperationsSummary,
+  type ControlCenterSummary,
+  type KpiRoleSummary,
+} from './control-center';
