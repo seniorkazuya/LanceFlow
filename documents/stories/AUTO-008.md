@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/automation, apps/web` |
 | **Depends on** | AUTO-002 |
 | **Branch** | `feature/AUTO-008-exceptions` |
-| **Status** | In Progress |
+| **Status** | QA / Staging |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-23",
+  "updated": "2026-05-25",
   "release": "v0.4.1",
   "project": {
     "owner": "seniorkazuya",
@@ -47,6 +47,6 @@
     "AUTO-005": { "column": "QA / Staging", "title": "AUTO-005 — Payment reminder and escalation jobs" },
     "AUTO-006": { "column": "QA / Staging", "title": "AUTO-006 — Client risk pre-screen API" },
     "AUTO-007": { "column": "QA / Staging", "title": "AUTO-007 — Notification service" },
-    "AUTO-008": { "column": "In Progress", "title": "AUTO-008 — Exception queue for leadership" }
+    "AUTO-008": { "column": "QA / Staging", "title": "AUTO-008 — Exception queue for leadership" }
   }
 }
