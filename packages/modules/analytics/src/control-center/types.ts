@@ -1,5 +1,7 @@
 import type { ExceptionInboxSummary } from '@lanceflow/automation';
 
+import type { KpiSignalThresholdsConfig } from '../thresholds/types';
+
 export type KpiRoleSummary = {
   role: string;
   count: number;
@@ -29,5 +31,6 @@ export type ControlCenterSummary = {
   exceptions: ExceptionInboxSummary;
   kpi: ControlCenterKpiSummary;
   operations: ControlCenterOperationsSummary;
+  thresholds: KpiSignalThresholdsConfig;
   generatedAt: string;
 };

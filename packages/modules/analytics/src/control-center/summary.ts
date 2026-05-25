@@ -2,10 +2,9 @@ import { getExceptionInboxSummary } from '@lanceflow/automation';
 import { prisma } from '@lanceflow/database';
 
 import { getWeekPeriod } from '../period';
+import { getKpiSignalThresholds, highRiskClientMinScore } from '../thresholds';
 import { aggregateKpiByRole } from './aggregate';
 import type { ControlCenterSummary } from './types';
-
-const HIGH_CLIENT_RISK = 60;
 
 /** Read-only Control Center aggregates for CEO/Ops (KPI-003). */
 export async function getControlCenterSummary(
@@ -15,6 +14,9 @@ export async function getControlCenterSummary(
   const periodStart = period.start.toISOString().slice(0, 10);
   const periodEnd = period.end.toISOString().slice(0, 10);
   const today = referenceDate.toISOString().slice(0, 10);
+
+  const thresholds = await getKpiSignalThresholds();
+  const highRiskMin = highRiskClientMinScore(thresholds.clientRisk);
 
   const [
     exceptions,
@@ -38,7 +40,7 @@ export async function getControlCenterSummary(
       },
     }),
     prisma.client.count({
-      where: { status: 'active', riskScore: { gte: HIGH_CLIENT_RISK } },
+      where: { status: 'active', riskScore: { gte: highRiskMin } },
     }),
   ]);
 
@@ -63,6 +65,7 @@ export async function getControlCenterSummary(
       overduePayments,
       highRiskClients,
     },
+    thresholds,
     generatedAt: referenceDate.toISOString(),
   };
 }

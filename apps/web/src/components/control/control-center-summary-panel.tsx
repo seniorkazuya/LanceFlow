@@ -1,5 +1,6 @@
 'use client';
 
+import { classifyKpiScore, type KpiSignalThresholdsConfig } from '@lanceflow/analytics/client';
 import { useCallback, useEffect, useState } from 'react';
 
 import { GlassCard, StatusBadge } from '@lanceflow/ui';
@@ -18,18 +19,13 @@ type SummaryResponse = {
     overduePayments: number;
     highRiskClients: number;
   };
+  thresholds: KpiSignalThresholdsConfig;
 };
 
 function exceptionStatus(exceptions: SummaryResponse['exceptions']): 'danger' | 'warning' | 'success' {
   if (exceptions.danger > 0) return 'danger';
   if (exceptions.warning > 0 || exceptions.open > 0) return 'warning';
   return 'success';
-}
-
-function scoreStatus(score: number): 'success' | 'warning' | 'danger' {
-  if (score >= 70) return 'success';
-  if (score >= 50) return 'warning';
-  return 'danger';
 }
 
 const ROLE_LABEL: Record<string, string> = {
@@ -77,6 +73,8 @@ export function ControlCenterSummaryPanel() {
 
   const engineerKpi = data.kpi.byRole.find((r) => r.role === 'engineer');
   const avgEngineer = engineerKpi?.avgScore ?? null;
+  const thresholds = data.thresholds;
+  const highRiskMin = thresholds.clientRisk.yellowMax + 1;
 
   const cards = [
     {
@@ -90,7 +88,8 @@ export function ControlCenterSummaryPanel() {
       label: 'Engineer KPI (week)',
       value: avgEngineer !== null ? String(avgEngineer) : '—',
       detail: data.kpi.recordCount > 0 ? `${data.kpi.recordCount} records · ${data.period.key}` : 'Run KPI rollup job',
-      status: avgEngineer !== null ? scoreStatus(avgEngineer) : ('warning' as const),
+      status:
+        avgEngineer !== null ? classifyKpiScore(avgEngineer, thresholds.kpiScore) : ('warning' as const),
       badge: 'Weekly',
     },
     {
@@ -110,7 +109,7 @@ export function ControlCenterSummaryPanel() {
     {
       label: 'High-risk clients',
       value: String(data.operations.highRiskClients),
-      detail: 'Risk score ≥ 60',
+      detail: `Risk score ≥ ${highRiskMin}`,
       status: data.operations.highRiskClients > 0 ? ('warning' as const) : ('success' as const),
       badge: 'Risk',
     },
@@ -157,7 +156,10 @@ export function ControlCenterSummaryPanel() {
           <ul className="mt-3 flex flex-wrap gap-4 text-sm">
             {data.kpi.byRole.map((row) => (
               <li key={row.role} className="flex items-center gap-2">
-                <StatusBadge status={scoreStatus(row.avgScore)} label={ROLE_LABEL[row.role] ?? row.role} />
+                <StatusBadge
+                  status={classifyKpiScore(row.avgScore, thresholds.kpiScore)}
+                  label={ROLE_LABEL[row.role] ?? row.role}
+                />
                 <span className="font-medium text-foreground">{row.avgScore}</span>
                 <span className="text-muted-foreground">({row.count})</span>
               </li>

@@ -1,4 +1,4 @@
-import type { ProjectAutoApproveThresholds } from '@lanceflow/config';
+import type { ProjectAutoApproveThresholds } from '@lanceflow/config/project-auto-approve';
 
 /** AUTO-002 — versioned project auto-approval rule. */
 export const PROJECT_AUTO_APPROVE_FORMULA_V1 = 'project-auto-approve-v1';

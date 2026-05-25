@@ -175,6 +175,21 @@ model KpiRecord {
   @@map("kpi_records")
 }
 
+/// KPI-005 — green/yellow/red bands per control-center metric (CEO configures).
+model KpiSignalThreshold {
+  metricKey  String   @id @map("metric_key")
+  direction  String
+  greenMin   Int?     @map("green_min")
+  yellowMin  Int?     @map("yellow_min")
+  greenMax   Int?     @map("green_max")
+  yellowMax  Int?     @map("yellow_max")
+  updatedBy  String?  @map("updated_by")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("kpi_signal_thresholds")
+}
+
 model RuleDecision {
   id             String   @id @default(cuid())
   entityType     String   @map("entity_type")

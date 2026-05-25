@@ -6,7 +6,11 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./thresholds/classify": "./src/thresholds/classify.ts",
+    "./thresholds/types": "./src/thresholds/types.ts",
+    "./control-center/aggregate": "./src/control-center/aggregate.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
