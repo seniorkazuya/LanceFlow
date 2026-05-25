@@ -19,6 +19,9 @@ export function LandingNav() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <Button asChild variant="ghost" size="sm">
+            <Link href="/apply">Apply</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
             <Link href="/auth/signin">Sign in</Link>
           </Button>
           <Button asChild size="sm">

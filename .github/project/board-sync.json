@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-25",
+  "updated": "2026-05-28",
   "release": "v0.6.0",
   "project": {
     "owner": "seniorkazuya",
@@ -58,6 +58,7 @@
     "PAY-002": { "column": "Done", "title": "PAY-002 — Escrow and work gating" },
     "PAY-003": { "column": "Done", "title": "PAY-003 — Milestone-linked payment reminders" },
     "PAY-004": { "column": "Done", "title": "PAY-004 — Fraud triggers v1" },
-    "PAY-005": { "column": "In Progress", "title": "PAY-005 — Dispute workflow" }
+    "PAY-005": { "column": "Done", "title": "PAY-005 — Dispute workflow" },
+    "HIRE-001": { "column": "In Progress", "title": "HIRE-001 — Candidate application portal" }
   }
 }
