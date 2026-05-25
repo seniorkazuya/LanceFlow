@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **KPI-003** — Control Center summary API (PR in flight) |
-| **Just completed** | **KPI-002** on staging ([#90](https://github.com/seniorkazuya/LanceFlow/pull/90)) |
+| **Active story** | **KPI-004** — Control Center dashboard UI (PR in flight) |
+| **Just completed** | **KPI-003** on staging ([#91](https://github.com/seniorkazuya/LanceFlow/pull/91)) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.5.0** — M3 Automation |
 
@@ -38,7 +38,8 @@ M3 Automation: rules engine, auto-approve/assign, payments, notifications, Contr
 |-------|-----|---------|
 | KPI-001 | #89 | Role KPI calculators |
 | KPI-002 | #90 | Nightly `kpi_records` rollup |
-| KPI-003 | (in flight) | `GET /api/control-center/summary` |
+| KPI-003 | #91 | `GET /api/control-center/summary` |
+| KPI-004 | (in flight) | Control Center StatusBadge cards |
 
 ### Staging env (M4 jobs)
 

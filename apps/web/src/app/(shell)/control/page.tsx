@@ -2,6 +2,7 @@ import { PageHeader } from '@lanceflow/ui';
 import { RolePolicy, hasRole } from '@lanceflow/auth';
 import { redirect } from 'next/navigation';
 
+import { ControlCenterSummaryPanel } from '@/components/control/control-center-summary-panel';
 import { ExceptionInbox } from '@/components/control/exception-inbox';
 import { ShellPage } from '@/components/app/shell-page';
 import { auth } from '@/auth';
@@ -18,9 +19,10 @@ export default async function ControlPage() {
       <PageHeader
         label="oversight"
         title="Control Center"
-        description="Exception inbox for CEO and Ops — red, yellow, and green severity from rules, payments, and assignments (AUTO-008)."
+        description="Company signals and exception inbox for CEO and Ops (KPI-003, AUTO-008)."
       />
 
+      <ControlCenterSummaryPanel />
       <ExceptionInbox />
     </ShellPage>
   );
