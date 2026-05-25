@@ -25,7 +25,7 @@
 |--|--|
 | **Release** | [v0.4.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.1) |
 | **Includes** | OPS-001–008 |
-| **Not on prod yet** | M3 automation (AUTO-001–004) — staging only until next release |
+| **Not on prod yet** | M3 automation (AUTO-001–005) — staging only until next release |
 
 ---
 
@@ -62,7 +62,7 @@
 | Milestone | Status |
 |-----------|--------|
 | **M0–M2** | Done (production v0.4.1) |
-| **M3** Automation | 5/8 on staging; AUTO-006 next |
+| **M3** Automation | 5/8 on staging; AUTO-006 in flight |
 
 ---
 

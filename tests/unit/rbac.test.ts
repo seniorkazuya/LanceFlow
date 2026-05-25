@@ -47,6 +47,12 @@ describe('hasRole', () => {
     expect(hasRole(UserRole.BIDDER, RolePolicy.clientsWrite)).toBe(false);
   });
 
+  it('allows client risk prescreen for bidder and ops', () => {
+    expect(hasRole(UserRole.BIDDER, RolePolicy.clientRiskPrescreen)).toBe(true);
+    expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.clientRiskPrescreen)).toBe(true);
+    expect(hasRole(UserRole.ENGINEER, RolePolicy.clientRiskPrescreen)).toBe(false);
+  });
+
   it('allows workers read for ops and ceo only', () => {
     expect(hasRole(UserRole.OPS_MANAGER, RolePolicy.workersRead)).toBe(true);
     expect(hasRole(UserRole.CEO, RolePolicy.workersRead)).toBe(true);

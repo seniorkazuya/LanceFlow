@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **AUTO-006** — Client risk pre-screen API for Bidders (`POST /api/clients/[id]/risk-prescreen`, RuleDecision + audit)
 - **AUTO-005** — Daily payment escalation job (due reminder, day-3 escalate, day-7 risk); BullMQ worker + manual `/api/jobs/payment-escalations`
 - **AUTO-004** — `PaymentSchedule` entity per project (due date, amount, `escalationLevel`); CRUD APIs and project UI
 - **AUTO-003** — Auto-assign top-ranked engineer on activate when `AUTO_ASSIGN_ENABLED`; audited override via `/api/projects/[id]/assign-override`

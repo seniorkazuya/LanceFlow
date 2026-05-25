@@ -6,6 +6,7 @@ import { notFound, redirect } from 'next/navigation';
 import { ShellPage } from '@/components/app/shell-page';
 import { ArchiveClientButton } from '@/components/clients/archive-client-button';
 import { ClientForm } from '@/components/clients/client-form';
+import { ClientPrescreenPanel } from '@/components/clients/client-prescreen-panel';
 import { ClientRiskActions } from '@/components/clients/client-risk-actions';
 import { RiskPanel } from '@/components/clients/risk-panel';
 import { auth } from '@/auth';
@@ -26,6 +27,7 @@ export default async function ClientDetailPage({ params }: PageProps) {
   }
 
   const canWrite = hasRole(role, RolePolicy.clientsWrite);
+  const canPrescreen = hasRole(role, RolePolicy.clientRiskPrescreen);
 
   return (
     <ShellPage>
@@ -61,6 +63,13 @@ export default async function ClientDetailPage({ params }: PageProps) {
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{client.notes}</p>
         ) : null}
       </GlassCard>
+
+      {canPrescreen && !canWrite && client.status === 'active' ? (
+        <GlassCard className="p-6 md:p-8">
+          <SectionLabel>bid readiness</SectionLabel>
+          <ClientPrescreenPanel clientId={client.id} />
+        </GlassCard>
+      ) : null}
 
       {canWrite && client.status === 'active' ? (
         <>
