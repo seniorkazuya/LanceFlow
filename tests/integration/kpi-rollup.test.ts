@@ -19,6 +19,7 @@ describe.runIf(runIntegration)('integration: KPI rollup (KPI-002)', () => {
       await prisma.kpiRecord.deleteMany({ where: { id: { in: kpiRecordIds } } });
     }
     if (projectIds.length > 0) {
+      await prisma.dailyReport.deleteMany({ where: { projectId: { in: projectIds } } });
       await prisma.project.deleteMany({ where: { id: { in: projectIds } } });
     }
     if (clientIds.length > 0) {
