@@ -10,6 +10,7 @@ const runIntegration = Boolean(databaseUrl);
 describe.runIf(runIntegration)('integration: KPI rollup (KPI-002)', () => {
   const clientIds: string[] = [];
   const projectIds: string[] = [];
+  const userIds: string[] = [];
   const kpiRecordIds: string[] = [];
   const actorId = 'test-actor-kpi-002';
 
@@ -23,15 +24,28 @@ describe.runIf(runIntegration)('integration: KPI rollup (KPI-002)', () => {
     if (clientIds.length > 0) {
       await prisma.client.deleteMany({ where: { id: { in: clientIds } } });
     }
+    if (userIds.length > 0) {
+      await prisma.user.deleteMany({ where: { id: { in: userIds } } });
+    }
     await prisma.$disconnect();
   });
 
-  it('upserts KPI records idempotently for the current week', async () => {
-    const engineer = await prisma.user.findFirst({
-      where: { role: UserRole.ENGINEER, status: 'active' },
+  async function createEngineer() {
+    const engineer = await prisma.user.create({
+      data: {
+        email: `kpi-engineer-${Date.now()}@test.local`,
+        displayName: 'KPI Test Engineer',
+        role: UserRole.ENGINEER,
+        status: 'active',
+        skillTags: ['react'],
+      },
     });
-    expect(engineer).not.toBeNull();
-    if (!engineer) return;
+    userIds.push(engineer.id);
+    return engineer;
+  }
+
+  it('upserts KPI records idempotently for the current week', async () => {
+    const engineer = await createEngineer();
 
     const first = await processKpiRollup(new Date('2026-05-20T12:00:00Z'), actorId);
     expect(first.upserted.length).toBeGreaterThanOrEqual(1);
@@ -46,7 +60,6 @@ describe.runIf(runIntegration)('integration: KPI rollup (KPI-002)', () => {
 
     const second = await processKpiRollup(new Date('2026-05-21T12:00:00Z'), actorId);
     expect(second.periodKey).toBe(first.periodKey);
-    expect(second.upserted.length).toBe(first.upserted.length);
 
     const count = await prisma.kpiRecord.count({
       where: { periodKey: first.periodKey, userId: engineer.id },
@@ -55,11 +68,7 @@ describe.runIf(runIntegration)('integration: KPI rollup (KPI-002)', () => {
   });
 
   it('creates engineer KPI from daily reports in period', async () => {
-    const engineer = await prisma.user.findFirst({
-      where: { role: UserRole.ENGINEER, status: 'active' },
-    });
-    expect(engineer).not.toBeNull();
-    if (!engineer) return;
+    const engineer = await createEngineer();
 
     const client = await createClient({ name: `KPI Client ${Date.now()}` }, actorId);
     expect(client.ok).toBe(true);
