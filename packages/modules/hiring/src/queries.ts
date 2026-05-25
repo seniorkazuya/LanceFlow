@@ -14,6 +14,9 @@ function toRecord(row: {
   consentGiven: boolean;
   consentAt: Date;
   status: string;
+  technicalScore: number | null;
+  technicalScoreAt: Date | null;
+  technicalScoreSource: string | null;
   createdAt: Date;
 }): HiringApplicationRecord {
   return {
@@ -28,6 +31,9 @@ function toRecord(row: {
     consentGiven: row.consentGiven,
     consentAt: row.consentAt,
     status: row.status,
+    technicalScore: row.technicalScore,
+    technicalScoreAt: row.technicalScoreAt,
+    technicalScoreSource: row.technicalScoreSource,
     createdAt: row.createdAt,
   };
 }

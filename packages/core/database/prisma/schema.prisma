@@ -278,6 +278,9 @@ model HiringApplication {
   resumeParsed        Json?     @map("resume_parsed")
   resumeParsedAt      DateTime? @map("resume_parsed_at")
   resumeParseVersion  String?   @map("resume_parse_version")
+  technicalScore      Int?      @map("technical_score")
+  technicalScoreAt    DateTime? @map("technical_score_at")
+  technicalScoreSource String?  @map("technical_score_source")
   createdAt           DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 
