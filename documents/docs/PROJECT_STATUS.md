@@ -1,6 +1,6 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-23  
+> **Last updated:** 2026-05-25  
 > **Current phase:** M3 — Automation (staging QA)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **AUTO-006** Client risk pre-screen API |
-| **Just completed** | **AUTO-005** on staging ([#82](https://github.com/seniorkazuya/LanceFlow/pull/82)) |
+| **Active story** | **AUTO-007** Notification service |
+| **Just completed** | **AUTO-006** on staging ([#84](https://github.com/seniorkazuya/LanceFlow/pull/84)) |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.4.1** — M2 Operations complete (not yet M3) |
 
@@ -19,41 +19,20 @@
 
 ---
 
-## Production (v0.4.1)
-
-| | |
-|--|--|
-| **Release** | [v0.4.1](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.1) |
-| **Includes** | OPS-001–008 |
-| **Not on prod yet** | M3 automation (AUTO-001–005) — staging only until next release |
-
----
-
 ## Staging (M3 — Automation)
 
 | Story | PR | Feature |
 |-------|-----|---------|
-| AUTO-001 | [#78](https://github.com/seniorkazuya/LanceFlow/pull/78) | Rules engine `evaluateRule()` + registry |
-| AUTO-002 | [#79](https://github.com/seniorkazuya/LanceFlow/pull/79) | Project auto-approval + `RuleDecision` |
-| AUTO-003 | [#80](https://github.com/seniorkazuya/LanceFlow/pull/80) | Auto-assign on activate |
-| AUTO-004 | [#81](https://github.com/seniorkazuya/LanceFlow/pull/81) | Payment schedules per project |
-| AUTO-005 | [#82](https://github.com/seniorkazuya/LanceFlow/pull/82) | Payment escalation jobs (BullMQ + manual API) |
+| AUTO-001–006 | #78–#84 | Rules engine, auto-approve, auto-assign, payments, escalation, risk pre-screen |
+| AUTO-007 | (in flight) | In-app bell + email adapter |
 
-### Staging QA checklist (M3)
-
-1. **AUTO-002** — Auto-approve → `active` + `RuleDecision`.
-2. **AUTO-003** — `AUTO_ASSIGN_ENABLED=true` → engineer assigned; override audited.
-3. **AUTO-004** — Add payment due date on project → mark paid.
-4. **AUTO-005** — Create overdue payment schedule → `POST /api/jobs/payment-escalations` → `escalationLevel` bumps + audit.
-5. **Ops console** — `/ops` coherent after automation.
-
-### Staging env (Vercel)
+### Staging env (notifications)
 
 | Variable | Purpose |
 |----------|---------|
-| `AUTO_ASSIGN_ENABLED` | `true` for AUTO-003 |
-| `REDIS_URL` | Required for AUTO-005 worker (optional for web-only manual job) |
-| `PAYMENT_ESCALATION_JOBS_ENABLED` | `true` on worker host |
+| `RESEND_API_KEY` | Optional — enables Resend email; omit for in-app only |
+| `NOTIFICATION_FROM_EMAIL` | Sender for Resend |
+| `PAYMENT_ESCALATION_NOTIFY_EMAIL` | `true` to email Ops on escalation job |
 
 ---
 
@@ -62,14 +41,15 @@
 | Milestone | Status |
 |-----------|--------|
 | **M0–M2** | Done (production v0.4.1) |
-| **M3** Automation | 5/8 on staging; AUTO-006 in flight |
+| **M3** Automation | 6/8 on staging; AUTO-007 in flight |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **AUTO-006** — Client risk pre-screen API  
-2. Sync `staging` with `main` → plan **v0.5.0**  
+1. **AUTO-007** — merge and QA notification bell  
+2. **AUTO-008** — Exception queue  
+3. Sync `staging` with `main` → **v0.5.0**  
 
 ---
 
@@ -77,10 +57,9 @@
 
 | Date | Change |
 |------|--------|
+| 2026-05-25 | AUTO-006 staging (#84) |
 | 2026-05-24 | AUTO-005 staging (#82) |
 | 2026-05-23 | AUTO-004 staging (#81) |
-| 2026-05-23 | AUTO-003 staging (#80) · AUTO-002 (#79) |
-| 2026-05-23 | v0.4.1 production (#77) — M2 complete |
 
 ---
 

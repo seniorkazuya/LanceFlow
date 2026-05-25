@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **AUTO-007** — In-app notification bell + Resend/noop email adapter; ops alerts on payment escalation
 - **AUTO-006** — Client risk pre-screen API for Bidders (`POST /api/clients/[id]/risk-prescreen`, RuleDecision + audit)
 - **AUTO-005** — Daily payment escalation job (due reminder, day-3 escalate, day-7 risk); BullMQ worker + manual `/api/jobs/payment-escalations`
 - **AUTO-004** — `PaymentSchedule` entity per project (due date, amount, `escalationLevel`); CRUD APIs and project UI
@@ -19,6 +20,7 @@ Staging migrate deploy adds:
 
 - `rule_decisions`
 - `payment_schedules`
+- `notifications`
 
 ## [0.4.1] — 2026-05-23
 

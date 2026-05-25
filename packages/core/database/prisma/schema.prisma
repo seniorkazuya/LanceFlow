@@ -20,8 +20,24 @@ model User {
   updatedAt   DateTime     @updatedAt @map("updated_at")
   assignments Assignment[]
   dailyReports  DailyReport[]
+  notifications Notification[]
 
   @@map("users")
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  type      String
+  title     String
+  body      String
+  readAt    DateTime? @map("read_at")
+  metadata  Json?
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("notifications")
 }
 
 model AuditLog {

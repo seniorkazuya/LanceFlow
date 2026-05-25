@@ -1,3 +1,4 @@
+import { notifyOpsManagers } from '@lanceflow/automation';
 import { auditLog } from '@lanceflow/audit';
 import { prisma } from '@lanceflow/database';
 
@@ -82,6 +83,17 @@ export async function processPaymentEscalations(
         scheduleIds: updated.map((u) => u.scheduleId),
       },
     });
+
+    await notifyOpsManagers(
+      {
+        type: 'payment_escalation',
+        title: 'Payment escalation updates',
+        body: `${updated.length} payment schedule(s) escalated. Review overdue client payments.`,
+        metadata: { updatedCount: updated.length, asOf: asOf.toISOString() },
+        sendEmail: process.env.PAYMENT_ESCALATION_NOTIFY_EMAIL === 'true',
+      },
+      actorId
+    );
   }
 
   return { scanned: rows.length, updated };
