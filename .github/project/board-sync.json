@@ -56,6 +56,7 @@
     "KPI-006": { "column": "Done", "title": "KPI-006 — Bonus and penalty suggestions" },
     "PAY-001": { "column": "Done", "title": "PAY-001 — Project milestone model" },
     "PAY-002": { "column": "Done", "title": "PAY-002 — Escrow and work gating" },
-    "PAY-003": { "column": "In Progress", "title": "PAY-003 — Milestone-linked payment reminders" }
+    "PAY-003": { "column": "Done", "title": "PAY-003 — Milestone-linked payment reminders" },
+    "PAY-004": { "column": "In Progress", "title": "PAY-004 — Fraud triggers v1" }
   }
 }

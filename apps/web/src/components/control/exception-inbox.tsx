@@ -23,6 +23,7 @@ type ExceptionItem = {
 type InboxResponse = {
   summary: { open: number; danger: number; warning: number; success: number };
   items: ExceptionItem[];
+  severeOnly?: boolean;
 };
 
 const SEVERITY_LABEL: Record<ExceptionItem['severity'], string> = {
@@ -37,6 +38,7 @@ const CATEGORY_LABEL: Record<string, string> = {
   payment: 'Payment',
   client_risk: 'Client risk',
   assignment: 'Assignment',
+  fraud: 'Fraud',
 };
 
 export function ExceptionInbox() {
@@ -127,8 +129,9 @@ export function ExceptionInbox() {
       <GlassCard variant="strong" className="p-5 md:p-6">
         <SectionLabel>exception inbox</SectionLabel>
         <p className="mt-2 text-sm text-muted-foreground">
-          CEO and Ops review automated rule outcomes, stalled approvals, payment escalations, and
-          elevated client risk. Acknowledged items stay visible until the underlying signal clears.
+          {data?.severeOnly
+            ? 'Critical-only view (fraud, payment risk, and other danger signals). Ops sees all severities.'
+            : 'Automated rule outcomes, fraud triggers, stalled approvals, payment escalations, and elevated client risk.'}
         </p>
 
         {loading && !data ? (
