@@ -26,7 +26,7 @@ describe.runIf(runIntegration)('integration: client risk prescreen (AUTO-006)', 
       {
         name: `Prescreen Client ${Date.now()}`,
         contactEmail: null,
-        notes: '',
+        notes: 'x'.repeat(81),
       },
       actorId
     );
