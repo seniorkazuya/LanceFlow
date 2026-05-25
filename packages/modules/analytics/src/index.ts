@@ -21,3 +21,18 @@ export {
   type ControlCenterSummary,
   type KpiRoleSummary,
 } from './control-center';
+export {
+  DEFAULT_KPI_SIGNAL_THRESHOLDS,
+  classifyByMetric,
+  classifyClientRisk,
+  classifyKpiScore,
+  getKpiSignalThresholds,
+  highRiskClientMinScore,
+  updateKpiSignalThresholds,
+  validateThresholdUpdate,
+  type ClientRiskThreshold,
+  type KpiScoreThreshold,
+  type KpiSignalThresholdUpdateInput,
+  type KpiSignalThresholdsConfig,
+  type SignalLevel,
+} from './thresholds';

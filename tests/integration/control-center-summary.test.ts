@@ -59,5 +59,9 @@ describe.runIf(runIntegration)('integration: control center summary (KPI-003)', 
       overduePayments: expect.any(Number),
       highRiskClients: expect.any(Number),
     });
+    expect(summary.thresholds.kpiScore.greenMin).toBeGreaterThan(0);
+    expect(summary.thresholds.clientRisk.yellowMax).toBeGreaterThan(
+      summary.thresholds.clientRisk.greenMax
+    );
   });
 });

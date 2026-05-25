@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **KPI-004** — Control Center dashboard UI (PR in flight) |
-| **Just completed** | **KPI-003** on staging ([#91](https://github.com/seniorkazuya/LanceFlow/pull/91)) |
+| **Active story** | **KPI-005** — Signal threshold configuration (PR in flight) |
+| **Just completed** | **KPI-004** on staging — Control Center dashboard UI |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.5.0** — M3 Automation |
 
@@ -39,7 +39,8 @@ M3 Automation: rules engine, auto-approve/assign, payments, notifications, Contr
 | KPI-001 | #89 | Role KPI calculators |
 | KPI-002 | #90 | Nightly `kpi_records` rollup |
 | KPI-003 | #91 | `GET /api/control-center/summary` |
-| KPI-004 | (in flight) | Control Center StatusBadge cards |
+| KPI-004 | merged | Control Center StatusBadge cards |
+| KPI-005 | (in flight) | CEO threshold config + audit |
 
 ### Staging env (M4 jobs)
 
@@ -57,7 +58,7 @@ Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | Milestone | Status |
 |-----------|--------|
 | **M0–M3** | Done (production **v0.5.0**) |
-| **M4** Analytics | KPI-001–002 on staging; KPI-003 in flight |
+| **M4** Analytics | KPI-001–004 on staging; KPI-005 in flight |
 
 ---
 

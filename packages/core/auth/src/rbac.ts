@@ -6,6 +6,8 @@ import type { SessionUser } from './types';
 export const RolePolicy = {
   /** Control center and ops oversight (CEO + Ops only). */
   controlCenter: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** KPI signal threshold config write — CEO only (KPI-005). */
+  kpiThresholdsWrite: [UserRole.CEO] as const,
   /** Ops workflow dashboard (OPS-008). */
   opsConsoleRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Hiring CEO queue — engineers must not access. */
