@@ -1,13 +1,15 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
 import { isAutoAssignEnabled } from '@lanceflow/config';
-import { listPaymentSchedulesForProject } from '@lanceflow/payments';
+import { listPaymentSchedulesForProject, listProjectMilestones } from '@lanceflow/payments';
 import { allowedTransitionsFrom, getProjectById, listProjectAssignments } from '@lanceflow/operations';
 import { GlassCard, PageHeader, SectionLabel, StatusBadge } from '@lanceflow/ui';
 import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectMilestonesPanel } from '@/components/projects/project-milestones-panel';
 import { ProjectPaymentSchedulesPanel } from '@/components/projects/project-payment-schedules-panel';
+import { serializeProjectMilestone } from '@/lib/project-milestones-api';
 import { serializePaymentSchedule } from '@/lib/payment-schedules-api';
 import { ProjectAutoAssignPanel } from '@/components/projects/project-auto-assign-panel';
 import { ProjectAutoApprovePanel } from '@/components/projects/project-auto-approve-panel';
@@ -34,6 +36,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const nextStatuses = allowedTransitionsFrom(project.status);
   const assignments = await listProjectAssignments(id);
   const paymentSchedules = (await listPaymentSchedulesForProject(id)) ?? [];
+  const milestones = (await listProjectMilestones(id)) ?? [];
 
   return (
     <ShellPage>
@@ -89,6 +92,33 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <ProjectAssignmentPanel projectId={project.id} projectStatus={project.status} />
           </div>
         ) : null}
+      </GlassCard>
+
+      <GlassCard className="p-5 md:p-6">
+        <SectionLabel>payment milestones</SectionLabel>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Percentage breakdown for client payments (PAY-001). Must sum to 100%.
+        </p>
+        {canWrite ? (
+          <div className="mt-6">
+            <ProjectMilestonesPanel
+              projectId={project.id}
+              initialMilestones={milestones.map(serializeProjectMilestone)}
+            />
+          </div>
+        ) : (
+          <ul className="mt-4 space-y-1 text-sm">
+            {milestones.length > 0 ? (
+              milestones.map((m) => (
+                <li key={m.id}>
+                  {m.label}: {m.percentPct}%
+                </li>
+              ))
+            ) : (
+              <li className="text-muted-foreground">No milestones defined.</li>
+            )}
+          </ul>
+        )}
       </GlassCard>
 
       <GlassCard className="p-5 md:p-6">

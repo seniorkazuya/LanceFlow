@@ -10,10 +10,10 @@
 
 | | |
 |--|--|
-| **Active story** | **Release v0.6.0** — M4 Analytics → production |
-| **Just completed** | **KPI-006** on staging ([#94](https://github.com/seniorkazuya/LanceFlow/pull/94)) |
+| **Active story** | **PAY-001** — Project milestone model (PR in flight) |
+| **Just completed** | **v0.6.0** production — M4 Analytics |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.5.0** → **v0.6.0** pending deploy |
+| **Production** | **v0.6.0** — M4 Analytics |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
