@@ -10,7 +10,7 @@
 
 | | |
 |--|--|
-| **Active story** | **PAY-003** — Milestone-linked payment reminders (in progress) |
+| **Active story** | **PAY-004** — Fraud triggers v1 (in progress) |
 | **Just completed** | **v0.6.0** production — M4 Analytics |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.6.0** — M4 Analytics |

@@ -1,5 +1,6 @@
 import { prisma } from '@lanceflow/database';
 
+import { collectFraudExceptionCandidates } from '../fraud/collect';
 import type { UpsertExceptionInput } from './types';
 
 const STALE_PENDING_DAYS = 3;
@@ -130,6 +131,9 @@ export async function collectExceptionCandidates(): Promise<UpsertExceptionInput
       entityId: project.id,
     });
   }
+
+  const fraud = await collectFraudExceptionCandidates();
+  items.push(...fraud);
 
   return items;
 }

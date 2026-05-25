@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **PAY-004** ? Fraud triggers v1: rule-based signals (excessive hours, progress spike, missing report streak, payment delay + missing reports) create `fraud` leadership exceptions; CEO inbox shows danger-only
 - **PAY-003** ? Milestone due dates sync linked `payment_schedules` for AUTO-005 reminders; escalation audit includes milestone label
 - **PAY-002** ? Escrow and work gating: block progress transitions and daily reports when escrow is held or payments are overdue; Ops override with audit (`escrow_held`, `escrow_override_*` on projects)
 - **PAY-001** ? Project payment milestones (`project_milestones`, sum to 100%); `GET/PUT /api/projects/[id]/milestones`; project detail UI
