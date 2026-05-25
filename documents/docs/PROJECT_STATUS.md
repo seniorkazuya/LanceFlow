@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **KPI-005** — Signal threshold configuration (PR in flight) |
-| **Just completed** | **KPI-004** on staging — Control Center dashboard UI |
+| **Active story** | **KPI-006** — Bonus/penalty suggestions (PR in flight) |
+| **Just completed** | **KPI-005** on staging — Signal threshold configuration |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.5.0** — M3 Automation |
 
@@ -40,7 +40,8 @@ M3 Automation: rules engine, auto-approve/assign, payments, notifications, Contr
 | KPI-002 | #90 | Nightly `kpi_records` rollup |
 | KPI-003 | #91 | `GET /api/control-center/summary` |
 | KPI-004 | merged | Control Center StatusBadge cards |
-| KPI-005 | (in flight) | CEO threshold config + audit |
+| KPI-005 | merged | CEO threshold config + audit |
+| KPI-006 | (in flight) | Bonus/penalty suggestions (Ops approve) |
 
 ### Staging env (M4 jobs)
 
@@ -58,14 +59,14 @@ Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | Milestone | Status |
 |-----------|--------|
 | **M0–M3** | Done (production **v0.5.0**) |
-| **M4** Analytics | KPI-001–004 on staging; KPI-005 in flight |
+| **M4** Analytics | KPI-001–005 on staging; KPI-006 in flight |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **KPI-005** — merge threshold config; QA on staging  
-2. **KPI-006** — Bonus/penalty suggestions  
+1. **KPI-006** — merge compensation suggestions; QA on staging  
+2. **DEV-005** / release — cut v0.6.0 when M4 slice is ready  
 
 ---
 

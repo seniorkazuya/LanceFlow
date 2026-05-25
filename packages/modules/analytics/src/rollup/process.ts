@@ -10,6 +10,7 @@ import type {
 } from '@lanceflow/rules-engine';
 
 import { computeRoleKpi } from '../calculators';
+import { generateCompensationSuggestions } from '../compensation';
 import { gatherKpiComponents } from '../components';
 import { getWeekPeriod } from '../period';
 
@@ -113,6 +114,8 @@ export async function processKpiRollup(
       upserted: upserted.length,
     },
   });
+
+  await generateCompensationSuggestions(referenceDate, actorId);
 
   return {
     periodKey: period.key,

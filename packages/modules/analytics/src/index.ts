@@ -22,6 +22,14 @@ export {
   type KpiRoleSummary,
 } from './control-center';
 export {
+  generateCompensationSuggestions,
+  listCompensationSuggestions,
+  reviewCompensationSuggestion,
+  type CompensationSuggestionRecord,
+  type CompensationSuggestionReviewInput,
+  type GenerateCompensationSuggestionsResult,
+} from './compensation';
+export {
   DEFAULT_KPI_SIGNAL_THRESHOLDS,
   classifyByMetric,
   classifyClientRisk,
