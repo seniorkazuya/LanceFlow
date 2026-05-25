@@ -3,6 +3,7 @@ import { RolePolicy, hasRole } from '@lanceflow/auth';
 import { UserRole } from '@lanceflow/types';
 import { redirect } from 'next/navigation';
 
+import { CompensationSuggestionsPanel } from '@/components/control/compensation-suggestions-panel';
 import { ControlCenterSummaryPanel } from '@/components/control/control-center-summary-panel';
 import { ExceptionInbox } from '@/components/control/exception-inbox';
 import { KpiThresholdsPanel } from '@/components/control/kpi-thresholds-panel';
@@ -22,11 +23,12 @@ export default async function ControlPage() {
       <PageHeader
         label="oversight"
         title="Control Center"
-        description="Company signals and exception inbox for CEO and Ops (KPI-003, AUTO-008)."
+        description="Company signals, compensation suggestions, and exception inbox for CEO and Ops."
       />
 
       {isCeo ? <KpiThresholdsPanel /> : null}
       <ControlCenterSummaryPanel />
+      <CompensationSuggestionsPanel />
       <ExceptionInbox />
     </ShellPage>
   );
