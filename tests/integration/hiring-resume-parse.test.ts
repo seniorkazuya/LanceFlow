@@ -38,21 +38,30 @@ describe.runIf(runIntegration)('integration: hiring resume parse (HIRE-002)', ()
   });
 
   it('parses submitted application resume and persists structured fields', async () => {
-    const resumeBytes = readFileSync(fixturePath);
+    const text = readFileSync(fixturePath, 'utf8');
+    const resumeBytes = Buffer.from(
+      `%PDF-1.4\n${text
+        .split('\n')
+        .map((line) => `(${line.replace(/[()\\]/g, ' ')})`)
+        .join('\n')}`
+    );
     const submit = await submitHiringApplication(
       {
         fullName: 'Parse Test',
         email: `hire-parse-${Date.now()}@example.com`,
         roleApplied: 'ENGINEER',
         consentGiven: true,
-        resumeFileName: 'resume.txt',
-        resumeMimeType: 'text/plain',
+        resumeFileName: 'resume.pdf',
+        resumeMimeType: 'application/pdf',
         resumeBytes,
       },
       actorId
     );
     expect(submit.ok).toBe(true);
-    if (!submit.ok) return;
+    if (!submit.ok) {
+      expect(submit.errors).toEqual([]);
+      return;
+    }
 
     createdIds.push(submit.application.id);
 
