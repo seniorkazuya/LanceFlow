@@ -2,6 +2,13 @@ import type { ProjectMilestoneInput } from './types';
 
 export type MilestoneValidationError = { field: string; message: string };
 
+function parseMilestoneDueDate(value: string): Date | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const parsed = new Date(`${trimmed}T00:00:00.000Z`);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
 /** PAY-001 — milestone percentages must sum to exactly 100. */
 export function validateProjectMilestones(
   milestones: ProjectMilestoneInput[]
@@ -33,6 +40,36 @@ export function validateProjectMilestones(
       });
     } else {
       sum += m.percentPct;
+    }
+
+    const dueRaw = m.dueDate?.trim() ?? '';
+    const hasDue = dueRaw.length > 0;
+    const hasAmount = m.amountCents !== undefined && m.amountCents !== null;
+
+    if (hasDue && !parseMilestoneDueDate(dueRaw)) {
+      errors.push({
+        field: `milestones[${index}].dueDate`,
+        message: 'dueDate must be a valid date (YYYY-MM-DD)',
+      });
+    }
+
+    if (hasDue && !hasAmount) {
+      errors.push({
+        field: `milestones[${index}].amountCents`,
+        message: 'amountCents is required when dueDate is set',
+      });
+    } else if (hasAmount && !hasDue) {
+      errors.push({
+        field: `milestones[${index}].dueDate`,
+        message: 'dueDate is required when amountCents is set',
+      });
+    } else if (hasAmount) {
+      if (!Number.isInteger(m.amountCents) || (m.amountCents as number) <= 0) {
+        errors.push({
+          field: `milestones[${index}].amountCents`,
+          message: 'amountCents must be a positive integer',
+        });
+      }
     }
   });
 

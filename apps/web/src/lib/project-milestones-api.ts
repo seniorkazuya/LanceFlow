@@ -7,5 +7,6 @@ export function serializeProjectMilestone(m: ProjectMilestoneRecord) {
     label: m.label,
     percentPct: m.percentPct,
     sortOrder: m.sortOrder,
+    dueDate: m.dueDate ? m.dueDate.toISOString().slice(0, 10) : null,
   };
 }

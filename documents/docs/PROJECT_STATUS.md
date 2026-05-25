@@ -10,7 +10,7 @@
 
 | | |
 |--|--|
-| **Active story** | **PAY-002** — Escrow and work gating (in progress) |
+| **Active story** | **PAY-003** — Milestone-linked payment reminders (in progress) |
 | **Just completed** | **v0.6.0** production — M4 Analytics |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.6.0** — M4 Analytics |
@@ -42,7 +42,8 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 |-------|-----|---------|
 | KPI-001–006 | #89–#94 | M4 Analytics (complete) |
 | PAY-001 | #96 | Project payment milestones (sum to 100%) |
-| PAY-002 | (pending) | Escrow hold + overdue payment gating; Ops override |
+| PAY-002 | merged | Escrow hold + overdue payment gating; Ops override |
+| PAY-003 | (pending) | Milestone due dates → linked schedules; AUTO-005 reminders |
 
 ### Staging env (M4 jobs)
 
@@ -58,15 +59,15 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | Milestone | Status |
 |-----------|--------|
 | **M0–M4** | Done (production **v0.6.0**) |
-| **M5** Payments | PAY-001 in review; PAY-002 in progress |
+| **M5** Payments | PAY-001–002 on staging; PAY-003 in progress |
 
 ---
 
 ## Recommended sprint order (next)
 
 1. Merge **#96** PAY-001; QA milestones on project detail  
-2. Merge PAY-002 PR; QA escrow panel and blocked transitions  
-3. **PAY-003** — Milestone-linked payment reminders  
+2. QA PAY-002 escrow on staging (post-migrate)  
+3. Merge PAY-003 PR; QA milestone due dates drive payment reminders  
 
 ---
 

@@ -96,32 +96,36 @@ model Project {
 
 /// PAY-001 — payment milestone % breakdown per project (must sum to 100).
 model ProjectMilestone {
-  id         String   @id @default(cuid())
-  projectId  String   @map("project_id")
-  label      String
-  percentPct Int      @map("percent_pct")
-  sortOrder  Int      @default(0) @map("sort_order")
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
-  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  id              String           @id @default(cuid())
+  projectId       String           @map("project_id")
+  label           String
+  percentPct      Int              @map("percent_pct")
+  dueDate         DateTime?        @db.Date @map("due_date")
+  sortOrder       Int              @default(0) @map("sort_order")
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  paymentSchedule PaymentSchedule?
 
   @@index([projectId])
   @@map("project_milestones")
 }
 
 model PaymentSchedule {
-  id              String    @id @default(cuid())
-  projectId       String    @map("project_id")
-  dueDate         DateTime  @db.Date @map("due_date")
-  amountCents     Int       @map("amount_cents")
-  currency        String    @default("USD")
-  status          String    @default("scheduled")
-  escalationLevel Int       @default(0) @map("escalation_level")
-  paidAt          DateTime? @map("paid_at")
+  id              String            @id @default(cuid())
+  projectId       String            @map("project_id")
+  milestoneId     String?           @unique @map("milestone_id")
+  dueDate         DateTime          @db.Date @map("due_date")
+  amountCents     Int               @map("amount_cents")
+  currency        String            @default("USD")
+  status          String            @default("scheduled")
+  escalationLevel Int               @default(0) @map("escalation_level")
+  paidAt          DateTime?         @map("paid_at")
   notes           String?
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime  @updatedAt @map("updated_at")
-  project         Project   @relation(fields: [projectId], references: [id])
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  project         Project           @relation(fields: [projectId], references: [id])
+  milestone       ProjectMilestone? @relation(fields: [milestoneId], references: [id], onDelete: SetNull)
 
   @@index([projectId, dueDate])
   @@map("payment_schedules")

@@ -31,6 +31,9 @@ export async function processPaymentEscalations(
   const rows = await prisma.paymentSchedule.findMany({
     where: { status: 'scheduled' },
     orderBy: { dueDate: 'asc' },
+    include: {
+      milestone: { select: { id: true, label: true, percentPct: true } },
+    },
   });
 
   const updated: PaymentEscalationUpdate[] = [];
@@ -66,6 +69,9 @@ export async function processPaymentEscalations(
         fromLevel: row.escalationLevel,
         toLevel: targetLevel,
         amountCents: row.amountCents,
+        milestoneId: row.milestoneId,
+        milestoneLabel: row.milestone?.label ?? null,
+        milestonePercentPct: row.milestone?.percentPct ?? null,
       },
     });
   }

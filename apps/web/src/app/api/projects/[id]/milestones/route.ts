@@ -48,7 +48,7 @@ export const PUT = withApiLogging(
 
     const { id } = await (context as RouteContext).params;
     const body = await parseJsonBody<{
-      milestones?: { label?: string; percentPct?: number }[];
+      milestones?: { label?: string; percentPct?: number; dueDate?: string | null; amountCents?: number | null }[];
     }>(request);
 
     if (!body?.milestones || !Array.isArray(body.milestones)) {
@@ -64,6 +64,8 @@ export const PUT = withApiLogging(
         milestones: body.milestones.map((m) => ({
           label: m.label ?? '',
           percentPct: m.percentPct ?? 0,
+          dueDate: m.dueDate ?? null,
+          amountCents: m.amountCents ?? null,
         })),
       },
       authz.user.id
