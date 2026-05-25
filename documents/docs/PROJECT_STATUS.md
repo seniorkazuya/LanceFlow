@@ -64,8 +64,8 @@ Trigger manually: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 ## Recommended sprint order (next)
 
-1. **KPI-003** — merge and QA `GET /api/control-center/summary`  
-2. **KPI-004** — Control Center dashboard UI  
+1. **KPI-005** — merge threshold config; QA on staging  
+2. **KPI-006** — Bonus/penalty suggestions  
 
 ---
 

@@ -1,16 +1,17 @@
 import {
-  evaluateRule,
-  getRuleByVersion,
+  BIDDER_KPI_FORMULA_V1,
+  CALLER_KPI_FORMULA_V1,
+  WORKER_KPI_FORMULA_V1,
+  computeBidderKpiV1,
+  computeCallerKpiV1,
+  computeWorkerKpiV1,
   type BidderKpiInputV1,
   type BidderKpiResultV1,
   type CallerKpiInputV1,
   type CallerKpiResultV1,
   type WorkerKpiInputV1,
   type WorkerKpiResultV1,
-  BIDDER_KPI_FORMULA_V1,
-  CALLER_KPI_FORMULA_V1,
-  WORKER_KPI_FORMULA_V1,
-} from '@lanceflow/rules-engine';
+} from '@lanceflow/rules-engine/kpi';
 import { UserRole } from '@lanceflow/types';
 
 export type RoleKpiRole = typeof UserRole.ENGINEER | typeof UserRole.BIDDER | typeof UserRole.CALLER;
@@ -30,13 +31,16 @@ const FORMULA_BY_ROLE: Record<RoleKpiRole, string> = {
 
 /** KPI-001 — compute versioned role KPI from planning doc weights. */
 export function computeRoleKpi(input: RoleKpiInput): RoleKpiResult {
-  const formulaVersion = FORMULA_BY_ROLE[input.role];
-  const rule = getRuleByVersion(formulaVersion);
-  if (!rule) {
-    throw new Error(`KPI formula not registered: ${formulaVersion}`);
+  switch (input.role) {
+    case UserRole.ENGINEER:
+      return computeWorkerKpiV1(input.components);
+    case UserRole.BIDDER:
+      return computeBidderKpiV1(input.components);
+    case UserRole.CALLER:
+      return computeCallerKpiV1(input.components);
+    default:
+      throw new Error(`Unsupported KPI role: ${(input as RoleKpiInput).role}`);
   }
-  const evaluated = evaluateRule(rule, input.components);
-  return evaluated.value as RoleKpiResult;
 }
 
 export function listRoleKpiFormulaVersions(): string[] {

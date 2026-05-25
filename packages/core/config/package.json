@@ -6,7 +6,11 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./project-auto-approve": "./src/project-auto-approve.ts",
+    "./feature-flags": "./src/feature-flags.ts",
+    "./logger": "./src/logger.ts",
+    "./health": "./src/health.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

@@ -1,7 +1,6 @@
 'use client';
 
-import type { KpiSignalThresholdsConfig } from '@lanceflow/analytics';
-import { classifyKpiScore } from '@lanceflow/analytics';
+import { classifyKpiScore, type KpiSignalThresholdsConfig } from '@lanceflow/analytics/client';
 import { useCallback, useEffect, useState } from 'react';
 
 import { GlassCard, StatusBadge } from '@lanceflow/ui';

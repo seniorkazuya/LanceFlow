@@ -78,6 +78,18 @@ lanceflow/
 
 **Do not** put business logic in route handlers beyond validation.
 
+### 4.1 Client components (`'use client'`)
+
+Never import module **barrel** exports (`@lanceflow/analytics`, `@lanceflow/config`, etc.) from client components. Barrels re-export server code (Prisma, Redis/ioredis, rule registries) and break the Next.js build.
+
+| Need | Import from |
+|------|-------------|
+| KPI signal coloring in UI | `@lanceflow/analytics/client` |
+| Threshold types only | `@lanceflow/analytics/thresholds/types` |
+| Server API routes / RSC | `@lanceflow/analytics` (full module) |
+| Pure KPI math in server code | `@lanceflow/rules-engine/kpi` |
+| Config thresholds (no Redis) | `@lanceflow/config/project-auto-approve` |
+
 ---
 
 ## 5. Database strategy
