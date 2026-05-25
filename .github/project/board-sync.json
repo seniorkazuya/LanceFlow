@@ -46,7 +46,7 @@
     "AUTO-004": { "column": "QA / Staging", "title": "AUTO-004 — Payment schedule entity" },
     "AUTO-005": { "column": "QA / Staging", "title": "AUTO-005 — Payment reminder and escalation jobs" },
     "AUTO-006": { "column": "QA / Staging", "title": "AUTO-006 — Client risk pre-screen API" },
-    "AUTO-007": { "column": "In Progress", "title": "AUTO-007 — Notification service" },
-    "AUTO-008": { "column": "Ready", "title": "AUTO-008 — Exception queue for leadership" }
+    "AUTO-007": { "column": "QA / Staging", "title": "AUTO-007 — Notification service" },
+    "AUTO-008": { "column": "In Progress", "title": "AUTO-008 — Exception queue for leadership" }
   }
 }
