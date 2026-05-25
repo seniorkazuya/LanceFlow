@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **HIRE-002** ? Resume parser (`@lanceflow/ai-hiring`): years, stack, seniority, job hop index; Zod validation; `POST /api/hiring/applications/[id]/parse` (CEO/Ops)
 - **HIRE-001** ? Candidate application portal: public `/apply`, `POST /api/hiring/applications`, resume upload (S3 or local dev), consent required, 5MB max
 - **PAY-005** ? Project dispute workflow (`project_disputes`): open ? investigating ? escalated ? resolved; high-value escalations create CEO leadership exceptions; SOP catalog link
 - **PAY-004** ? Fraud triggers v1: rule-based signals (excessive hours, progress spike, missing report streak, payment delay + missing reports) create `fraud` leadership exceptions; CEO inbox shows danger-only
@@ -19,7 +20,7 @@ Staging migrate deploy adds:
 
 - `project_milestones` (`due_date`); `payment_schedules.milestone_id`; `project_disputes`
 - `escrow_held`, `escrow_override_reason`, `escrow_override_by`, `escrow_override_at` on `ops_projects`
-- `hiring_applications` (HIRE-001)
+- `hiring_applications` (HIRE-001); `resume_parsed`, `resume_parsed_at`, `resume_parse_version` (HIRE-002)
 
 ## [0.6.0] ????? 2026-05-25
 

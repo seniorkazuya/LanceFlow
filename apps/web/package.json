@@ -19,6 +19,7 @@
     "@lanceflow/auth": "workspace:*",
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
+    "@lanceflow/ai-hiring": "workspace:*",
     "@lanceflow/hiring": "workspace:*",
     "@lanceflow/operations": "workspace:*",
     "@lanceflow/payments": "workspace:*",

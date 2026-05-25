@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **HIRE-001** — Candidate application portal (in progress) |
-| **Just completed** | **M5 Payments** — PAY-001–005 on staging |
+| **Active story** | **HIRE-002** — Resume parser (in progress) |
+| **Just completed** | **HIRE-001** — Candidate application portal |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.6.0** — M4 Analytics |
 
@@ -42,7 +42,8 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 |-------|-----|---------|
 | KPI-001–006 | #89–#94 | M4 Analytics (complete) |
 | PAY-001–005 | #96–#100 | M5 Payments (milestones, escrow, reminders, fraud, disputes) |
-| HIRE-001 | (pending) | Public apply portal + resume upload |
+| HIRE-001 | #101 | Public apply portal + resume upload |
+| HIRE-002 | (pending) | Resume parse API (years, stack, seniority, job hops) |
 
 ### Staging env (M4 jobs)
 

@@ -17,6 +17,8 @@ export const RolePolicy = {
     UserRole.CALLER,
     UserRole.BIDDER,
   ] as const,
+  /** Resume parse / hiring application management (HIRE-002). */
+  hiringApplicationsManage: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Audit log read — CEO only (CORE-006). */
   auditRead: [UserRole.CEO] as const,
   /** Client records read (OPS-001). */
