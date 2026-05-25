@@ -39,5 +39,10 @@ export type HiringApplicationRecord = {
   consentGiven: boolean;
   consentAt: Date;
   status: string;
+  technicalScore: number | null;
+  technicalScoreAt: Date | null;
+  technicalScoreSource: string | null;
   createdAt: Date;
 };
+
+export type TechnicalScoreSource = 'manual' | 'webhook';

@@ -16,3 +16,12 @@ export {
 } from './types';
 export { isS3StorageConfigured, readResume, storeResume } from './storage';
 export { getHiringApplicationById } from './queries';
+export {
+  ingestAssessmentWebhook,
+  setTechnicalScore,
+  validateTechnicalScore,
+  type AssessmentWebhookInput,
+  type AssessmentWebhookResult,
+  type SetTechnicalScoreResult,
+} from './assessment';
+export type { TechnicalScoreSource } from './types';
