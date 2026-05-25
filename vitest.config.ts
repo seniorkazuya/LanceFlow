@@ -5,5 +5,8 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     environment: 'node',
     testTimeout: 30_000,
+    // Integration tests share the Prisma singleton; parallel file runs + per-file
+    // $disconnect in afterAll caused flaky failures (e.g. project-auto-assign).
+    fileParallelism: false,
   },
 });

@@ -27,7 +27,6 @@ describe.runIf(runIntegration)('integration: milestone payment reminders (PAY-00
     if (clientIds.length > 0) {
       await prisma.client.deleteMany({ where: { id: { in: clientIds } } });
     }
-    await prisma.$disconnect();
   });
 
   it('syncs linked schedules and escalates on milestone due date', async () => {

@@ -101,13 +101,14 @@ describe.runIf(runIntegration)('integration: project auto-assign (AUTO-003)', ()
   });
 
   it('override marks prior decision and assigns different engineer', async () => {
+    const uniqueSkill = `auto-assign-override-${Date.now()}`;
     const engineerA = await prisma.user.create({
       data: {
         email: `override-a-${Date.now()}@test.local`,
         displayName: 'Override A',
         role: UserRole.ENGINEER,
         status: 'active',
-        skillTags: ['react'],
+        skillTags: [uniqueSkill],
       },
     });
     const engineerB = await prisma.user.create({
@@ -116,7 +117,7 @@ describe.runIf(runIntegration)('integration: project auto-assign (AUTO-003)', ()
         displayName: 'Override B',
         role: UserRole.ENGINEER,
         status: 'active',
-        skillTags: ['react'],
+        skillTags: [uniqueSkill],
       },
     });
     userIds.push(engineerA.id, engineerB.id);
@@ -137,10 +138,14 @@ describe.runIf(runIntegration)('integration: project auto-assign (AUTO-003)', ()
     if (!project.ok) return;
     projectIds.push(project.project.id);
 
-    await transitionProject(project.project.id, 'pending_approval', actorId);
-    await transitionProject(project.project.id, 'active', actorId);
+    const toPending = await transitionProject(project.project.id, 'pending_approval', actorId);
+    expect(toPending.ok).toBe(true);
+    const toActive = await transitionProject(project.project.id, 'active', actorId);
+    expect(toActive.ok).toBe(true);
 
-    const first = await runProjectAutoAssignOnActivate(project.project.id, actorId);
+    const first = await runProjectAutoAssignOnActivate(project.project.id, actorId, {
+      requiredSkills: [uniqueSkill],
+    });
     expect(first.ok).toBe(true);
     if (!first.ok || first.skipped) return;
     if (first.assignmentId) assignmentIds.push(first.assignmentId);
@@ -151,7 +156,7 @@ describe.runIf(runIntegration)('integration: project auto-assign (AUTO-003)', ()
       {
         userId: engineerB.id,
         reason: 'Ops selected backup engineer for coverage',
-        requiredSkills: ['react'],
+        requiredSkills: [uniqueSkill],
       },
       actorId
     );
