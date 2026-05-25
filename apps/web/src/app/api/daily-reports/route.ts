@@ -4,6 +4,7 @@ import {
   listReportsForUserOnDate,
   submitDailyReport,
 } from '@lanceflow/operations';
+import { getWorkGatingStatus } from '@lanceflow/payments';
 import { NextResponse } from 'next/server';
 
 import { parseJsonBody } from '@/lib/clients-api';
@@ -36,6 +37,11 @@ export const POST = withAuthRoute('/api/daily-reports', RolePolicy.dailyReportsS
       { errors: [{ field: 'projectId', message: 'projectId is required' }] },
       { status: 400 }
     );
+  }
+
+  const gate = await getWorkGatingStatus(body.projectId);
+  if (gate.ok && gate.status.blocked) {
+    return NextResponse.json({ errors: [{ field: 'workGating', message: gate.status.message }] }, { status: 423 });
   }
 
   const result = await submitDailyReport(

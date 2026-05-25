@@ -78,9 +78,13 @@ model Project {
   status             String   @default("draft")
   scopeClarityPct    Int?     @map("scope_clarity_pct")
   profitMarginPct    Int?     @map("profit_margin_pct")
-  clientRiskAtCreate Int?     @map("client_risk_at_create")
-  createdAt          DateTime @default(now()) @map("created_at")
-  updatedAt          DateTime @updatedAt @map("updated_at")
+  clientRiskAtCreate Int?      @map("client_risk_at_create")
+  escrowHeld         Boolean   @default(false) @map("escrow_held")
+  escrowOverrideReason String? @map("escrow_override_reason")
+  escrowOverrideBy   String?   @map("escrow_override_by")
+  escrowOverrideAt   DateTime? @map("escrow_override_at")
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
   client             Client   @relation(fields: [clientId], references: [id])
   assignments        Assignment[]
   dailyReports       DailyReport[]

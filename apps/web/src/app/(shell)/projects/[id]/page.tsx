@@ -7,6 +7,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectEscrowPanel } from '@/components/projects/project-escrow-panel';
 import { ProjectMilestonesPanel } from '@/components/projects/project-milestones-panel';
 import { ProjectPaymentSchedulesPanel } from '@/components/projects/project-payment-schedules-panel';
 import { serializeProjectMilestone } from '@/lib/project-milestones-api';
@@ -93,6 +94,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         ) : null}
       </GlassCard>
+
+      {canWrite ? (
+        <GlassCard className="p-5 md:p-6">
+          <SectionLabel>escrow & work gating</SectionLabel>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Block progress when payments are overdue or escrow is held (PAY-002). Ops override is audited.
+          </p>
+          <div className="mt-6">
+            <ProjectEscrowPanel projectId={project.id} />
+          </div>
+        </GlassCard>
+      ) : null}
 
       <GlassCard className="p-5 md:p-6">
         <SectionLabel>payment milestones</SectionLabel>
