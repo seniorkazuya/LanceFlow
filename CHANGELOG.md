@@ -6,6 +6,20 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **KPI-002** — Nightly KPI rollup (`kpi_records`, idempotent ISO-week upsert, BullMQ + `POST /api/jobs/kpi-rollup`)
+- **KPI-001** — Role KPI calculators (Worker, Bidder, Caller) in `@lanceflow/analytics` + rules-engine
+
+### Database (staging)
+
+- `kpi_records`
+
+## [0.5.0] — 2026-05-25
+
+M3 Automation on production: rules engine, auto-approve/assign, payments, notifications, and leadership exception inbox.
+
+### Added
+
+- **AUTO-008** — Leadership exception inbox at `/control`
 - **AUTO-007** — In-app notification bell + Resend/noop email adapter; ops alerts on payment escalation
 - **AUTO-006** — Client risk pre-screen API for Bidders (`POST /api/clients/[id]/risk-prescreen`, RuleDecision + audit)
 - **AUTO-005** — Daily payment escalation job (due reminder, day-3 escalate, day-7 risk); BullMQ worker + manual `/api/jobs/payment-escalations`

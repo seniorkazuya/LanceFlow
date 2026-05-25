@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@lanceflow/analytics": "workspace:*",
     "@lanceflow/audit": "workspace:*",
     "@lanceflow/automation": "workspace:*",
     "@lanceflow/auth": "workspace:*",
