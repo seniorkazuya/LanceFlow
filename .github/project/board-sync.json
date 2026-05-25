@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-05-25",
-  "release": "v0.5.0",
+  "release": "v0.6.0",
   "project": {
     "owner": "seniorkazuya",
     "number": 4,
@@ -48,6 +48,11 @@
     "AUTO-006": { "column": "Done", "title": "AUTO-006 — Client risk pre-screen API" },
     "AUTO-007": { "column": "Done", "title": "AUTO-007 — Notification service" },
     "AUTO-008": { "column": "Done", "title": "AUTO-008 — Exception queue for leadership" },
-    "KPI-001": { "column": "In Progress", "title": "KPI-001 — KPI calculators by role" }
+    "KPI-001": { "column": "Done", "title": "KPI-001 — KPI calculators by role" },
+    "KPI-002": { "column": "Done", "title": "KPI-002 — Nightly KPI rollup job" },
+    "KPI-003": { "column": "Done", "title": "KPI-003 — Control Center summary API" },
+    "KPI-004": { "column": "Done", "title": "KPI-004 — Control Center dashboard UI" },
+    "KPI-005": { "column": "Done", "title": "KPI-005 — Signal threshold configuration" },
+    "KPI-006": { "column": "Done", "title": "KPI-006 — Bonus and penalty suggestions" }
   }
 }

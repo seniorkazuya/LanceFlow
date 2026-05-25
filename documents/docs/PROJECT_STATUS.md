@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
 > **Last updated:** 2026-05-25  
-> **Current phase:** M4 — Analytics (KPI calculators)  
+> **Current phase:** M4 — Analytics (release to production)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,44 +10,42 @@
 
 | | |
 |--|--|
-| **Active story** | **KPI-001** — Role KPI calculators |
-| **Just released** | **v0.5.0** — M3 Automation on production |
+| **Active story** | **Release v0.6.0** — M4 Analytics → production |
+| **Just completed** | **KPI-006** on staging ([#94](https://github.com/seniorkazuya/LanceFlow/pull/94)) |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.5.0** — M3 Automation (deploy via tag `v0.5.0`) |
+| **Production** | **v0.5.0** → **v0.6.0** pending deploy |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## Production (v0.5.0 — M3 Automation)
+## Production (target v0.6.0)
 
-| Story | Feature |
-|-------|---------|
-| AUTO-001–008 | Rules engine, auto-approve, auto-assign, payments, escalation, risk pre-screen, notifications, exception inbox |
-| OPS-001–008 | Clients, projects, workload, assignment, daily reports, SOPs, ops console |
-
-### Production env (M3 — set on Vercel production project)
+M4 Analytics: role KPIs, Control Center summary + dashboard, CEO thresholds, Ops-approved bonus/penalty suggestions.
 
 | Variable | Purpose |
 |----------|---------|
-| `AUTO_ASSIGN_ENABLED` | Auto-assign on project activate |
-| `PAYMENT_ESCALATION_JOBS_ENABLED` | BullMQ payment escalation worker |
-| `PAYMENT_ESCALATION_CRON` | Cron for daily escalation job |
-| `REDIS_URL` | Worker queue |
-| `RESEND_API_KEY` | Optional — Resend email |
-| `NOTIFICATION_FROM_EMAIL` | Sender for Resend |
+| `KPI_ROLLUP_JOBS_ENABLED` | KPI rollup + compensation suggestions in worker |
+| `KPI_ROLLUP_CRON` | Nightly cron (default `0 3 * * *`) |
+| `AUTO_ASSIGN_ENABLED` | (M3) Auto-assign on activate |
+| `PAYMENT_ESCALATION_JOBS_ENABLED` | (M3) Payment escalation worker |
+| `REDIS_URL` | BullMQ worker |
+| `RESEND_API_KEY` | Optional email |
 
-### Production DB migrations
-
-After deploy, **Deploy Production** workflow runs `pnpm db:migrate:deploy`. New since v0.4.1:
-
-`rule_decisions`, `payment_schedules`, `notifications`, `leadership_exceptions`
+Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 ---
 
-## Staging
+## Staging (M4 complete)
 
-Same feature set as production v0.5.0; used for pre-release QA and M4 development.
+| Story | PR | Feature |
+|-------|-----|---------|
+| KPI-001 | #89 | Role KPI calculators |
+| KPI-002 | #90 | Nightly `kpi_records` rollup |
+| KPI-003 | #91 | `GET /api/control-center/summary` |
+| KPI-004 | #92 | Control Center StatusBadge cards |
+| KPI-005 | #93 | CEO threshold config + audit |
+| KPI-006 | #94 | Bonus/penalty suggestions (Ops approve) |
 
 ---
 
@@ -56,15 +54,15 @@ Same feature set as production v0.5.0; used for pre-release QA and M4 developmen
 | Milestone | Status |
 |-----------|--------|
 | **M0–M3** | Done (production **v0.5.0**) |
-| **M4** Analytics | In progress — KPI-001 |
+| **M4** Analytics | Complete on staging; **v0.6.0** release PR in flight |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. **KPI-001** — Worker / Bidder / Caller KPI calculators  
-2. **KPI-002** — Nightly KPI job  
-3. **KPI-003** — Control Center summary API  
+1. Merge **release/v0.6.0** → `main`, tag **v0.6.0**, approve production deploy  
+2. Staging/production QA: `/control`, KPI rollup, compensation suggestions  
+3. **M5** Payments / Hiring per [STORY_DEVELOPMENT_PLAN.md](./STORY_DEVELOPMENT_PLAN.md)
 
 ---
 
@@ -72,9 +70,9 @@ Same feature set as production v0.5.0; used for pre-release QA and M4 developmen
 
 | Date | Change |
 |------|--------|
-| 2026-05-25 | **v0.5.0** — M3 Automation to production |
-| 2026-05-25 | M3 complete on staging — AUTO-008 (#86) |
-| 2026-05-23 | **v0.4.1** — M2 Operations to production |
+| 2026-05-25 | KPI-005–006 staging (#93–#94); preparing **v0.6.0** |
+| 2026-05-25 | **v0.5.0** production — M3 Automation |
+| 2026-05-23 | **v0.4.1** — M2 Operations |
 
 ---
 

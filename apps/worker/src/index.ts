@@ -1,22 +1,35 @@
+import { processKpiRollup } from '@lanceflow/analytics';
+import { processPaymentEscalations } from '@lanceflow/payments';
 import { Queue, Worker } from 'bullmq';
 import Redis from 'ioredis';
 
-import { processPaymentEscalations } from '@lanceflow/payments';
+const PAYMENT_QUEUE = 'payment-escalation';
+const KPI_QUEUE = 'kpi-rollup';
+const PAYMENT_CRON_DEFAULT = '0 8 * * *';
+const KPI_CRON_DEFAULT = '0 3 * * *';
 
-const QUEUE_NAME = 'payment-escalation';
-const DEFAULT_CRON = '0 8 * * *';
-
-function isJobsEnabled(): boolean {
-  const raw = process.env.PAYMENT_ESCALATION_JOBS_ENABLED?.trim().toLowerCase();
+function flagEnabled(name: string): boolean {
+  const raw = process.env[name]?.trim().toLowerCase();
   return raw === '1' || raw === 'true' || raw === 'yes';
 }
 
-async function runEscalationJob() {
-  const result = await processPaymentEscalations();
-  console.info(
-    `[${QUEUE_NAME}] scanned=${result.scanned} updated=${result.updated.length}`,
-    result.updated.length > 0 ? result.updated : ''
+async function registerCron(
+  connection: Redis,
+  queueName: string,
+  jobName: string,
+  cron: string,
+  jobId: string
+) {
+  const queue = new Queue(queueName, { connection });
+  await queue.add(
+    jobName,
+    {},
+    {
+      repeat: { pattern: cron },
+      jobId,
+    }
   );
+  return queue;
 }
 
 async function main() {
@@ -26,41 +39,67 @@ async function main() {
     process.exit(1);
   }
 
-  if (!isJobsEnabled()) {
-    console.info('PAYMENT_ESCALATION_JOBS_ENABLED is off — exiting');
+  const paymentEnabled = flagEnabled('PAYMENT_ESCALATION_JOBS_ENABLED');
+  const kpiEnabled = flagEnabled('KPI_ROLLUP_JOBS_ENABLED');
+
+  if (!paymentEnabled && !kpiEnabled) {
+    console.info('No worker jobs enabled — exiting');
     process.exit(0);
   }
 
   const connection = new Redis(redisUrl, { maxRetriesPerRequest: null });
+  const queues: Queue[] = [];
+  const workers: Worker[] = [];
 
-  const worker = new Worker(
-    QUEUE_NAME,
-    async () => {
-      await runEscalationJob();
-    },
-    { connection }
-  );
+  if (paymentEnabled) {
+    const cron = process.env.PAYMENT_ESCALATION_CRON?.trim() || PAYMENT_CRON_DEFAULT;
+    workers.push(
+      new Worker(
+        PAYMENT_QUEUE,
+        async () => {
+          const result = await processPaymentEscalations();
+          console.info(
+            `[${PAYMENT_QUEUE}] scanned=${result.scanned} updated=${result.updated.length}`
+          );
+        },
+        { connection }
+      )
+    );
+    queues.push(
+      await registerCron(connection, PAYMENT_QUEUE, 'daily-escalation', cron, 'payment-escalation-daily')
+    );
+    console.info(`[${PAYMENT_QUEUE}] scheduled (cron: ${cron})`);
+  }
 
-  worker.on('failed', (job, err) => {
-    console.error(`[${QUEUE_NAME}] job ${job?.id} failed`, err);
-  });
+  if (kpiEnabled) {
+    const cron = process.env.KPI_ROLLUP_CRON?.trim() || KPI_CRON_DEFAULT;
+    workers.push(
+      new Worker(
+        KPI_QUEUE,
+        async () => {
+          const result = await processKpiRollup();
+          console.info(
+            `[${KPI_QUEUE}] period=${result.periodKey} scanned=${result.scanned} upserted=${result.upserted.length}`
+          );
+        },
+        { connection }
+      )
+    );
+    queues.push(
+      await registerCron(connection, KPI_QUEUE, 'nightly-rollup', cron, 'kpi-rollup-nightly')
+    );
+    console.info(`[${KPI_QUEUE}] scheduled (cron: ${cron})`);
+  }
 
-  const cron = process.env.PAYMENT_ESCALATION_CRON?.trim() || DEFAULT_CRON;
-  const queue = new Queue(QUEUE_NAME, { connection });
-  await queue.add(
-    'daily-escalation',
-    {},
-    {
-      repeat: { pattern: cron },
-      jobId: 'payment-escalation-daily',
-    }
-  );
-
-  console.info(`Worker listening on queue "${QUEUE_NAME}" (cron: ${cron})`);
+  for (const worker of workers) {
+    worker.on('failed', (job, err) => {
+      console.error(`[${job?.queueName}] job ${job?.id} failed`, err);
+    });
+  }
 
   const shutdown = async () => {
-    await worker.close();
-    await queue.close();
+    await Promise.all(workers.map((w) => w.close()));
+    await Promise.all(queues.map((q) => q.close()));
     await connection.quit();
     process.exit(0);
   };

@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@lanceflow/analytics':
+        specifier: workspace:*
+        version: link:packages/modules/analytics
       '@lanceflow/audit':
         specifier: workspace:*
         version: link:packages/audit
@@ -68,6 +71,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@lanceflow/analytics':
+        specifier: workspace:*
+        version: link:../../packages/modules/analytics
       '@lanceflow/audit':
         specifier: workspace:*
         version: link:../../packages/audit
@@ -162,6 +168,9 @@ importers:
 
   apps/worker:
     dependencies:
+      '@lanceflow/analytics':
+        specifier: workspace:*
+        version: link:../../packages/modules/analytics
       '@lanceflow/database':
         specifier: workspace:*
         version: link:../../packages/core/database
@@ -323,6 +332,34 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.19(tsx@4.22.3)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  packages/modules/analytics:
+    dependencies:
+      '@lanceflow/audit':
+        specifier: workspace:*
+        version: link:../../audit
+      '@lanceflow/automation':
+        specifier: workspace:*
+        version: link:../automation
+      '@lanceflow/database':
+        specifier: workspace:*
+        version: link:../../core/database
+      '@lanceflow/rules-engine':
+        specifier: workspace:*
+        version: link:../../rules-engine
+      '@lanceflow/types':
+        specifier: workspace:*
+        version: link:../../core/types
+      '@prisma/client':
+        specifier: ^6.1.0
+        version: 6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3)
+    devDependencies:
+      '@lanceflow/typescript-config':
+        specifier: workspace:*
+        version: link:../../core/typescript-config
       typescript:
         specifier: ^5.7.2
         version: 5.9.3

@@ -21,6 +21,8 @@ model User {
   assignments Assignment[]
   dailyReports  DailyReport[]
   notifications Notification[]
+  kpiRecords    KpiRecord[]
+  compensationSuggestions CompensationSuggestion[]
 
   @@map("users")
 }
@@ -154,6 +156,62 @@ model LeadershipException {
 
   @@index([status, severity])
   @@map("leadership_exceptions")
+}
+
+model KpiRecord {
+  id             String   @id @default(cuid())
+  userId         String   @map("user_id")
+  role           String
+  periodKey      String   @map("period_key")
+  periodStart    DateTime @db.Date @map("period_start")
+  periodEnd      DateTime @db.Date @map("period_end")
+  formulaVersion String   @map("formula_version")
+  score          Int
+  components     Json
+  computedAt     DateTime @default(now()) @map("computed_at")
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, periodKey])
+  @@index([periodKey])
+  @@map("kpi_records")
+}
+
+/// KPI-005 — green/yellow/red bands per control-center metric (CEO configures).
+model KpiSignalThreshold {
+  metricKey  String   @id @map("metric_key")
+  direction  String
+  greenMin   Int?     @map("green_min")
+  yellowMin  Int?     @map("yellow_min")
+  greenMax   Int?     @map("green_max")
+  yellowMax  Int?     @map("yellow_max")
+  updatedBy  String?  @map("updated_by")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("kpi_signal_thresholds")
+}
+
+/// KPI-006 — Ops-reviewed bonus/penalty suggestions from weekly KPI (not payroll).
+model CompensationSuggestion {
+  id             String    @id @default(cuid())
+  userId         String    @map("user_id")
+  periodKey      String    @map("period_key")
+  kind           String
+  percentBps     Int       @map("percent_bps")
+  kpiScore       Int       @map("kpi_score")
+  formulaVersion String    @map("formula_version")
+  inputs         Json
+  status         String    @default("pending")
+  reviewedBy     String?   @map("reviewed_by")
+  reviewedAt     DateTime? @map("reviewed_at")
+  reviewNote     String?   @map("review_note")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, periodKey])
+  @@index([status, periodKey])
+  @@map("compensation_suggestions")
 }
 
 model RuleDecision {

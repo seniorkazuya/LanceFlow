@@ -111,7 +111,8 @@ After sign-in you land on **Dashboard**:
 |----------|--------|
 | `GET /api/health` | `status: ok`, database/redis checks |
 | `GET /api/me` | 401 when logged out; user JSON when logged in |
-| `GET /api/control/summary` | 200 for Ops/CEO; 403 for Engineer |
+| `GET /api/control-center/summary` | 200 for Ops/CEO — exceptions, KPI, ops counts; 403 for Engineer |
+| `GET /api/control/summary` | Same payload as control-center (legacy alias) |
 | `GET /api/hiring/ceo-queue` | 403 for Engineer |
 
 ---
@@ -172,7 +173,7 @@ To get closer to Screenpipe later (CORE-005+): logo strip, “how it works” st
 
 ## Current project status
 
-See [PROJECT_STATUS.md](./PROJECT_STATUS.md) — production **v0.5.0** (M3 Automation); staging tracks **M4** KPI work.
+See [PROJECT_STATUS.md](./PROJECT_STATUS.md) — production **v0.4.1** (M2); staging has **M3** AUTO-001–003 for QA.
 
 ---
 

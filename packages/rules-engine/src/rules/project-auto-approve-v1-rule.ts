@@ -1,4 +1,4 @@
-import { PROJECT_AUTO_APPROVE_THRESHOLDS } from '@lanceflow/config';
+import { PROJECT_AUTO_APPROVE_THRESHOLDS } from '@lanceflow/config/project-auto-approve';
 
 import {
   PROJECT_AUTO_APPROVE_FORMULA_V1,
