@@ -1,5 +1,10 @@
 import { collectFraudExceptionCandidates, syncLeadershipExceptions } from '@lanceflow/automation';
-import { createClient, createProject, submitDailyReport } from '@lanceflow/operations';
+import {
+  createClient,
+  createProject,
+  submitDailyReport,
+  transitionProject,
+} from '@lanceflow/operations';
 import { prisma } from '@lanceflow/database';
 import { UserRole } from '@lanceflow/types';
 import { afterAll, describe, expect, it } from 'vitest';
@@ -61,6 +66,11 @@ describe.runIf(runIntegration)('integration: fraud triggers (PAY-004)', () => {
     await prisma.assignment.create({
       data: { projectId: project.project.id, userId: engineer.id },
     });
+
+    const toPending = await transitionProject(project.project.id, 'pending_approval', actorId);
+    expect(toPending.ok).toBe(true);
+    const toActive = await transitionProject(project.project.id, 'active', actorId);
+    expect(toActive.ok).toBe(true);
 
     const report = await submitDailyReport(
       engineer.id,
