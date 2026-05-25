@@ -1,0 +1,25 @@
+{
+  "name": "@lanceflow/payments",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@lanceflow/audit": "workspace:*",
+    "@lanceflow/automation": "workspace:*",
+    "@lanceflow/database": "workspace:*"
+  },
+  "devDependencies": {
+    "@lanceflow/typescript-config": "workspace:*",
+    "typescript": "^5.7.2"
+  }
+}

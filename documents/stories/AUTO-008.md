@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/automation, apps/web` |
 | **Depends on** | AUTO-002 |
 | **Branch** | `feature/AUTO-008-exceptions` |
-| **Status** | Backlog |
+| **Status** | QA / Staging |
 
 ---
 
@@ -21,7 +21,7 @@ As CEO, I review only exceptions.
 
 ## Acceptance criteria
 
-- [ ] Exception inbox with severity colors
+- [x] Exception inbox with severity colors
 
 ---
 
@@ -72,7 +72,7 @@ You are implementing LanceFlow story AUTO-008: Exception queue for leadership.
 As CEO, I review only exceptions.
 
 ### Acceptance criteria
-- [ ] Exception inbox with severity colors
+- [x] Exception inbox with severity colors
 
 ### Technical requirements
 Red/yellow/green alignment.

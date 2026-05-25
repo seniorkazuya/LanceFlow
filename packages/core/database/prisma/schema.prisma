@@ -20,8 +20,24 @@ model User {
   updatedAt   DateTime     @updatedAt @map("updated_at")
   assignments Assignment[]
   dailyReports  DailyReport[]
+  notifications Notification[]
 
   @@map("users")
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  type      String
+  title     String
+  body      String
+  readAt    DateTime? @map("read_at")
+  metadata  Json?
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("notifications")
 }
 
 model AuditLog {
@@ -66,8 +82,27 @@ model Project {
   client             Client   @relation(fields: [clientId], references: [id])
   assignments        Assignment[]
   dailyReports       DailyReport[]
+  paymentSchedules   PaymentSchedule[]
 
   @@map("ops_projects")
+}
+
+model PaymentSchedule {
+  id              String    @id @default(cuid())
+  projectId       String    @map("project_id")
+  dueDate         DateTime  @db.Date @map("due_date")
+  amountCents     Int       @map("amount_cents")
+  currency        String    @default("USD")
+  status          String    @default("scheduled")
+  escalationLevel Int       @default(0) @map("escalation_level")
+  paidAt          DateTime? @map("paid_at")
+  notes           String?
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  project         Project   @relation(fields: [projectId], references: [id])
+
+  @@index([projectId, dueDate])
+  @@map("payment_schedules")
 }
 
 model Assignment {
@@ -99,4 +134,41 @@ model DailyReport {
 
   @@unique([userId, projectId, reportDate])
   @@map("ops_daily_reports")
+}
+
+model LeadershipException {
+  id             String    @id @default(cuid())
+  sourceKey      String    @unique @map("source_key")
+  severity       String
+  category       String
+  title          String
+  summary        String
+  entityType     String    @map("entity_type")
+  entityId       String    @map("entity_id")
+  status         String    @default("open")
+  acknowledgedAt DateTime? @map("acknowledged_at")
+  acknowledgedBy String?   @map("acknowledged_by")
+  metadata       Json?
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@index([status, severity])
+  @@map("leadership_exceptions")
+}
+
+model RuleDecision {
+  id             String   @id @default(cuid())
+  entityType     String   @map("entity_type")
+  entityId       String   @map("entity_id")
+  ruleKey        String   @map("rule_key")
+  formulaVersion String   @map("formula_version")
+  inputs         Json
+  outcome        String
+  explanation    Json?
+  overridden     Boolean  @default(false)
+  actorId        String?  @map("actor_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@index([entityType, entityId])
+  @@map("rule_decisions")
 }

@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-23  
-> **Current phase:** M2 — Operations (complete)  
+> **Last updated:** 2026-05-25  
+> **Current phase:** M4 — Analytics (KPI calculators)  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,45 +10,44 @@
 
 | | |
 |--|--|
-| **Release in flight** | **v0.4.1** — [PR](https://github.com/seniorkazuya/LanceFlow/compare/main...staging) → `main` |
-| **Includes** | OPS-006 daily reports, OPS-007 SOPs, OPS-008 ops console |
+| **Active story** | **KPI-001** — Role KPI calculators |
+| **Just released** | **v0.5.0** — M3 Automation on production |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production today** | **v0.4.0** — M2 core (through OPS-005 + UX) |
+| **Production** | **v0.5.0** — M3 Automation (deploy via tag `v0.5.0`) |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## v0.4.1 release (staging → production)
+## Production (v0.5.0 — M3 Automation)
 
-| | |
-|--|--|
-| **Stories** | OPS-006, OPS-007, OPS-008 |
-| **Migrations** | `ops_daily_reports` |
-| **After merge** | `git tag v0.4.1 && git push origin v0.4.1` · approve **Deploy Production** |
+| Story | Feature |
+|-------|---------|
+| AUTO-001–008 | Rules engine, auto-approve, auto-assign, payments, escalation, risk pre-screen, notifications, exception inbox |
+| OPS-001–008 | Clients, projects, workload, assignment, daily reports, SOPs, ops console |
+
+### Production env (M3 — set on Vercel production project)
+
+| Variable | Purpose |
+|----------|---------|
+| `AUTO_ASSIGN_ENABLED` | Auto-assign on project activate |
+| `PAYMENT_ESCALATION_JOBS_ENABLED` | BullMQ payment escalation worker |
+| `PAYMENT_ESCALATION_CRON` | Cron for daily escalation job |
+| `REDIS_URL` | Worker queue |
+| `RESEND_API_KEY` | Optional — Resend email |
+| `NOTIFICATION_FROM_EMAIL` | Sender for Resend |
+
+### Production DB migrations
+
+After deploy, **Deploy Production** workflow runs `pnpm db:migrate:deploy`. New since v0.4.1:
+
+`rule_decisions`, `payment_schedules`, `notifications`, `leadership_exceptions`
 
 ---
 
-## Feature parity
+## Staging
 
-| Area | Routes | Staging | Production (today) | Production (after v0.4.1) |
-|------|--------|---------|-------------------|---------------------------|
-| Clients + risk | `/clients` | Yes | Yes | Yes |
-| Projects | `/projects` | Yes | Yes | Yes |
-| Team workload | `/workers` | Yes | Yes | Yes |
-| Assignment | Project detail | Yes | Yes | Yes |
-| Daily reports | `/daily-reports`, `/daily-reports/missing` | Yes | No | Yes |
-| SOPs | `/sops` | Yes | No | Yes |
-| Ops console | `/ops` | Yes | No | Yes |
-
----
-
-## Production (v0.4.0 today)
-
-| | |
-|--|--|
-| **Release** | [v0.4.0](https://github.com/seniorkazuya/LanceFlow/releases/tag/v0.4.0) |
-| **URL** | `PRODUCTION_URL` in GitHub environment **production** |
+Same feature set as production v0.5.0; used for pre-release QA and M4 development.
 
 ---
 
@@ -56,29 +55,16 @@
 
 | Milestone | Status |
 |-----------|--------|
-| **M0** Platform & DevOps | Done |
-| **M1** Foundation | Done |
-| **M2** Operations | Done (ships to prod with v0.4.1) |
-
-### M2 — Operations stories
-
-| Story | Title | Staging | Production |
-|-------|-------|---------|------------|
-| OPS-001 | Clients | Done | v0.4.0 |
-| OPS-002 | Client risk v0 | Done | v0.4.0 |
-| OPS-003 | Project lifecycle | Done | v0.4.0 |
-| OPS-004 | Skills & workload | Done | v0.4.0 |
-| OPS-005 | Assignment algorithm | Done | v0.4.0 |
-| OPS-006 | Daily reports | Done | v0.4.1 (pending) |
-| OPS-007 | SOP store | Done | v0.4.1 (pending) |
-| OPS-008 | Ops console | Done | v0.4.1 (pending) |
+| **M0–M3** | Done (production **v0.5.0**) |
+| **M4** Analytics | In progress — KPI-001 |
 
 ---
 
-## Next (M3)
+## Recommended sprint order (next)
 
-1. **AUTO-001** — Rules engine registry  
-2. Sync `staging` with `main` after v0.4.1 tag  
+1. **KPI-001** — Worker / Bidder / Caller KPI calculators  
+2. **KPI-002** — Nightly KPI job  
+3. **KPI-003** — Control Center summary API  
 
 ---
 
@@ -86,9 +72,9 @@
 
 | Date | Change |
 |------|--------|
-| 2026-05-23 | v0.4.1 release PR — OPS-006–008 to production |
-| 2026-05-22 | OPS-008 (#75) · OPS-007 (#74) · v0.4.0 prod (#70) |
-| 2026-05-21 | OPS-003 (#66) · v0.3.0 (#65) |
+| 2026-05-25 | **v0.5.0** — M3 Automation to production |
+| 2026-05-25 | M3 complete on staging — AUTO-008 (#86) |
+| 2026-05-23 | **v0.4.1** — M2 Operations to production |
 
 ---
 

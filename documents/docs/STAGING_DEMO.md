@@ -36,8 +36,27 @@ The marketing landing page **is the site root**:
 | `/clients` | Client list (Ops write, Bidder read) |
 | `/clients/new` | Create client (Ops / CEO) |
 | `/clients/[id]` | Risk score 0–100, v0 evaluate, manual override (Ops) |
+| `/projects` | Project lifecycle, assignments, auto-approval (AUTO-002) |
+| `/projects/[id]` | Auto-assign panel when `AUTO_ASSIGN_ENABLED=true` (AUTO-003) |
+| `/ops` | Ops console — workflow projects, missing reports, assignments (OPS-008) |
+| `/sops` | SOP library by category (OPS-007) |
+| `/daily-reports` | Engineer daily reports (OPS-006) |
 
 There is no separate `/landing` route — `/` is the public marketing entry.
+
+### M3 automation env (staging)
+
+Set on Vercel (**Preview** for `staging` branch):
+
+| Variable | Value | Story |
+|----------|--------|-------|
+| `AUTO_ASSIGN_ENABLED` | `true` | AUTO-003 — auto-assign on project activate |
+| `REDIS_URL` | Redis URL | AUTO-005 worker (local: `docker compose up -d redis`) |
+| `PAYMENT_ESCALATION_JOBS_ENABLED` | `true` | Worker process only |
+
+Without `AUTO_ASSIGN_ENABLED`, activation still works but no automatic engineer assignment runs.
+
+**AUTO-005 manual run (no worker):** as CEO/Ops, `POST /api/jobs/payment-escalations` (or use Control Center flow when wired) after creating overdue `payment_schedules` in QA.
 
 ---
 
@@ -151,16 +170,9 @@ To get closer to Screenpipe later (CORE-005+): logo strip, “how it works” st
 
 ---
 
-## Current project status (M1)
+## Current project status
 
-| Story | Status |
-|-------|--------|
-| CORE-001–003 | Done (DB, auth, RBAC) |
-| CORE-004 | Done (design system + shell + brand UI) |
-| CORE-005 | In progress (marketing copy from Foundation doc) |
-| Release on `main` | v0.2.1 — does not include latest staging UI until next release |
-
-See [PROJECT_STATUS.md](./PROJECT_STATUS.md).
+See [PROJECT_STATUS.md](./PROJECT_STATUS.md) — production **v0.5.0** (M3 Automation); staging tracks **M4** KPI work.
 
 ---
 

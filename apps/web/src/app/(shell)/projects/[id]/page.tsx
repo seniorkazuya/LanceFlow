@@ -1,10 +1,16 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
+import { isAutoAssignEnabled } from '@lanceflow/config';
+import { listPaymentSchedulesForProject } from '@lanceflow/payments';
 import { allowedTransitionsFrom, getProjectById, listProjectAssignments } from '@lanceflow/operations';
 import { GlassCard, PageHeader, SectionLabel, StatusBadge } from '@lanceflow/ui';
 import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectPaymentSchedulesPanel } from '@/components/projects/project-payment-schedules-panel';
+import { serializePaymentSchedule } from '@/lib/payment-schedules-api';
+import { ProjectAutoAssignPanel } from '@/components/projects/project-auto-assign-panel';
+import { ProjectAutoApprovePanel } from '@/components/projects/project-auto-approve-panel';
 import { ProjectTransitionButtons } from '@/components/projects/project-transition-buttons';
 import { auth } from '@/auth';
 
@@ -24,8 +30,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   }
 
   const canWrite = hasRole(role, RolePolicy.projectsWrite);
+  const autoAssignEnabled = isAutoAssignEnabled();
   const nextStatuses = allowedTransitionsFrom(project.status);
   const assignments = await listProjectAssignments(id);
+  const paymentSchedules = (await listPaymentSchedulesForProject(id)) ?? [];
 
   return (
     <ShellPage>
@@ -44,7 +52,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </span>
         </div>
         {canWrite ? (
-          <div className="mt-6">
+          <div className="mt-6 space-y-4">
+            <ProjectAutoApprovePanel projectId={project.id} projectStatus={project.status} />
             <ProjectTransitionButtons
               projectId={project.id}
               currentStatus={project.status}
@@ -71,10 +80,43 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <p className="mt-4 text-sm text-muted-foreground">No active assignments.</p>
         )}
         {canWrite ? (
-          <div className="mt-6 border-t border-white/[0.06] pt-6">
+          <div className="mt-6 border-t border-white/[0.06] pt-6 space-y-6">
+            <ProjectAutoAssignPanel
+              projectId={project.id}
+              projectStatus={project.status}
+              autoAssignEnabled={autoAssignEnabled}
+            />
             <ProjectAssignmentPanel projectId={project.id} projectStatus={project.status} />
           </div>
         ) : null}
+      </GlassCard>
+
+      <GlassCard className="p-5 md:p-6">
+        <SectionLabel>payments</SectionLabel>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Track client payment due dates per project (AUTO-004). Escalation level advances in AUTO-005 jobs.
+        </p>
+        {canWrite ? (
+          <div className="mt-6">
+            <ProjectPaymentSchedulesPanel
+              projectId={project.id}
+              initialSchedules={paymentSchedules.map(serializePaymentSchedule)}
+            />
+          </div>
+        ) : (
+          <ul className="mt-4 space-y-2 text-sm">
+            {paymentSchedules.length > 0 ? (
+              paymentSchedules.map((row) => (
+                <li key={row.id}>
+                  {row.dueDate.toISOString().slice(0, 10)} · {(row.amountCents / 100).toFixed(2)}{' '}
+                  {row.currency} · L{row.escalationLevel} · {row.status}
+                </li>
+              ))
+            ) : (
+              <li className="text-muted-foreground">No payment schedules.</li>
+            )}
+          </ul>
+        )}
       </GlassCard>
     </ShellPage>
   );

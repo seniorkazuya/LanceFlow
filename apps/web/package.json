@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "@lanceflow/audit": "workspace:*",
+    "@lanceflow/automation": "workspace:*",
     "@lanceflow/auth": "workspace:*",
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
     "@lanceflow/operations": "workspace:*",
+    "@lanceflow/payments": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "@lanceflow/ui": "workspace:*",
     "@sentry/nextjs": "^8.45.0",

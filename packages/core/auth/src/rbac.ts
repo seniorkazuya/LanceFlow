@@ -21,6 +21,8 @@ export const RolePolicy = {
   clientsRead: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
   /** Client records write (OPS-001). */
   clientsWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Client risk pre-screen before bid (AUTO-006). */
+  clientRiskPrescreen: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
   /** Project lifecycle read (OPS-003). */
   projectsRead: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
   /** Project lifecycle write (OPS-003). */
