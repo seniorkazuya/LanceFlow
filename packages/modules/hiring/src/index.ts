@@ -14,4 +14,5 @@ export {
   type HiringApplyRole,
   type SubmitApplicationInput,
 } from './types';
-export { isS3StorageConfigured, storeResume } from './storage';
+export { isS3StorageConfigured, readResume, storeResume } from './storage';
+export { getHiringApplicationById } from './queries';

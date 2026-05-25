@@ -2,6 +2,7 @@ import { isS3StorageConfigured, uploadResumeToStorage } from './s3';
 import { uploadResumeToLocal } from './local';
 
 export { isS3StorageConfigured };
+export { readResume } from './read';
 
 export async function storeResume(params: {
   applicationId: string;

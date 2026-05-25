@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@lanceflow/ai-hiring':
+        specifier: workspace:*
+        version: link:packages/modules/ai-hiring
       '@lanceflow/analytics':
         specifier: workspace:*
         version: link:packages/modules/analytics
@@ -74,6 +77,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@lanceflow/ai-hiring':
+        specifier: workspace:*
+        version: link:../../packages/modules/ai-hiring
       '@lanceflow/analytics':
         specifier: workspace:*
         version: link:../../packages/modules/analytics
@@ -338,6 +344,31 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.19(tsx@4.22.3)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  packages/modules/ai-hiring:
+    dependencies:
+      '@lanceflow/audit':
+        specifier: workspace:*
+        version: link:../../audit
+      '@lanceflow/database':
+        specifier: workspace:*
+        version: link:../../core/database
+      '@lanceflow/hiring':
+        specifier: workspace:*
+        version: link:../hiring
+      '@lanceflow/types':
+        specifier: workspace:*
+        version: link:../../core/types
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
+    devDependencies:
+      '@lanceflow/typescript-config':
+        specifier: workspace:*
+        version: link:../../core/typescript-config
       typescript:
         specifier: ^5.7.2
         version: 5.9.3
@@ -4275,6 +4306,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
 snapshots:
 
@@ -8706,3 +8740,5 @@ snapshots:
   yallist@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.25.76: {}

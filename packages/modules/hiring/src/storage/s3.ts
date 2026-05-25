@@ -9,7 +9,7 @@ export function isS3StorageConfigured(): boolean {
   );
 }
 
-function createS3Client(): S3Client {
+export function createS3Client(): S3Client {
   const endpoint = process.env.S3_ENDPOINT?.trim();
   return new S3Client({
     region: process.env.S3_REGION?.trim() || 'us-east-1',

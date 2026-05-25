@@ -59,6 +59,7 @@
     "PAY-003": { "column": "Done", "title": "PAY-003 — Milestone-linked payment reminders" },
     "PAY-004": { "column": "Done", "title": "PAY-004 — Fraud triggers v1" },
     "PAY-005": { "column": "Done", "title": "PAY-005 — Dispute workflow" },
-    "HIRE-001": { "column": "In Progress", "title": "HIRE-001 — Candidate application portal" }
+    "HIRE-001": { "column": "Done", "title": "HIRE-001 — Candidate application portal" },
+    "HIRE-002": { "column": "In Progress", "title": "HIRE-002 — Resume parser integration" }
   }
 }
