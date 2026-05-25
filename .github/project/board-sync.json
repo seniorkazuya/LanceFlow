@@ -54,6 +54,7 @@
     "KPI-004": { "column": "Done", "title": "KPI-004 — Control Center dashboard UI" },
     "KPI-005": { "column": "Done", "title": "KPI-005 — Signal threshold configuration" },
     "KPI-006": { "column": "Done", "title": "KPI-006 — Bonus and penalty suggestions" },
-    "PAY-001": { "column": "In Review", "title": "PAY-001 — Project milestone model" }
+    "PAY-001": { "column": "Done", "title": "PAY-001 — Project milestone model" },
+    "PAY-002": { "column": "In Review", "title": "PAY-002 — Escrow and work gating" }
   }
 }

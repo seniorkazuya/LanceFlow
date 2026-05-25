@@ -1,6 +1,7 @@
 import { RolePolicy, authorizeRequest } from '@lanceflow/auth';
 import { runProjectAutoAssignOnActivate } from '@lanceflow/automation';
 import { transitionProject } from '@lanceflow/operations';
+import { assertWorkAllowedForTransition } from '@lanceflow/payments';
 import { NextResponse } from 'next/server';
 
 import { getAuthSession } from '@/auth';
@@ -25,6 +26,11 @@ export const POST = withApiLogging(
     const body = await parseJsonBody<{ status?: string }>(request);
     if (!body?.status) {
       return NextResponse.json({ errors: [{ field: 'status', message: 'status is required' }] }, { status: 400 });
+    }
+
+    const gate = await assertWorkAllowedForTransition(id, body.status);
+    if (!gate.ok) {
+      return NextResponse.json({ errors: gate.errors }, { status: 423 });
     }
 
     const result = await transitionProject(id, body.status, authz.user.id);
