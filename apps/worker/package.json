@@ -10,6 +10,7 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
+    "@lanceflow/analytics": "workspace:*",
     "@lanceflow/database": "workspace:*",
     "@lanceflow/payments": "workspace:*",
     "bullmq": "^5.34.5",

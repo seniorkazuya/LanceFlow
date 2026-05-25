@@ -21,6 +21,7 @@ model User {
   assignments Assignment[]
   dailyReports  DailyReport[]
   notifications Notification[]
+  kpiRecords    KpiRecord[]
 
   @@map("users")
 }
@@ -154,6 +155,24 @@ model LeadershipException {
 
   @@index([status, severity])
   @@map("leadership_exceptions")
+}
+
+model KpiRecord {
+  id             String   @id @default(cuid())
+  userId         String   @map("user_id")
+  role           String
+  periodKey      String   @map("period_key")
+  periodStart    DateTime @db.Date @map("period_start")
+  periodEnd      DateTime @db.Date @map("period_end")
+  formulaVersion String   @map("formula_version")
+  score          Int
+  components     Json
+  computedAt     DateTime @default(now()) @map("computed_at")
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, periodKey])
+  @@index([periodKey])
+  @@map("kpi_records")
 }
 
 model RuleDecision {

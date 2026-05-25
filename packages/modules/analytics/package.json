@@ -14,8 +14,11 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
+    "@lanceflow/audit": "workspace:*",
+    "@lanceflow/database": "workspace:*",
     "@lanceflow/rules-engine": "workspace:*",
-    "@lanceflow/types": "workspace:*"
+    "@lanceflow/types": "workspace:*",
+    "@prisma/client": "^6.1.0"
   },
   "devDependencies": {
     "@lanceflow/typescript-config": "workspace:*",
