@@ -10,12 +10,15 @@ import { completeMutation, notifyError } from '@/lib/notify';
 type MilestoneRow = {
   label: string;
   percentPct: string;
+  dueDate: string;
+  amountCents: string;
 };
 
 type SavedMilestone = {
   id: string;
   label: string;
   percentPct: number;
+  dueDate: string | null;
 };
 
 type Props = {
@@ -24,7 +27,16 @@ type Props = {
 };
 
 function emptyRow(): MilestoneRow {
-  return { label: '', percentPct: '' };
+  return { label: '', percentPct: '', dueDate: '', amountCents: '' };
+}
+
+function toRow(m: SavedMilestone): MilestoneRow {
+  return {
+    label: m.label,
+    percentPct: String(m.percentPct),
+    dueDate: m.dueDate ?? '',
+    amountCents: '',
+  };
 }
 
 export function ProjectMilestonesPanel({ projectId, initialMilestones }: Props) {
@@ -32,11 +44,11 @@ export function ProjectMilestonesPanel({ projectId, initialMilestones }: Props) 
   const [saved, setSaved] = useState(initialMilestones);
   const [rows, setRows] = useState<MilestoneRow[]>(() =>
     initialMilestones.length > 0
-      ? initialMilestones.map((m) => ({ label: m.label, percentPct: String(m.percentPct) }))
+      ? initialMilestones.map(toRow)
       : [
-          { label: 'Kickoff', percentPct: '30' },
-          { label: 'Delivery', percentPct: '50' },
-          { label: 'Final', percentPct: '20' },
+          { label: 'Kickoff', percentPct: '30', dueDate: '', amountCents: '' },
+          { label: 'Delivery', percentPct: '50', dueDate: '', amountCents: '' },
+          { label: 'Final', percentPct: '20', dueDate: '', amountCents: '' },
         ]
   );
   const [pending, setPending] = useState(false);
@@ -63,10 +75,17 @@ export function ProjectMilestonesPanel({ projectId, initialMilestones }: Props) 
   }
 
   async function save() {
-    const milestones = rows.map((r) => ({
-      label: r.label.trim(),
-      percentPct: Number.parseInt(r.percentPct, 10),
-    }));
+    const milestones = rows.map((r) => {
+      const dueDate = r.dueDate.trim() || null;
+      const amountRaw = r.amountCents.trim();
+      const amountCents = amountRaw ? Number.parseInt(amountRaw, 10) : null;
+      return {
+        label: r.label.trim(),
+        percentPct: Number.parseInt(r.percentPct, 10),
+        dueDate,
+        amountCents,
+      };
+    });
 
     setPending(true);
     const res = await fetch(`/api/projects/${projectId}/milestones`, {
@@ -96,18 +115,25 @@ export function ProjectMilestonesPanel({ projectId, initialMilestones }: Props) 
     <div className="space-y-4">
       {saved.length > 0 ? (
         <p className="text-sm text-muted-foreground">
-          Saved: {saved.map((m) => `${m.label} (${m.percentPct}%)`).join(' · ')}
+          Saved:{' '}
+          {saved
+            .map((m) => {
+              const due = m.dueDate ? ` · due ${m.dueDate}` : '';
+              return `${m.label} (${m.percentPct}%)${due}`;
+            })
+            .join(' · ')}
         </p>
       ) : (
         <p className="text-sm text-muted-foreground">
-          Define milestone labels and percentages. They must sum to exactly 100%.
+          Define milestone labels and percentages (sum 100%). Optional due date + amount sync
+          payment reminders (PAY-003 / AUTO-005).
         </p>
       )}
 
       <ul className="space-y-2">
         {rows.map((row, index) => (
           <li key={index} className="flex flex-wrap items-end gap-2">
-            <label className="min-w-[140px] flex-1 text-sm">
+            <label className="min-w-[120px] flex-1 text-sm">
               <span className="text-muted-foreground">Label</span>
               <Input
                 className="mt-1"
@@ -115,7 +141,7 @@ export function ProjectMilestonesPanel({ projectId, initialMilestones }: Props) 
                 onChange={(e) => updateRow(index, { label: e.target.value })}
               />
             </label>
-            <label className="w-24 text-sm">
+            <label className="w-16 text-sm">
               <span className="text-muted-foreground">%</span>
               <Input
                 className="mt-1"
@@ -124,6 +150,25 @@ export function ProjectMilestonesPanel({ projectId, initialMilestones }: Props) 
                 max={100}
                 value={row.percentPct}
                 onChange={(e) => updateRow(index, { percentPct: e.target.value })}
+              />
+            </label>
+            <label className="w-32 text-sm">
+              <span className="text-muted-foreground">Due</span>
+              <Input
+                className="mt-1"
+                type="date"
+                value={row.dueDate}
+                onChange={(e) => updateRow(index, { dueDate: e.target.value })}
+              />
+            </label>
+            <label className="w-28 text-sm">
+              <span className="text-muted-foreground">Amount ¢</span>
+              <Input
+                className="mt-1"
+                type="number"
+                min={1}
+                value={row.amountCents}
+                onChange={(e) => updateRow(index, { amountCents: e.target.value })}
               />
             </label>
             <Button type="button" variant="secondary" size="sm" onClick={() => removeRow(index)}>

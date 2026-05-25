@@ -110,7 +110,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       <GlassCard className="p-5 md:p-6">
         <SectionLabel>payment milestones</SectionLabel>
         <p className="mt-2 text-xs text-muted-foreground">
-          Percentage breakdown for client payments (PAY-001). Must sum to 100%.
+          Percentage breakdown for client payments (PAY-001). Due date + amount sync reminders
+          (PAY-003 / AUTO-005). Must sum to 100%.
         </p>
         {canWrite ? (
           <div className="mt-6">
@@ -125,6 +126,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               milestones.map((m) => (
                 <li key={m.id}>
                   {m.label}: {m.percentPct}%
+                  {m.dueDate ? ` · due ${m.dueDate.toISOString().slice(0, 10)}` : ''}
                 </li>
               ))
             ) : (
