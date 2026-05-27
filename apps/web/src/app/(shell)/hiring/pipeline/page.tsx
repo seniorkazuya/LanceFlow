@@ -25,6 +25,14 @@ function stageTone(stage: string): 'neutral' | 'warning' | 'success' | 'danger' 
   return 'neutral';
 }
 
+function decisionTone(decision: string): 'neutral' | 'warning' | 'success' | 'danger' {
+  if (decision === 'Reject') return 'danger';
+  if (decision === 'Fast Track') return 'success';
+  if (decision === 'Hire') return 'success';
+  if (decision === 'Hold') return 'warning';
+  return 'neutral';
+}
+
 export default async function HiringPipelinePage({ searchParams }: PageProps) {
   const session = await auth();
   const role = session?.user?.role ?? '';
@@ -241,10 +249,23 @@ export default async function HiringPipelinePage({ searchParams }: PageProps) {
                     ) : null}
                   </div>
                 </div>
-                {app.hiringRecommendation ? (
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    Recommendation: {app.hiringRecommendation}
-                  </p>
+                {app.hiringDecision ? (
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <StatusBadge
+                      status={decisionTone(app.hiringDecision)}
+                      label={app.hiringDecision}
+                    />
+                    {app.hiringDecisionSource ? (
+                      <span className="text-xs text-muted-foreground">
+                        via {app.hiringDecisionSource}
+                        {app.hiringDecisionSource === 'override' &&
+                        app.hiringRecommendation &&
+                        app.hiringRecommendation !== app.hiringDecision
+                          ? ` (rule: ${app.hiringRecommendation})`
+                          : null}
+                      </span>
+                    ) : null}
+                  </div>
                 ) : null}
               </li>
             ))}

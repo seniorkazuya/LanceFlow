@@ -9,11 +9,22 @@ export {
 export {
   ALLOWED_RESUME_MIME_TYPES,
   HIRING_APPLY_ROLES,
+  HIRING_DECISIONS,
   MAX_RESUME_BYTES,
   type HiringApplicationRecord,
   type HiringApplyRole,
+  type HiringDecision,
+  type HiringDecisionSource,
   type SubmitApplicationInput,
 } from './types';
+export {
+  getHiringDecisionDetail,
+  overrideHiringDecision,
+  isHiringDecision,
+  validateOverrideHiringDecisionInput,
+  type HiringDecisionDetail,
+  type OverrideHiringDecisionResult,
+} from './decision';
 export { isS3StorageConfigured, readResume, storeResume } from './storage';
 export { getHiringApplicationById } from './queries';
 export {

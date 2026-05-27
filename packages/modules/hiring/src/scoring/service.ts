@@ -8,8 +8,10 @@ import {
   hiringThsRsV1Rule,
 } from '@lanceflow/rules-engine';
 
+import { applyHiringDecisionFromRule } from '../decision';
+import { mapHiringApplicationRow } from '../record-mapper';
 import { buildThsRsInputFromApplication } from './build-input';
-import type { HiringApplicationRecord } from '../types';
+import type { HiringApplicationRecord, HiringDecision } from '../types';
 
 export type ScoreHiringApplicationResult =
   | {
@@ -22,52 +24,6 @@ export type ScoreHiringApplicationResult =
       decisionId: string;
     }
   | { ok: false; errors: { field: string; message: string }[] };
-
-function toRecord(row: {
-  id: string;
-  fullName: string;
-  email: string;
-  roleApplied: string;
-  resumeStorageKey: string;
-  resumeFileName: string;
-  resumeMimeType: string | null;
-  resumeSizeBytes: number;
-  consentGiven: boolean;
-  consentAt: Date;
-  status: string;
-  technicalScore: number | null;
-  technicalScoreAt: Date | null;
-  technicalScoreSource: string | null;
-  thsScore: number | null;
-  rsScore: number | null;
-  hiringRecommendation: string | null;
-  thsRsFormulaVersion: string | null;
-  thsRsScoredAt: Date | null;
-  createdAt: Date;
-}): HiringApplicationRecord {
-  return {
-    id: row.id,
-    fullName: row.fullName,
-    email: row.email,
-    roleApplied: row.roleApplied,
-    resumeStorageKey: row.resumeStorageKey,
-    resumeFileName: row.resumeFileName,
-    resumeMimeType: row.resumeMimeType,
-    resumeSizeBytes: row.resumeSizeBytes,
-    consentGiven: row.consentGiven,
-    consentAt: row.consentAt,
-    status: row.status,
-    technicalScore: row.technicalScore,
-    technicalScoreAt: row.technicalScoreAt,
-    technicalScoreSource: row.technicalScoreSource,
-    thsScore: row.thsScore,
-    rsScore: row.rsScore,
-    hiringRecommendation: row.hiringRecommendation,
-    thsRsFormulaVersion: row.thsRsFormulaVersion,
-    thsRsScoredAt: row.thsRsScoredAt,
-    createdAt: row.createdAt,
-  };
-}
 
 /** HIRE-004 — compute THS/RS, persist scores, auto-reject when RS > 70. */
 export async function scoreHiringApplication(
@@ -127,6 +83,16 @@ export async function scoreHiringApplication(
     actorId,
   });
 
+  await applyHiringDecisionFromRule(
+    applicationId,
+    evaluated.value.recommendation as HiringDecision,
+    actorId
+  );
+
+  const refreshed = await prisma.hiringApplication.findUniqueOrThrow({
+    where: { id: applicationId },
+  });
+
   await auditLog({
     actorId,
     action: 'hiring_application.score_ths_rs',
@@ -144,7 +110,7 @@ export async function scoreHiringApplication(
 
   return {
     ok: true,
-    application: toRecord(updated),
+    application: mapHiringApplicationRow(refreshed),
     ths: evaluated.value.ths,
     rs: evaluated.value.rs,
     recommendation: evaluated.value.recommendation,
