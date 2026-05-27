@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **HIRE-007** — CEO-only hiring queue endpoint; surfaces top 5% THS and high-risk RS/RP flags; `GET /api/hiring/ceo-queue`
 - **HIRE-006** — Hiring decision output (Reject/Hold/Hire/Fast Track); rule apply on THS/RS score; audited override via `PATCH /api/hiring/applications/[id]/decision`; RP score stub column
 - **HIRE-005** — Hiring pipeline dashboard: stages, THS/RS distribution, time-to-hire, filters; `GET /api/hiring/pipeline`; `/hiring/pipeline` (CEO/Ops)
 - **HIRE-004** — THS/RS calculators v1 (`hiring-ths-rs-v1`); auto-reject when RS > 70; `POST /api/hiring/applications/[id]/score`

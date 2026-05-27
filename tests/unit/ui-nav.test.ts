@@ -30,7 +30,7 @@ describe('getNavItemsForRole', () => {
     expect(ids).toContain('sops');
     expect(ids).toContain('control');
     expect(ids).toContain('hiring-pipeline');
-    expect(ids).toContain('hiring-ceo-queue');
+    expect(ids).not.toContain('hiring-ceo-queue');
     expect(ids).not.toContain('audit');
   });
 
@@ -45,9 +45,9 @@ describe('getNavItemsForRole', () => {
     expect(ids).toEqual(['dashboard', 'daily-reports', 'sops']);
   });
 
-  it('shows hiring CEO queue but not pipeline for caller', () => {
+  it('does not show CEO queue for caller', () => {
     const ids = getNavItemsForRole(UserRole.CALLER).map((item) => item.id);
-    expect(ids).toContain('hiring-ceo-queue');
+    expect(ids).not.toContain('hiring-ceo-queue');
     expect(ids).not.toContain('hiring-pipeline');
     expect(ids).not.toContain('control');
   });

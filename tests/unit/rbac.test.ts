@@ -118,9 +118,16 @@ describe('engineer cannot access hiring CEO queue', () => {
     if (!result.ok) expect(result.status).toBe(403);
   });
 
-  it('allows caller', () => {
+  it('denies caller', () => {
     const caller = { ...engineerUser, role: UserRole.CALLER };
     const result = authorizeRequest(caller, RolePolicy.hiringCeoQueue);
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.status).toBe(403);
+  });
+
+  it('allows CEO', () => {
+    const ceo = { ...engineerUser, role: UserRole.CEO };
+    const result = authorizeRequest(ceo, RolePolicy.hiringCeoQueue);
     expect(result.ok).toBe(true);
   });
 });

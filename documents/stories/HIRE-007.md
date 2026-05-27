@@ -9,7 +9,7 @@
 | **Modules** | `apps/web` |
 | **Depends on** | HIRE-006 |
 | **Branch** | `feature/HIRE-007-ceo-queue` |
-| **Status** | Backlog |
+| **Status** | In Progress |
 
 ---
 
@@ -21,7 +21,7 @@ As CEO, I see only top candidates and high risk.
 
 ## Acceptance criteria
 
-- [ ] CEO-only queue endpoint
+- [x] CEO-only queue endpoint
 
 ---
 

@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **HIRE-006** — Hiring decision engine (in progress) |
-| **Just completed** | **HIRE-005** — Hiring pipeline dashboard |
+| **Active story** | **HIRE-007** — CEO filtered hiring queue (in progress) |
+| **Just completed** | **HIRE-006** — Hiring decision engine output |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.6.0** — M4 Analytics |
 
@@ -47,7 +47,8 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | HIRE-003 | #103 | Technical score 0–100 + assessment webhook |
 | HIRE-004 | #104 | THS/RS scoring + auto-reject RS > 70 |
 | HIRE-005 | #105 | Pipeline dashboard — stages, filters, time-to-hire |
-| HIRE-006 | (pending) | Decision enum + override audit |
+| HIRE-006 | #106 | Decision enum + override audit |
+| HIRE-007 | (pending) | CEO-only queue endpoint (top 5%, high RS, high RP) |
 
 ### Staging env (M4 jobs)
 
