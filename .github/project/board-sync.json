@@ -62,6 +62,7 @@
     "HIRE-001": { "column": "Done", "title": "HIRE-001 — Candidate application portal" },
     "HIRE-002": { "column": "Done", "title": "HIRE-002 — Resume parser integration" },
     "HIRE-003": { "column": "Done", "title": "HIRE-003 — Technical assessment hook" },
-    "HIRE-004": { "column": "In Progress", "title": "HIRE-004 — THS and RS calculators v1" }
+    "HIRE-004": { "column": "Done", "title": "HIRE-004 — THS and RS calculators v1" },
+    "HIRE-005": { "column": "In Progress", "title": "HIRE-005 — Hiring pipeline dashboard" }
   }
 }

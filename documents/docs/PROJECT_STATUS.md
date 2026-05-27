@@ -10,8 +10,8 @@
 
 | | |
 |--|--|
-| **Active story** | **HIRE-004** — THS/RS calculators (in progress) |
-| **Just completed** | **HIRE-003** — Technical assessment hook |
+| **Active story** | **HIRE-005** — Hiring pipeline dashboard (in progress) |
+| **Just completed** | **HIRE-004** — THS/RS calculators v1 |
 | **Staging** | https://lance-flow-web.vercel.app |
 | **Production** | **v0.6.0** — M4 Analytics |
 
@@ -45,7 +45,8 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 | HIRE-001 | #101 | Public apply portal + resume upload |
 | HIRE-002 | #102 | Resume parse API (years, stack, seniority, job hops) |
 | HIRE-003 | #103 | Technical score 0–100 + assessment webhook |
-| HIRE-004 | (pending) | THS/RS scoring + auto-reject RS > 70 |
+| HIRE-004 | #104 | THS/RS scoring + auto-reject RS > 70 |
+| HIRE-005 | (pending) | Pipeline dashboard — stages, filters, time-to-hire |
 
 ### Staging env (M4 jobs)
 
@@ -62,7 +63,7 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 |-----------|--------|
 | **M0–M4** | Done (production **v0.6.0**) |
 | **M5** Payments | Done on staging (PAY-001–005) |
-| **M6** Hiring | HIRE-001 in progress |
+| **M6** Hiring | HIRE-005 in progress |
 
 ---
 

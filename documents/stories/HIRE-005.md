@@ -9,7 +9,7 @@
 | **Modules** | `apps/web, packages/modules/hiring` |
 | **Depends on** | HIRE-004 |
 | **Branch** | `feature/HIRE-005-pipeline` |
-| **Status** | Backlog |
+| **Status** | In Progress |
 
 ---
 
