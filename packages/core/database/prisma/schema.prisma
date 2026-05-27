@@ -281,7 +281,12 @@ model HiringApplication {
   technicalScore      Int?      @map("technical_score")
   technicalScoreAt    DateTime? @map("technical_score_at")
   technicalScoreSource String?  @map("technical_score_source")
-  createdAt           DateTime  @default(now()) @map("created_at")
+  thsScore             Int?      @map("ths_score")
+  rsScore              Int?      @map("rs_score")
+  hiringRecommendation String?   @map("hiring_recommendation")
+  thsRsFormulaVersion  String?   @map("ths_rs_formula_version")
+  thsRsScoredAt        DateTime? @map("ths_rs_scored_at")
+  createdAt            DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 
   @@index([email])

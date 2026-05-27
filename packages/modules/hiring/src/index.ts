@@ -25,3 +25,4 @@ export {
   type SetTechnicalScoreResult,
 } from './assessment';
 export type { TechnicalScoreSource } from './types';
+export { scoreHiringApplication, type ScoreHiringApplicationResult } from './scoring';

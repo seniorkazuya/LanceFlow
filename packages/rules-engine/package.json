@@ -10,7 +10,8 @@
     "./assignment": "./src/assignment/index.ts",
     "./core": "./src/core/index.ts",
     "./kpi": "./src/kpi/index.ts",
-    "./compensation": "./src/compensation/index.ts"
+    "./compensation": "./src/compensation/index.ts",
+    "./hiring": "./src/hiring/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

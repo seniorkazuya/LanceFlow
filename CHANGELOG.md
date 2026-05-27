@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **HIRE-004** — THS/RS calculators v1 (`hiring-ths-rs-v1`); auto-reject when RS > 70; `POST /api/hiring/applications/[id]/score`
 - **HIRE-003** ? Technical assessment score (0?100) on applications; manual PATCH + webhook placeholder with `HIRING_ASSESSMENT_WEBHOOK_SECRET`
 - **HIRE-002** ? Resume parser (`@lanceflow/ai-hiring`): years, stack, seniority, job hop index; Zod validation; `POST /api/hiring/applications/[id]/parse` (CEO/Ops)
 - **HIRE-001** ? Candidate application portal: public `/apply`, `POST /api/hiring/applications`, resume upload (S3 or local dev), consent required, 5MB max
@@ -21,7 +22,7 @@ Staging migrate deploy adds:
 
 - `project_milestones` (`due_date`); `payment_schedules.milestone_id`; `project_disputes`
 - `escrow_held`, `escrow_override_reason`, `escrow_override_by`, `escrow_override_at` on `ops_projects`
-- `hiring_applications` (HIRE-001); `resume_parsed`, `resume_parsed_at`, `resume_parse_version` (HIRE-002); `technical_score`, `technical_score_at`, `technical_score_source` (HIRE-003)
+- `hiring_applications` (HIRE-001); `resume_parsed` (HIRE-002); `technical_score` (HIRE-003); `ths_score`, `rs_score`, `hiring_recommendation` (HIRE-004)
 
 ## [0.6.0] ????? 2026-05-25
 
