@@ -1,0 +1,53 @@
+[
+  {
+    "name": "strong-engineer",
+    "input": {
+      "roleApplied": "ENGINEER",
+      "yearsExperience": 8,
+      "stack": ["typescript", "react", "node", "postgresql", "aws"],
+      "seniority": "senior",
+      "jobHopIndex": 3,
+      "technicalScore": 88
+    },
+    "expect": {
+      "thsMin": 60,
+      "thsMax": 70,
+      "rsMax": 55,
+      "recommendation": "Hire",
+      "autoRejected": false
+    }
+  },
+  {
+    "name": "high-job-hop-reject",
+    "input": {
+      "roleApplied": "ENGINEER",
+      "yearsExperience": 4,
+      "stack": ["javascript"],
+      "seniority": "mid",
+      "jobHopIndex": 9,
+      "technicalScore": 55
+    },
+    "expect": {
+      "rsMin": 71,
+      "recommendation": "Reject",
+      "autoRejected": true
+    }
+  },
+  {
+    "name": "fast-track-low-risk",
+    "input": {
+      "roleApplied": "ENGINEER",
+      "yearsExperience": 10,
+      "stack": ["typescript", "react", "node", "aws", "docker"],
+      "seniority": "senior",
+      "jobHopIndex": 2,
+      "technicalScore": 92
+    },
+    "expect": {
+      "thsMin": 64,
+      "rsMax": 49,
+      "recommendation": "Fast Track",
+      "autoRejected": false
+    }
+  }
+]

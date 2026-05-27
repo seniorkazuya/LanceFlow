@@ -42,6 +42,11 @@ export type HiringApplicationRecord = {
   technicalScore: number | null;
   technicalScoreAt: Date | null;
   technicalScoreSource: string | null;
+  thsScore: number | null;
+  rsScore: number | null;
+  hiringRecommendation: string | null;
+  thsRsFormulaVersion: string | null;
+  thsRsScoredAt: Date | null;
   createdAt: Date;
 };
 

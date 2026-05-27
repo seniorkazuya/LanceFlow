@@ -24,6 +24,11 @@ function toRecord(row: {
   technicalScore: number | null;
   technicalScoreAt: Date | null;
   technicalScoreSource: string | null;
+  thsScore: number | null;
+  rsScore: number | null;
+  hiringRecommendation: string | null;
+  thsRsFormulaVersion: string | null;
+  thsRsScoredAt: Date | null;
   createdAt: Date;
 }): HiringApplicationRecord {
   return {
@@ -41,6 +46,11 @@ function toRecord(row: {
     technicalScore: row.technicalScore,
     technicalScoreAt: row.technicalScoreAt,
     technicalScoreSource: row.technicalScoreSource,
+    thsScore: row.thsScore,
+    rsScore: row.rsScore,
+    hiringRecommendation: row.hiringRecommendation,
+    thsRsFormulaVersion: row.thsRsFormulaVersion,
+    thsRsScoredAt: row.thsRsScoredAt,
     createdAt: row.createdAt,
   };
 }
