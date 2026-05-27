@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **HIRE-005** — Hiring pipeline dashboard: stages, THS/RS distribution, time-to-hire, filters; `GET /api/hiring/pipeline`; `/hiring/pipeline` (CEO/Ops)
 - **HIRE-004** — THS/RS calculators v1 (`hiring-ths-rs-v1`); auto-reject when RS > 70; `POST /api/hiring/applications/[id]/score`
 - **HIRE-003** ? Technical assessment score (0?100) on applications; manual PATCH + webhook placeholder with `HIRING_ASSESSMENT_WEBHOOK_SECRET`
 - **HIRE-002** ? Resume parser (`@lanceflow/ai-hiring`): years, stack, seniority, job hop index; Zod validation; `POST /api/hiring/applications/[id]/parse` (CEO/Ops)

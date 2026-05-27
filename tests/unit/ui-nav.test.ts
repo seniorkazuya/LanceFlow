@@ -14,6 +14,7 @@ describe('getNavItemsForRole', () => {
       'missing-reports',
       'sops',
       'control',
+      'hiring-pipeline',
       'hiring-ceo-queue',
       'audit',
     ]);
@@ -28,7 +29,9 @@ describe('getNavItemsForRole', () => {
     expect(ids).toContain('missing-reports');
     expect(ids).toContain('sops');
     expect(ids).toContain('control');
+    expect(ids).toContain('hiring-pipeline');
     expect(ids).toContain('hiring-ceo-queue');
+    expect(ids).not.toContain('audit');
   });
 
   it('shows clients for bidder without control', () => {
@@ -42,9 +45,10 @@ describe('getNavItemsForRole', () => {
     expect(ids).toEqual(['dashboard', 'daily-reports', 'sops']);
   });
 
-  it('shows hiring but not control for caller', () => {
+  it('shows hiring CEO queue but not pipeline for caller', () => {
     const ids = getNavItemsForRole(UserRole.CALLER).map((item) => item.id);
     expect(ids).toContain('hiring-ceo-queue');
+    expect(ids).not.toContain('hiring-pipeline');
     expect(ids).not.toContain('control');
   });
 });
