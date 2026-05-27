@@ -48,3 +48,5 @@ export {
   type HiringPipelineFilters,
   type HiringPipelineSnapshot,
 } from './pipeline';
+
+export { getHiringCeoQueueSnapshot, type HiringCeoQueueSnapshot } from './ceo-queue';

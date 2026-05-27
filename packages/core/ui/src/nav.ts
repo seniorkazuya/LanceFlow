@@ -86,7 +86,7 @@ export const APP_NAV_ITEMS: readonly NavItem[] = [
     id: 'hiring-ceo-queue',
     label: 'Hiring CEO Queue',
     href: '/hiring/ceo-queue',
-    allowedRoles: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.CALLER, UserRole.BIDDER],
+    allowedRoles: [UserRole.CEO],
   },
   {
     id: 'audit',

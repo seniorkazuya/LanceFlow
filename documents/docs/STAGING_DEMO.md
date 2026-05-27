@@ -98,7 +98,7 @@ After sign-in you land on **Dashboard**:
 - **Sidebar** — items depend on role (CORE-003 RBAC):
   - Everyone: Dashboard
   - CEO / Ops: + Control Center
-  - CEO / Ops / Caller / Bidder: + Hiring CEO Queue
+  - CEO: + Hiring CEO Queue
   - Engineer: Dashboard only
   - CEO / Ops: + **Team workload** (`/workers`)
   - CEO / Ops / Bidder: + **Projects** (`/projects`)
