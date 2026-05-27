@@ -6,6 +6,7 @@ All notable changes to the LanceFlow application are documented here.
 
 ### Added
 
+- **HIRE-006** — Hiring decision output (Reject/Hold/Hire/Fast Track); rule apply on THS/RS score; audited override via `PATCH /api/hiring/applications/[id]/decision`; RP score stub column
 - **HIRE-005** — Hiring pipeline dashboard: stages, THS/RS distribution, time-to-hire, filters; `GET /api/hiring/pipeline`; `/hiring/pipeline` (CEO/Ops)
 - **HIRE-004** — THS/RS calculators v1 (`hiring-ths-rs-v1`); auto-reject when RS > 70; `POST /api/hiring/applications/[id]/score`
 - **HIRE-003** ? Technical assessment score (0?100) on applications; manual PATCH + webhook placeholder with `HIRING_ASSESSMENT_WEBHOOK_SECRET`
@@ -23,7 +24,7 @@ Staging migrate deploy adds:
 
 - `project_milestones` (`due_date`); `payment_schedules.milestone_id`; `project_disputes`
 - `escrow_held`, `escrow_override_reason`, `escrow_override_by`, `escrow_override_at` on `ops_projects`
-- `hiring_applications` (HIRE-001); `resume_parsed` (HIRE-002); `technical_score` (HIRE-003); `ths_score`, `rs_score`, `hiring_recommendation` (HIRE-004)
+- `hiring_applications` (HIRE-001); `resume_parsed` (HIRE-002); `technical_score` (HIRE-003); `ths_score`, `rs_score`, `hiring_recommendation` (HIRE-004); `hiring_decision`, `rp_score` (HIRE-006)
 
 ## [0.6.0] ????? 2026-05-25
 

@@ -9,7 +9,7 @@
 | **Modules** | `packages/modules/hiring` |
 | **Depends on** | HIRE-004 |
 | **Branch** | `feature/HIRE-006-decision` |
-| **Status** | Backlog |
+| **Status** | In Progress |
 
 ---
 

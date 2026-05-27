@@ -39,6 +39,8 @@ export type HiringPipelineListItem = {
   thsScore: number | null;
   rsScore: number | null;
   hiringRecommendation: string | null;
+  hiringDecision: string | null;
+  hiringDecisionSource: string | null;
   createdAt: string;
   thsRsScoredAt: string | null;
   /** Days from application to THS/RS score, when scored. */

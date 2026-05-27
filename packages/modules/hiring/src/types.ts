@@ -27,6 +27,15 @@ export type SubmitApplicationInput = {
   resumeBytes: Buffer;
 };
 
+export type TechnicalScoreSource = 'manual' | 'webhook';
+
+/** Effective hiring decisions (HIRE-006) — aligned with @lanceflow/rules-engine HiringRecommendation. */
+export const HIRING_DECISIONS = ['Reject', 'Hold', 'Hire', 'Fast Track'] as const;
+
+export type HiringDecision = (typeof HIRING_DECISIONS)[number];
+
+export type HiringDecisionSource = 'rule' | 'override';
+
 export type HiringApplicationRecord = {
   id: string;
   fullName: string;
@@ -45,9 +54,12 @@ export type HiringApplicationRecord = {
   thsScore: number | null;
   rsScore: number | null;
   hiringRecommendation: string | null;
+  hiringDecision: HiringDecision | null;
+  hiringDecisionSource: HiringDecisionSource | null;
+  hiringDecisionAt: Date | null;
+  hiringDecisionOverrideReason: string | null;
+  rpScore: number | null;
   thsRsFormulaVersion: string | null;
   thsRsScoredAt: Date | null;
   createdAt: Date;
 };
-
-export type TechnicalScoreSource = 'manual' | 'webhook';

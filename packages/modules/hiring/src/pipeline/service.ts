@@ -20,6 +20,8 @@ function toListItem(row: {
   thsScore: number | null;
   rsScore: number | null;
   hiringRecommendation: string | null;
+  hiringDecision: string | null;
+  hiringDecisionSource: string | null;
   createdAt: Date;
   thsRsScoredAt: Date | null;
 }): HiringPipelineListItem {
@@ -32,6 +34,8 @@ function toListItem(row: {
     thsScore: row.thsScore,
     rsScore: row.rsScore,
     hiringRecommendation: row.hiringRecommendation,
+    hiringDecision: row.hiringDecision,
+    hiringDecisionSource: row.hiringDecisionSource,
     createdAt: row.createdAt.toISOString(),
     thsRsScoredAt: row.thsRsScoredAt?.toISOString() ?? null,
     daysToScore:
@@ -67,6 +71,8 @@ export async function getHiringPipelineSnapshot(
         thsScore: true,
         rsScore: true,
         hiringRecommendation: true,
+        hiringDecision: true,
+        hiringDecisionSource: true,
         createdAt: true,
         thsRsScoredAt: true,
       },
