@@ -7,6 +7,7 @@ import { auditLog } from '@lanceflow/audit';
 import { prisma } from '@lanceflow/database';
 import { HIRE_THS_RS_RULE_KEY } from '@lanceflow/rules-engine';
 
+import { sendCandidateDecisionEmail } from '../notifications';
 import { mapHiringApplicationRow } from '../record-mapper';
 import type { HiringApplicationRecord, HiringDecision } from '../types';
 import { validateOverrideHiringDecisionInput } from './validate';
@@ -95,8 +96,12 @@ export async function applyHiringDecisionFromRule(
   decision: HiringDecision,
   actorId: string
 ): Promise<void> {
+  const existing = await prisma.hiringApplication.findUnique({ where: { id: applicationId } });
+  if (!existing) return;
+
+  const previousDecision = existing.hiringDecision as HiringDecision | null;
   const now = new Date();
-  await prisma.hiringApplication.update({
+  const updated = await prisma.hiringApplication.update({
     where: { id: applicationId },
     data: {
       hiringDecision: decision,
@@ -111,8 +116,19 @@ export async function applyHiringDecisionFromRule(
     action: 'hiring_application.apply_decision_rule',
     entityType: 'hiring_application',
     entityId: applicationId,
-    payload: { decision, source: 'rule' },
+    payload: { decision, source: 'rule', previousDecision },
   });
+
+  if (previousDecision !== decision) {
+    await sendCandidateDecisionEmail({
+      applicationId,
+      email: updated.email,
+      fullName: updated.fullName,
+      roleApplied: updated.roleApplied,
+      decision,
+      actorId,
+    });
+  }
 }
 
 /** Manual decision override — audited; marks prior THS/RS rule decision overridden (HIRE-006). */
@@ -193,6 +209,15 @@ export async function overrideHiringDecision(
       reason,
       decisionId: ruleDecision.id,
     },
+  });
+
+  await sendCandidateDecisionEmail({
+    applicationId,
+    email: updated.email,
+    fullName: updated.fullName,
+    roleApplied: updated.roleApplied,
+    decision,
+    actorId,
   });
 
   return {

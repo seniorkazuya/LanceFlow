@@ -50,3 +50,10 @@ export {
 } from './pipeline';
 
 export { getHiringCeoQueueSnapshot, type HiringCeoQueueSnapshot } from './ceo-queue';
+export {
+  buildCandidateDecisionEmail,
+  isHiringDecisionEmailEnabled,
+  sendCandidateDecisionEmail,
+  type CandidateDecisionEmailContent,
+  type SendCandidateDecisionEmailResult,
+} from './notifications';
