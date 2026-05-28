@@ -19,6 +19,6 @@
   "devDependencies": {
     "@lanceflow/typescript-config": "workspace:*",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^6.0.3"
   }
 }

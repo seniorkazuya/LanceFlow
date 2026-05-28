@@ -22,6 +22,6 @@
   "devDependencies": {
     "@lanceflow/typescript-config": "workspace:*",
     "prisma": "^6.1.0",
-    "typescript": "^5.7.2"
+    "typescript": "^6.0.3"
   }
 }
