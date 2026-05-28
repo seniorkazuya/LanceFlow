@@ -291,6 +291,9 @@ model HiringApplication {
   rpScore                     Int?      @map("rp_score")
   thsRsFormulaVersion  String?   @map("ths_rs_formula_version")
   thsRsScoredAt        DateTime? @map("ths_rs_scored_at")
+  communicationScores   Json?     @map("communication_scores")
+  communicationScoredAt DateTime? @map("communication_scored_at")
+  communicationLlmCalls Int       @default(0) @map("communication_llm_calls")
   createdAt            DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 
