@@ -286,11 +286,18 @@ async function setItemColumn(
 
 async function main() {
   const args = parseArgs(process.argv);
-  const token = process.env.PROJECTS_TOKEN || process.env.GITHUB_TOKEN;
-  if (!token) {
-    console.error('Missing PROJECTS_TOKEN or GITHUB_TOKEN');
-    process.exit(1);
+  const projectsToken = process.env.PROJECTS_TOKEN?.trim();
+  /**
+   * Dependabot PRs do not have access to repository secrets, and GitHub's default
+   * token may not have Projects v2 access. This sync job should never block CI
+   * for code changes when it can't access the project board.
+   */
+  if (!projectsToken) {
+    console.log('Skipping project sync: PROJECTS_TOKEN is not available in this context');
+    return;
   }
+
+  const token = projectsToken;
 
   const manifest = await loadManifest();
   const { owner, number } = manifest.project;
@@ -373,6 +380,18 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err.message || err);
+  const message = String(err?.message || err);
+  // Fail-open for project board sync issues so CI isn't blocked.
+  if (
+    message.includes('ProjectV2') ||
+    message.includes('Project') ||
+    message.includes('GraphQL failed') ||
+    message.includes('not found')
+  ) {
+    console.error(`Project sync skipped: ${message}`);
+    process.exit(0);
+  }
+
+  console.error(message);
   process.exit(1);
 });
