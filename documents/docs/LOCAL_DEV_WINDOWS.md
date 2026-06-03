@@ -39,4 +39,6 @@ You only need Postgres for sign-in and migrations. Redis is optional locally (`/
 
 Use the same `AUTH_SECRET`, `DEV_AUTH_*`, and `AUTH_URL=http://localhost:3000` as in `.env.example`.
 
+**Env file location:** keep `.env` at the **repo root** (next to `.env.example`). The web app loads it automatically; if sign-up or sign-in cannot reach the database, restart `pnpm dev` after editing `.env`.
+
 See also [AUTH.md](./AUTH.md).

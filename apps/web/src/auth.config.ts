@@ -20,7 +20,7 @@ export const authConfig = {
         return isLoggedIn;
       }
 
-      if (isLoggedIn && nextUrl.pathname === '/auth/signin') {
+      if (isLoggedIn && nextUrl.pathname.startsWith('/auth/')) {
         return Response.redirect(new URL('/dashboard', nextUrl));
       }
 

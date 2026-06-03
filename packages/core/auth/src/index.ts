@@ -8,6 +8,15 @@ export {
 } from './auth-diagnostics';
 export type { SessionUser } from './types';
 export { findOrCreateUserForSignIn } from './user';
+export { hashPassword, verifyPassword } from './password';
+export {
+  AuthRegistrationError,
+  authenticatePortalUser,
+  normalizeAuthEmail,
+  postLoginPathForRole,
+  registerPortalUser,
+  validatePortalRegistrationInput,
+} from './portal';
 export {
   ForbiddenError,
   RolePolicy,

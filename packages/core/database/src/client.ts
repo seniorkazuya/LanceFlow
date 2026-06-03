@@ -1,5 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 
+import { loadMonorepoEnv } from './env';
+
+loadMonorepoEnv();
+
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 export const prisma =
