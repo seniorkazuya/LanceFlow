@@ -51,6 +51,9 @@ export function LandingNav({ activePage }: LandingNavProps) {
           <Link className="btn btn-ghost" href="/auth/signin">
             Sign in
           </Link>
+          <Link className="btn btn-ghost label-hide" href="/auth/signup">
+            Sign up
+          </Link>
           <Link className="btn btn-primary" href="/#contact">
             Contact us
           </Link>

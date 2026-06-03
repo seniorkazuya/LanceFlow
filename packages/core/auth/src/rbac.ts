@@ -51,6 +51,8 @@ export const RolePolicy = {
     UserRole.CALLER,
     UserRole.BIDDER,
     UserRole.ENGINEER,
+    UserRole.CLIENT,
+    UserRole.DEVELOPER,
   ] as const,
 } as const;
 

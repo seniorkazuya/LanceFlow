@@ -20,7 +20,15 @@ export const APP_NAV_ITEMS: readonly NavItem[] = [
       UserRole.CALLER,
       UserRole.BIDDER,
       UserRole.ENGINEER,
+      UserRole.CLIENT,
+      UserRole.DEVELOPER,
     ],
+  },
+  {
+    id: 'apply',
+    label: 'Apply',
+    href: '/apply',
+    allowedRoles: [UserRole.DEVELOPER],
   },
   {
     id: 'clients',

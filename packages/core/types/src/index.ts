@@ -5,7 +5,21 @@ export const UserRole = {
   CALLER: 'CALLER',
   BIDDER: 'BIDDER',
   ENGINEER: 'ENGINEER',
+  /** External client portal account */
+  CLIENT: 'CLIENT',
+  /** External developer / talent portal account */
+  DEVELOPER: 'DEVELOPER',
 } as const;
+
+export const AccountType = {
+  STAFF: 'staff',
+  CLIENT: 'client',
+  DEVELOPER: 'developer',
+} as const;
+
+export type AccountType = (typeof AccountType)[keyof typeof AccountType];
+
+export type PortalAccountType = typeof AccountType.CLIENT | typeof AccountType.DEVELOPER;
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 

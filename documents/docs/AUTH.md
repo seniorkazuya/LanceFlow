@@ -30,7 +30,20 @@ Sign-in compares credentials with **exact** string equality. A password that wor
 2. `docker compose up -d` and `pnpm db:migrate:deploy`.
 3. `pnpm dev` → http://localhost:3000/auth/signin
 
-On first successful sign-in, the user is **upserted** into `users` with role `OPS_MANAGER` (RBAC in CORE-003).
+On first successful sign-in with `DEV_AUTH_*`, the user is **upserted** into `users` with role `OPS_MANAGER` (RBAC in CORE-003).
+
+## Portal sign-up (clients & developers)
+
+| Path | Account |
+|------|---------|
+| `/auth/signup` | Choose client or developer |
+| `/auth/signup/client` | Client registration → role `CLIENT` |
+| `/auth/signup/developer` | Developer registration → role `DEVELOPER` |
+| `/auth/signin` | Email + password for all account types |
+
+Registered users authenticate against `users.password_hash` (scrypt). Internal staff can still use `DEV_AUTH_*` when configured.
+
+Requires migration `20260601120000_user_portal_auth` (`account_type`, `password_hash` on `users`).
 
 ## Production note
 
