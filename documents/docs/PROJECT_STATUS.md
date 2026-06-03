@@ -1,7 +1,7 @@
 # LanceFlow — Project Status (Client View)
 
-> **Last updated:** 2026-05-25  
-> **Current phase:** M4 — Analytics (release to production)  
+> **Last updated:** 2026-05-28  
+> **Current phase:** M6 — Hiring  
 > **Repository:** https://github.com/seniorkazuya/LanceFlow  
 
 ---
@@ -10,16 +10,16 @@
 
 | | |
 |--|--|
-| **Active story** | **Release v0.6.0** — M4 Analytics → production |
-| **Just completed** | **KPI-006** on staging ([#94](https://github.com/seniorkazuya/LanceFlow/pull/94)) |
+| **Active story** | **HIRE-007** — CEO filtered hiring queue (in progress) |
+| **Just completed** | **HIRE-006** — Hiring decision engine output |
 | **Staging** | https://lance-flow-web.vercel.app |
-| **Production** | **v0.5.0** → **v0.6.0** pending deploy |
+| **Production** | **v0.6.0** — M4 Analytics |
 
 **Links:** [Staging demo](./STAGING_DEMO.md) · [Production deploy](./DEPLOY_PRODUCTION.md) · [Story plan](./STORY_DEVELOPMENT_PLAN.md) · [GitHub Project #4](https://github.com/users/seniorkazuya/projects/4)
 
 ---
 
-## Production (target v0.6.0)
+## Production (v0.6.0)
 
 M4 Analytics: role KPIs, Control Center summary + dashboard, CEO thresholds, Ops-approved bonus/penalty suggestions.
 
@@ -27,8 +27,8 @@ M4 Analytics: role KPIs, Control Center summary + dashboard, CEO thresholds, Ops
 |----------|---------|
 | `KPI_ROLLUP_JOBS_ENABLED` | KPI rollup + compensation suggestions in worker |
 | `KPI_ROLLUP_CRON` | Nightly cron (default `0 3 * * *`) |
-| `AUTO_ASSIGN_ENABLED` | (M3) Auto-assign on activate |
-| `PAYMENT_ESCALATION_JOBS_ENABLED` | (M3) Payment escalation worker |
+| `AUTO_ASSIGN_ENABLED` | Auto-assign on activate |
+| `PAYMENT_ESCALATION_JOBS_ENABLED` | Payment escalation worker |
 | `REDIS_URL` | BullMQ worker |
 | `RESEND_API_KEY` | Optional email |
 
@@ -36,16 +36,26 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 ---
 
-## Staging (M4 complete)
+## Staging (M4 + M5 + M6)
 
 | Story | PR | Feature |
 |-------|-----|---------|
-| KPI-001 | #89 | Role KPI calculators |
-| KPI-002 | #90 | Nightly `kpi_records` rollup |
-| KPI-003 | #91 | `GET /api/control-center/summary` |
-| KPI-004 | #92 | Control Center StatusBadge cards |
-| KPI-005 | #93 | CEO threshold config + audit |
-| KPI-006 | #94 | Bonus/penalty suggestions (Ops approve) |
+| KPI-001–006 | #89–#94 | M4 Analytics (complete) |
+| PAY-001–005 | #96–#100 | M5 Payments (milestones, escrow, reminders, fraud, disputes) |
+| HIRE-001 | #101 | Public apply portal + resume upload |
+| HIRE-002 | #102 | Resume parse API (years, stack, seniority, job hops) |
+| HIRE-003 | #103 | Technical score 0–100 + assessment webhook |
+| HIRE-004 | #104 | THS/RS scoring + auto-reject RS > 70 |
+| HIRE-005 | #105 | Pipeline dashboard — stages, filters, time-to-hire |
+| HIRE-006 | #106 | Decision enum + override audit |
+| HIRE-007 | (pending) | CEO-only queue endpoint (top 5%, high RS, high RP) |
+
+### Staging env (M4 jobs)
+
+| Variable | Purpose |
+|----------|---------|
+| `KPI_ROLLUP_JOBS_ENABLED` | Enable KPI rollup in worker |
+| `KPI_ROLLUP_CRON` | Cron pattern (default `0 3 * * *`) |
 
 ---
 
@@ -53,16 +63,17 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 | Milestone | Status |
 |-----------|--------|
-| **M0–M3** | Done (production **v0.5.0**) |
-| **M4** Analytics | Complete on staging; **v0.6.0** release PR in flight |
+| **M0–M4** | Done (production **v0.6.0**) |
+| **M5** Payments | Done on staging (PAY-001–005) |
+| **M6** Hiring | HIRE-005 in progress |
 
 ---
 
 ## Recommended sprint order (next)
 
-1. Merge **release/v0.6.0** → `main`, tag **v0.6.0**, approve production deploy  
-2. Staging/production QA: `/control`, KPI rollup, compensation suggestions  
-3. **M5** Payments / Hiring per [STORY_DEVELOPMENT_PLAN.md](./STORY_DEVELOPMENT_PLAN.md)
+1. Merge **#96** PAY-001; QA milestones on project detail  
+2. QA PAY-002 escrow on staging (post-migrate)  
+3. Merge PAY-003 PR; QA milestone due dates drive payment reminders  
 
 ---
 
@@ -70,9 +81,9 @@ Manual: `POST /api/jobs/kpi-rollup` (CEO/Ops).
 
 | Date | Change |
 |------|--------|
-| 2026-05-25 | KPI-005–006 staging (#93–#94); preparing **v0.6.0** |
+| 2026-05-25 | **v0.6.0** production — M4 Analytics |
+| 2026-05-25 | PAY-001 staging (#96) |
 | 2026-05-25 | **v0.5.0** production — M3 Automation |
-| 2026-05-23 | **v0.4.1** — M2 Operations |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-25",
+  "updated": "2026-05-28",
   "release": "v0.6.0",
   "project": {
     "owner": "seniorkazuya",
@@ -53,6 +53,18 @@
     "KPI-003": { "column": "Done", "title": "KPI-003 — Control Center summary API" },
     "KPI-004": { "column": "Done", "title": "KPI-004 — Control Center dashboard UI" },
     "KPI-005": { "column": "Done", "title": "KPI-005 — Signal threshold configuration" },
-    "KPI-006": { "column": "Done", "title": "KPI-006 — Bonus and penalty suggestions" }
+    "KPI-006": { "column": "Done", "title": "KPI-006 — Bonus and penalty suggestions" },
+    "PAY-001": { "column": "Done", "title": "PAY-001 — Project milestone model" },
+    "PAY-002": { "column": "Done", "title": "PAY-002 — Escrow and work gating" },
+    "PAY-003": { "column": "Done", "title": "PAY-003 — Milestone-linked payment reminders" },
+    "PAY-004": { "column": "Done", "title": "PAY-004 — Fraud triggers v1" },
+    "PAY-005": { "column": "Done", "title": "PAY-005 — Dispute workflow" },
+    "HIRE-001": { "column": "Done", "title": "HIRE-001 — Candidate application portal" },
+    "HIRE-002": { "column": "Done", "title": "HIRE-002 — Resume parser integration" },
+    "HIRE-003": { "column": "Done", "title": "HIRE-003 — Technical assessment hook" },
+    "HIRE-004": { "column": "Done", "title": "HIRE-004 — THS and RS calculators v1" },
+    "HIRE-005": { "column": "Done", "title": "HIRE-005 — Hiring pipeline dashboard" },
+    "HIRE-006": { "column": "Done", "title": "HIRE-006 — Hiring decision engine output" },
+    "HIRE-007": { "column": "In Progress", "title": "HIRE-007 — CEO filtered hiring queue" }
   }
 }

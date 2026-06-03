@@ -132,6 +132,8 @@ const SEVERITY_ORDER: Record<ExceptionSeverity, number> = {
 
 export async function listLeadershipExceptions(options?: {
   status?: ExceptionStatus | 'active';
+  /** CEO inbox: only critical (danger) items (PAY-004). */
+  minSeverity?: ExceptionSeverity;
   limit?: number;
 }): Promise<LeadershipExceptionRecord[]> {
   const statusFilter =
@@ -144,6 +146,7 @@ export async function listLeadershipExceptions(options?: {
   const rows = await prisma.leadershipException.findMany({
     where: {
       status: typeof statusFilter === 'string' ? statusFilter : statusFilter,
+      ...(options?.minSeverity ? { severity: options.minSeverity } : {}),
     },
     orderBy: { updatedAt: 'desc' },
     take: options?.limit ?? 100,
@@ -160,9 +163,14 @@ export async function listLeadershipExceptions(options?: {
     });
 }
 
-export async function getExceptionInboxSummary(): Promise<ExceptionInboxSummary> {
+export async function getExceptionInboxSummary(options?: {
+  minSeverity?: ExceptionSeverity;
+}): Promise<ExceptionInboxSummary> {
   const rows = await prisma.leadershipException.findMany({
-    where: { status: { in: ['open', 'acknowledged'] } },
+    where: {
+      status: { in: ['open', 'acknowledged'] },
+      ...(options?.minSeverity ? { severity: options.minSeverity } : {}),
+    },
   });
   return summarizeInbox(rows);
 }

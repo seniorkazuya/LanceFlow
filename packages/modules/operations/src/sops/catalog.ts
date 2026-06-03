@@ -69,6 +69,23 @@ export const SOP_CATALOG: readonly SopCategory[] = [
     ],
   },
   {
+    id: 'payments',
+    label: 'Payments & disputes',
+    items: [
+      {
+        id: 'payments-dispute',
+        title: 'Client dispute workflow',
+        href: 'https://docs.lanceflow.app/sops/payments/dispute',
+        description: 'Open → investigate → escalate (CEO on high value) → resolve (PAY-005).',
+      },
+      {
+        id: 'payments-escrow',
+        title: 'Escrow and work gating',
+        href: 'https://docs.lanceflow.app/sops/payments/escrow',
+      },
+    ],
+  },
+  {
     id: 'hiring',
     label: 'Hiring',
     items: [

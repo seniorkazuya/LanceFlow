@@ -1,13 +1,17 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
 import { isAutoAssignEnabled } from '@lanceflow/config';
-import { listPaymentSchedulesForProject } from '@lanceflow/payments';
+import { listPaymentSchedulesForProject, listProjectMilestones } from '@lanceflow/payments';
 import { allowedTransitionsFrom, getProjectById, listProjectAssignments } from '@lanceflow/operations';
 import { GlassCard, PageHeader, SectionLabel, StatusBadge } from '@lanceflow/ui';
 import { notFound, redirect } from 'next/navigation';
 
 import { ShellPage } from '@/components/app/shell-page';
 import { ProjectAssignmentPanel } from '@/components/projects/project-assignment-panel';
+import { ProjectDisputesPanel } from '@/components/projects/project-disputes-panel';
+import { ProjectEscrowPanel } from '@/components/projects/project-escrow-panel';
+import { ProjectMilestonesPanel } from '@/components/projects/project-milestones-panel';
 import { ProjectPaymentSchedulesPanel } from '@/components/projects/project-payment-schedules-panel';
+import { serializeProjectMilestone } from '@/lib/project-milestones-api';
 import { serializePaymentSchedule } from '@/lib/payment-schedules-api';
 import { ProjectAutoAssignPanel } from '@/components/projects/project-auto-assign-panel';
 import { ProjectAutoApprovePanel } from '@/components/projects/project-auto-approve-panel';
@@ -34,6 +38,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const nextStatuses = allowedTransitionsFrom(project.status);
   const assignments = await listProjectAssignments(id);
   const paymentSchedules = (await listPaymentSchedulesForProject(id)) ?? [];
+  const milestones = (await listProjectMilestones(id)) ?? [];
 
   return (
     <ShellPage>
@@ -90,6 +95,59 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         ) : null}
       </GlassCard>
+
+      {canWrite ? (
+        <GlassCard className="p-5 md:p-6">
+          <SectionLabel>escrow & work gating</SectionLabel>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Block progress when payments are overdue or escrow is held (PAY-002). Ops override is audited.
+          </p>
+          <div className="mt-6">
+            <ProjectEscrowPanel projectId={project.id} />
+          </div>
+        </GlassCard>
+      ) : null}
+
+      <GlassCard className="p-5 md:p-6">
+        <SectionLabel>payment milestones</SectionLabel>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Percentage breakdown for client payments (PAY-001). Due date + amount sync reminders
+          (PAY-003 / AUTO-005). Must sum to 100%.
+        </p>
+        {canWrite ? (
+          <div className="mt-6">
+            <ProjectMilestonesPanel
+              projectId={project.id}
+              initialMilestones={milestones.map(serializeProjectMilestone)}
+            />
+          </div>
+        ) : (
+          <ul className="mt-4 space-y-1 text-sm">
+            {milestones.length > 0 ? (
+              milestones.map((m) => (
+                <li key={m.id}>
+                  {m.label}: {m.percentPct}%
+                  {m.dueDate ? ` · due ${m.dueDate.toISOString().slice(0, 10)}` : ''}
+                </li>
+              ))
+            ) : (
+              <li className="text-muted-foreground">No milestones defined.</li>
+            )}
+          </ul>
+        )}
+      </GlassCard>
+
+      {canWrite ? (
+        <GlassCard className="p-5 md:p-6">
+          <SectionLabel>disputes</SectionLabel>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Ops dispute workflow (PAY-005). High-value escalations appear in the CEO exception inbox.
+          </p>
+          <div className="mt-6">
+            <ProjectDisputesPanel projectId={project.id} />
+          </div>
+        </GlassCard>
+      ) : null}
 
       <GlassCard className="p-5 md:p-6">
         <SectionLabel>payments</SectionLabel>

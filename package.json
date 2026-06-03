@@ -26,6 +26,8 @@
     "@lanceflow/auth": "workspace:*",
     "@lanceflow/config": "workspace:*",
     "@lanceflow/database": "workspace:*",
+    "@lanceflow/ai-hiring": "workspace:*",
+    "@lanceflow/hiring": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "@lanceflow/ui": "workspace:*",
     "ioredis": "^5.4.2",

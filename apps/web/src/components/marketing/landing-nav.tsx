@@ -1,29 +1,43 @@
-'use client';
-
-import { Button } from '@lanceflow/ui';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ThemeToggle } from '@/components/theme/theme-toggle';
-
-const BRAND_ICON = '/brand/lanceflow-icon.png';
+const LOGO = '/marketing/company_logo.png';
 
 export function LandingNav() {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-2xl">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Image src={BRAND_ICON} alt="" width={28} height={28} className="h-7 w-7 object-contain" />
-          <span className="text-sm font-semibold tracking-tight text-foreground">lanceflow</span>
+    <header>
+      <div className="wrap nav">
+        <Link className="brand" href="#top" aria-label="Lanceflows home">
+          <Image
+            className="logo-img"
+            src={LOGO}
+            alt="Lanceflows logo"
+            width={120}
+            height={44}
+            style={{ width: 'auto', height: 44 }}
+            priority
+          />
+          <span className="brand-text">
+            <span className="brand-name">
+              Lance<b>flows</b>
+            </span>
+            <span className="brand-tag">Software Engineering &amp; AI Services</span>
+          </span>
         </Link>
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/auth/signin">Sign in</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href="/auth/signin">Open app</Link>
-          </Button>
+        <nav className="nav-links" aria-label="Primary">
+          <Link href="/" className="active">
+            Overview
+          </Link>
+          <Link href="#about-short">Services</Link>
+          <Link href="#why">Case Studies</Link>
+        </nav>
+        <div className="top-actions">
+          <Link className="btn btn-ghost" href="/auth/signin">
+            Sign in
+          </Link>
+          <Link className="btn btn-primary" href="#contact">
+            Contact us
+          </Link>
         </div>
       </div>
     </header>

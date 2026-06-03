@@ -10,13 +10,12 @@ export const RolePolicy = {
   kpiThresholdsWrite: [UserRole.CEO] as const,
   /** Ops workflow dashboard (OPS-008). */
   opsConsoleRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
-  /** Hiring CEO queue — engineers must not access. */
-  hiringCeoQueue: [
-    UserRole.CEO,
-    UserRole.OPS_MANAGER,
-    UserRole.CALLER,
-    UserRole.BIDDER,
-  ] as const,
+  /** Hiring CEO queue — CEO only (HIRE-007). */
+  hiringCeoQueue: [UserRole.CEO] as const,
+  /** Resume parse / hiring application management (HIRE-002). */
+  hiringApplicationsManage: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
+  /** Hiring pipeline dashboard — HR/Ops/CEO (HIRE-005); engineers denied. */
+  hiringPipelineRead: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Audit log read — CEO only (CORE-006). */
   auditRead: [UserRole.CEO] as const,
   /** Client records read (OPS-001). */
