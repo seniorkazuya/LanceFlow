@@ -27,7 +27,7 @@ function loadEnvFile(envPath: string): void {
   }
 }
 
-/** Load repo-root `.env` when Prisma runs outside Next (or Next did not inject env). */
+/** Load repo-root `.env` when Next did not inject env (local dev without --env-file). */
 export function loadMonorepoEnv(): void {
   if (loaded) return;
   loaded = true;

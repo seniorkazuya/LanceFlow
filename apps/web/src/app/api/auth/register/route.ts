@@ -4,8 +4,8 @@ import {
   postLoginPathForRole,
   registerPortalUser,
 } from '@lanceflow/auth';
-import { loadMonorepoEnv } from '@lanceflow/database';
 import { AccountType } from '@lanceflow/types';
+import { loadMonorepoEnv } from '@/lib/load-monorepo-env';
 import { NextResponse } from 'next/server';
 
 type RegisterBody = {

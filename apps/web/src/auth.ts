@@ -5,9 +5,6 @@ import {
   resolveDevAuthConfig,
   validateDevCredentials,
 } from '@lanceflow/auth';
-import { loadMonorepoEnv } from '@lanceflow/database';
-
-loadMonorepoEnv();
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
