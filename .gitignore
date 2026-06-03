@@ -38,3 +38,5 @@ coverage
 documents/_extracted
 documents/_docx_extract
 html/
+.vercel
+.env*

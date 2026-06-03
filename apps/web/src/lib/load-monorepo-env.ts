@@ -27,12 +27,10 @@ function loadEnvFile(envPath: string): void {
   }
 }
 
-/** Load repo-root `.env` when Next did not inject env (local dev without --env-file). */
+/** Load repo-root `.env` values for keys not already set in the process environment. */
 export function loadMonorepoEnv(): void {
   if (loaded) return;
   loaded = true;
-
-  if (process.env.DATABASE_URL?.trim()) return;
 
   const searchDirs = [
     process.cwd(),

@@ -2,31 +2,36 @@ import Link from 'next/link';
 
 import { AuthPageShell } from '@/components/auth/auth-page-shell';
 import { SignInForm } from '@/components/auth/sign-in-form';
+import { isGoogleAuthConfigured } from '@/lib/google-auth-config';
 
 type PageProps = {
-  searchParams: Promise<{ registered?: string }>;
+  searchParams: Promise<{ registered?: string; error?: string }>;
 };
 
 export default async function SignInPage({ searchParams }: PageProps) {
-  const { registered } = await searchParams;
+  const { registered, error } = await searchParams;
+  const googleEnabled = isGoogleAuthConfigured();
 
   return (
     <AuthPageShell
       label="sign in"
       title="Welcome back"
-      description="Sign in with your email and password."
+      description={
+        googleEnabled
+          ? 'Sign in with Google or your email and password.'
+          : 'Sign in with your email and password.'
+      }
       footer={
-        <p className="text-center text-sm text-muted-foreground">
-          <Link
-            href="/"
-            className="text-foreground/80 underline-offset-4 hover:text-primary hover:underline"
-          >
-            ← Back to home
-          </Link>
+        <p className="auth-page-footer">
+          <Link href="/">← Back to home</Link>
         </p>
       }
     >
-      <SignInForm registered={registered === '1'} />
+      <SignInForm
+        registered={registered === '1'}
+        errorCode={error}
+        googleEnabled={googleEnabled}
+      />
     </AuthPageShell>
   );
 }
