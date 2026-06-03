@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 
 /** Shared LanceFlow theme — navy/teal brand, glass surfaces. */
 const preset: Partial<Config> = {
-  darkMode: ['class'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
