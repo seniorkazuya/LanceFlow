@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { CaseStudyDetail } from '@/components/marketing/case-study-detail';
-import { getAllMarketingCases, getMarketingCase, getMarketingCaseIds } from '@/data/marketing-cases-index';
+import { getMarketingCase, getMarketingCaseIds } from '@/data/marketing-cases-index';
 
 type PageProps = {
   params: Promise<{ id: string }>;
