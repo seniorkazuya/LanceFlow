@@ -3,11 +3,23 @@ import Link from 'next/link';
 
 const LOGO = '/marketing/company_logo.png';
 
-export function LandingNav() {
+export type MarketingNavPage = 'overview' | 'services' | 'case-study';
+
+const NAV_LINKS: { href: string; label: string; page: MarketingNavPage }[] = [
+  { href: '/', label: 'Overview', page: 'overview' },
+  { href: '/services', label: 'Services', page: 'services' },
+  { href: '/case-study', label: 'Case Studies', page: 'case-study' },
+];
+
+type LandingNavProps = {
+  activePage?: MarketingNavPage;
+};
+
+export function LandingNav({ activePage }: LandingNavProps) {
   return (
     <header>
       <div className="wrap nav">
-        <Link className="brand" href="#top" aria-label="Lanceflows home">
+        <Link className="brand" href="/" aria-label="Lanceflows home">
           <Image
             className="logo-img"
             src={LOGO}
@@ -25,17 +37,21 @@ export function LandingNav() {
           </span>
         </Link>
         <nav className="nav-links" aria-label="Primary">
-          <Link href="/" className="active">
-            Overview
-          </Link>
-          <Link href="#about-short">Services</Link>
-          <Link href="#why">Case Studies</Link>
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.page}
+              href={item.href}
+              className={activePage === item.page ? 'active' : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
         <div className="top-actions">
           <Link className="btn btn-ghost" href="/auth/signin">
             Sign in
           </Link>
-          <Link className="btn btn-primary" href="#contact">
+          <Link className="btn btn-primary" href="/#contact">
             Contact us
           </Link>
         </div>

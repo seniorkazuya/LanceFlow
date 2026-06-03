@@ -1,19 +1,10 @@
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { ContactForm } from '@/components/marketing/contact-form';
 import { HeroSlider } from '@/components/marketing/hero-slider';
-import { LandingFooter } from '@/components/marketing/landing-footer';
-import { LandingNav } from '@/components/marketing/landing-nav';
+import { MarketingShell } from '@/components/marketing/marketing-shell';
 import { WhyTabs } from '@/components/marketing/why-tabs';
-
-import '@/styles/marketing.css';
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
-});
 
 const FEATURES = [
   {
@@ -42,9 +33,7 @@ const STATS = [
 
 export function LandingPage() {
   return (
-    <div className={`marketing-site ${plusJakarta.className}`}>
-      <LandingNav />
-
+    <MarketingShell activePage="overview">
       <main id="top">
         <section className="hero">
           <div className="wrap">
@@ -146,9 +135,9 @@ export function LandingPage() {
               Whether you&apos;re hiring talent or bringing your strengths, Lanceflows makes the next
               step seamless.
             </p>
-            <a className="btn btn-ghost" href="#contact">
+            <Link className="btn btn-ghost" href="/#contact">
               Contact us
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -197,7 +186,6 @@ export function LandingPage() {
       </main>
 
       <span id="signin" aria-hidden />
-      <LandingFooter />
-    </div>
+    </MarketingShell>
   );
 }
