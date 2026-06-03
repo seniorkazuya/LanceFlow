@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-label="Fintech and payments">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0c1f54"/><stop offset=".55" stop-color="#1e51b5"/><stop offset="1" stop-color="#2bc1c0"/>
+  </linearGradient></defs>
+  <rect width="400" height="240" fill="url(#g)"/>
+  <circle cx="350" cy="44" r="80" fill="#fff" opacity=".06"/>
+  <circle cx="44" cy="206" r="60" fill="#fff" opacity=".05"/>
+  <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="132" y="92" width="136" height="84" rx="12"/>
+    <line x1="132" y1="116" x2="268" y2="116"/>
+    <rect x="150" y="134" width="34" height="24" rx="5"/>
+    <line x1="210" y1="158" x2="248" y2="158"/>
+  </g>
+  <text x="288" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="46" font-weight="800" fill="#fff" text-anchor="middle">$</text>
+</svg>
