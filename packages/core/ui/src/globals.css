@@ -97,10 +97,27 @@
 }
 
 @layer components {
+  /* Dot grid is decorative only — mask must not apply to page content (see shell main). */
   .lf-page-grid {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .lf-page-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
     background-image: radial-gradient(hsl(var(--page-grid-dot) / 0.12) 1px, transparent 1px);
     background-size: 24px 24px;
     mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  }
+
+  .lf-page-grid > * {
+    position: relative;
+    z-index: 1;
   }
 
   .lf-mesh-bg {
