@@ -1,5 +1,6 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
-import { listProjects } from '@lanceflow/operations';
+import { listProjects, listProjectsForPortalClient } from '@lanceflow/operations';
+import { UserRole } from '@lanceflow/types';
 import { Button, GlassCard, PageHeader, StatusBadge } from '@lanceflow/ui';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -18,19 +19,32 @@ function statusTone(status: string): 'neutral' | 'warning' | 'success' {
 export default async function ProjectsPage() {
   const session = await auth();
   const role = session?.user?.role ?? '';
-  if (!hasRole(role, RolePolicy.projectsRead)) {
+  const email = session?.user?.email ?? '';
+  const isPortalClient = role === UserRole.CLIENT;
+
+  if (isPortalClient) {
+    if (!hasRole(role, RolePolicy.clientProjectsRead)) {
+      redirect('/dashboard');
+    }
+  } else if (!hasRole(role, RolePolicy.projectsRead)) {
     redirect('/dashboard');
   }
 
   const canWrite = hasRole(role, RolePolicy.projectsWrite);
-  const projects = await listProjects();
+  const projects = isPortalClient
+    ? await listProjectsForPortalClient(email)
+    : await listProjects();
 
   return (
     <ShellPage>
       <PageHeader
-        label="operations"
-        title="Projects"
-        description="Lifecycle: draft → pending approval → active → delivered → closed."
+        label={isPortalClient ? 'portal' : 'operations'}
+        title={isPortalClient ? 'My projects' : 'Projects'}
+        description={
+          isPortalClient
+            ? 'Projects linked to your account email. Ask your LanceFlow contact to set your email on the client record if nothing appears here.'
+            : 'Lifecycle: draft → pending approval → active → delivered → closed.'
+        }
         action={
           canWrite ? (
             <Button asChild size="sm">
@@ -42,7 +56,11 @@ export default async function ProjectsPage() {
 
       <GlassCard className="overflow-hidden p-0">
         {projects.length === 0 ? (
-          <p className="px-5 py-8 text-sm text-muted-foreground">No projects yet.</p>
+          <p className="px-5 py-8 text-sm text-muted-foreground">
+            {isPortalClient
+              ? 'No projects are linked to your email yet.'
+              : 'No projects yet.'}
+          </p>
         ) : (
           <ul className="divide-y divide-border">
             {projects.map((p) => (
@@ -53,7 +71,9 @@ export default async function ProjectsPage() {
                 >
                   <div>
                     <p className="font-medium text-foreground">{p.title}</p>
-                    <p className="text-sm text-muted-foreground">{p.clientName}</p>
+                    {!isPortalClient ? (
+                      <p className="text-sm text-muted-foreground">{p.clientName}</p>
+                    ) : null}
                   </div>
                   <StatusBadge status={statusTone(p.status)} label={p.status.replace('_', ' ')} />
                 </Link>

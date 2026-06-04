@@ -1,6 +1,5 @@
 'use client';
 
-import { Button, GlassCard, Input, SectionLabel } from '@lanceflow/ui';
 import { HIRING_APPLY_ROLES, MAX_RESUME_BYTES } from '@lanceflow/hiring/client';
 import { useState } from 'react';
 
@@ -12,10 +11,21 @@ const ROLE_LABELS: Record<(typeof HIRING_APPLY_ROLES)[number], string> = {
 
 type FieldError = { field: string; message: string };
 
-export function HiringApplyForm() {
+type HiringApplyFormProps = {
+  defaultFullName?: string;
+  defaultEmail?: string;
+  signedIn?: boolean;
+};
+
+export function HiringApplyForm({
+  defaultFullName = '',
+  defaultEmail = '',
+  signedIn = false,
+}: HiringApplyFormProps = {}) {
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState<FieldError[]>([]);
   const [success, setSuccess] = useState<string | null>(null);
+  const [formKey, setFormKey] = useState(0);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -53,7 +63,7 @@ export function HiringApplyForm() {
       }
 
       setSuccess(data.message ?? 'Application received.');
-      event.currentTarget.reset();
+      setFormKey((key) => key + 1);
     } catch {
       setErrors([{ field: 'form', message: 'Network error — try again' }]);
     }
@@ -66,33 +76,49 @@ export function HiringApplyForm() {
   }
 
   return (
-    <GlassCard className="p-6 md:p-8">
-      <SectionLabel>application</SectionLabel>
-      <form onSubmit={onSubmit} className="mt-6 grid gap-5">
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Full name</span>
-          <Input name="fullName" required maxLength={120} autoComplete="name" />
-          {errorFor('fullName') ? (
-            <span className="text-destructive">{errorFor('fullName')}</span>
-          ) : null}
-        </label>
+    <div className="card apply-form-card">
+      <p className="apply-form-eyebrow">Application</p>
+      {signedIn ? (
+        <p className="apply-form-intro">
+          Your account is active. Submit your resume and choose the role track you are applying
+          for (Engineer, Bidder, or Caller). Ops will review you in the hiring pipeline.
+        </p>
+      ) : null}
 
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Email</span>
-          <Input name="email" type="email" required autoComplete="email" />
-          {errorFor('email') ? (
-            <span className="text-destructive">{errorFor('email')}</span>
-          ) : null}
-        </label>
-
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Role</span>
-          <select
-            name="roleApplied"
+      <form key={formKey} onSubmit={onSubmit} className="apply-form" noValidate>
+        <div className="field">
+          <label htmlFor="apply-fullName">Full name</label>
+          <input
+            id="apply-fullName"
+            name="fullName"
+            type="text"
             required
-            className="h-10 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            defaultValue=""
-          >
+            maxLength={120}
+            autoComplete="name"
+            defaultValue={defaultFullName}
+            placeholder="Your full name"
+          />
+          {errorFor('fullName') ? <span className="field-error">{errorFor('fullName')}</span> : null}
+        </div>
+
+        <div className="field">
+          <label htmlFor="apply-email">Email</label>
+          <input
+            id="apply-email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            defaultValue={defaultEmail}
+            readOnly={signedIn && Boolean(defaultEmail)}
+            placeholder="you@email.com"
+          />
+          {errorFor('email') ? <span className="field-error">{errorFor('email')}</span> : null}
+        </div>
+
+        <div className="field">
+          <label htmlFor="apply-role">Role</label>
+          <select id="apply-role" name="roleApplied" required defaultValue="">
             <option value="" disabled>
               Select a role
             </option>
@@ -103,55 +129,50 @@ export function HiringApplyForm() {
             ))}
           </select>
           {errorFor('roleApplied') ? (
-            <span className="text-destructive">{errorFor('roleApplied')}</span>
+            <span className="field-error">{errorFor('roleApplied')}</span>
           ) : null}
-        </label>
+        </div>
 
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Resume (PDF or Word, max 5MB)</span>
-          <Input
+        <div className="field">
+          <label htmlFor="apply-resume">Resume (PDF or Word, max 5MB)</label>
+          <input
+            id="apply-resume"
             name="resume"
             type="file"
             required
+            className="file-input"
             accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           />
-          {errorFor('resume') ? (
-            <span className="text-destructive">{errorFor('resume')}</span>
-          ) : null}
-        </label>
+          {errorFor('resume') ? <span className="field-error">{errorFor('resume')}</span> : null}
+        </div>
 
-        <label className="flex items-start gap-3 text-sm">
-          <input
-            name="consentGiven"
-            type="checkbox"
-            className="mt-1 h-4 w-4 rounded border-input"
-            required
-          />
-          <span className="text-muted-foreground">
+        <label className="consent-row">
+          <input name="consentGiven" type="checkbox" required />
+          <span>
             I consent to LanceFlow storing my application and resume for hiring evaluation, and
             contacting me about this application.
           </span>
         </label>
         {errorFor('consentGiven') ? (
-          <p className="text-sm text-destructive">{errorFor('consentGiven')}</p>
+          <p className="field-error">{errorFor('consentGiven')}</p>
         ) : null}
 
         {errorFor('form') ? (
-          <p role="alert" className="text-sm text-destructive">
+          <p role="alert" className="field-error">
             {errorFor('form')}
           </p>
         ) : null}
 
         {success ? (
-          <p role="status" className="text-sm text-primary">
+          <p role="status" className="form-success">
             {success}
           </p>
         ) : null}
 
-        <Button type="submit" disabled={pending} className="w-full sm:w-auto">
+        <button className="btn btn-primary apply-submit" type="submit" disabled={pending}>
           {pending ? 'Submitting…' : 'Submit application'}
-        </Button>
+        </button>
       </form>
-    </GlassCard>
+    </div>
   );
 }

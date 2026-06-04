@@ -3,18 +3,37 @@ import {
   authenticatePortalUser,
   findOrCreateUserForSignIn,
   resolveDevAuthConfig,
+  resolveGoogleSignInUser,
   validateDevCredentials,
 } from '@lanceflow/auth';
+import { AccountType } from '@lanceflow/types';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import Google from 'next-auth/providers/google';
+import { cookies } from 'next/headers';
 
 import { authConfig } from './auth.config';
+import { getGoogleOAuthCredentials } from './lib/google-auth-config';
+import { loadMonorepoEnv } from './lib/load-monorepo-env';
+
+loadMonorepoEnv();
 
 const nextAuth = NextAuth({
   ...authConfig,
   secret: process.env.AUTH_SECRET,
   trustHost: true,
   providers: [
+    ...((): ReturnType<typeof import('next-auth/providers/google').default>[] => {
+      const google = getGoogleOAuthCredentials();
+      if (!google) return [];
+      return [
+        Google({
+          clientId: google.clientId,
+          clientSecret: google.clientSecret,
+          allowDangerousEmailAccountLinking: true,
+        }),
+      ];
+    })(),
     Credentials({
       id: 'credentials',
       name: 'Email',
@@ -36,7 +55,7 @@ const nextAuth = NextAuth({
                 action: 'auth.sign_in',
                 entityType: 'user',
                 entityId: portalUser.id,
-                payload: { email: portalUser.email, role: portalUser.role },
+                payload: { email: portalUser.email, role: portalUser.role, provider: 'credentials' },
               });
             } catch (auditError) {
               console.error('[auth] auditLog auth.sign_in failed', auditError);
@@ -59,7 +78,7 @@ const nextAuth = NextAuth({
               action: 'auth.sign_in',
               entityType: 'user',
               entityId: user.id,
-              payload: { email: user.email, role: user.role },
+              payload: { email: user.email, role: user.role, provider: 'credentials' },
             });
           } catch (auditError) {
             console.error('[auth] auditLog auth.sign_in failed', auditError);
@@ -77,6 +96,47 @@ const nextAuth = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    ...authConfig.callbacks,
+    async signIn({ user, account }) {
+      if (account?.provider !== 'google') return true;
+      if (!user.email) return false;
+
+      const jar = await cookies();
+      const rawType = jar.get('portal_account_type')?.value;
+      const accountType =
+        rawType === AccountType.CLIENT || rawType === AccountType.DEVELOPER ? rawType : undefined;
+
+      const result = await resolveGoogleSignInUser({
+        email: user.email,
+        displayName: user.name ?? undefined,
+        accountType,
+      });
+
+      jar.delete('portal_account_type');
+
+      if (!result) return false;
+      if (result.kind === 'redirect') return result.url;
+
+      user.id = result.user.id;
+      user.role = result.user.role;
+      user.name = result.user.displayName;
+
+      try {
+        await auditLog({
+          actorId: result.user.id,
+          action: 'auth.sign_in',
+          entityType: 'user',
+          entityId: result.user.id,
+          payload: { email: result.user.email, role: result.user.role, provider: 'google' },
+        });
+      } catch (auditError) {
+        console.error('[auth] auditLog auth.sign_in failed', auditError);
+      }
+
+      return true;
+    },
+  },
 });
 
 export const { handlers, signIn, signOut, auth } = nextAuth;
@@ -84,3 +144,5 @@ export const { handlers, signIn, signOut, auth } = nextAuth;
 export async function getAuthSession() {
   return nextAuth.auth();
 }
+
+export { isGoogleAuthConfigured } from './lib/google-auth-config';

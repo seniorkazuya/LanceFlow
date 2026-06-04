@@ -69,13 +69,7 @@ export async function registerPortalUser(params: {
     },
   });
 
-  return {
-    id: user.id,
-    email: user.email,
-    displayName: user.displayName,
-    role: user.role as SessionUser['role'],
-    accountType: user.accountType as AccountTypeValue,
-  };
+  return toSessionUser(user);
 }
 
 export async function authenticatePortalUser(
@@ -88,6 +82,16 @@ export async function authenticatePortalUser(
   if (!verifyPassword(password, user.passwordHash)) return null;
   if (user.status !== 'active') return null;
 
+  return toSessionUser(user);
+}
+
+function toSessionUser(user: {
+  id: string;
+  email: string;
+  displayName: string;
+  role: string;
+  accountType: string;
+}): SessionUser {
   return {
     id: user.id,
     email: user.email,
@@ -97,8 +101,48 @@ export async function authenticatePortalUser(
   };
 }
 
+export type GoogleSignInResult =
+  | { kind: 'user'; user: SessionUser }
+  | { kind: 'redirect'; url: string };
+
+/** Google OAuth — link existing users by email or create portal users when account type is set. */
+export async function resolveGoogleSignInUser(params: {
+  email: string;
+  displayName?: string;
+  accountType?: PortalAccountType | null;
+}): Promise<GoogleSignInResult | null> {
+  const email = normalizeAuthEmail(params.email);
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
+
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (existing) {
+    if (existing.status !== 'active') return null;
+    return { kind: 'user', user: toSessionUser(existing) };
+  }
+
+  const accountType = params.accountType;
+  if (accountType !== AccountType.CLIENT && accountType !== AccountType.DEVELOPER) {
+    return { kind: 'redirect', url: '/auth/signup?error=choose_account_type' };
+  }
+
+  const role = PORTAL_ROLE[accountType];
+  const displayName = (params.displayName?.trim() || email.split('@')[0] || 'User').slice(0, 120);
+
+  const user = await prisma.user.create({
+    data: {
+      email,
+      displayName,
+      role,
+      accountType,
+      passwordHash: null,
+    },
+  });
+
+  return { kind: 'user', user: toSessionUser(user) };
+}
+
 export function postLoginPathForRole(role: string): string {
-  if (role === UserRole.CLIENT) return '/dashboard';
+  if (role === UserRole.CLIENT) return '/projects';
   if (role === UserRole.DEVELOPER) return '/apply';
   return '/dashboard';
 }

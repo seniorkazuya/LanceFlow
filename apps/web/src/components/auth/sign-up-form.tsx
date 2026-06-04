@@ -1,18 +1,20 @@
 'use client';
 
 import { AccountType, type PortalAccountType } from '@lanceflow/types';
-import { Button, Input } from '@lanceflow/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+import { AuthDivider, GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 
 type SignUpFormProps = {
   accountType: PortalAccountType;
   title: string;
   description: string;
+  googleEnabled: boolean;
 };
 
-export function SignUpForm({ accountType, title, description }: SignUpFormProps) {
+export function SignUpForm({ accountType, title, description, googleEnabled }: SignUpFormProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -52,47 +54,53 @@ export function SignUpForm({ accountType, title, description }: SignUpFormProps)
       : 'Already have a developer account?';
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-lg font-semibold text-foreground">{title}</h2>
-        <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+    <div className="auth-form-stack">
+      <div className="auth-form-intro-block">
+        <h2>{title}</h2>
+        <p>{description}</p>
       </div>
 
-      <form onSubmit={onSubmit} className="grid gap-4">
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Full name</span>
-          <Input name="displayName" type="text" autoComplete="name" maxLength={120} />
-        </label>
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Email</span>
-          <Input name="email" type="email" required autoComplete="email" />
-        </label>
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Password</span>
-          <Input
+      {googleEnabled ? (
+        <>
+          <GoogleSignInButton accountType={accountType} label="Sign up with Google" />
+          <AuthDivider />
+        </>
+      ) : null}
+
+      <form onSubmit={onSubmit} className="auth-form">
+        <div className="field">
+          <label htmlFor="signup-name">Full name</label>
+          <input id="signup-name" name="displayName" type="text" autoComplete="name" maxLength={120} />
+        </div>
+        <div className="field">
+          <label htmlFor="signup-email">Email</label>
+          <input id="signup-email" name="email" type="email" required autoComplete="email" />
+        </div>
+        <div className="field">
+          <label htmlFor="signup-password">Password</label>
+          <input
+            id="signup-password"
             name="password"
             type="password"
             required
             minLength={8}
             autoComplete="new-password"
           />
-          <span className="text-xs text-muted-foreground">At least 8 characters</span>
-        </label>
+          <span className="field-hint">At least 8 characters</span>
+        </div>
         {error ? (
-          <p role="alert" className="text-sm text-destructive">
+          <p role="alert" className="field-error">
             {error}
           </p>
         ) : null}
-        <Button type="submit" disabled={pending} className="w-full">
-          {pending ? 'Creating account…' : 'Create account'}
-        </Button>
+        <button type="submit" className="btn btn-primary auth-submit" disabled={pending}>
+          {pending ? 'Creating account…' : 'Create account with email'}
+        </button>
       </form>
 
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="auth-form-signin-link">
         {signInHint}{' '}
-        <Link href="/auth/signin" className="font-medium text-primary hover:underline">
-          Sign in
-        </Link>
+        <Link href="/auth/signin">Sign in</Link>
       </p>
     </div>
   );

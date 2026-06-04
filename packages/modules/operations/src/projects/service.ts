@@ -54,6 +54,41 @@ export async function listProjects(): Promise<ProjectRecord[]> {
   return rows.map(toRecord);
 }
 
+/** Portal clients see projects whose ops client record matches their login email. */
+export async function listProjectsForPortalClient(contactEmail: string): Promise<ProjectRecord[]> {
+  const normalized = contactEmail.trim().toLowerCase();
+  if (!normalized) return [];
+
+  const rows = await prisma.project.findMany({
+    where: {
+      client: {
+        contactEmail: { equals: normalized, mode: 'insensitive' },
+      },
+    },
+    include: projectInclude,
+    orderBy: { updatedAt: 'desc' },
+  });
+  return rows.map(toRecord);
+}
+
+export async function portalClientCanAccessProject(
+  contactEmail: string,
+  projectId: string
+): Promise<boolean> {
+  const normalized = contactEmail.trim().toLowerCase();
+  if (!normalized) return false;
+
+  const count = await prisma.project.count({
+    where: {
+      id: projectId,
+      client: {
+        contactEmail: { equals: normalized, mode: 'insensitive' },
+      },
+    },
+  });
+  return count > 0;
+}
+
 export async function getProjectById(id: string): Promise<ProjectRecord | null> {
   const row = await prisma.project.findUnique({
     where: { id },

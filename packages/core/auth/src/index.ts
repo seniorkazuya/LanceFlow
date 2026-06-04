@@ -15,7 +15,9 @@ export {
   normalizeAuthEmail,
   postLoginPathForRole,
   registerPortalUser,
+  resolveGoogleSignInUser,
   validatePortalRegistrationInput,
+  type GoogleSignInResult,
 } from './portal';
 export {
   ForbiddenError,
