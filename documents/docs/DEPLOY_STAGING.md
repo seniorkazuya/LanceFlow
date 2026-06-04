@@ -107,6 +107,7 @@ Update [PROJECT_STATUS.md](./PROJECT_STATUS.md) with the staging URL for clients
 | `apps/web/apps/web/package.json` ENOENT | Do not run `vercel` CLI inside `apps/web` when Root Directory is `apps/web` — workflow runs from repo root |
 | `CLI version is outdated` (needs 47.2.2+) | Workflow pins `vercel@48.x`; redeploy after merge |
 | Health check timeout | Set `STAGING_URL` to production URL (e.g. `https://lance-flow-web.vercel.app`); re-run workflow |
+| Health returns `503` / `redis: error` | Remove `REDIS_URL` from Vercel or use a real Redis URL; local `redis://localhost` must not be synced (see `pnpm vercel:env:sync`) |
 | Build fails on Vercel | Root Directory = `apps/web`; see `apps/web/vercel.json` |
 
 ---

@@ -115,6 +115,9 @@ function deployValueForKey(key, value, target) {
   if (key === 'AUTH_URL' || key === 'NEXT_PUBLIC_APP_URL') {
     return value.includes('localhost') ? STAGING_APP_URL : value;
   }
+  if (key === 'REDIS_URL' && /localhost|127\.0\.0\.1/i.test(value)) {
+    return null;
+  }
   return value;
 }
 
@@ -136,7 +139,9 @@ for (const key of DEFAULT_KEYS) {
   const value = vars[key]?.trim();
   if (!value) continue;
   for (const target of targets) {
-    jobs.push({ key, target, value: deployValueForKey(key, value, target) });
+    const deployValue = deployValueForKey(key, value, target);
+    if (deployValue == null) continue;
+    jobs.push({ key, target, value: deployValue });
   }
 }
 
