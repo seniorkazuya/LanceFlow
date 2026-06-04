@@ -51,4 +51,14 @@ describe('getNavItemsForRole', () => {
     expect(ids).not.toContain('hiring-pipeline');
     expect(ids).not.toContain('control');
   });
+
+  it('shows dashboard and my projects for client portal role', () => {
+    const ids = getNavItemsForRole(UserRole.CLIENT).map((item) => item.id);
+    expect(ids).toEqual(['dashboard', 'my-projects']);
+  });
+
+  it('shows dashboard and apply for developer portal role', () => {
+    const ids = getNavItemsForRole(UserRole.DEVELOPER).map((item) => item.id);
+    expect(ids).toEqual(['dashboard', 'apply']);
+  });
 });

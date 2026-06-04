@@ -10,14 +10,16 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(cuid())
-  email       String       @unique
-  displayName String       @map("display_name")
-  role        String
-  status      String       @default("active")
-  skillTags   String[]     @default([]) @map("skill_tags")
-  createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt @map("updated_at")
+  id           String       @id @default(cuid())
+  email        String       @unique
+  displayName  String       @map("display_name")
+  role         String
+  accountType  String       @default("staff") @map("account_type")
+  passwordHash String?      @map("password_hash")
+  status       String       @default("active")
+  skillTags    String[]     @default([]) @map("skill_tags")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
   assignments Assignment[]
   dailyReports  DailyReport[]
   notifications Notification[]

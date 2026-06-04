@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
   },
 };
 
-const sentryEnabled = Boolean(process.env.SENTRY_DSN);
+const sentryEnabled = Boolean(process.env.SENTRY_DSN?.trim());
 
 export default sentryEnabled
   ? withSentryConfig(nextConfig, {

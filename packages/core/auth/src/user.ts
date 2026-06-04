@@ -1,5 +1,5 @@
 import { prisma } from '@lanceflow/database';
-import { UserRole, type UserRole as UserRoleType } from '@lanceflow/types';
+import { AccountType, UserRole, type UserRole as UserRoleType } from '@lanceflow/types';
 
 import type { SessionUser } from './types';
 
@@ -17,6 +17,7 @@ export async function findOrCreateUserForSignIn(params: {
       email: params.email,
       displayName,
       role,
+      accountType: AccountType.STAFF,
     },
     update: {
       displayName,
@@ -28,5 +29,6 @@ export async function findOrCreateUserForSignIn(params: {
     email: user.email,
     displayName: user.displayName,
     role: user.role as UserRoleType,
+    accountType: user.accountType as typeof AccountType.STAFF,
   };
 }

@@ -3,6 +3,8 @@ export {
   createProject,
   getProjectById,
   listProjects,
+  listProjectsForPortalClient,
+  portalClientCanAccessProject,
   transitionProject,
   updateProject,
   type ProjectMutationResult,

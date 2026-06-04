@@ -6,7 +6,7 @@
     "node": "22.x"
   },
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "node --env-file=../../.env ./node_modules/next/dist/bin/next dev --port 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --max-warnings 0",
@@ -25,6 +25,7 @@
     "@lanceflow/payments": "workspace:*",
     "@lanceflow/types": "workspace:*",
     "@lanceflow/ui": "workspace:*",
+    "@sentry/core": "^8.55.2",
     "@sentry/nextjs": "^8.45.0",
     "lucide-react": "^0.469.0",
     "next": "^15.1.3",

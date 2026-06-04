@@ -1,7 +1,13 @@
 import { RolePolicy, hasRole } from '@lanceflow/auth';
 import { isAutoAssignEnabled } from '@lanceflow/config';
 import { listPaymentSchedulesForProject, listProjectMilestones } from '@lanceflow/payments';
-import { allowedTransitionsFrom, getProjectById, listProjectAssignments } from '@lanceflow/operations';
+import {
+  allowedTransitionsFrom,
+  getProjectById,
+  listProjectAssignments,
+  portalClientCanAccessProject,
+} from '@lanceflow/operations';
+import { UserRole } from '@lanceflow/types';
 import { GlassCard, PageHeader, SectionLabel, StatusBadge } from '@lanceflow/ui';
 import { notFound, redirect } from 'next/navigation';
 
@@ -23,11 +29,20 @@ type PageProps = { params: Promise<{ id: string }> };
 export default async function ProjectDetailPage({ params }: PageProps) {
   const session = await auth();
   const role = session?.user?.role ?? '';
-  if (!hasRole(role, RolePolicy.projectsRead)) {
+  const email = session?.user?.email ?? '';
+  const isPortalClient = role === UserRole.CLIENT;
+  const canStaffRead = hasRole(role, RolePolicy.projectsRead);
+  const canClientRead = hasRole(role, RolePolicy.clientProjectsRead);
+
+  if (!canStaffRead && !canClientRead) {
     redirect('/dashboard');
   }
 
   const { id } = await params;
+  if (isPortalClient && !(await portalClientCanAccessProject(email, id))) {
+    redirect('/projects');
+  }
+
   const project = await getProjectById(id);
   if (!project) {
     notFound();
@@ -45,16 +60,26 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       <PageHeader
         label="project"
         title={project.title}
-        description={`Client: ${project.clientName} · Risk at create: ${project.clientRiskAtCreate ?? '—'}`}
+        description={
+          isPortalClient
+            ? `Status: ${project.status.replace('_', ' ')}`
+            : `Client: ${project.clientName} · Risk at create: ${project.clientRiskAtCreate ?? '—'}`
+        }
       />
 
       <GlassCard className="p-5 md:p-6">
         <SectionLabel>lifecycle</SectionLabel>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <StatusBadge status="neutral" label={project.status.replace('_', ' ')} />
-          <span className="text-sm text-muted-foreground">
-            Scope {project.scopeClarityPct ?? '—'}% · Margin {project.profitMarginPct ?? '—'}%
-          </span>
+          {!isPortalClient ? (
+            <span className="text-sm text-muted-foreground">
+              Scope {project.scopeClarityPct ?? '—'}% · Margin {project.profitMarginPct ?? '—'}%
+            </span>
+          ) : project.scopeClarityPct != null ? (
+            <span className="text-sm text-muted-foreground">
+              Scope clarity {project.scopeClarityPct}%
+            </span>
+          ) : null}
         </div>
         {canWrite ? (
           <div className="mt-6 space-y-4">
@@ -68,33 +93,35 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         ) : null}
       </GlassCard>
 
-      <GlassCard className="p-5 md:p-6">
-        <SectionLabel>assignments</SectionLabel>
-        {assignments.length > 0 ? (
-          <ul className="mt-4 space-y-2 text-sm">
-            {assignments.map((a) => (
-              <li key={a.id} className="flex flex-wrap justify-between gap-2">
-                <span className="font-medium text-foreground">{a.engineerName}</span>
-                <span className="text-muted-foreground">
-                  Score {a.skillScore ?? '—'} · {a.formulaVersion ?? 'manual'}
-                </span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-4 text-sm text-muted-foreground">No active assignments.</p>
-        )}
-        {canWrite ? (
-          <div className="mt-6 border-t border-white/[0.06] pt-6 space-y-6">
-            <ProjectAutoAssignPanel
-              projectId={project.id}
-              projectStatus={project.status}
-              autoAssignEnabled={autoAssignEnabled}
-            />
-            <ProjectAssignmentPanel projectId={project.id} projectStatus={project.status} />
-          </div>
-        ) : null}
-      </GlassCard>
+      {!isPortalClient ? (
+        <GlassCard className="p-5 md:p-6">
+          <SectionLabel>assignments</SectionLabel>
+          {assignments.length > 0 ? (
+            <ul className="mt-4 space-y-2 text-sm">
+              {assignments.map((a) => (
+                <li key={a.id} className="flex flex-wrap justify-between gap-2">
+                  <span className="font-medium text-foreground">{a.engineerName}</span>
+                  <span className="text-muted-foreground">
+                    Score {a.skillScore ?? '—'} · {a.formulaVersion ?? 'manual'}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-4 text-sm text-muted-foreground">No active assignments.</p>
+          )}
+          {canWrite ? (
+            <div className="mt-6 border-t border-white/[0.06] pt-6 space-y-6">
+              <ProjectAutoAssignPanel
+                projectId={project.id}
+                projectStatus={project.status}
+                autoAssignEnabled={autoAssignEnabled}
+              />
+              <ProjectAssignmentPanel projectId={project.id} projectStatus={project.status} />
+            </div>
+          ) : null}
+        </GlassCard>
+      ) : null}
 
       {canWrite ? (
         <GlassCard className="p-5 md:p-6">

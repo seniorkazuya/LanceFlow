@@ -8,6 +8,17 @@ export {
 } from './auth-diagnostics';
 export type { SessionUser } from './types';
 export { findOrCreateUserForSignIn } from './user';
+export { hashPassword, verifyPassword } from './password';
+export {
+  AuthRegistrationError,
+  authenticatePortalUser,
+  normalizeAuthEmail,
+  postLoginPathForRole,
+  registerPortalUser,
+  resolveGoogleSignInUser,
+  validatePortalRegistrationInput,
+  type GoogleSignInResult,
+} from './portal';
 export {
   ForbiddenError,
   RolePolicy,
