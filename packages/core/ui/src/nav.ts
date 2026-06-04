@@ -37,6 +37,12 @@ export const APP_NAV_ITEMS: readonly NavItem[] = [
     allowedRoles: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER],
   },
   {
+    id: 'my-projects',
+    label: 'My projects',
+    href: '/projects',
+    allowedRoles: [UserRole.CLIENT],
+  },
+  {
     id: 'projects',
     label: 'Projects',
     href: '/projects',

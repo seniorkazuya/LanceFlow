@@ -52,9 +52,9 @@ describe('getNavItemsForRole', () => {
     expect(ids).not.toContain('control');
   });
 
-  it('shows dashboard only for client portal role', () => {
+  it('shows dashboard and my projects for client portal role', () => {
     const ids = getNavItemsForRole(UserRole.CLIENT).map((item) => item.id);
-    expect(ids).toEqual(['dashboard']);
+    expect(ids).toEqual(['dashboard', 'my-projects']);
   });
 
   it('shows dashboard and apply for developer portal role', () => {

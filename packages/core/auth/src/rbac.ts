@@ -26,6 +26,8 @@ export const RolePolicy = {
   clientRiskPrescreen: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
   /** Project lifecycle read (OPS-003). */
   projectsRead: [UserRole.CEO, UserRole.OPS_MANAGER, UserRole.BIDDER] as const,
+  /** Portal client — projects linked via ops client contact email. */
+  clientProjectsRead: [UserRole.CLIENT] as const,
   /** Project lifecycle write (OPS-003). */
   projectsWrite: [UserRole.CEO, UserRole.OPS_MANAGER] as const,
   /** Engineer skills and workload read (OPS-004). */

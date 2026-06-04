@@ -1,14 +1,30 @@
 'use client';
 
-import { Button, Input } from '@lanceflow/ui';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
+import { AuthDivider, GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import { postLoginPathForRole } from '@/lib/auth-redirect';
 
-export function SignInForm({ registered }: { registered?: boolean }) {
-  const [error, setError] = useState<string | null>(null);
+const ERROR_MESSAGES: Record<string, string> = {
+  google_not_configured: 'Google sign-in is not configured yet. Use email and password.',
+  choose_account_type: 'Choose client or developer sign-up before using Google for a new account.',
+};
+
+export function SignInForm({
+  registered,
+  errorCode,
+  googleEnabled,
+}: {
+  registered?: boolean;
+  errorCode?: string;
+  googleEnabled: boolean;
+}) {
+  const [error, setError] = useState<string | null>(() => {
+    if (errorCode === 'google_not_configured') return null;
+    return errorCode ? (ERROR_MESSAGES[errorCode] ?? 'Sign-in failed. Try again.') : null;
+  });
   const [pending, setPending] = useState(false);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -41,51 +57,56 @@ export function SignInForm({ registered }: { registered?: boolean }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="auth-form-stack">
       {registered ? (
-        <p role="status" className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-foreground">
-          Account created. Sign in with your email and password.
+        <p role="status" className="form-banner form-banner-success">
+          Account created. Sign in with your email and password, or continue with Google.
         </p>
       ) : null}
 
-      <form onSubmit={onSubmit} className="grid gap-4">
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Email</span>
-          <Input name="email" type="email" required autoComplete="email" />
-        </label>
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium text-foreground">Password</span>
-          <Input name="password" type="password" required autoComplete="current-password" />
-        </label>
+      {googleEnabled ? (
+        <>
+          <GoogleSignInButton />
+          <AuthDivider />
+        </>
+      ) : null}
+
+      <form onSubmit={onSubmit} className="auth-form">
+        <div className="field">
+          <label htmlFor="signin-email">Email</label>
+          <input id="signin-email" name="email" type="email" required autoComplete="email" />
+        </div>
+        <div className="field">
+          <label htmlFor="signin-password">Password</label>
+          <input
+            id="signin-password"
+            name="password"
+            type="password"
+            required
+            autoComplete="current-password"
+          />
+        </div>
         {error ? (
-          <p role="alert" className="text-sm text-destructive">
+          <p role="alert" className="field-error">
             {error}
           </p>
         ) : null}
-        <Button type="submit" disabled={pending} className="w-full">
-          {pending ? 'Signing in…' : 'Sign in'}
-        </Button>
+        <button type="submit" className="btn btn-primary auth-submit" disabled={pending}>
+          {pending ? 'Signing in…' : 'Sign in with email'}
+        </button>
       </form>
 
-      <div className="space-y-3 border-t border-border/60 pt-4">
-        <p className="text-center text-sm font-medium text-foreground">New to Lanceflows?</p>
-        <div className="grid gap-2 sm:grid-cols-2">
-          <Link
-            href="/auth/signup/client"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
-          >
+      <div className="auth-form-footer">
+        <p className="auth-form-footer-title">New to Lanceflows?</p>
+        <div className="auth-link-grid">
+          <Link className="btn btn-ghost" href="/auth/signup/client">
             Sign up as client
           </Link>
-          <Link
-            href="/auth/signup/developer"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
-          >
+          <Link className="btn btn-ghost" href="/auth/signup/developer">
             Sign up as developer
           </Link>
         </div>
-        <p className="text-center text-xs text-muted-foreground">
-          Internal team? Use your company credentials on this page.
-        </p>
+        <p className="auth-form-note">Internal team? Use your company credentials on this page.</p>
       </div>
     </div>
   );

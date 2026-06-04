@@ -1,6 +1,5 @@
 'use client';
 
-import { Bell } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
 type NotificationItem = {
@@ -47,18 +46,22 @@ export function NotificationBell() {
   }
 
   return (
-    <div className="relative">
+    <div className="notify-root">
       <button
         type="button"
         aria-label={`Notifications${unread > 0 ? `, ${unread} unread` : ''}`}
-        className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-foreground transition hover:bg-white/[0.1]"
+        aria-expanded={open}
+        className="notify-btn"
         onClick={toggleOpen}
       >
-        <Bell className="h-4 w-4" />
+        <svg aria-hidden viewBox="0 0 24 24" className="notify-btn-icon">
+          <path
+            d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 1 0-14 0v5l-2 2v1h18v-1l-2-2Z"
+            fill="currentColor"
+          />
+        </svg>
         {unread > 0 ? (
-          <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-primary-foreground">
-            {unread > 9 ? '9+' : unread}
-          </span>
+          <span className="notify-badge">{unread > 9 ? '9+' : unread}</span>
         ) : null}
       </button>
 
@@ -66,39 +69,34 @@ export function NotificationBell() {
         <>
           <button
             type="button"
-            className="fixed inset-0 z-40 cursor-default"
+            className="notify-backdrop"
             aria-label="Close notifications"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute right-0 z-50 mt-2 w-80 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-popover shadow-lg">
-            <div className="border-b border-border px-3 py-2">
-              <p className="text-sm font-medium text-foreground">Notifications</p>
-              <p className="text-xs text-muted-foreground">
+          <div className="notify-panel" role="dialog" aria-label="Notifications">
+            <div className="notify-panel-head">
+              <p className="notify-panel-title">Notifications</p>
+              <p className="notify-panel-subtitle">
                 {unread > 0 ? `${unread} unread` : 'All caught up'}
               </p>
             </div>
-            <ul className="max-h-72 overflow-y-auto">
+            <ul className="notify-panel-list">
               {loading ? (
-                <li className="px-3 py-4 text-sm text-muted-foreground">Loading…</li>
+                <li className="notify-empty">Loading…</li>
               ) : items.length === 0 ? (
-                <li className="px-3 py-4 text-sm text-muted-foreground">No notifications yet.</li>
+                <li className="notify-empty">No notifications yet.</li>
               ) : (
                 items.map((item) => (
-                  <li
-                    key={item.id}
-                    className={`border-b border-border/60 px-3 py-2 last:border-0 ${
-                      item.readAt ? 'opacity-70' : ''
-                    }`}
-                  >
+                  <li key={item.id} className={item.readAt ? 'notify-item is-read' : 'notify-item'}>
                     <button
                       type="button"
-                      className="w-full text-left"
+                      className="notify-item-btn"
                       onClick={() => {
                         if (!item.readAt) void markRead(item.id);
                       }}
                     >
-                      <p className="text-sm font-medium text-foreground">{item.title}</p>
-                      <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{item.body}</p>
+                      <p className="notify-item-title">{item.title}</p>
+                      <p className="notify-item-body">{item.body}</p>
                     </button>
                   </li>
                 ))
