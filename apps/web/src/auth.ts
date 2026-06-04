@@ -10,11 +10,13 @@ import { AccountType } from '@lanceflow/types';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
+import MicrosoftEntraID from 'next-auth/providers/microsoft-entra-id';
 import { cookies } from 'next/headers';
 
 import { authConfig } from './auth.config';
 import { getGoogleOAuthCredentials } from './lib/google-auth-config';
 import { loadMonorepoEnv } from './lib/load-monorepo-env';
+import { getMicrosoftOAuthCredentials } from './lib/microsoft-auth-config';
 
 loadMonorepoEnv();
 
@@ -30,6 +32,18 @@ const nextAuth = NextAuth({
         Google({
           clientId: google.clientId,
           clientSecret: google.clientSecret,
+          allowDangerousEmailAccountLinking: true,
+        }),
+      ];
+    })(),
+    ...((): ReturnType<typeof import('next-auth/providers/microsoft-entra-id').default>[] => {
+      const microsoft = getMicrosoftOAuthCredentials();
+      if (!microsoft) return [];
+      return [
+        MicrosoftEntraID({
+          clientId: microsoft.clientId,
+          clientSecret: microsoft.clientSecret,
+          issuer: `https://login.microsoftonline.com/${microsoft.tenantId}/v2.0`,
           allowDangerousEmailAccountLinking: true,
         }),
       ];
@@ -99,7 +113,8 @@ const nextAuth = NextAuth({
   callbacks: {
     ...authConfig.callbacks,
     async signIn({ user, account }) {
-      if (account?.provider !== 'google') return true;
+      const provider = account?.provider;
+      if (provider !== 'google' && provider !== 'microsoft-entra-id') return true;
       if (!user.email) return false;
 
       const jar = await cookies();
@@ -122,13 +137,15 @@ const nextAuth = NextAuth({
       user.role = result.user.role;
       user.name = result.user.displayName;
 
+      const providerLabel = provider === 'google' ? 'google' : 'microsoft';
+
       try {
         await auditLog({
           actorId: result.user.id,
           action: 'auth.sign_in',
           entityType: 'user',
           entityId: result.user.id,
-          payload: { email: result.user.email, role: result.user.role, provider: 'google' },
+          payload: { email: result.user.email, role: result.user.role, provider: providerLabel },
         });
       } catch (auditError) {
         console.error('[auth] auditLog auth.sign_in failed', auditError);
@@ -146,3 +163,4 @@ export async function getAuthSession() {
 }
 
 export { isGoogleAuthConfigured } from './lib/google-auth-config';
+export { isMicrosoftAuthConfigured } from './lib/microsoft-auth-config';

@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
 import { AuthPageShell } from '@/components/auth/auth-page-shell';
 import { SignInForm } from '@/components/auth/sign-in-form';
 import { isGoogleAuthConfigured } from '@/lib/google-auth-config';
+import { isMicrosoftAuthConfigured } from '@/lib/microsoft-auth-config';
 
 type PageProps = {
   searchParams: Promise<{ registered?: string; error?: string }>;
@@ -10,27 +9,19 @@ type PageProps = {
 
 export default async function SignInPage({ searchParams }: PageProps) {
   const { registered, error } = await searchParams;
-  const googleEnabled = isGoogleAuthConfigured();
 
   return (
     <AuthPageShell
-      label="sign in"
-      title="Welcome back"
-      description={
-        googleEnabled
-          ? 'Sign in with Google or your email and password.'
-          : 'Sign in with your email and password.'
-      }
-      footer={
-        <p className="auth-page-footer">
-          <Link href="/">← Back to home</Link>
-        </p>
-      }
+      narrow
+      label="Welcome back"
+      title="Sign in to Lanceflows"
+      description="Manage your projects, talent, and delivery — in flow."
     >
       <SignInForm
         registered={registered === '1'}
         errorCode={error}
-        googleEnabled={googleEnabled}
+        googleEnabled={isGoogleAuthConfigured()}
+        microsoftEnabled={isMicrosoftAuthConfigured()}
       />
     </AuthPageShell>
   );

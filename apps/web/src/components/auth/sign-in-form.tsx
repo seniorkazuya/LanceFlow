@@ -4,25 +4,30 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
-import { AuthDivider, GoogleSignInButton } from '@/components/auth/google-sign-in-button';
+import { AuthDivider, SocialSignInButtons } from '@/components/auth/social-sign-in-buttons';
 import { postLoginPathForRole } from '@/lib/auth-redirect';
 
 const ERROR_MESSAGES: Record<string, string> = {
   google_not_configured: 'Google sign-in is not configured yet. Use email and password.',
-  choose_account_type: 'Choose client or developer sign-up before using Google for a new account.',
+  microsoft_not_configured: 'Outlook sign-in is not configured yet. Use email and password.',
+  choose_account_type: 'Choose client or developer sign-up before using social sign-in for a new account.',
 };
 
 export function SignInForm({
   registered,
   errorCode,
   googleEnabled,
+  microsoftEnabled,
 }: {
   registered?: boolean;
   errorCode?: string;
   googleEnabled: boolean;
+  microsoftEnabled: boolean;
 }) {
   const [error, setError] = useState<string | null>(() => {
-    if (errorCode === 'google_not_configured') return null;
+    if (errorCode === 'google_not_configured' || errorCode === 'microsoft_not_configured') {
+      return null;
+    }
     return errorCode ? (ERROR_MESSAGES[errorCode] ?? 'Sign-in failed. Try again.') : null;
   });
   const [pending, setPending] = useState(false);
@@ -57,57 +62,64 @@ export function SignInForm({
   }
 
   return (
-    <div className="auth-form-stack">
+    <>
       {registered ? (
         <p role="status" className="form-banner form-banner-success">
-          Account created. Sign in with your email and password, or continue with Google.
+          Account created. Sign in with your email and password, or continue with Google or Outlook.
         </p>
       ) : null}
 
-      {googleEnabled ? (
-        <>
-          <GoogleSignInButton />
-          <AuthDivider />
-        </>
-      ) : null}
-
-      <form onSubmit={onSubmit} className="auth-form">
+      <form onSubmit={onSubmit} noValidate>
         <div className="field">
           <label htmlFor="signin-email">Email</label>
-          <input id="signin-email" name="email" type="email" required autoComplete="email" />
+          <input
+            id="signin-email"
+            name="email"
+            type="email"
+            placeholder="you@email.com"
+            required
+            autoComplete="email"
+          />
         </div>
         <div className="field">
-          <label htmlFor="signin-password">Password</label>
+          <div className="field-row">
+            <label htmlFor="signin-password">Password</label>
+            <a href="#">Forgot password?</a>
+          </div>
           <input
             id="signin-password"
             name="password"
             type="password"
+            placeholder="••••••••"
             required
+            minLength={6}
             autoComplete="current-password"
           />
         </div>
+        <label className="remember">
+          <input type="checkbox" name="remember" />
+          Keep me signed in
+        </label>
         {error ? (
           <p role="alert" className="field-error">
             {error}
           </p>
         ) : null}
-        <button type="submit" className="btn btn-primary auth-submit" disabled={pending}>
-          {pending ? 'Signing in…' : 'Sign in with email'}
+        <button type="submit" className="btn btn-primary" disabled={pending}>
+          {pending ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
 
-      <div className="auth-form-footer">
-        <p className="auth-form-footer-title">New to Lanceflows?</p>
-        <div className="auth-link-grid">
-          <Link className="btn btn-ghost" href="/auth/signup/client">
-            Sign up as client
-          </Link>
-          <Link className="btn btn-ghost" href="/auth/signup/developer">
-            Sign up as developer
-          </Link>
-        </div>
-        <p className="auth-form-note">Internal team? Use your company credentials on this page.</p>
-      </div>
-    </div>
+      <AuthDivider label="or continue with" />
+      <SocialSignInButtons
+        mode="signin"
+        googleEnabled={googleEnabled}
+        microsoftEnabled={microsoftEnabled}
+      />
+
+      <p className="auth-foot">
+        New to Lanceflows? <Link href="/auth/signup">Create an account</Link>
+      </p>
+    </>
   );
 }
