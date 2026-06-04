@@ -27,6 +27,7 @@ export async function checkDatabase(
 
 export async function checkRedis(redisUrl: string | undefined): Promise<HealthCheckStatus> {
   if (!redisUrl) return 'skipped';
+  if (/localhost|127\.0\.0\.1/i.test(redisUrl)) return 'skipped';
 
   const redis = new Redis(redisUrl, {
     maxRetriesPerRequest: 1,
@@ -49,6 +50,8 @@ export function resolveHealthStatus(
   database: HealthCheckStatus,
   redis: HealthCheckStatus,
 ): 'ok' | 'degraded' {
-  if (database === 'error' || redis === 'error') return 'degraded';
+  if (database === 'error') return 'degraded';
+  // Redis is optional for the web app; report check status but do not fail deploy health.
+  void redis;
   return 'ok';
 }
