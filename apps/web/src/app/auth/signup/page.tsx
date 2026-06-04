@@ -1,43 +1,53 @@
-import Link from 'next/link';
+import { AccountType } from '@lanceflow/types';
 
 import { AuthPageShell } from '@/components/auth/auth-page-shell';
+import { SignUpForm } from '@/components/auth/sign-up-form';
+import { isGoogleAuthConfigured } from '@/lib/google-auth-config';
+import { isMicrosoftAuthConfigured } from '@/lib/microsoft-auth-config';
 
 type PageProps = {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; role?: string }>;
 };
 
-export default async function SignUpHubPage({ searchParams }: PageProps) {
-  const { error } = await searchParams;
+function resolveInitialRole(role: string | undefined) {
+  if (role === 'client') return AccountType.CLIENT;
+  if (role === 'developer' || role === 'talent') return AccountType.DEVELOPER;
+  return undefined;
+}
+
+export default async function SignUpPage({ searchParams }: PageProps) {
+  const { error, role } = await searchParams;
   const showAccountTypeError = error === 'choose_account_type';
+  const oauthNotConfigured =
+    error === 'google_not_configured' || error === 'microsoft_not_configured';
+  const oauthMessage =
+    error === 'microsoft_not_configured'
+      ? 'Outlook sign-in is not configured yet. Add AZURE_AD_CLIENT_ID and AZURE_AD_CLIENT_SECRET to .env, then restart the dev server.'
+      : error === 'google_not_configured'
+        ? 'Google sign-in is not configured yet. Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env, then restart the dev server.'
+        : null;
 
   return (
     <AuthPageShell
-      label="sign up"
+      label="Get started"
       title="Create your account"
-      description="Choose how you will use Lanceflows — as a client hiring talent or as a developer joining the network."
-      footer={
-        <p className="auth-page-footer">
-          Already have an account? <Link href="/auth/signin">Sign in</Link> · <Link href="/">Home</Link>
-        </p>
-      }
+      description="Hire talent or bring your strengths — start moving in flow."
     >
       {showAccountTypeError ? (
         <p role="alert" className="form-banner form-banner-error">
-          New Google accounts must pick client or developer sign-up first.
+          New social sign-up accounts must pick client or talent first.
         </p>
       ) : null}
-      <div className="auth-choice-grid">
-        <Link href="/auth/signup/client" className="auth-choice-card">
-          <span className="auth-choice-tag">For clients</span>
-          <h2>Sign up as a client</h2>
-          <p>Hire engineering and AI talent, request quotes, and manage engagements.</p>
-        </Link>
-        <Link href="/auth/signup/developer" className="auth-choice-card">
-          <span className="auth-choice-tag">For talent</span>
-          <h2>Sign up as a developer</h2>
-          <p>Join the talent network, apply to roles, and work through our hiring pipeline.</p>
-        </Link>
-      </div>
+      {oauthNotConfigured && oauthMessage ? (
+        <p role="status" className="form-banner form-banner-error">
+          {oauthMessage}
+        </p>
+      ) : null}
+      <SignUpForm
+        initialAccountType={resolveInitialRole(role)}
+        googleEnabled={isGoogleAuthConfigured()}
+        microsoftEnabled={isMicrosoftAuthConfigured()}
+      />
     </AuthPageShell>
   );
 }

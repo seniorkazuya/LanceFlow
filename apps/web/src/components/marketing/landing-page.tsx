@@ -77,15 +77,12 @@ export function LandingPage() {
             <div className="about-grid">
               <div className="about-media">
                 <Image
-                  src="/marketing/company_logo.png"
-                  alt="Lanceflows"
-                  width={320}
-                  height={200}
-                  style={{
-                    maxWidth: '74%',
-                    height: 'auto',
-                    filter: 'drop-shadow(0 14px 26px rgba(14,28,58,.18))',
-                  }}
+                  src="/marketing/img/com_slogan.png"
+                  alt="Lanceflows — where strong action meets seamless flow"
+                  width={960}
+                  height={720}
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ width: '100%', height: 'auto' }}
                 />
               </div>
               <div className="about-text">
