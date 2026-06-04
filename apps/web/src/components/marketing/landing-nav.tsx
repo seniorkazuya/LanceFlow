@@ -1,7 +1,5 @@
 'use client';
 
-import type { ReactNode } from 'react';
-
 import { SiteHeader } from '@/components/marketing/site-header';
 import type { MarketingNavPage } from '@/components/marketing/site-nav-config';
 
